@@ -9,7 +9,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/style.css" />
 	<%-- <link href="${pageContext.servletContext.contextPath}/resources/css/bootstrap.css" rel='stylesheet' type='text/css' /> --%>
@@ -19,7 +19,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
 	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
-
 	<style type="text/css">
 		table#acrylic {
             border-collapse: separate;
@@ -118,7 +117,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				
 				$("#selCity").change(function () {
 					console.log("City Change");
-			        //setProvince();
+			        setProvince();
 			       $("#mlocation").val(""); 
 			    });
 				
@@ -153,8 +152,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			});
 		}
 		
-		function setProvince(selCity, selProvince) {
+		function setProvince() {
 			console.log("setProvince 실행");
+			var selCity = $("#selCity").val();
 			$.ajax({
 				url: "getProvince.jsp",
 				data: {"selCity":selCity, "selProvince":null},
@@ -170,7 +170,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			$("#mlocation").val($("#selCity").val() + " "+ $("#selProvince").val()); 				
 		}	
 	
-		function showModifyModal(member, selCity, selProvince) {
+		function showModifyModal(member) {
 			$("#modifyForm #mid").html(member.mid);
 			$("#modifyForm #mname").val(member.mname);
 			$("#modifyForm #mpassword").val(member.mpassword);

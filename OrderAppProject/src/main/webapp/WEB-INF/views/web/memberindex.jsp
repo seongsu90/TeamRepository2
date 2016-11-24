@@ -155,38 +155,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="about-section"> 
 		   	<iframe  src="memberboard?pageNo=1" style="width:100%; height:80vh; border:0px;" scrolling="no"></iframe>
 
-
-<!-- 		   <h2>About Us</h2>
-		         <div class="about-section">
-				 <div class="col-md-7 ab-text">
-					<h4>Welcome to <span>FoodHouse</span></h4>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-						Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-						when an unknown printer took a galley of type and scrambled it
-						to make a type specimen book. It has survived not only five centuries, 
-						but also the leap into electronic typesetting, remaining essentially unchanged.
-						It was popularised in the 1960</p>
-						<div class="why">
-								<h4>Why Choose Us</h4>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-								Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-								when an unknown printer took a galley of type and scrambled.</p>
-						</div>
-						<ul>
-							<li>Lorem Ipsum is simply dummy text of the printing.</li>
-							<li>Lorem Ipsum is simply dummy.</li>
-							<li>Lorem Ipsum is simply dummy text.</li>
-						</ul>
-					</div>
-					<div class="col-md-5 chef">
-						<img src="/teamapp/resources/img/chef.png" class="img-responsive" alt="" />
-					</div>
-					<div class="clearfix"> </div>
-			     </div> -->
-		   </div>
-		</div>
-		<!--start-team-->
-		  
 <!--/start-footer-->
 	<div class= "footer">
 		 <div class="container">                                                   
