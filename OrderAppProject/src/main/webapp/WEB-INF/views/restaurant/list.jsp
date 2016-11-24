@@ -195,8 +195,8 @@
 		   <div class="panel panel-primary">
 		    <div class="panel-heading">Les informations Personnel :</div>
 		     <div class="panel-body">
-			  <div align="right"><a href='#'><span class='glyphicon glyphicon-tasks'></span> &nbsp Edit ! </a></div>
-			  <label>Name</label><input type='text' class='form-control'  value='just'  disabled>
+			  <div align="right"><a href='#'><span class='info'></span> &nbsp Edit ! </a></div>
+			  <label>아이디 : </label><input type='text' class='form-control'  value="${resid}" disabled>
 		      <label>이름 : </label><input type='text' class='form-control'  value='just' disabled> 
 			  <label>위치 : </label><input type='text' class='form-control'  value='just' disabled>
 			  <label>전화 번호 : </label><input type='text' class='form-control'  value='just' disabled>
@@ -284,7 +284,6 @@
 							<a href="modify?mresid=${resid}">[수정]</a>
 						
 					</c:if>
-					
 					
 					
 					<c:if test="${mrank==2}">
