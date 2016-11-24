@@ -115,7 +115,7 @@
 			<div style="text-align: right;">
 				<button type="button" class="btn btn-warning" style="">추가</button>
 			</div>
-			<table id="acrylic" style="width:100%">
+			<table id="acrylic" style="width:100%"> 
 				<thead>
 					<tr>
 						<c:if test="${mrank==2}">
