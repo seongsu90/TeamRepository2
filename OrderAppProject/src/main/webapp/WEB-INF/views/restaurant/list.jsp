@@ -198,48 +198,51 @@
 		      </div>
 		      <div class="modal-body">
 				<table style="width:100%">
+				
+				
+				
 					<tr>
-					<td style="background-color:pink; width:100px">식당 이름</td>
-					<td>${restaurant.resname}</td>
+					<td style="background-color:pink; width:100px">이름</td>
+					<td><pre>${restaurant.resname}</pre></td>
 					</tr>
 					
 					<tr>
-					<td style="background-color:pink; width:100px">식당 위치</td>
+					<td style="background-color:pink; width:100px">위치</td>
 					<td><pre>${restaurant.reslocation}</pre></td>
 					</tr>
 					
 					<tr>
-					<td style="background-color:pink; width:100px">식당 전화번호</td>
+					<td style="background-color:pink; width:100px">전화번호</td>
 					<td><pre>${restaurant.restel}</pre></td>
 					</tr>
 					
 					<tr>
-					<td style="background-color:pink; width:100px">식당 전체 테이블 수</td>
+					<td style="background-color:pink; width:100px">전체 테이블 수</td>
 					<td><pre>${restaurant.restotaltable}</pre></td>
 					</tr>
 					
 					<tr>
-					<td style="background-color:pink; width:100px">식당 정보</td>
+					<td style="background-color:pink; width:100px">정보</td>
 					<td><pre>${restaurant.resinfo}</pre></td>
 					</tr>
 					
 					<tr>
-					<td style="background-color:pink; width:100px">식당 오픈타임</td>
+					<td style="background-color:pink; width:100px">오픈타임</td>
 					<td><pre>${restaurant.resopen}</pre></td>
 					</tr>
 					
 					<tr>
-					<td style="background-color:pink; width:100px">식당 클로즈타임</td>
+					<td style="background-color:pink; width:100px">클로즈타임</td>
 					<td><pre>${restaurant.resclose}</pre></td>
 					</tr>
 					
 					<tr>
-					<td style="background-color:pink; width:150px">식당 휴일</td>
+					<td style="background-color:pink; width:150px">휴일</td>
 					<td><pre>${restaurant.rescloseday}</pre></td>
 					</tr>
 					
 					<tr>
-					<td style="background-color:pink; width:150px">식당 사진</td>
+					<td style="background-color:pink; width:150px">사진</td>
 					<td><img src="showPhoto?ressavedfile=${restaurant.ressavedfile}" width="120px"/></td>
 					</tr>
 				</table>
