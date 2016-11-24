@@ -50,7 +50,7 @@ public class PosDao {
 		return row;
 	}
 	
-	public List<Pos> selectInfo(int presid, int ptableno) {
+/*	public List<Pos> selectInfo(int presid, int ptableno) {
 		String sql = "select presid, ptableno, pmlname, pcount from pos where presid=? and ptableno=?";
 		List<Pos> list =  jdbcTemplate.query(sql, new Object[] {presid, ptableno}, new RowMapper<Pos>() {
 			@Override
@@ -65,7 +65,7 @@ public class PosDao {
 			}	
 		});				
 		return list;
-	}
+	}*/
 
 	public List<Integer> calc(int presid, int ptableno) {
 		String sql = "";
@@ -87,7 +87,7 @@ public class PosDao {
 		return list;
 	}
 	
-	public List<Pos> list(int presid) {
+	public List<Pos> selectInfo(int presid) {
 		String sql = "select presid, ptableno, pmlname, pcount from pos where presid=? order by ptableno";
 		List<Pos> list = jdbcTemplate.query(sql, new Object[] {presid}, new RowMapper<Pos>() {
 			@Override

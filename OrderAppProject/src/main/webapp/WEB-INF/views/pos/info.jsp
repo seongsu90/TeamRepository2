@@ -11,17 +11,19 @@
 	 주문 상세정보
 	 <hr/>
 	 
+	 	<h3>${ptableno} 번 테이블</h3>
 	 	<table border="1">
-	 		<h3>${ptableno} 번 테이블</h3>
 			<tr>
 				<td style="width:200px;" align="center"><b>메뉴</b></td>
 				<td style="width:100px" align="center"><b>수량</b></td>
 			</tr>
 			
-			<c:forEach var="infoList" items="${infoList}">
+			<c:forEach var="posList" items="${posList}">
 				<tr>
-					<td align="center">${infoList.pmlname}</td>
-					<td align="center">${infoList.pcount}</td>	
+					<c:if test="${posList.ptableno == ptableno}">
+						<td align="center">${posList.pmlname}</td>
+						<td align="center">${posList.pcount}</td>
+					</c:if>		
 				</tr>
 			</c:forEach>
 		</table>

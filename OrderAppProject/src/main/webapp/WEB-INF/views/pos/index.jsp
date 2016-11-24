@@ -4,168 +4,138 @@
 <!DOCTYPE html>
 <html>		
 	<head>	
-		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css">
+		<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/style.css" />
+		<%-- <link href="${pageContext.servletContext.contextPath}/resources/css/bootstrap.css" rel='stylesheet' type='text/css' /> --%>
+		<link href='http://fonts.googleapis.com/css?family=Niconne|Playball|Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
+		<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
+		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 		
 		<style type="text/css">
- 			a {	
-				text-decoration: none;
-				color: black;
+ 					
+		/* 	.center {
+			    margin-top:50px;   
+			} */
+	
+			body { 
+				padding-top:20px; 
 			}
-			a:HOVER {				
-				color: green;
-			} 
+			
+			.panel-body .btn:not(.btn-block) { 
+				width:100px;
+				margin-bottom:20px; 
+				
+			}
 						
 		</style>
 		
 	</head>
 	
 	<body>
-		Pos 메인화면
-		<hr/>	
-
-		<c:if test="${presid != 0}">
-			<table width="400" border="1">
-				<tr>
-					<td style="width:200px; height:200px">
-						<a href="info?presid=${presid}&ptableno=1">1							
-							<c:forEach  var="pos" items="${posList}">
-								<c:if test="${pos.ptableno == 1}">	
-									<br/>${pos.pmlname}		${pos.pcount}<br/>
-								</c:if>	
-							</c:forEach>									
-						</a>										
-					</td>
-					<td style="width:200px; height:200px">
-						<a href="info?presid=${presid}&ptableno=2">2
-							<c:forEach  var="pos" items="${posList}">
-								<c:if test="${pos.ptableno == 2}">	
-									<br/>${pos.pmlname}		${pos.pcount}<br/>
-								</c:if>	
-							</c:forEach>
-						</a>					
-					</td>
-				</tr> 
-				<tr>
-					<td style="width:200px; height:200px">
-						<a href="info?presid=${presid}&ptableno=3">3
-							<c:forEach  var="pos" items="${posList}">
-								<c:if test="${pos.ptableno == 3}">	
-									<br/>${pos.pmlname}		${pos.pcount}<br/>
-								</c:if>	
-							</c:forEach>
-						</a>					
-					</td>
-					<td style="width:200px; height:200px">
-						<a href="info?presid=${presid}&ptableno=4">4
-							<c:forEach  var="pos" items="${posList}">
-								<c:if test="${pos.ptableno == 4}">	
-									<br/>${pos.pmlname}		${pos.pcount}<br/>
-								</c:if>	
-							</c:forEach>
-						</a>					
-					</td>
-				</tr>
-			</table>
-			<br/><br/>
 		
-			<table width="400" border="1">			
-				<tr>
-					<td>예약시간</td>
-					<td>인원수</td>
-					<td>예약자</td>
-					<td>확인</td>
-				</tr>
-				<c:forEach  var="reservList" items="${reservList}">
-					<tr>
-						<td>${reservList.rvtime}</td>
-						<td>${reservList.rvperson}</td>
-						<td>${reservList.rvmid}</td>
-						<td>
-							<form method="post" action="/teamapp/reservation/delete">
-								<input type="hidden" name="rvmid" value="${reservList.rvmid}"/>
-								<input type="hidden" name="rvresid" value="${reservList.rvresid}"/>
-								<input type="submit" value="확인"/>													
-							</form>							
-							<a href="index?rvmid=${reservList.rvmid}"><input type="submit" value="삭제"/></a>
-						</td>							
-					</tr>
-				</c:forEach>
-			</table>		
-		</c:if>
-		<c:if test="${presid == 0}">돌아가</c:if>
-
+		<div class="container" align="center"><h2>POS System</h2> <br/>
+				<div class="row">
+			        <div class="col-md-12">
+			            <div class="panel panel-primary">
+			                <!-- <div class="panel-heading">
+			                    <h3 class="panel-title">
+			                        <span class="glyphicon glyphicon-bookmark"></span> POS System 
+			                    </h3>
+			                </div> -->
+			                
+			                <div class="panel-body">
+			                
+			                	<div class="row">
+				                	<c:forEach var="i" begin="1" end="8">
+				        				<div class="col-md-2">
+				                    		<button data-toggle="modal"  style="width:150px; height:150px;" data-target="#squarespaceModal" >${i} 번 테이블
+				                    			<c:forEach  var="posList" items="${posList}">
+													<c:if test="${posList.ptableno == i}">	<br/>${posList.pmlname}		${posList.pcount}<br/></c:if>
+												</c:forEach>									
+											</button>
+											
+										<!-- modal start-->
+										<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+										  <div class="modal-dialog">
+											<div class="modal-content">
+														
+										          <div class="modal-header">
+										              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+										              <h4 class="modal-title" id="myModalLabel">상세정보</h4>
+										          </div>
+										          
+										          <div class="modal-body">
+										              <div class="row">
+										                  <div class="col-md-6">
+										                      <div class="well" style="height: 300px">
+									                              <div class="form-group">
+									                                  <table>
+									                                  	<tr>
+									                                  		<td style="width:100%;" align="center"><b>주문내역</b></td>															
+									                                  	</tr>			
+									                                  			                                  	
+									                                  	<c:forEach var="posList" items="${posList}">
+																			<tr>
+																				<td align="center">${posList.pmlname}</td>
+																				<td align="center">${posList.pcount}</td>	
+																			</tr>
+																		</c:forEach>														
+									                                  </table>				                                  
+									                              </div>					                             
+										                      </div>
+										                  </div>
+										                  <div class="col-md-6">
+										                      <form method="post" action="/teamapp/pos/add">	
+																<table>
+																	<tr>
+																		<td style="width:200px;" align="center">메뉴</td>
+																		<td style="width:100px" align="center">수량</td>
+																	</tr>
+																	<c:forEach var="menuList" items="${menuList}">
+																		<tr>
+																			<td>
+																				<input type="hidden" name=presid value="${presid}"/> 							
+																				<input type="hidden" name=ptableno value="${ptableno}"/>
+																				<input type="text" name=tempmenu value="${menuList.mlname}" readonly/>							
+																			</td>
+																			<td>
+																				<input style="width:50px" type="number" min="0" max="99" name=tempcount value="0"/> 							
+																			</td>				
+																		</tr>					
+																	</c:forEach>				
+																</table>
+															</form> 
+										                  </div>
+										              </div>
+										          </div>
+										          
+										        <div class="modal-footer">  
+										        	<button type="button" class="btn btn-default" data-dismiss="modal"  role="button">결제</button>
+										        	<button type="button" class="btn btn-default" data-dismiss="modal"  role="button">주문</button>  
+										      	</div>
+										  </div>
+										</div>	                    	                    
+					                </div>	 
+					                <!-- modal end -->
+					               </div>
+					        	</c:forEach>	
+					        			        		        	
+			               	</div>	               	
+			            </div>
+			            <!-- panel body end -->
+			        </div>
+				</div>
+				
+				<div class="col-md-12">
+				</div>
+				
+			</div>
+		</div>
 		
-		<%-- <c:forEach var="i" begin="0" end="${totalTable/4}">
-			<table>
-				<tr>
-					<td>
-						${presid}
-					</td>
-					<td>
-						${presid}
-					</td>
-					<td>
-						${presid}
-					</td>
-					<td>
-						${presid}
-					</td>
-				</tr>
-			</table>
-		</c:forEach> --%>
-		
-	 	<%-- <c:if test="${presid != 0}">
-			<table width="400" border="1">
-				<c:forEach  var="i" begin="0" end="${totalTable/2}">
-					<c:if test="${i%2 != 0}">
-						<tr>
-							<td style="width:200px; height:200px">
-								<a href="info?presid=${presid}&ptableno=${i+2}">${i+2}							
-									<c:forEach  var="pos" items="${posList}">
-										<c:if test="${pos.ptableno == i+2}">	
-											<br/>${pos.pmlname}		${pos.pcount}<br/>
-										</c:if>	
-									</c:forEach>									
-								</a>							
-							</td>	
-							<td style="width:200px; height:200px">
-								<a href="info?presid=${presid}&ptableno=${i+3}">${i+3}							
-									<c:forEach  var="pos" items="${posList}">
-										<c:if test="${pos.ptableno == i+3}">	
-											<br/>${pos.pmlname}		${pos.pcount}<br/>
-										</c:if>	
-									</c:forEach>									
-								</a>
-							</td>	
-						</tr>
-					</c:if>
-					<c:if test="${i%2 == 0}">
-						<tr>
-							<td style="width:200px; height:200px">
-								<a href="info?presid=${presid}&ptableno=${i+1}">${i+1}							
-									<c:forEach  var="pos" items="${posList}">
-										<c:if test="${pos.ptableno == i+1}">	
-											<br/>${pos.pmlname}		${pos.pcount}<br/>
-										</c:if>	
-									</c:forEach>									
-								</a>						
-							</td>	
-							<td style="width:200px; height:200px">
-								<a href="info?presid=${presid}&ptableno=${i+2}">${i+2}							
-									<c:forEach  var="pos" items="${posList}">
-										<c:if test="${pos.ptableno == i+2}">	
-											<br/>${pos.pmlname}		${pos.pcount}<br/>
-										</c:if>	
-									</c:forEach>									
-								</a>
-							</td>	
-						</tr>
-					</c:if>
-				</c:forEach>		
-			</table>
-		</c:if>	  --%>	
-		
-		
-
+	
 	</body>
 </html>

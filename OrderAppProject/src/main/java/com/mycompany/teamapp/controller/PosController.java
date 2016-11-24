@@ -1,10 +1,6 @@
 package com.mycompany.teamapp.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -58,7 +54,7 @@ public class PosController {
 		Member member = memberService.info(mid);
 		int presid = member.getMresid();
 		
-		List<Pos> posList = posService.list(presid);						// 매장 별 주문 내역
+		List<Pos> posList = posService.info(presid);						// 매장 별 주문 내역
 		
 		Restaurant restaurant = restaurantService.info(presid);		// 매장별 총 테이블 수
 		int totalTable = restaurant.getRestotaltable();
@@ -83,39 +79,14 @@ public class PosController {
 		String[] arrMenu = pos.getTempmenu();			// 주문 메뉴
 		int[] arrCount = pos.getTempcount();				// 수량 배열
 				
-		Map<String, Integer> map = new HashMap<>();
 		for (int i = 0; i < arrMenu.length; i++) {
 			if ( arrCount[i] != 0 ) {
-				map.put(arrMenu[i], arrCount[i]);
+				pos.setPmlname(arrMenu[i]);
+				pos.setPcount(arrCount[i]);
+				posService.add(pos);
 			}
 		}
 		
-		Set<Entry<String, Integer>> set = map.entrySet();
-		for (Entry<String, Integer> entry : set) {
-			pos.setPmlname(entry.getKey());
-			pos.setPcount(entry.getValue());
-			posService.add(pos);
-		}
-		
-		/*int[] arrResult = new int[arrCount.length];		// 수량 중에 0인 것 제거
-		int cnt = 0;
-		
-		for (int i = 0; i <arrCount.length; i++) {
-			if (arrCount[i] == 0) {
-				cnt++;
-			} else {
-				arrResult[i-cnt] = arrCount[i];
-			}
-		}
-		
-		for ( int i = 0 ; i < arrMenu.length ; i++ ) {			
-			logger.info(arrMenu[i]);
-			logger.info(String.valueOf(arrResult[i]));
-			pos.setPmlname(arrMenu[i]);
-			pos.setPcount(arrResult[i]);
-			
-			posService.add(pos);
-		}*/
 		return "redirect:/pos/index";	
 	}
 
@@ -143,7 +114,7 @@ public class PosController {
 	public String info(int presid, int ptableno, Model model) {
 		logger.info("pos info 실행");
 
-		List<Pos> infoList = posService.info(presid, ptableno);						// 테이블별 주문 내역
+		List<Pos> posList = posService.info(presid);						// 테이블별 주문 내역		
 		List<Integer> price = posService.calcSum(presid, ptableno);				// 합계 계산
 		List<MenuList> menuList = menuListService.menuList(presid);			// 매장별 메뉴 리스트
 		List<Integer> eventList = posService.checkEvent(presid, ptableno);		// 매장별 이벤트 메뉴 할인 합계
@@ -167,10 +138,9 @@ public class PosController {
 		}
 		
 		model.addAttribute("ptableno", ptableno);
-		model.addAttribute("infoList", infoList);
+		model.addAttribute("posList", posList);
 		model.addAttribute("totalPrice", totalPrice);
 		model.addAttribute("menuList", menuList);
-		model.addAttribute("eventList", eventList);
 		model.addAttribute("eventPrice", eventPrice);
 		model.addAttribute("result", result);
 		model.addAttribute("point", point);

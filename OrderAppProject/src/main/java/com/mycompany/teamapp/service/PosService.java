@@ -52,18 +52,18 @@ public class PosService {
 		return DELETE_SUCCESS;
 	}
 	
-	public List<Pos> info(int presid, int ptableno) {
+/*	public List<Pos> info(int presid, int ptableno) {
 		List<Pos> list = posDao.selectInfo(presid, ptableno);
 		return list;
 	}
-	
+	*/
 	public List<Integer> calcSum(int presid, int ptableno) {		
 		List<Integer> list = posDao.calc(presid, ptableno);
 		return list;
 	}
 	
-	public List<Pos> list(int presid) {
-		List<Pos> list = posDao.list(presid);
+	public List<Pos> info(int presid) {
+		List<Pos> list = posDao.selectInfo(presid);
 		return list; 
 	}
 

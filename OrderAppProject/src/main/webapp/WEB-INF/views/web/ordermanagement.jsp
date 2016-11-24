@@ -71,19 +71,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<!--/header-->
 	</div>
-	<!--error-->
-	<div class="error">
-		<div class="container">
-			<div class="error-top">
-				<h3>404<span>ERROR!</span></h3>
-				<p>Page Not Found...</p>
-				<div class="error-btn">
-					<a href="/teamapp/home">Back To Home</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--error-->
+
+
+	<iframe  src="/teamapp/pos/index" style="width:100%; height:80vh; border:0px;" scrolling="no"></iframe>
+
+
 <!--/start-footer-->
 	<div class= "footer">
 		 <div class="container">                                                   
