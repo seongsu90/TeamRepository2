@@ -35,7 +35,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             -moz-border-radius: 10px;
             -webkit-border-radius: 10px;
             border-radius: 10px;
-            margin: 50px auto;
+            margin: 10px auto;
             -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
             -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
@@ -347,11 +347,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</table>
 			<br/>
 	 		
-			<form method="post" action="/teamapp/member/memberboard?pageNo=1">
-				검색 <input type="text" name="find" value="${find}"/>
+			<form action="/teamapp/member/memberboard?">
+				<input type="hidden" name="pageNo" value="1"/>
+				검색 <input type="text" name="find" value="${find}"/>			
 				<input type="submit" value="찾기"/>
 			</form><br/>
-	 		
+			
 			<div style="width: 600px">
 				<c:if test="${pageNo!=1}">
 				<a href="memberboard?pageNo=1&find=${find}">[처음]</a>
@@ -397,7 +398,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px; padding:0px; background-color: #34495e; color:white" class="input-group-addon"><b>아이디</b></span>
-								<b><input type="text" class="form-control" name="username" id="mid"/></b>
+								<b><input type="text" class="form-control" name="username" id="mid" readonly/></b>
 							</div>
 						</div>
 						
