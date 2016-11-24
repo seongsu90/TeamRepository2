@@ -112,7 +112,7 @@
 			function onClickBtnAdd() {
 				$.ajax({
 					url:"addForm",
-					data:{"resid":resid, "resname":resname, "reslocation":reslocation, "restotaltable":restotaltable, "resinfo":resinfo, "restel":restel, "rescloseday":rescloseday, "resopen":resopen, "resclose":resclose, "resoriginafile":resorigin, "ressavedfile":ressavedfile, "resmime":resmime},
+					data:{"resid":resid, "resname":resname, "reslocation":reslocation, "restotaltable":restotaltable, "resinfo":resinfo, "restel":restel, "rescloseday":rescloseday, "resopen":resopen, "resclose":resclose, "resoriginfile":resoriginfile, "ressavedfile":ressavedfile, "resmime":resmime},
 					method:"post",
 					success: function(data) {
 						$("#restaurantAddModal").modal("hide");
@@ -203,32 +203,6 @@
 				<input type="submit" value="찾기" class="btn btn-success"/>
 			</form>
 		</div>
-
-		<%-- test --%>
-		<div class="container">
-		 <div class="row">
-		  <div class="col-md-4" >
-		   <div class="panel panel-primary">
-		    <div class="panel-heading">Les informations Personnel :</div>
-		     <div class="panel-body">
-			  <div align="right"><a href='#'><span class='info'></span> &nbsp Edit ! </a></div>
-				  <label>아이디 : </label><input type='number' class='form-control'  value="${resid}" disabled>
-			      <label>이름 : </label><input type='text' class='form-control'  value='just' disabled>
-				  <label>위치 : </label><input type='text' class='form-control'  value='just' disabled>
-				  <label>전화 번호 : </label><input type='text' class='form-control'  value='just' disabled>
-				  <label>전체 테이블 수 :</label><input type='number' class='form-control'  value='just' disabled>
-			      <label>오픈 타임 :</label><input type='text' class='form-control'  value='just' disabled>
-			      <label>클로즈 타임 :</label><input type='text' class='form-control'  value='just' disabled>
-			      <label>휴일 :</label><input type='text' class='form-control'  value='just' disabled>
-			      <label>사진 :</label><input type='file' class='form-control'  value='just' disabled>
-
-		    </div>
-		   </div>
-		  </div>
-		 </div>
-		</div>
-
-
 
 
 			 <%-- ## Add Modal ## --%>
@@ -346,19 +320,15 @@
 		<div id="infoModal" class="modal fade" tabindex="-1" role="dialog">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
-		      <div class="modal-header">
+		      <div class="modal-header"  style="background-color: #34495e">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title">Info</h4>
+		        <h4 class="modal-title" style="color: #FFFFFF;">Info</h4>
 		      </div>
 		      <div class="modal-body">
 				
-<div class="container">
-		 <div class="row">
-		  <div class="col-md-4" >
-		   <div class="panel panel-primary">
-		    <div class="panel-heading">Les informations Personnel :</div>
+
 		     <div class="panel-body">
-			  <div align="right"><a href='#'><span class='info'></span> &nbsp Edit ! </a></div>
+			  <div align="right"><a href='#'><span class='info'></span> </a></div>
 				  <label>아이디 : </label><input type='number' class='form-control'  value="${resid}" disabled>
 			      <label>이름 : </label><input type='text' class='form-control'  value='just' disabled>
 				  <label>위치 : </label><input type='text' class='form-control'  value='just' disabled>
@@ -370,12 +340,8 @@
 			      <label>사진 :</label><input type='file' class='form-control'  value='just' disabled>
 
 		    </div>
-		   </div>
-		  </div>
-		 </div>
-		</div>
-				
-				
+		  
+
 				
 				
 				
@@ -404,10 +370,11 @@
 					<a href="/teamapp/reservation/list?mid=${login}" class="btn btn-primary">[나의 예약 목록]</a>
 				</c:if>
 				<button type="button" class="btn btn-primary">수정</button>
+				 </div>
 
 		      </div>
 		    </div>
 		  </div>
-		</div>
+	
 	</body>
 </html>

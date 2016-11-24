@@ -53,7 +53,7 @@
 			<div class="top-nav">
 					<span class="menu"> </span>
 					<ul>					
-						<li><a class="active" href="${pageContext.servletContext.contextPath}/home">Home</a></li> 
+						<li><a class="active" href="${pageContext.servletContext.contextPath}/">Home</a></li> 
 						<c:if test="${mrank==2}">
 						<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
 						<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
@@ -340,7 +340,7 @@
 					<div class="bottom-nav">
 					       <h4>LEARN</h4>
 							<ul>
-							<li><a class="active" href="${pageContext.servletContext.contextPath}/home">Home</a></li> 
+							<li><a class="active" href="${pageContext.servletContext.contextPath}/">Home</a></li> 
 							<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
 							<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
 							<li><a href="${pageContext.servletContext.contextPath}/web/ordermanagement">주문관리</a></li> 
