@@ -21,9 +21,110 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
 	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
+	<style type="text/css">
+		table#acrylic {
+            border-collapse: separate;
+            background: #fff;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            margin: 50px auto;
+            -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+        
+        #acrylic thead {
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+        
+        #acrylic thead th {
+            font-family: 'Roboto';
+            font-size: 16px;
+            font-weight: 400;
+            color: #fff;
+            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+            text-align: left;
+            padding: 20px;
+            background-size: 100%;
+            background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #646f7f), color-stop(100%, #4a5564));
+            background-image: -moz-linear-gradient(#646f7f, #4a5564);
+            background-image: -webkit-linear-gradient(#646f7f, #4a5564);
+            background-image: linear-gradient(#646f7f, #4a5564);
+            border-top: 1px solid #858d99;
+        }
+        
+        #acrylic thead th:first-child {
+            -moz-border-top-right-radius: 10px;
+            -webkit-border-top-left-radius: 10px;
+            border-top-left-radius: 10px;
+        }
+        
+        #acrylic thead th:last-child {
+            -moz-border-top-right-radius: 10px;
+            -webkit-border-top-right-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        
+        #acrylic tbody tr td {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+            color: #5f6062;
+            font-size: 13px;
+            padding: 20px 20px 20px 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        #acrylic tbody tr:nth-child(2n) {
+            background: #f0f3f5;
+        }
+        
+        #acrylic tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        #acrylic tbody tr:last-child td:first-child {
+            -moz-border-bottom-right-radius: 10px;
+            -webkit-border-bottom-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+        
+        #acrylic tbody tr:last-child td:last-child {
+            -moz-border-bottom-right-radius: 10px;
+            -webkit-border-bottom-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        
+        #acrylic tbody:hover > tr td {
+            filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=50);
+            opacity: 0.5;
+        }
+        
+        #acrylic tbody:hover > tr:hover td {
+            text-shadow: none;
+            color: #2d2d2d;
+            filter: progid: DXImageTransform.Microsoft.Alpha(enabled=false);
+            opacity: 1;
+            transition: 0.2s all;
+        }
+	</style>
 
+<script type="text/javascript">
+		$(function() {			
+			$("nav li").on("click", function() {
+				$("nav li").removeClass("active");
+				$(this).addClass("active");
+			});
+		});
+	</script>
 </head>
+
+
 <body>
+
 	<!--start-header-->
 	<div id="home" class="header">
 			<!--logo-->
@@ -63,44 +164,35 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 		<!--/header-->
 	</div>
-		<div class="menu-section">
-		     <div class="container">
+	
+	
+	
+	
+	
+	
+	
+<div class="menu-section">
+		  <div class="container">
 			      <h2>Restaurant Management</h2>
 				  <p>가맹점 관리 페이지 입니다.</p><br/>
-				  <p>관리자 로그인 후 이용 바랍니다.</p> 
-				     
-				       <div class="menu-grids">
-					        <div class="col-md-4 menu-grid" >
-                              <a href="/teamapp/restaurant/list"> <img src="/teamapp/resources/img/g1.jpg" class="img-responsive" alt="" /></a>
-									<div class="price">
-                                    <span style="font-size:30pt">List</span>
-                                </div>
-								<p>가맹점 목록 열람 및 수정</p>
-
-							</div>
-							
-							
-							<div class="col-md-4 menu-grid">
-								<a href="/teamapp/restaurant/add"> <img src="/teamapp/resources/img/g2.jpg" class="img-responsive" alt="" /></a>
-								<div class="price">
-                                    <span style="font-size:30pt">Register</span>
-                                </div>
-								<p>가맹점 추가</p>
-
-							</div>
-							<div class="col-md-4 menu-grid">
-								<a href="/teamapp/restaurant/delete"> <img src="/teamapp/resources/img/g4.jpg" class="img-responsive" alt="" /></a>
-								<div class="price">
-                                     <span style="font-size:30pt">Delete</span>
-                                </div>
-								<p>가맹점 삭제</p>
-
-							</div>
-							
-					   </div>
-				 </div>
-			 </div>
+				 
+				<div class="container" align="center">
+					      <div class="masthead">
+					    <!--     <h3 class="text-muted">응디</h3> -->
+					        <nav>                                                                                                                                                                                                                                     
+					          <ul class="nav nav-justified">
+					             <li class="active"><a target="iframe" href="/teamapp/restaurant/list">가맹 식당 목록 열람 및 수정</a></li>
+					             <li><a target="iframe" href="/teamapp/restaurant/add">가맹 식당 추가</a></li>
+					              <li><a target="iframe" href="/teamapp/restaurant/delete">가맹 식당 삭제</a></li>
+					          </ul>
+					        </nav>
+					      </div>
+									     		     
+						<iframe name="iframe" style="width:90%; height:500px; border-width:0px;" src="/teamapp/restaurant/list"> </iframe>
+										   			
+				</div>
 		</div>
+</div>
 	
 <!--/start-footer-->
 	<div class= "footer">

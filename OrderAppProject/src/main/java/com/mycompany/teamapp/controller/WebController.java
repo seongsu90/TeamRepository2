@@ -15,6 +15,7 @@ public class WebController {
 	@RequestMapping("/resmanagement")
 	public String resmanagement()
 	{
+		
 		return "/web/resmanagement";
 	}
 	
