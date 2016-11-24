@@ -351,56 +351,34 @@
 		        <h4 class="modal-title">Info</h4>
 		      </div>
 		      <div class="modal-body">
-				<table style="width:100%">
+				
+<div class="container">
+		 <div class="row">
+		  <div class="col-md-4" >
+		   <div class="panel panel-primary">
+		    <div class="panel-heading">Les informations Personnel :</div>
+		     <div class="panel-body">
+			  <div align="right"><a href='#'><span class='info'></span> &nbsp Edit ! </a></div>
+				  <label>아이디 : </label><input type='number' class='form-control'  value="${resid}" disabled>
+			      <label>이름 : </label><input type='text' class='form-control'  value='just' disabled>
+				  <label>위치 : </label><input type='text' class='form-control'  value='just' disabled>
+				  <label>전화 번호 : </label><input type='text' class='form-control'  value='just' disabled>
+				  <label>전체 테이블 수 :</label><input type='number' class='form-control'  value='just' disabled>
+			      <label>오픈 타임 :</label><input type='text' class='form-control'  value='just' disabled>
+			      <label>클로즈 타임 :</label><input type='text' class='form-control'  value='just' disabled>
+			      <label>휴일 :</label><input type='text' class='form-control'  value='just' disabled>
+			      <label>사진 :</label><input type='file' class='form-control'  value='just' disabled>
 
-
-
-					<tr>
-					<td style="background-color:pink; width:100px">이름</td>
-					<td><pre>${restaurant.resname}</pre></td>
-					</tr>
-
-					<tr>
-					<td style="background-color:pink; width:100px">위치</td>
-					<td><pre>${restaurant.reslocation}</pre></td>
-					</tr>
-
-					<tr>
-					<td style="background-color:pink; width:100px">전화번호</td>
-					<td><pre>${restaurant.restel}</pre></td>
-					</tr>
-
-					<tr>
-					<td style="background-color:pink; width:100px">전체 테이블 수</td>
-					<td><pre>${restaurant.restotaltable}</pre></td>
-					</tr>
-
-					<tr>
-					<td style="background-color:pink; width:100px">정보</td>
-					<td><pre>${restaurant.resinfo}</pre></td>
-					</tr>
-
-					<tr>
-					<td style="background-color:pink; width:100px">오픈타임</td>
-					<td><pre>${restaurant.resopen}</pre></td>
-					</tr>
-
-					<tr>
-					<td style="background-color:pink; width:100px">클로즈타임</td>
-					<td><pre>${restaurant.resclose}</pre></td>
-					</tr>
-
-					<tr>
-					<td style="background-color:pink; width:150px">휴일</td>
-					<td><pre>${restaurant.rescloseday}</pre></td>
-					</tr>
-
-					<tr>
-					<td style="background-color:pink; width:150px">사진</td>
-					<td><img src="showPhoto?ressavedfile=${restaurant.ressavedfile}" width="120px"/></td>
-					</tr>
-				</table>
-
+		    </div>
+		   </div>
+		  </div>
+		 </div>
+		</div>
+				
+				
+				
+				
+				
 				<div>
 					<c:if test="${mrank==1}">
 						<c:if test="${resid==mresid }">
