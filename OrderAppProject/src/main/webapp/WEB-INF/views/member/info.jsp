@@ -60,10 +60,10 @@
 			</table>
 			<br/>
 			
-			<a href="/teamapp/member/modifyInfo?mid=${login}"><input type="button" value="수정"/></a>
-			<a href="/teamapp/member/withdraw"><input type="button" value="탈퇴"/><br/></a>
+			<a href="${pageContext.servletContext.contextPath}/member/modifyInfo?mid=${login}"><input type="button" value="수정"/></a>
+			<a href="${pageContext.servletContext.contextPath}/member/withdraw"><input type="button" value="탈퇴"/><br/></a>
 			
-			<a href="/teamapp/favorite/add"><input type="button" value="즐겨찾기 추가"/></a>
-			<a href="/teamapp/favorite/list"><input type="button" value="즐겨찾기 목록"/></a>
+			<a href="${pageContext.servletContext.contextPath}/favorite/add"><input type="button" value="즐겨찾기 추가"/></a>
+			<a href="${pageContext.servletContext.contextPath}/favorite/list"><input type="button" value="즐겨찾기 목록"/></a>
 	</body>
 </html>

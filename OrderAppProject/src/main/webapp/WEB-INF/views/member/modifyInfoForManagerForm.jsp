@@ -82,7 +82,7 @@
 		<b>회원 정보 수정 ( 관리자용 )</b>
 		<hr/>
 		
-		<form method="post" action="/teamapp/member/modifyInfo">
+		<form method="post" action="${pageContext.servletContext.contextPath}/member/modifyInfo">
 			<input type="hidden" name="mid" value="${member.mid}"/>
 			<table>
 				<tr>

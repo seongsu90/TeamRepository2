@@ -123,7 +123,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         body, html{
 		    height: 100%;
 		 	background-repeat: no-repeat;
-		 	background-color: #d3d3d3;
+		 	background-color: white;
 		 	font-family: 'Oxygen', sans-serif;
 		}
 		
@@ -347,7 +347,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</table>
 			<br/>
 	 		
-			<form action="/teamapp/member/memberboard?">
+			<form action="${pageContext.servletContext.contextPath}/member/memberboard">
 				<input type="hidden" name="pageNo" value="1"/>
 				검색 <input type="text" name="find" value="${find}"/>			
 				<input type="submit" value="찾기"/>

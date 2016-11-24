@@ -69,13 +69,13 @@
 					 </td>
 					<td> ${member.mpoint} </td>
 					<td> ${member.mresid} </td>
-					<td> <a href="/teamapp/member/modifyInfo?mid=${member.mid}"><input type="button" value="수정"/></a></td>
+					<td> <a href="/${pageContext.servletContext.contextPath}/member/modifyInfo?mid=${member.mid}"><input type="button" value="수정"/></a></td>
 				</tr>
 			</c:forEach>
 		</table>
 		<br/>
  		
-		<form method="post" action="/teamapp/member/list?pageNo=1">
+		<form method="post" action="${pageContext.servletContext.contextPath}/member/list?pageNo=1">
 			검색 <input type="text" name="find" value="${find}"/>
 			<input type="submit" value="찾기"/>
 		</form><br/>
