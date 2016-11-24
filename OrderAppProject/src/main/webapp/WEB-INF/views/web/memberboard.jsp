@@ -19,6 +19,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
 	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
+	
+
+	<!-- Website Font style -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+		
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+	
 	<style type="text/css">
 		table#acrylic {
             border-collapse: separate;
@@ -108,17 +117,94 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             opacity: 1;
             transition: 0.2s all;
         }
+        
+        
+        /* 모달 폼 */
+        body, html{
+		    height: 100%;
+		 	background-repeat: no-repeat;
+		 	background-color: #d3d3d3;
+		 	font-family: 'Oxygen', sans-serif;
+		}
+		
+		.main{
+		 	margin-top: 70px;
+		}
+		
+		h1.title { 
+			font-size: 50px;
+			font-family: 'Passion One', cursive; 
+			font-weight: 400; 
+		}
+		
+		hr{
+			width: 10%;
+			color: #fff;
+		}
+		
+		.form-group{
+			margin-bottom: 15px;
+		}
+		
+		label{
+			margin-bottom: 15px;
+		}
+		
+		input,
+		input::-webkit-input-placeholder {
+		    font-size: 11px;
+		    padding-top: 3px;
+		}
+		
+		.main-login{
+		 	background-color: #fff;
+		    /* shadows and rounded borders */
+		    -moz-border-radius: 2px;
+		    -webkit-border-radius: 2px;
+		    border-radius: 2px;
+		    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+		    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+		    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+		
+		}
+		
+		.main-center{
+		 	margin-top: 30px;
+		 	margin: 0 auto;
+		 	max-width: 330px;
+		    padding: 40px 40px;
+		
+		}
+		
+		.login-button{
+			margin-top: 5px;
+		}
+		
+		.login-register{
+			font-size: 11px;
+			text-align: center;
+		}
+		
+		.input-group-addon {
+			color: #34495e;
+		}
+        
+        
+        
+        
+        
+        
 	</style>		
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
 				console.log("ready 실행");
-				setCity();
 				
 				$("#selCity").change(function () {
 					console.log("City Change");
-			        setProvince();
-			       $("#mlocation").val(""); 
+					var selCity = $("#selCity").val();
+			        setProvince(selCity, null);
+			        $("#mlocation").val(""); 
 			    });
 				
 				$("#selProvince").change(function () {
@@ -126,23 +212,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					setMlocation();
 			    });
 		});
-			
-		window.onload = function() {
-			console.log("onLoad");
-			var selCity = $("#selectedCity").val();
-			var selProvince = $("#selectedProv").val();
-				$.ajax({
-				url: "getProvince.jsp",
-				data: {"selCity":selCity, "selProvince":selProvince},
-				success: function (data) {
-					$("#selProvince").html(data);
-				}
-			});
-		};
-			
-		function setCity() {
+		function setCity(selCity) {
 			console.log("setCity 실행");
-			var selCity = $("#selectedCity").val();
 			$.ajax({
 				url: "getCity.jsp",
 				data: {"selCity":selCity},
@@ -152,15 +223,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			});
 		}
 		
-		function setProvince() {
+		function setProvince(selCity, selProvince) {
 			console.log("setProvince 실행");
-			var selCity = $("#selCity").val();
 			$.ajax({
 				url: "getProvince.jsp",
-				data: {"selCity":selCity, "selProvince":null},
+				data: {"selCity":selCity, "selProvince":selProvince},
 				success: function (data) {
 					$("#selProvince").html(data);
-					$("#modifyForm #selProvince").val(selProvince);
 				}
 			});
 		}
@@ -171,26 +240,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		}	
 	
 		function showModifyModal(member) {
-			$("#modifyForm #mid").html(member.mid);
+			
+			$("#modifyForm #mid").val(member.mid);
 			$("#modifyForm #mname").val(member.mname);
 			$("#modifyForm #mpassword").val(member.mpassword);
 			$("#modifyForm #mphone").val(member.mphone);
 			$("#modifyForm #mbirth").val(member.mbirth);
-			
 			var selCity = member.mlocation.substring(0, member.mlocation.indexOf(" "));
-			var selProvince = member.mlocation.substring(member.mlocation.indexOf(" ")+1);
-			$("#modifyForm #selCity").val(selCity);
-			setProvince(selCity, selProvince);
+			var selProvince = member.mlocation.substring(member.mlocation.indexOf(" ")+1);			
 			$("#modifyForm #mlocation").val(member.mlocation);
 			$("#modifyForm #mrank").val(member.mrank);
 			$("#modifyForm #mpoint").val(member.mpoint);
 			$("#modifyForm #mresid").val(member.mresid);
-
+			setCity(selCity);
+			setProvince(selCity, selProvince);
 			$("#memberModifyModal").modal("show");
 		}
 		
 		function onClickBtnModify() {
-			var mid = $("#modifyForm #mid").html();
+			var mid = $("#modifyForm #mid").val();
 			var mname = $("#modifyForm #mname").val();
 			var mpassword = $("#modifyForm #mpassword").val();
 			var mphone = $("#modifyForm #mphone").val();
@@ -216,6 +284,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					}
 				}
 			});
+		}
+		
+		function onClickBtnCancel() {
+			$("#memberModifyModal").modal("hide");
 		}
 	</script>	
 </head>
@@ -308,80 +380,98 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	
 	<!-- 수정 Modal ############################################## -->
 	
-	<div id="memberModifyModal" class="modal fade" tabindex="-1" role="dialog">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title">회원 정보 수정 ( 관리자용 )</h4>
-	      </div>
-	      <div class="modal-body">
-				<form id="modifyForm">
-					<input type="hidden" name="mid" value="${member.mid}"/>
-					<table>
-						<tr>
-							<td class="list" style="background-color: #ff66ff;"><b>아이디</b></td>
-							<td class="content"><b id="mid"></b></td>
-						</tr>
+	<div id="memberModifyModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
+		<div class="modal-dialog" role="document">
+	    	<div class="modal-content" style="width:500px">
+	    		<!-- modal-header -->
+	     		<div class="modal-header" style="background-color: #34495e; color:white">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">회원 정보 수정</h4>
+	      		</div>
+	      		
+	      		<!-- modal-modal-body -->
+	      		<div class="modal-body">
+					<form id="modifyForm">
+						<input type="hidden" name="mid" value="${member.mid}"/>				
 							
-						<tr>
-							<td class="list">이름 </td>
-							<td class="content"><input id="mname" type="text" name="mname"></td>
-						</tr>
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px; padding:0px; background-color: #34495e; color:white" class="input-group-addon"><b>아이디</b></span>
+								<b><input type="text" class="form-control" name="username" id="mid"/></b>
+							</div>
+						</div>
 						
-						<tr>
-							<td class="list">비밀번호 </td>
-							<td class="content"><input id="mpassword" type="text" name="mpassword"></td>
-						</tr>
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>이름</b></span>
+								<input type="text" class="form-control" name="mname" id="mname"/>
+							</div>
+						</div>
 						
-						<tr>
-							<td class="list">휴대전화 </td>
-							<td class="content"><input id="mphone" type="tel" name="mphone"></td>
-						</tr>
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>비밀번호</b></span>
+								<input type="text" class="form-control" name="mpassword" id="mpassword"/>
+							</div>
+						</div>
 						
-						<tr>
-							<td class="list">생일 </td>
-							<td class="content"><input id="mbirth" type="date" name="mbirth"></td>
-						</tr>
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>휴대전화</b></span>
+								<input type="text" class="form-control" name="mphone" id="mphone"/>
+							</div>
+						</div>
 						
-						<tr>
-							<td class="list"> 관심지역 </td>
-							<td class="content">
-								시　도 | <select style="width: 110px" id="selCity" name="selCity">
-										</select><br/>
-								시군구 | <select style="width: 110px" id="selProvince" name="selProvince">
-										</select>
-										<input type="text" name="mlocation" id="mlocation" value="${member.mlocation}"/>
-										<input type="hidden" name="selectedCity" id="selectedCity" value="${slocation[0]}"/>
-										<input type="hidden" name="selectedProv" id="selectedProv" value="${slocation[1]}"/>
-							</td>
-						</tr>
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>생일</b></span>
+								<input type="text" class="form-control" name="mbirth" id="mbirth"/>
+							</div>
+						</div>
 						
-						<tr>
-							<td class="list">회원 등급 </td>
-							<td class="content"><input id="mrank" type="number" name="mrank" value="${member.mrank}"/></td>
-						</tr>
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>관심지역</b></span>
+								<select class="form-control" style="width: 110px" id="selCity" name="selCity"></select>
+								<select class="form-control" style="width: 110px" id="selProvince" name="selProvince"></select><br/>
+								<input type="hidden" class="form-control" name="mlocation" id="mlocation" value="${member.mlocation}"/>		
+							</div>
+						</div>
 						
-						<tr>
-							<td class="list">적립 포인트 </td>
-							<td class="content"><input id="mpoint" type="number" name="mpoint" value="${member.mpoint}"/></td>
-						</tr>
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>회원 등급</b></span>
+								<input type="number" class="form-control" name="mrank" id="mrank"/>
+							</div>
+						</div>
 						
-						<tr>
-							<td class="list">보유 레스토랑 id </td>
-							<td class="content"><input id="mresid" type="number" name="mresid" value="${member.mresid}"/></td>
-						</tr>
-					</table>
-				</form>
-
-	      </div>
-	      <div class="modal-footer">
-	        <button id="btnModify" type="button" class="btn btn-primary" onclick="onClickBtnModify()">수정하기</button>
-	        <button id="btnInit" type="button" class="btn btn-default">초기화</button>
-	      </div>
-	    </div><!-- /.modal-content -->
-	  </div><!-- /.modal-dialog -->
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>적립 포인트</b></span>
+								<input type="number" class="form-control" name="mpoint" id="mpoint"/>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>보유 레스토랑id</b></span>
+								<input type="number" class="form-control" name="mresid" id="mresid"/>
+							</div>
+						</div>
+						
+					</form>		
+	      		</div>
+	      	
+		      	<!-- modal-modal-modal-footer -->	
+				<div class="modal-footer" style="background-color: #34495e; color:white">
+			        <button id="btnModify" type="button" class="btn btn-default" onclick="onClickBtnModify()" style="color: #34495e"><b>수정하기</b></button>
+			        <button id="btnInit" type="button" class="btn btn-default" onclick="onClickBtnCancel()" style="color: #34495e"><b>취소</b></button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog --> --%>
 	</div><!-- /.modal -->
 	<!-- ####################################################### -->	
+	
+	
 </body>
 </html>
