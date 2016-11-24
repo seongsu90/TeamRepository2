@@ -5,15 +5,16 @@
 	<head> <!-- 헤드엘리먼트 -->
 		<meta charset="UTF-8">
 	</head>
-	<body> <!-- 브라우저에 나오는 부분 -->
+	<body style="width:600px; margin:auto;"> <!-- 브라우저에 나오는 부분 -->
 		
-		메뉴리스트 삭제
-		<hr/> <!-- 시작과 동시에 끝이다라는 의미<br/>// 태그의 의미는 수평선그리기 -->
-		<form method="post">
-
-		 메뉴:<input type="text" name="mlname" value="${menuList.mlname}"><br/>
+		<h4 style="width:600px; margin:auto;">메뉴 삭제</h4>
 		
-		<input type="submit" value="삭제하기"/> <br/>
-		</form>
+			<form method="post">
+				삭제하시려면 메뉴이름을 한번 더 입력해주세요.<br/><br/>
+				 메뉴:<input type="text" name="mlname" value="${menuList.mlname}"><br/><br/><br/>
+			
+				<input type="submit" value="삭제"/> <br/>
+			</form>
+		
 	</body>
 </html>

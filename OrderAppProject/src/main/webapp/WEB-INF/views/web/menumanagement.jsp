@@ -38,6 +38,24 @@
 
  });
 	</script>
+	
+
+    
+    <link href="/myweb/resources/bootstrap-3.3/css/bootstrap.min.css" rel="stylesheet">
+
+  
+    <link href="/myweb/resources/css/justified-nav.css" rel="stylesheet">
+	<script type="text/javascript" src="/myweb/resources/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="/myweb/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
+ 	<script>
+ 		$(function(){
+ 			$("nav li").on("click", function(){
+ 				$("nav li").removeClass("active");//jquery 이용
+ 				//this.setAttribute("class","active")//순수 DOM
+ 				$(this).addClass("active");
+ 			});
+ 		});
+ 	</script>
 	 
 </head>
 <body>
@@ -81,7 +99,7 @@
 		<!--/header-->
 	</div>
 <!--gallery-->
-	<div class="gallery services">
+	<div class="gallery services" style="height:10px;">
 		<div class="container">
 				<h3>MenuList</h3>
 			<div class="portfolio-bottom">
@@ -90,184 +108,21 @@
 						<a href="/teamapp/resources/img/g1.jpg" class=" mask b-link-stripe b-animate-go   swipebox"  title="Image Title">
 						  </a>
 						   <div class="container">
-	<div class="row">
-
-		<section class="content">
-			<h1>목록</h1>
-			<div class="col-md-8 col-md-offset-2">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div class="pull-right">
-							<div class="btn-group">
-								<button type="button" class="btn btn-success btn-filter" data-target="pagado">Pagado</button>
-								<button type="button" class="btn btn-warning btn-filter" data-target="pendiente">Pendiente</button>
-								<button type="button" class="btn btn-danger btn-filter" data-target="cancelado">Cancelado</button>
-								<button type="button" class="btn btn-default btn-filter" data-target="all">Todos</button>
+							<div class="row">
+						
+								<section class="content">
+									<nav>
+							          <ul class="nav nav-justified" style="width:1200px;">
+							            <li class="active" style="background-color:#34495e;"><a target="iframe" href="/teamapp/menulist/add">생성</a></li>
+							            <li style="background-color:#34495e;"><a target="iframe" href="/teamapp/menulist/list">메뉴</a></li>
+							            <li style="background-color:#34495e;"><a target="iframe" href="/teamapp/menulist/hotlist?mlishot=1">핫메뉴</a></li>
+							          </ul>
+						  			</nav>
+									<iframe name="iframe" style="width:1200px; height:800px; border-width:0;" src="/teamapp/menulist/add"></iframe>
+								</section>					
 							</div>
 						</div>
-						<div class="table-container">
-							<table class="table table-filter">
-								<tbody>
-									<tr data-status="pagado">
-										<td>
-											<div class="ckbox">
-												<input type="checkbox" id="checkbox1">
-												<label for="checkbox1"></label>
-											</div>
-										</td>
-										<td>
-											<a href="javascript:;" class="star">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td>
-										<td>
-											<div class="media">
-												<a href="#" class="pull-left">
-													<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-												</a>
-												<div class="media-body">
-													<span class="media-meta pull-right">Febrero 13, 2016</span>
-													<h4 class="title">
-														Lorem Impsum
-														<span class="pull-right pagado">(Pagado)</span>
-													</h4>
-													<p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr data-status="pendiente">
-										<td>
-											<div class="ckbox">
-												<input type="checkbox" id="checkbox3">
-												<label for="checkbox3"></label>
-											</div>
-										</td>
-										<td>
-											<a href="javascript:;" class="star">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td>
-										<td>
-											<div class="media">
-												<a href="#" class="pull-left">
-													<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-												</a>
-												<div class="media-body">
-													<span class="media-meta pull-right">Febrero 13, 2016</span>
-													<h4 class="title">
-														Lorem Impsum
-														<span class="pull-right pendiente">(Pendiente)</span>
-													</h4>
-													<p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr data-status="cancelado">
-										<td>
-											<div class="ckbox">
-												<input type="checkbox" id="checkbox2">
-												<label for="checkbox2"></label>
-											</div>
-										</td>
-										<td>
-											<a href="javascript:;" class="star">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td>
-										<td>
-											<div class="media">
-												<a href="#" class="pull-left">
-													<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-												</a>
-												<div class="media-body">
-													<span class="media-meta pull-right">Febrero 13, 2016</span>
-													<h4 class="title">
-														Lorem Impsum
-														<span class="pull-right cancelado">(Cancelado)</span>
-													</h4>
-													<p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr data-status="pagado" class="selected">
-										<td>
-											<div class="ckbox">
-												<input type="checkbox" id="checkbox4" checked>
-												<label for="checkbox4"></label>
-											</div>
-										</td>
-										<td>
-											<a href="javascript:;" class="star star-checked">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td>
-										<td>
-											<div class="media">
-												<a href="#" class="pull-left">
-													<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-												</a>
-												<div class="media-body">
-													<span class="media-meta pull-right">Febrero 13, 2016</span>
-													<h4 class="title">
-														Lorem Impsum
-														<span class="pull-right pagado">(Pagado)</span>
-													</h4>
-													<p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr data-status="pendiente">
-										<td>
-											<div class="ckbox">
-												<input type="checkbox" id="checkbox5">
-												<label for="checkbox5"></label>
-											</div>
-										</td>
-										<td>
-											<a href="javascript:;" class="star">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td>
-										<td>
-											<div class="media">
-												<a href="#" class="pull-left">
-													<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-												</a>
-												<div class="media-body">
-													<span class="media-meta pull-right">Febrero 13, 2016</span>
-													<h4 class="title">
-														Lorem Impsum
-														<span class="pull-right pendiente">(Pendiente)</span>
-													</h4>
-													<p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<div class="content-footer">
-					<p>
-						Page © - 2016 <br>
-						Powered By <a href="https://www.facebook.com/tavo.qiqe.lucero" target="_blank">TavoQiqe</a>
-					</p>
-				</div>
-			</div>
-		</section>
-		
-	</div>
-</div>
-						
-						  
-						
-						
+	
 					</div>
 					
 				</div>

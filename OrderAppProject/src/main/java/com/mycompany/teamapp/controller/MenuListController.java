@@ -30,7 +30,6 @@ public class MenuListController {
 		@RequestMapping("/list")
 		public String list(String pageNo, Model model, HttpSession session){
 			int intPageNo=1;
-			
 			if(pageNo==null){
 				pageNo=(String) session.getAttribute("pageNo");
 				if(pageNo != null){
@@ -115,6 +114,7 @@ public class MenuListController {
 		
 		@RequestMapping(value="/modify", method=RequestMethod.POST)
 		public String modify(MenuList menuList,HttpSession session) throws IllegalStateException, IOException {
+			
 			menuList.setMloriginfile(menuList.getMlphoto().getOriginalFilename());
 			String mlsavedfile = new Date().getTime() + menuList.getMlphoto().getOriginalFilename();
 			String realPath = session.getServletContext().getRealPath("/WEB-INF/photo/"+mlsavedfile);
