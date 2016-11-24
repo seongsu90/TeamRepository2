@@ -52,15 +52,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             font-family: 'Roboto';
             font-size: 16px;
             font-weight: 400;
-            color: #fff;
+            color: white;
             text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
             text-align: left;
             padding: 20px;
             background-size: 100%;
-            background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #646f7f), color-stop(100%, #4a5564));
-            background-image: -moz-linear-gradient(#646f7f, #4a5564);
-            background-image: -webkit-linear-gradient(#646f7f, #4a5564);
-            background-image: linear-gradient(#646f7f, #4a5564);
+            background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3C5064), color-stop(100%, #34495e));
+            background-image: -moz-linear-gradient(#3C5064, #34495e);
+            background-image: -webkit-linear-gradient(#3C5064, #34495e);
+            background-image: linear-gradient(#3C5064, #34495e);
             border-top: 1px solid #858d99;
         }
         
