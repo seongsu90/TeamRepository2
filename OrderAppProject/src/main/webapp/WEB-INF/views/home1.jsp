@@ -20,23 +20,24 @@
 	<script type="text/javascript">
 		function onClickLogin()
 		{
-			var mid =$("#login-form #login_username").val();
-			var mpassword=$("#login-form #login_password").val();
+			var mid =$("#login_username").val();
+			var mpassword=$("#login_password").val();
+			console.log("왔는감");
 			
 			$.ajax({
-				url:"login",
+				url: "login",
 				data: {"mid":mid, "mpassword":mpassword},
-				method:"post"
-				succed: function(data){
-					if(data.result=="success"){
+				method:"post",
+				success: function(data){
+					if(data.result=="0"){
 						alert("로그인 성공");
 						$("#login-modal").modal("hide");
 						location.reload();
-					}else if(data.result == "fail"){
-							alert("아이디 혹은 비밀번호가 틀렸습니다.")
+					}else{
+							alert("아이디 혹은 비밀번호가 틀렸습니다.");
 					}
 				}
-			})
+			});
 		}
 		
 	</script>
@@ -409,7 +410,7 @@
         		    	</div>
 				        <div class="modal-footer">
                             <div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="onClickLogin()">Login</button>
+                                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="onClickLogin()">Login</button>
                             </div>
 				    	    <div>
                                 <button id="login_lost_btn" type="button" class="btn btn-link" >Lost Password?</button>

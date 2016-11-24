@@ -38,18 +38,11 @@ public class MemberController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(String mid, String mpassword, HttpSession session, Model model) {
 		logger.info("login() POST 실행");
-		int result = memberService.login(mid, mpassword);
-		if ( result == MemberService.LOGIN_FAIL_MPASSWORD ) {
-			model.addAttribute("error", "LOGIN_FAIL_MPASSWORD");
-			return "member/loginForm";
-		} else if ( result == MemberService.LOGIN_FAIL_MID) {
-			model.addAttribute("error", "LOGIN_FAIL_MID");
-			return "member/loginForm";
-		} else {
-			session.setAttribute("login", mid);
-			session.setAttribute("mrank", memberService.info(mid).getMrank());
-			return "redirect:/";
-		}
+		String result = String.valueOf(memberService.login(mid, mpassword));
+		model.addAttribute("result", result);
+		session.setAttribute("login", mid);
+		session.setAttribute("mrank", memberService.info(mid).getMrank());
+		return "member/modify";
 	}
 	
 	// 아이디 찾기 폼
