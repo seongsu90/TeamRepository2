@@ -5,24 +5,18 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/style.css" />
-	<%-- <link href="${pageContext.servletContext.contextPath}/resources/css/bootstrap.css" rel='stylesheet' type='text/css' /> --%>
+	<%-- <link href="${pageContext.servletContext.contextPath}/resources/css/bootstrap.css" rel='stylesheet' type='text/css' /> --%> 
 	<link href='http://fonts.googleapis.com/css?family=Niconne|Playball|Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
+	
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
 	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 
-
-	<style>
-	 div.container {
-         width: 120%;   
-         margin: auto;
-
-     }
-	</style>
 </head>
 <body>
     <!--start-header-->
@@ -35,18 +29,15 @@
 					<span class="menu"> </span>
 					<ul>
 						<li ><p class="text-center"><a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a></p></li>					
-						<li><a class="active" href="/teamapp/home">Home</a></li> 
-						<li><a href="/teamapp/web/memberindex">회원관리</a></li>
-						<li><a href="/teamapp/web/resmanagement">가맹점관리</a></li> 
-						<li><a href="/teamapp/web/ordermanagement">주문관리</a></li> 
-						<li><a href="/teamapp/web/restaurantmanege">매장관리</a></li>
-						<li><a href="/teamapp/web/menumanagement">메뉴관리</a></li> 
-						<li class="lost"><a href="/teamapp/web/contact">오시는길</a></li>
+						<li><a class="active" href="${pageContext.servletContext.contextPath}/home">Home</a></li> 
+						<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
+						<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
+						<li><a href="${pageContext.servletContext.contextPath}/web/ordermanagement">주문관리</a></li> 
+						<li><a href="${pageContext.servletContext.contextPath}/web/restaurantmanege">매장관리</a></li>
+						<li><a href="${pageContext.servletContext.contextPath}/web/menumanagement">메뉴관리</a></li> 
+						<li class="lost"><a href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
 						<div class="clearfix"> </div>
 					</ul>
-					
-		        		
-				
 				</div>
 
 				<div class="clearfix"> </div>
@@ -71,10 +62,10 @@
 					 <div  id="top" class="callbacks_container">
 							<ul class="rslides" id="slider4">
 									<li>
-										<img src="/teamapp/resources/img/bg2.jpg" class="img-responsive" alt="" />
+										<img src="${pageContext.servletContext.contextPath}/resources/img/bg2.jpg" class="img-responsive" alt="" />
 										<div class="caption1">
 										<div class="logo">
-											<a href="/teamapp/home"><h1>주문<span>할게요!</span></h1></a>
+											<a href="${pageContext.servletContext.contextPath}/home"><h1>주문<span>할게요!</span></h1></a>
 										</div>
 											<h2>BEST RECIPES WITH
 											BEST INGREDIENTS</h2>	
@@ -82,7 +73,7 @@
 										</div>
 									</li>
 									<li>
-									<img src="/teamapp/resources/img/bg.jpg" class="img-responsive" alt="" />
+									<img src="${pageContext.servletContext.contextPath}/resources/img/bg.jpg" class="img-responsive" alt="" />
 									  <div class="caption1">
 										<div class="logo">
 											<a href="/teamapp/home"><h1>주문<span>할게요!</span></h1></a>
@@ -93,7 +84,7 @@
 										</div>
 									</li>
 									<li>
-									<img src="/teamapp/resources/img/bg3.jpg" class="img-responsive" alt="" />
+									<img src="${pageContext.servletContext.contextPath}/resources/img/bg3.jpg" class="img-responsive" alt="" />
 									<div class="caption1">
 									<div class="logo">
 										<a href="/teamapp/home"><h1>주문<span>할게요!</span></h1></a>
@@ -108,7 +99,7 @@
 						</div>
 					</div>	
 				<!--- banner Slider starts Here --->
-	  			<script src="/teamapp/resources/js/responsiveslides.min.js"></script>
+	  			<script src="${pageContext.servletContext.contextPath}/resources/js/responsiveslides.min.js"></script>
 			 <script>
 			    // You can also use "$(window).load(function() {"
 			    $(function () {
@@ -131,7 +122,7 @@
 			  </script>
 			<!----//End-slider-script---->
 				<div class="clearfix"> </div>
-</div>
+
 		<!--start-welcome-->
 		<div class="welcome-section">
 		   <div class="container">
@@ -142,13 +133,13 @@
 					   <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 				   </div>
 					<div class="col-md-8 welcome-img">
-					   <img src="/teamapp/resources/img/img_03.jpg" class="img-responsive" alt="" />
+					   <img src="${pageContext.servletContext.contextPath}/resources/img/img_03.jpg" class="img-responsive" alt="" />
 					</div>
 				   <div class="clearfix"> </div>
 			   </div>
 			    <div class="about-grid">
 				   <div class="col-md-4 about-img">
-					   <img src="/teamapp/resources/img/img_02.jpg" class="img-responsive" alt="" />
+					   <img src="${pageContext.servletContext.contextPath}/resources/img/img_02.jpg" class="img-responsive" alt="" />
 					</div>
 					<div class="col-md-8 about-text">
 					   <h3>About</h3>
@@ -223,7 +214,9 @@
 									 <p>의미없는 Coder</p>
 									 <a class="more" href="#">More Info </a>
 							</li>
+							
 						<div class="clearfix"> </div>
+						</ul>
 					 </div>
 					 <div class="clearfix"> </div>
 				</div>
@@ -241,7 +234,7 @@
 					   <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 				   </div>
 					<div class="col-md-8 welcome-img">
-					 <a href="single.html" class="mask"><img src="/teamapp/resources/img/b2.jpg" alt="image" class="img-responsive zoom-img"></a>
+					 <a href="single.html" class="mask"><img src="${pageContext.servletContext.contextPath}/resources/img/b2.jpg" alt="image" class="img-responsive zoom-img"></a>
 					</div>
 				   <div class="clearfix"> </div>
 			   </div>
@@ -252,7 +245,7 @@
 					   <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 				   </div>
 					<div class="col-md-8 blog-img two">
-					 <a href="single.html" class="mask"><img src="/teamapp/resources/img/b3.jpg" alt="image" class="img-responsive zoom-img"></a>
+					 <a href="single.html" class="mask"><img src="${pageContext.servletContext.contextPath}/resources/img/b3.jpg" alt="image" class="img-responsive zoom-img"></a>
 					</div>
 				   <div class="clearfix"> </div>
 			   </div> 
@@ -263,7 +256,7 @@
 					   <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 				   </div>
 					<div class="col-md-8 welcome-img">
-					 <a href="single.html" class="mask"><img src="/teamapp/resources/img/b1.jpg" alt="image" class="img-responsive zoom-img"></a>
+					 <a href="single.html" class="mask"><img src="${pageContext.servletContext.contextPath}/resources/img/b1.jpg" alt="image" class="img-responsive zoom-img"></a>
 					</div>
 				   <div class="clearfix"> </div>
 			   </div>
@@ -276,23 +269,23 @@
 			<div class="portfolio-bottom">
 				<div class="gallery-one">
 					<div class="col-md-3 gallery-left">
-						<a href="/teamapp/resources/img/g1.jpg" class=" mask b-link-stripe b-animate-go   swipebox"  title="Image Title">
-								<img src="/teamapp/resources/img/g1.jpg" alt="" class="img-responsive zoom-img"/>
+						<a href="${pageContext.servletContext.contextPath}/resources/img/g1.jpg" class=" mask b-link-stripe b-animate-go   swipebox"  title="Image Title">
+								<img src="${pageContext.servletContext.contextPath}/resources/img/g1.jpg" alt="" class="img-responsive zoom-img"/>
 						</a>
 					</div>
 					<div class="col-md-3 gallery-left">
-						<a href="/teamapp/resources/img/g2.jpg" class=" mask b-link-stripe b-animate-go   swipebox"  title="Image Title">
-								<img src="/teamapp/resources/img/g2.jpg" alt="" class="img-responsive zoom-img"/>
+						<a href="${pageContext.servletContext.contextPath}/resources/img/g2.jpg" class=" mask b-link-stripe b-animate-go   swipebox"  title="Image Title">
+								<img src="${pageContext.servletContext.contextPath}/resources/img/g2.jpg" alt="" class="img-responsive zoom-img"/>
 						</a>
 					</div>
 					<div class="col-md-3 gallery-left">
-						<a href="/teamapp/resources/img/g4.jpg" class=" mask b-link-stripe b-animate-go   swipebox"  title="Image Title">
-								<img src="/teamapp/resources/img/g4.jpg" alt="" class="img-responsive zoom-img"/>
+						<a href="${pageContext.servletContext.contextPath}/resources/img/g4.jpg" class=" mask b-link-stripe b-animate-go   swipebox"  title="Image Title">
+								<img src="${pageContext.servletContext.contextPath}/resources/img/g4.jpg" alt="" class="img-responsive zoom-img"/>
 						</a>
 					</div>
 					<div class="col-md-3 gallery-left">
-						<a href="/teamapp/resources/img/g3.jpg" class=" mask b-link-stripe b-animate-go   swipebox"  title="Image Title">
-								<img src="/teamapp/resources/img/g3.jpg" alt="" class="img-responsive zoom-img"/>
+						<a href="${pageContext.servletContext.contextPath}/resources/img/g3.jpg" class=" mask b-link-stripe b-animate-go   swipebox"  title="Image Title">
+								<img src="${pageContext.servletContext.contextPath}/resources/img/g3.jpg" alt="" class="img-responsive zoom-img"/>
 						</a>
 					</div>
 					<div class="clearfix"> </div>
@@ -300,34 +293,26 @@
 			</div>
 		</div>
 	</div>
-	<!--swipebox -->	
-			<link rel="stylesheet" href="/teamapp/resources/css/swipebox.css">
-				<script src="/teamapp/resources/js/jquery.swipebox.min.js"></script> 
-				<script type="text/javascript">
-					jQuery(function($) {
-						$(".swipebox").swipebox();
-					});
-				</script>
-			<!--//swipebox Ends -->
+	
 <!--/start-footer-->
 	<div class= "footer">
 		 <div class="container">                                                   
 			<div class="col-md-3 footer-grid">
 					<div class="logo two">
-						<a href="index.html"><h3>FOOD<span>House</span></h3></a>
+						<a href="${pageContext.servletContext.contextPath}/home"><h3>FOOD<span>House</span></h3></a>
 					</div>
 				</div>
 				<div class=" col-md-3 footer-grid footer-grid2">
 					<div class="bottom-nav">
 					       <h4>LEARN</h4>
 							<ul>
-							<li><a class="active" href="/teamapp/home">Home</a></li> 
-							<li><a href="/teamapp/web/memberindex">회원관리</a></li>
-							<li><a href="/teamapp/web/resmanagement">가맹점관리</a></li> 
-							<li><a href="/teamapp/web/ordermanagement">주문관리</a></li> 
-							<li><a href="/teamapp/web/restaurantmanege">매장관리</a></li>
-							<li><a href="/teamapp/web/menumanagement">메뉴관리</a></li> 
-							<li><a href="/teamapp/web/contact">오시는길</a></li>
+							<li><a class="active" href="${pageContext.servletContext.contextPath}/home">Home</a></li> 
+							<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
+							<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
+							<li><a href="${pageContext.servletContext.contextPath}/web/ordermanagement">주문관리</a></li> 
+							<li><a href="${pageContext.servletContext.contextPath}/web/restaurantmanege">매장관리</a></li>
+							<li><a href="${pageContext.servletContext.contextPath}/web/menumanagement">메뉴관리</a></li> 
+							<li><a href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
 							<div class="clearfix"> </div>
 						</ul>
 					 </div>
@@ -460,6 +445,16 @@
 
 <!-- END # BOOTSNIP INFO -->
 
+<!--swipebox -->	
+			
+				<script src="/teamapp/resources/js/jquery.swipebox.min.js"></script> 
+				<script type="text/javascript">
+					jQuery(function($) {
+						$(".swipebox").swipebox();
+					});
+				</script>
+			<!--//swipebox Ends -->
+
 
 			<!--start-smoth-scrolling-->
 			<script type="text/javascript">
@@ -471,7 +466,7 @@
 								});
 								</script>
 							<!--start-smooth-scrolling-->
-						<script type="text/javascript">
+				<%--		<script type="text/javascript">
 									$(document).ready(function() {
 										/*
 										var defaults = {
@@ -485,7 +480,7 @@
 										$().UItoTop({ easingType: 'easeOutQuart' });
 										
 									});
-								</script>
+								</script> --%>
 		<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
     
 </body>

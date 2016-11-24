@@ -180,7 +180,7 @@ li.lost {
   text-decoration: none;
   height: 80px;
   width: 40px;
-  background: transparent url("/teamapp/resources/img/arrows.png") no-repeat left top;
+  background: transparent url(${pageContext.servletContext.contextPath}+'/resources/img/arrows.png') no-repeat left top;
     margin-top: 4%;
 	  display: none;
 }
@@ -803,7 +803,7 @@ i.blog_circle{
 i.blog_icon1 {
   width: 30px;
   height: 30px;
-  background: url(/teamapp/resources/img/img-spt.png)-36px -136px #1BBC9B;
+  background: url(img/img-spt.png)-36px -136px #1BBC9B;
   float: left;
 }
 ul.blog_social{
@@ -828,7 +828,7 @@ ul.blog_social li a i {
   width: 25px;
   height: 25px;
   display: block;
-  background: url(/teamapp/resources/img/img-spt.png)no-repeat;
+  background: url(img/img-spt.png)no-repeat;
 }
 ul.blog_social li a i:hover{
 	opacity:0.8;
@@ -848,7 +848,7 @@ ul.blog_social li a i.g2{
 i.blog_icon2{
   width: 30px;
   height: 30px;
- background: url(/teamapp/resources/img/img-spt.png)-62px -136px #1BBC9B;
+ background: url(img/img-spt.png)-62px -136px #1BBC9B;
   float: left;
   margin-right: 10px;
 }
@@ -1015,7 +1015,7 @@ p.tzweight_Bold {
 }
 /*----reservation---------*/
 .reservation{
-  background: url("/teamapp/resources/img/menu-bg.jpg") no-repeat 0px 0px;
+  background: url("teamapp/resources/img/menu-bg.jpg") no-repeat 0px 0px;
   background-size: cover;
   -o-background-size: cover;
   -moz-background-size:cover;
@@ -1235,7 +1235,7 @@ ul.bottom-icons li a span{
 	width:32px;
 	height:32px;
 	display: inline-block;
-	background: url('/teamapp/resources/img/img-spt.png') no-repeat;
+	background: url(${pageContext.servletContext.contextPath}+'/resources/img/img-spt.png') no-repeat;
 	vertical-align: middle;
 	-webkit-transition: all 0.3s ease;
 			-moz-transition: all 0.3s ease;
@@ -1433,7 +1433,7 @@ ul.bottom-icons li a.mbl span{
 	  font-size: 2.5em;
 	}
 	.reservation {
-	  background: url("/teamapp/resources/img/menu-bg.jpg") no-repeat 0px 0px;
+	  background: url("teamapp/resources/img/menu-bg.jpg") no-repeat 0px 0px;
 	  background-size: cover;
 	  -o-background-size: cover;
 	  -moz-background-size: cover;
@@ -1487,7 +1487,7 @@ ul.bottom-icons li a.mbl span{
 	display: block;
 	width: 35px;
 	height: 35px;
-	background: url(/teamapp/resources/img/menu-icon.png) no-repeat 0px 0px;
+	background: url(teamapp/resources/img/menu-icon.png) no-repeat 0px 0px;
 	display: block;
 	  position: absolute;
 	  right: 10%;
@@ -1585,7 +1585,7 @@ ul.bottom-icons li a.mbl span{
 	  padding: 127px 15px;
 	}
 	.team-section {
-	  background: url("/teamapp/resources/img/team-bg.jpg") no-repeat 0px 0px;
+	  background: url("teamapp/resources/img/team-bg.jpg") no-repeat 0px 0px;
 	  padding: 0em 0 4em 0;
 	  background-size: cover;
 	  -o-background-size: cover;
@@ -1705,7 +1705,7 @@ ul.bottom-icons li a.mbl span{
 	  margin-top: 6em;
 	}
 	.reservation {
-	  background: url("/teamapp/resources/img/menu-bg.jpg") no-repeat 0px 0px;
+	  background: url("teamapp/resources/img/menu-bg.jpg") no-repeat 0px 0px;
 	  background-size: cover;
 	  -o-background-size: cover;
 	  -moz-background-size: cover;
@@ -1971,7 +1971,7 @@ ul.bottom-icons li a.mbl span{
 	  font-size: 2.3em;
 	}
 	.team-section {
-	  background: url("/teamapp/resources/img/team-bg.jpg") no-repeat 0px 0px;
+	  background: url("teamapp/resources/img/team-bg.jpg") no-repeat 0px 0px;
 	  padding: 0em 0 2em 0;
 	  background-size: cover;
 	  -o-background-size: cover;
@@ -1990,7 +1990,7 @@ ul.bottom-icons li a.mbl span{
 	font-size: 1.6em;
 	}
 	.reservation {
-	  background: url("/teamapp/resources/img/menu-bg.jpg") no-repeat 0px 0px;
+	  background: url("teamapp/resources/img/menu-bg.jpg") no-repeat 0px 0px;
 	  background-size: cover;
 	  -o-background-size: cover;
 	  -moz-background-size: cover;
@@ -2188,7 +2188,7 @@ ul.bottom-icons li a.mbl span{
 	}
 	.ab-text ul li {
 	  list-style-type: none;
-	  background: url(/teamapp/resources/img/arrow.png) no-repeat 0px 6px;
+	  background: url(teamapp/resources/img/arrow.png) no-repeat 0px 6px;
 	  display: block;
 	  height: 44px;
 	  }
@@ -2219,7 +2219,7 @@ ul.bottom-icons li a.mbl span{
   font-size: 1.5em;
 	}
 	.reservation {
-	  background: url("/teamapp/resources/img/menu-bg.jpg") no-repeat 0px 0px;
+	  background: url("teamapp/resources/img/menu-bg.jpg") no-repeat 0px 0px;
 	  background-size: cover;
 	  -o-background-size: cover;
 	  -moz-background-size: cover;
