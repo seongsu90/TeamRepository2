@@ -29,8 +29,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script type="text/javascript" src="/teamapp/resources/js/prefixfree.min.js"></script>
 	<script type="text/javascript" src="/teamapp/resources/js/custom.js"></script>
 	<script type="text/javascrpt" src="/teamapp/resources/js/bootstrap.min.js"></script>
-
 </head>
+
 <body>
 	<!--start-header-->
 	<div id="home" class="header">
