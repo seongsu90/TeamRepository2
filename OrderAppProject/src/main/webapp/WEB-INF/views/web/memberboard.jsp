@@ -398,7 +398,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px; padding:0px; background-color: #34495e; color:white" class="input-group-addon"><b>아이디</b></span>
-								<b><input type="text" class="form-control" name="username" id="mid" readonly/></b>
+								<b><input type="text" class="form-control" name="mid" id="mid" readonly/></b>
 							</div>
 						</div>
 						

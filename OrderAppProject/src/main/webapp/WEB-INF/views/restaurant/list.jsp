@@ -110,17 +110,45 @@
 			};
 
 			function onClickBtnAdd() {
+				console.log("onClickBtnAdd");
+				$("#restaurantAddModal").modal("show");
+			}
+			
+			function onClickBtnResAdd() {
+				console.log("onClickBtnResAdd() 실행");
+				
+				var resname = $("#resname").val();
+				var restotaltable = $("#restotaltable").val();
+				var resinfo = $("#resinfo").val();
+				var restel = $("#restel").val();
+				var reslocation = $("#reslocation").val();
+				var rescloseday = $("#rescloseday").val();
+				var resopen = $("#resopen").val();
+				var resclose = $("#resclose").val();
+				var resphoto = $("#resphoto").val();
+				
 				$.ajax({
-					url:"addForm",
-					data:{"resid":resid, "resname":resname, "reslocation":reslocation, "restotaltable":restotaltable, "resinfo":resinfo, "restel":restel, "rescloseday":rescloseday, "resopen":resopen, "resclose":resclose, "resoriginfile":resoriginfile, "ressavedfile":ressavedfile, "resmime":resmime},
+					url:"/restaurant/add",
+					data:{},
 					method:"post",
 					success: function(data) {
-						$("#restaurantAddModal").modal("hide");
-					}
+						if(data.result == "success") {
+							alert("추가 성공");
+							$("#restaurantAddModal").modal("hide");
+							location.reload();
+						} else if(data.result == "wrongData") {
+							alert("입력 데이터가 올바르지 않음");
+						}
+					}					
+					
 				});
-
+								
 			}
 
+			function onClickBtnCancel() {
+				console.log("onClickBtnCancel() 실행");
+				$("#restaurantAddModal").modal("hide");
+			}
 
 
 
@@ -210,22 +238,20 @@
 
 
 			<div id="restaurantAddModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
-		<div class="modal-dialog" role="document">
-	    	<div class="modal-content" style="width:500px">
-	    		<!-- modal-header -->
-	     		<div class="modal-header" style="background-color: #34495e; color:white">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">레스토랑 추가</h4>
-	      		</div>
+				<div class="modal-dialog" role="document">
+	    			<div class="modal-content" style="width:500px">
+	    			<!-- modal-header -->
+		     		<div class="modal-header" style="background-color: #34495e; color:white">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">레스토랑 추가</h4>
+		      		</div>
 
 	      		<!-- modal-modal-body -->
 	      		<div class="modal-body">
 					<form id="addForm">
-						<input type="hidden" name="resid" value="${restaurant.resid}"/>
-
 						<div class="form-group">
 							<div class="input-group">
-								<span style="width: 130px; padding:0px; background-color: #34495e; color:white" class="input-group-addon"><b>식당 이름</b></span>
+								<span style="width: 130px; padding:0px;" class="input-group-addon"><b>식당 이름</b></span>
 								<b><input type="text" class="form-control" name="resname" id="resname"/></b>
 							</div>
 						</div>
@@ -276,24 +302,24 @@
 							</div>
 						</div>
 
-						<<div class="form-group">
+						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>클로즈 타임</b></span>
 								<input type="time" class="form-control" name="resclose" id="resclose"/>
 							</div>
 						</div>
-
+<!-- 
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>보유 레스토랑id</b></span>
 								<input type="number" class="form-control" name="mresid" id="mresid"/>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="form-group">
 							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>보유 레스토랑id</b></span>
-								<input type="file" class="form-control" name="ressavedfile " id="ressavedfile"/>
+								<span style="width: 130px" class="input-group-addon"><b>사진</b></span>
+								<input type="file" class="form-control" name="resphoto " id="resphoto"/>
 							</div>
 						</div>
 						
@@ -302,10 +328,10 @@
 	      		</div>
 
 		      	<!-- modal-modal-modal-footer -->
-			<!-- 	<div class="modal-footer" style="background-color: #34495e; color:white">
-			        <button id="btnModify" type="button" class="btn btn-default" onclick="onClickBtnModify()" style="color: #34495e"><b>수정하기</b></button>
+				<div class="modal-footer" style="background-color: #34495e; color:white">
+			        <button id="btnResAdd" type="button" class="btn btn-default" onclick="onClickBtnResAdd()" style="color: #34495e"><b>추가</b></button>
 			        <button id="btnInit" type="button" class="btn btn-default" onclick="onClickBtnCancel()" style="color: #34495e"><b>취소</b></button>
-				</div> -->
+				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog --> --%>
 	</div><!-- /.modal -->
