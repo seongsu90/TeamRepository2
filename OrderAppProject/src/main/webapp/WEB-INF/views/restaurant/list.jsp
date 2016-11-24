@@ -188,7 +188,33 @@
 			</form>
 		</div>
 		
-	<%-- ## Info Modal ## --%>
+		<%-- test --%>
+		<div class="container">
+		 <div class="row">
+		  <div class="col-md-4" >
+		   <div class="panel panel-primary">
+		    <div class="panel-heading">Les informations Personnel :</div>
+		     <div class="panel-body">
+			  <div align="right"><a href='#'><span class='glyphicon glyphicon-tasks'></span> &nbsp Edit ! </a></div>
+			  <label>Name</label><input type='text' class='form-control'  value='just'  disabled>
+		      <label>이름 : </label><input type='text' class='form-control'  value='just' disabled> 
+			  <label>위치 : </label><input type='text' class='form-control'  value='just' disabled>
+			  <label>전화 번호 : </label><input type='text' class='form-control'  value='just' disabled>
+			  <label>전체 테이블 수 :</label><input type='text' class='form-control'  value='just' disabled> 
+		      <label>오픈 타임 :</label><input type='text' class='form-control'  value='just' disabled> 
+		       <label>클로즈 타임 :</label><input type='text' class='form-control'  value='just' disabled> 
+		        <label>휴일 :</label><input type='text' class='form-control'  value='just' disabled> 
+		         <label>사진 :</label><input type='file' class='form-control'  value='just' disabled> 
+		         
+		    </div>
+		   </div>
+		  </div>
+		 </div>
+		</div>
+		
+		
+		
+	 <%-- ## Info Modal ## --%>
 		<div id="infoModal" class="modal fade" tabindex="-1" role="dialog">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
@@ -276,6 +302,6 @@
 		      </div>
 		    </div>
 		  </div>
-		</div>		
+		</div>	 
 	</body>
 </html>
