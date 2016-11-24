@@ -16,6 +16,30 @@
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
 	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
+	
+	<script type="text/javascript">
+		function onClickLogin()
+		{
+			var mid =$("#login-form #login_username").val();
+			var mpassword=$("#login-form #login_password").val();
+			
+			$.ajax({
+				url:"login",
+				data: {"mid":mid, "mpassword":mpassword},
+				method:"post"
+				succed: function(data){
+					if(data.result=="success"){
+						alert("로그인 성공");
+						$("#login-modal").modal("hide");
+						location.reload();
+					}else if(data.result == "fail"){
+							alert("아이디 혹은 비밀번호가 틀렸습니다.")
+					}
+				}
+			})
+		}
+		
+	</script>
 
 </head>
 <body>
@@ -27,15 +51,19 @@
 		<!--top-nav-->
 			<div class="top-nav">
 					<span class="menu"> </span>
-					<ul>
-						<li ><p class="text-center"><a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a></p></li>					
+					<ul>					
 						<li><a class="active" href="${pageContext.servletContext.contextPath}/home">Home</a></li> 
+						<c:if test="${mrank==2}">
 						<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
 						<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
+						</c:if>
+						<c:if test="${mrank==1}">
 						<li><a href="${pageContext.servletContext.contextPath}/web/ordermanagement">주문관리</a></li> 
 						<li><a href="${pageContext.servletContext.contextPath}/web/restaurantmanege">매장관리</a></li>
 						<li><a href="${pageContext.servletContext.contextPath}/web/menumanagement">메뉴관리</a></li> 
+						</c:if>
 						<li class="lost"><a href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
+						<li ><p class="text-center"><a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a></p></li>
 						<div class="clearfix"> </div>
 					</ul>
 				</div>
@@ -351,11 +379,11 @@
 <!-- END # BOOTSNIP INFO -->
 
 <!-- BEGIN # MODAL LOGIN -->
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; padding-top: 150px" >
     	<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header" align="center">
-					<img class="img-circle" id="img_logo" src="http://bootsnipp.com/img/logo.jpg">
+					<img class="img-angle" id="img_logo" src="${pageContext.servletContext.contextPath}/resources/img/logo_reform2.png">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 					</button>
@@ -381,11 +409,11 @@
         		    	</div>
 				        <div class="modal-footer">
                             <div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="onClickLogin()">Login</button>
                             </div>
 				    	    <div>
-                                <button id="login_lost_btn" type="button" class="btn btn-link">Lost Password?</button>
-                                <button id="login_register_btn" type="button" class="btn btn-link">Register</button>
+                                <button id="login_lost_btn" type="button" class="btn btn-link" >Lost Password?</button>
+                           <!--      <button id="login_register_btn" type="button" class="btn btn-link">Register</button> -->
                             </div>
 				        </div>
                     </form>

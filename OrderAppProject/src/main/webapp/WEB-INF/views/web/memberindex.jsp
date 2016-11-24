@@ -152,7 +152,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!--/header-->
 	</div>
 <!--start-slider-->
-		<div class="about-section"> 
+	 
 		   	<iframe  src="memberboard?pageNo=1" style="width:100%; height:80vh; border:0px;" scrolling="no"></iframe>
 
 <!--/start-footer-->
