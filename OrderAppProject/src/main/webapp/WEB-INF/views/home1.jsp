@@ -25,10 +25,11 @@
 			console.log("왔는감");
 			
 			$.ajax({
-				url: "login",
+				url: "member/login",
 				data: {"mid":mid, "mpassword":mpassword},
 				method:"post",
 				success: function(data){
+					console.log("리턴"+data.result);
 					if(data.result=="0"){
 						alert("로그인 성공");
 						$("#login-modal").modal("hide");
