@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8"> 
+		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css">
 		<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/style.css" />
@@ -13,7 +13,7 @@
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>		
+		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 		<style type="text/css">
 			table#acrylic {
 	            border-collapse: separate;
@@ -27,13 +27,13 @@
 	            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 	            cursor: pointer;
 	        }
-	        
+
 	        #acrylic thead {
 	            -moz-border-radius: 10px;
 	            -webkit-border-radius: 10px;
 	            border-radius: 10px;
 	        }
-	        
+
 	        #acrylic thead th {
 	            font-family: 'Roboto';
 	            font-size: 16px;
@@ -49,19 +49,19 @@
 	            background-image: linear-gradient(#646f7f, #4a5564);
 	            border-top: 1px solid #858d99;
 	        }
-	        
+
 	        #acrylic thead th:first-child {
 	            -moz-border-top-right-radius: 10px;
 	            -webkit-border-top-left-radius: 10px;
 	            border-top-left-radius: 10px;
 	        }
-	        
+
 	        #acrylic thead th:last-child {
 	            -moz-border-top-right-radius: 10px;
 	            -webkit-border-top-right-radius: 10px;
 	            border-top-right-radius: 10px;
 	        }
-	        
+
 	        #acrylic tbody tr td {
 	            font-family: 'Open Sans', sans-serif;
 	            font-weight: 400;
@@ -70,32 +70,32 @@
 	            padding: 10px 10px 10px 10px;
 	            border-bottom: 1px solid #e0e0e0;
 	        }
-	        
+
 	        #acrylic tbody tr:nth-child(2n) {
 	            background: #f0f3f5;
 	        }
-	        
+
 	        #acrylic tbody tr:last-child td {
 	            border-bottom: none;
 	        }
-	        
+
 	        #acrylic tbody tr:last-child td:first-child {
 	            -moz-border-bottom-right-radius: 10px;
 	            -webkit-border-bottom-left-radius: 10px;
 	            border-bottom-left-radius: 10px;
 	        }
-	        
+
 	        #acrylic tbody tr:last-child td:last-child {
 	            -moz-border-bottom-right-radius: 10px;
 	            -webkit-border-bottom-right-radius: 10px;
 	            border-bottom-right-radius: 10px;
 	        }
-	        
+
 	        #acrylic tbody:hover > tr td {
 	            filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=50);
 	            opacity: 0.5;
 	        }
-	        
+
 	        #acrylic tbody:hover > tr:hover td {
 	            text-shadow: none;
 	            color: #2d2d2d;
@@ -103,19 +103,35 @@
 	            opacity: 1;
 	            transition: 0.2s all;
 	        }
-		</style>	
+		</style>
 		<script type="text/javascript">
 			function showInfo() {
 				$("#infoModal").modal("show");
 			};
+
+			function onClickBtnAdd() {
+				$.ajax({
+					url:"addForm",
+					data:{"resid":resid, "resname":resname, "reslocation":reslocation, "restotaltable":restotaltable, "resinfo":resinfo, "restel":restel, "rescloseday":rescloseday, "resopen":resopen, "resclose":resclose, "resoriginafile":resorigin, "ressavedfile":ressavedfile, "resmime":resmime},
+					method:"post",
+					success: function(data) {
+						$("#restaurantAddModal").modal("hide");
+					}
+				});
+
+			}
+
+
+
+
 		</script>
 	</head>
 	<body>
 		<div style="text-align: center;">
 			<div style="text-align: right;">
-				<button type="button" class="btn btn-warning" style="">추가</button>
+				<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e">추가</button>
 			</div>
-			<table id="acrylic" style="width:100%"> 
+			<table id="acrylic" style="width:100%">
 				<thead>
 					<tr>
 						<c:if test="${mrank==2}">
@@ -140,12 +156,12 @@
 								<td> ${restaurant.resid}</td>
 							</c:if>
 							<td><img src="showPhoto?ressavedfile=${restaurant.ressavedfile}" width="50px"/></td>
-							
+
 							<td>
 								<%-- <a href="info?resid=${restaurant.resid}">${restaurant.resname}</a> --%>
 								<a id="btnInfo" href="javascript:showInfo()">${restaurant.resname}</a>
 							</td>
-						
+
 							<%-- <td> ${restaurant.reslocation} </td> --%>
 							<td> ${restaurant.resinfo} </td>
 							<td> ${restaurant.restotaltable} </td>
@@ -162,32 +178,32 @@
 				<c:if test="${pageNo!=1}">
 				<a href="list?pageNo=1&find=${find}">[처음]</a>
 				</c:if>
-				
+
 				<c:if test="${groupNo>1}">
 					<a href="list?pageNo=${startPageNo-1}&find=${find}">[이전]</a>
 				</c:if>
-				
+
 				<c:forEach var="i" begin="${startPageNo}" end="${endPageNo}">
 					<a href="list?pageNo=${i}&find=${find}"
 						<c:if test="${pageNo==i}">style="color:red" </c:if>
 					>${i}</a>
 				</c:forEach>
-				
+
 				<c:if test="${groupNo<totalGroupNo}">
 					<a href="list?pageNo=${endPageNo+1}&find=${find}">[다음]</a>
 				</c:if>
-				
+
 				<c:if test="${pageNo!=totalPageNo}">
 				<a href="list?pageNo=${totalPageNo}&find=${find}">[맨끝]</a>
 				</c:if>
-			</div>			
-			<br/>			
+			</div>
+			<br/>
 			<form method="post" action="/teamapp/restaurant/list?pageNo=1">
 				식당 이름으로 검색 <input type="text" name="find" value="${find}"/>
 				<input type="submit" value="찾기" class="btn btn-success"/>
 			</form>
 		</div>
-		
+
 		<%-- test --%>
 		<div class="container">
 		 <div class="row">
@@ -196,24 +212,136 @@
 		    <div class="panel-heading">Les informations Personnel :</div>
 		     <div class="panel-body">
 			  <div align="right"><a href='#'><span class='info'></span> &nbsp Edit ! </a></div>
-			  <label>아이디 : </label><input type='text' class='form-control'  value="${resid}" disabled>
-		      <label>이름 : </label><input type='text' class='form-control'  value='just' disabled> 
-			  <label>위치 : </label><input type='text' class='form-control'  value='just' disabled>
-			  <label>전화 번호 : </label><input type='text' class='form-control'  value='just' disabled>
-			  <label>전체 테이블 수 :</label><input type='text' class='form-control'  value='just' disabled> 
-		      <label>오픈 타임 :</label><input type='text' class='form-control'  value='just' disabled> 
-		       <label>클로즈 타임 :</label><input type='text' class='form-control'  value='just' disabled> 
-		        <label>휴일 :</label><input type='text' class='form-control'  value='just' disabled> 
-		         <label>사진 :</label><input type='file' class='form-control'  value='just' disabled> 
-		         
+				  <label>아이디 : </label><input type='number' class='form-control'  value="${resid}" disabled>
+			      <label>이름 : </label><input type='text' class='form-control'  value='just' disabled>
+				  <label>위치 : </label><input type='text' class='form-control'  value='just' disabled>
+				  <label>전화 번호 : </label><input type='text' class='form-control'  value='just' disabled>
+				  <label>전체 테이블 수 :</label><input type='number' class='form-control'  value='just' disabled>
+			      <label>오픈 타임 :</label><input type='text' class='form-control'  value='just' disabled>
+			      <label>클로즈 타임 :</label><input type='text' class='form-control'  value='just' disabled>
+			      <label>휴일 :</label><input type='text' class='form-control'  value='just' disabled>
+			      <label>사진 :</label><input type='file' class='form-control'  value='just' disabled>
+
 		    </div>
 		   </div>
 		  </div>
 		 </div>
 		</div>
-		
-		
-		
+
+
+
+
+			 <%-- ## Add Modal ## --%>
+
+
+
+			<div id="restaurantAddModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
+		<div class="modal-dialog" role="document">
+	    	<div class="modal-content" style="width:500px">
+	    		<!-- modal-header -->
+	     		<div class="modal-header" style="background-color: #34495e; color:white">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">레스토랑 추가</h4>
+	      		</div>
+
+	      		<!-- modal-modal-body -->
+	      		<div class="modal-body">
+					<form id="addForm">
+						<input type="hidden" name="resid" value="${restaurant.resid}"/>
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px; padding:0px; background-color: #34495e; color:white" class="input-group-addon"><b>식당 이름</b></span>
+								<b><input type="text" class="form-control" name="resname" id="resname"/></b>
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>전체 테이블 수</b></span>
+								<input type="number" class="form-control" name="restotaltable" id="restotaltable"/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>레스토랑 정보</b></span>
+								<input type="text" class="form-control" name="resinfo" id="resinfo"/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>전화번호</b></span>
+								<input type="tel" class="form-control" name="restel" id="restel"/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>관심지역</b></span>
+								<select class="form-control" style="width: 110px" id="selCity" name="selCity"></select>
+								<select class="form-control" style="width: 110px" id="selProvince" name="selProvince"></select><br/>
+								<input type="hidden" class="form-control" name="reslocation" id="reslocation" value="${restaurant.reslocation}"/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>휴일</b></span>
+								<input type="text" class="form-control" name="rescloseday" id="rescloseday"/>
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>오픈 타임</b></span>
+								<input type="time" class="form-control" name="resopen" id="resopen"/>
+							</div>
+						</div>
+
+						<<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>클로즈 타임</b></span>
+								<input type="time" class="form-control" name="resclose" id="resclose"/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>보유 레스토랑id</b></span>
+								<input type="number" class="form-control" name="mresid" id="mresid"/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>보유 레스토랑id</b></span>
+								<input type="file" class="form-control" name="ressavedfile " id="ressavedfile"/>
+							</div>
+						</div>
+						
+
+					</form>
+	      		</div>
+
+		      	<!-- modal-modal-modal-footer -->
+			<!-- 	<div class="modal-footer" style="background-color: #34495e; color:white">
+			        <button id="btnModify" type="button" class="btn btn-default" onclick="onClickBtnModify()" style="color: #34495e"><b>수정하기</b></button>
+			        <button id="btnInit" type="button" class="btn btn-default" onclick="onClickBtnCancel()" style="color: #34495e"><b>취소</b></button>
+				</div> -->
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog --> --%>
+	</div><!-- /.modal -->
+
+
+
+
+
+
+
 	 <%-- ## Info Modal ## --%>
 		<div id="infoModal" class="modal fade" tabindex="-1" role="dialog">
 		  <div class="modal-dialog" role="document">
@@ -224,55 +352,55 @@
 		      </div>
 		      <div class="modal-body">
 				<table style="width:100%">
-				
-				
-				
+
+
+
 					<tr>
 					<td style="background-color:pink; width:100px">이름</td>
 					<td><pre>${restaurant.resname}</pre></td>
 					</tr>
-					
+
 					<tr>
 					<td style="background-color:pink; width:100px">위치</td>
 					<td><pre>${restaurant.reslocation}</pre></td>
 					</tr>
-					
+
 					<tr>
 					<td style="background-color:pink; width:100px">전화번호</td>
 					<td><pre>${restaurant.restel}</pre></td>
 					</tr>
-					
+
 					<tr>
 					<td style="background-color:pink; width:100px">전체 테이블 수</td>
 					<td><pre>${restaurant.restotaltable}</pre></td>
 					</tr>
-					
+
 					<tr>
 					<td style="background-color:pink; width:100px">정보</td>
 					<td><pre>${restaurant.resinfo}</pre></td>
 					</tr>
-					
+
 					<tr>
 					<td style="background-color:pink; width:100px">오픈타임</td>
 					<td><pre>${restaurant.resopen}</pre></td>
 					</tr>
-					
+
 					<tr>
 					<td style="background-color:pink; width:100px">클로즈타임</td>
 					<td><pre>${restaurant.resclose}</pre></td>
 					</tr>
-					
+
 					<tr>
 					<td style="background-color:pink; width:150px">휴일</td>
 					<td><pre>${restaurant.rescloseday}</pre></td>
 					</tr>
-					
+
 					<tr>
 					<td style="background-color:pink; width:150px">사진</td>
 					<td><img src="showPhoto?ressavedfile=${restaurant.ressavedfile}" width="120px"/></td>
 					</tr>
 				</table>
-				
+
 				<div>
 					<c:if test="${mrank==1}">
 						<c:if test="${resid==mresid }">
@@ -280,27 +408,28 @@
 						</c:if>
 					</c:if>
 					<c:if test="${mrank==2}">
-						
+
 							<a href="modify?mresid=${resid}">[수정]</a>
-						
+
 					</c:if>
-					
-					
+
+
 					<c:if test="${mrank==2}">
 						<a href="delete?resid=${resid}">[삭제]</a>
 					</c:if>
-					
+
 				</div>
 		      </div>
 		      <div class="modal-footer">
-				<c:if test="${mrank==0}"> 
+				<c:if test="${mrank==0}">
 					<a href="/teamapp/reservation/add?rvresid=${resid}" class="btn btn-primary">[예약하러 가기]</a>
 					<a href="/teamapp/reservation/list?mid=${login}" class="btn btn-primary">[나의 예약 목록]</a>
 				</c:if>
-				<button type="button" class="btn btn-primary">수정</button>		
+				<button type="button" class="btn btn-primary">수정</button>
+
 		      </div>
 		    </div>
 		  </div>
-		</div>	 
+		</div>
 	</body>
 </html>
