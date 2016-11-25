@@ -12,6 +12,9 @@
 	<link
 		href='http://fonts.googleapis.com/css?family=Niconne|Playball|Open+Sans:300italic,400italic,600italic,400,300,600,700'
 		rel='stylesheet' type='text/css'>
+	<link rel="stylesheet"
+		href="${pageContext.servletContext.contextPath}/resources/css/common.css" />	
+		
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<script type="text/javascript"
 		src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
@@ -19,6 +22,20 @@
 		src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
+	<script type="text/javascript">
+		function showInfo(data) {
+			$("#infoModal").modal("show");
+			$("#infoModal #resid").val(data.resid);
+			$("#infoModal #resname").val(data.resname);
+			$("#infoModal #reslocation").val(data.reslocation);
+			$("#infoModal #restotaltable").val(data.restotaltable);
+			$("#infoModal #resinfo").val(data.resinfo);
+			$("#infoModal #restel").val(data.restel);
+			$("#infoModal #rescloseday").val(data.rescloseday);
+			$("#infoModal #resopen").val(data.resopen);
+			$("#infoModal #resclose").val(data.resclose);
+		};
+	</script>
 </head>
 
 
@@ -183,5 +200,50 @@
 	<a href="#home" id="toTop" class="scroll" style="display: block;">
 		<span id="toTopHover" style="opacity: 1;"> </span>
 	</a>
+	
+	
+	<%-- #################################################################################### --%>
+	<%-- ## Info Modal ## --%>
+	<div id="infoModal" class="modal fade" tabindex="-1" role="dialog" >
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<!-- modal-header -->
+		     		<div class="modal-header" style="background-color: #34495e; color:white">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">레스토랑 정보</h4>
+		      		</div>
+			<div class="modal-body">
+			
+
+			<div class="panel-body">
+				<div align="right"><a href='#'><span class='info'></span> </a></div>
+					<label>아이디 : </label><input id="resid" type='number' class='form-control'  disabled>
+					<label>이름 : </label><input id="resname" type='text' class='form-control'  value='just' disabled>
+					<label>위치 : </label><input id="reslocation" type='text' class='form-control'  value='just' disabled>
+					<label>전화 번호 : </label><input id="restel" type='text' class='form-control'  value='just' disabled>
+					<label>전체 테이블 수 :</label><input id="restotaltable" type='number' class='form-control'  value='just' disabled>
+					<label>오픈 타임 :</label><input id="resopen" type='text' class='form-control'  value='just' disabled>
+					<label>클로즈 타임 :</label><input id="resclose" type='text' class='form-control'  value='just' disabled>
+					<label>휴일 :</label><input id="rescloseday" type='text' class='form-control'  value='just' disabled>
+					<label>정보 :</label><input id="resinfo" type='text' class='form-control'  value='just' disabled>
+					<label>사진 :</label><input id="resphoto" type='file' class='form-control'  value='just' disabled>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div>
+					<c:if test="${mrank==1}" style="background-color: #34495e; color:white">
+						<c:if test="${resid==mresid }">
+							<a href="modify?mresid=${mresid}" type="button" class="btn btn-primary">수정</a>
+						</c:if>
+					</c:if>
+					<c:if test="${mrank==2}">
+						<a href="modify?mresid=${resid}" type="button" class="btn btn-primary">수정</a>
+						<a href="delete?resid=${resid}" type="button" class="btn btn-primary">삭제</a>
+					</c:if>
+				</div>
+			</div>
+	      </div>
+	    </div>
+	  </div>
 </body>
 </html>
