@@ -25,8 +25,9 @@
 			<div class="container">
 		<!--top-nav-->
 			<div class="top-nav">
-					<span class="menu two"> </span>
-					<li><a href="${pageContext.servletContext.contextPath}/">Home</a></li> 
+					<span class="menu"> </span>
+					<ul>
+						<li><a href="${pageContext.servletContext.contextPath}/">Home</a></li> 
 						<c:if test="${mrank==2}">
 						<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
 						<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
@@ -43,6 +44,7 @@
 						<c:if test="${login!=null}">
 						<li ><a href="${pageContext.servletContext.contextPath}/member/logout">로그아웃</a></li>
 						</c:if>
+					</ul>
 				</div>
 				<div class="clearfix"> </div>
 		<!-- script-for-menu -->
