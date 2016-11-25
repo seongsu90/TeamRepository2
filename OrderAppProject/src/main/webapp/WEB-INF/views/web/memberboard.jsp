@@ -215,7 +215,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		function setCity(selCity) {
 			console.log("setCity 실행");
 			$.ajax({
-				url: "getCity.jsp",
+				url: "backup/member/getCity",
 				data: {"selCity":selCity},
 				success: function (data) {
 					$("#selCity").html(data);
@@ -226,7 +226,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		function setProvince(selCity, selProvince) {
 			console.log("setProvince 실행");
 			$.ajax({
-				url: "getProvince.jsp",
+				url: "backup/member/getProvince",
 				data: {"selCity":selCity, "selProvince":selProvince},
 				success: function (data) {
 					$("#selProvince").html(data);

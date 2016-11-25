@@ -88,7 +88,8 @@ public class MemberController {
 		}
 		if ( member.getMphone().equals(mphone) ) {
 			session.setAttribute("findMid", mid);
-			return "redirect:/member/mpasswordReset";
+			return "/member/findMpasswordForm";
+			/*return "redirect:/member/mpasswordReset";*/
 		} else {
 			model.addAttribute("error", " 휴대폰 번호가 일치하지 않습니다.");
 			return "member/findMpasswordForm";
