@@ -9,10 +9,22 @@
 		<script>
 			function onClickChangepw()
 			{
-				console.log("onClickChangepw")
+				var mid = $("#mid").val();
+				var mphone = $("#mphone").val();
+		
+				$.ajax({
+					url: "member/findMpassword",
+					data: {"mid":mid, "mphone":mphone},
+					method:"post",
+					success: function(data){
+						if(data.result=="success"){
+							$(".modal-bodyfooter").load("/teamapp/member/mpasswordReset?mid=" + mid);
+						}else{
+							alert("입력값이 올바르지 않습니다.");
+						}
+					}
+				});
 				
-				var mid =$ ("#mid").val();
-				$(".modal-bodyfooter").load("/teamapp/member/mpasswordReset?mid="+mid);
 			}
 		
 		</script>

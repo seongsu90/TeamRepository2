@@ -23,7 +23,7 @@
 		{
 			var mid =$("#login_username").val();
 			var mpassword=$("#login_password").val();
-			console.log("왔는감");
+			location.reload();
 			
 			$.ajax({
 				url: "member/login",
@@ -35,7 +35,8 @@
 						$("#login-modal").modal("hide");
 						location.reload();
 					}else{
-							alert("아이디 혹은 비밀번호가 틀렸습니다.");
+						alert("아이디 혹은 비밀번호가 틀렸습니다.");
+						location.reload();
 					}
 				}
 			});

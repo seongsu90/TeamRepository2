@@ -81,18 +81,17 @@ public class MemberController {
 	@RequestMapping(value="/findMpassword", method=RequestMethod.POST)
 	public String findMpassword(String mid, String mphone, Model model, HttpSession session) {
 		logger.info("findMpassword() POST 실행");
-		Member member = memberService.info(mid);
-		if ( member == null ) {
-			model.addAttribute("error", " 존재하지 않는 id입니다.");
-			return "member/findMpasswordForm";
-		}
-		if ( member.getMphone().equals(mphone) ) {
-			session.setAttribute("findMid", mid);
-			return "redirect:/member/mpasswordReset";
-		} else {
-			model.addAttribute("error", " 휴대폰 번호가 일치하지 않습니다.");
-			return "member/findMpasswordForm";
-		}
+		String result = "fail";
+		
+		try {
+			Member member = memberService.info(mid);
+			if ( member.getMphone().equals(mphone) ) {
+				result = "success";
+			}
+		} catch (Exception e) { }
+		
+		model.addAttribute("result", result);
+		return "member/result";
 		
 	}
 	

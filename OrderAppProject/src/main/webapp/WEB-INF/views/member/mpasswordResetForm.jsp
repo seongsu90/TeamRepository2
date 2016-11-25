@@ -7,13 +7,9 @@
 		<script type="text/javascript">
 			function onClickModifyPw()
 			{
-				console.log("수정진행");
 				var mid = $("#mid").val();
 				var mpassword = $("#mpassword").val();
 				var mpassword2 = $("#mpassword2").val();
-				console.log("#####" + mid);
-				console.log(mpassword);
-				console.log(mpassword2);
 				
 				$.ajax({
 					url: "member/mpasswordReset",
@@ -25,7 +21,7 @@
 							$("#login-modal").modal("hide");
 							location.reload();
 						}else{
-								alert("아이디 혹은 비밀번호가 틀렸습니다.");
+								alert("비밀번호가 일치하지 않습니다");
 						}
 					}
 				});
