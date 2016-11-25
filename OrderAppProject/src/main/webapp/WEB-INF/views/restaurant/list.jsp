@@ -122,7 +122,6 @@
 			
 			function onClickBtnResAdd() {
 				console.log("onClickBtnResAdd() 실행");
-				
 				var resname = $("#resname").val();
 				var restotaltable = $("#restotaltable").val();
 				var resinfo = $("#resinfo").val();
@@ -147,10 +146,10 @@
 						}
 					}					
 					
-				});
-								
+				});				
 			}
 
+			
 			function onClickBtnCancel() {
 				console.log("onClickBtnCancel() 실행");
 				$("#restaurantAddModal").modal("hide");
@@ -240,8 +239,6 @@
 
 
 			 <%-- ## Add Modal ## --%>
-
-
 
 			<div id="restaurantAddModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
 				<div class="modal-dialog" role="document">
