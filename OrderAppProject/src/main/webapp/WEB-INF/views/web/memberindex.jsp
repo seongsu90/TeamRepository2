@@ -176,7 +176,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="bottom-nav">
 					       <h4>LEARN</h4>
 							<ul>
-							<li><a class="active" href="/teamapp/home">Home</a></li> 
+							<li><a class="active" href="${pageContext.servletContext.contextPath}/">Home</a></li> 
 							<li><a href="/teamapp/web/memberindex">회원관리</a></li>
 							<li><a href="/teamapp/web/resmanagement">가맹점관리</a></li> 
 							<li><a href="/teamapp/web/ordermanagement">주문관리</a></li>

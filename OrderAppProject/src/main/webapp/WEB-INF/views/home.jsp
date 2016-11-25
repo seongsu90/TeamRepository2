@@ -341,12 +341,22 @@
 					       <h4>LEARN</h4>
 							<ul>
 							<li><a class="active" href="${pageContext.servletContext.contextPath}/">Home</a></li> 
+							<c:if test="${mrank==2}">
 							<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
 							<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
+							</c:if>
+							<c:if test="${mrank==1}">
 							<li><a href="${pageContext.servletContext.contextPath}/web/ordermanagement">주문관리</a></li> 
 							<li><a href="${pageContext.servletContext.contextPath}/web/restaurantmanege">매장관리</a></li>
 							<li><a href="${pageContext.servletContext.contextPath}/web/menumanagement">메뉴관리</a></li> 
-							<li><a href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
+							</c:if>
+							<li class="lost"><a href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
+							<c:if test="${login==null}">
+							<li ><p class="text-center"><a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a></p></li>
+							</c:if>
+							<c:if test="${login!=null}">
+							<li ><a href="${pageContext.servletContext.contextPath}/member/logout">로그아웃</a></li>
+							</c:if>
 							<div class="clearfix"> </div>
 						</ul>
 					 </div>

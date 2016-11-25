@@ -4,32 +4,18 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Food House a Hotels and Restaurants Category Flat Bootstarp responsive Website Template | Home :: w3layouts</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Food House Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href="/teamapp/resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
-<!-- Custom Theme files -->
-<link href="/teamapp/resources/css/style.css" rel='stylesheet' type='text/css' />	
-<script src="/teamapp/resources/js/jquery.min.js"> </script>
-<!--web-fonts-->
-  <link href='http://fonts.googleapis.com/css?family=Niconne|Playball|Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
-<!--//web-fonts-->
-<link rel="stylesheet" type="text/css"
-			href="/teamapp/resources/bootstrap-3.3/css/bootstrap.min.css">
-			<script type="text/javascrpt"
-			src="/teamapp/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/teamapp/resources/css/style.css" />	
-	<script type="text/javascript" src="/teamapp/resources/js/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="/teamapp/resources/js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="/teamapp/resources/js/jquery.easing.1.3.js"></script>
-	<script type="text/javascript" src="/teamapp/resources/js/prefixfree.min.js"></script>
-	<script type="text/javascript" src="/teamapp/resources/js/custom.js"></script>
-	<script type="text/javascrpt" src="/teamapp/resources/js/bootstrap.min.js"></script>
-
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/style.css" />
+	<%-- <link href="${pageContext.servletContext.contextPath}/resources/css/bootstrap.css" rel='stylesheet' type='text/css' /> --%> 
+	<link href='http://fonts.googleapis.com/css?family=Niconne|Playball|Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
+	
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
+	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
+	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 </head>
 <body>
 	<!--start-header-->
@@ -40,16 +26,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<!--top-nav-->
 			<div class="top-nav">
 					<span class="menu two"> </span>
-					<ul>
-						<li><a href="/teamapp/home">Home</a></li> 
-						<li><a href="/teamapp/web/memberindex">회원관리</a></li>
-						<li><a href="/teamapp/web/resmanagement">가맹점관리</a></li> 
-						<li><a href="/teamapp/web/ordermanagement">주문관리</a></li> 
-						<li><a href="/teamapp/web/restaurantmanege">매장관리</a></li>
-						<li><a href="/teamapp/web/menumanagement">메뉴판관리</a></li> 
-						<li><a class="active"  href="/teamapp/web/contact">오시는길</a></li>
-						<li class="lost"><a href="/teamapp/member/login">로그인</a></li>
-					</ul>
+					<li><a href="${pageContext.servletContext.contextPath}/">Home</a></li> 
+						<c:if test="${mrank==2}">
+						<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
+						<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
+						</c:if>
+						<c:if test="${mrank==1}">
+						<li><a href="${pageContext.servletContext.contextPath}/web/ordermanagement">주문관리</a></li> 
+						<li><a href="${pageContext.servletContext.contextPath}/web/restaurantmanege">매장관리</a></li>
+						<li><a href="${pageContext.servletContext.contextPath}/web/menumanagement">메뉴관리</a></li> 
+						</c:if>
+						<li><a class="active"  href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
+						<c:if test="${login==null}">
+						<li ><p class="text-center"><a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a></p></li>
+						</c:if>
+						<c:if test="${login!=null}">
+						<li ><a href="${pageContext.servletContext.contextPath}/member/logout">로그아웃</a></li>
+						</c:if>
 				</div>
 				<div class="clearfix"> </div>
 		<!-- script-for-menu -->
@@ -109,7 +102,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="bottom-nav">
 					       <h4>LEARN</h4>
 							<ul>
-							<li><a class="active" href="/teamapp/home">Home</a></li> 
+							<li><a class="active" href="${pageContext.servletContext.contextPath}/">Home</a></li> 
 							<li><a href="/teamapp/web/memberindex">회원관리</a></li>
 							<li><a href="/teamapp/web/resmanagement">가맹점관리</a></li> 
 							<li><a href="/teamapp/web/ordermanagement">주문관리</a></li> 
