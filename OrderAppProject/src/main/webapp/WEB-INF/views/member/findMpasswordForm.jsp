@@ -10,8 +10,9 @@
 			function onClickChangepw()
 			{
 				console.log("onClickChangepw")
-				console.log("${findMid}");
-				$(".modal-body").load("/teamapp/member/mpasswordReset")
+				
+				var mid =$ ("#mid").val();
+				$(".modal-bodyfooter").load("/teamapp/member/mpasswordReset?mid="+mid);
 			}
 		
 		</script>
@@ -28,6 +29,7 @@
     	</div>
     		
     	<!-- modal-modal-body -->
+    	<div class="modal-bodyfooter">
     	<div class="modal-body">
 			<form id="modifyForm">	
 			
@@ -53,6 +55,6 @@
 	        <button id="btnModify" type="button" class="btn btn-default" onclick="onClickChangepw()" style="color: #34495e"><b>확인</b></button>
 	        <button id="btnInit" type="button" data-dismiss="modal" class="btn btn-default"  style="color: #34495e"><b>취소</b></button>
 	    </div>
-
+</div>
 	</body>
 </html>

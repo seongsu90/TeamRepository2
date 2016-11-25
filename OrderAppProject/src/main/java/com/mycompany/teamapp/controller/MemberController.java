@@ -98,8 +98,9 @@ public class MemberController {
 	
 	// 비밀번호 재설정 폼
 	@RequestMapping(value="/mpasswordReset", method=RequestMethod.GET)
-	public String mpasswordResetForm() {
+	public String mpasswordResetForm(String mid,Model model) {
 		logger.info("mpasswordResetForm() GET 실행");
+		model.addAttribute("mid",mid);
 		return "member/mpasswordResetForm";
 	}
 	
@@ -107,16 +108,19 @@ public class MemberController {
 	@RequestMapping(value="/mpasswordReset", method=RequestMethod.POST)
 	public String mpasswordReset(String mid, String mpassword, String mpassword2, Model model) {
 		logger.info("mpasswordReset() POST 실행");
+		String result = "success";
 		Member member = memberService.info(mid);
+		
 		if ( mpassword.equals(mpassword2) ) {
 			member.setMpassword(mpassword);
 			memberService.modify(member);
-			return "redirect:/member/login";
 		} else {
 			model.addAttribute("error", " 비밀번호가 일치하지 않습니다.");
-			return "member/mpasswordResetForm";
+			result = "fail";
 		}
-		
+		logger.info(result);
+		model.addAttribute("result", result);
+		return "member/modify";
 	}
 	
 	// 회원가입 폼
