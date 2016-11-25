@@ -188,37 +188,13 @@ public class RestaurantController {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
+
 	@RequestMapping("/info")
-	public String info(int resid, Model model, HttpSession session){
-		
-		try{
-			Restaurant restaurant=restaurantService.info(resid);
-		
-			model.addAttribute("restaurant", restaurant);
-			model.addAttribute("resid", resid);
-			
-			String mid=(String)session.getAttribute("login");
-			model.addAttribute("mid", mid);
-			Member member=memberService.info(mid);
-		
-			int mrank=member.getMrank();
-			int mresid=member.getMresid();
-			model.addAttribute("mrank", mrank);
-			model.addAttribute("mresid", mresid);
-			
-		}catch(Exception e){
-			e.printStackTrace();
-			logger.info("비회원 로그인");
-		}
-		
+	public String info(int resid, Model model){
+		Restaurant restaurant=restaurantService.info(resid);
+		model.addAttribute("restaurant", restaurant);
 		return "restaurant/info";
 	}
-	
-
-	
 	
 	@RequestMapping(value="/modify", method=RequestMethod.GET)
 	public String modifyForm(int mresid, Model model){

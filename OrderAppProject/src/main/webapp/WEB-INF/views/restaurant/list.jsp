@@ -105,8 +105,14 @@
 	        }
 		</style>
 		<script type="text/javascript">
-			function showInfo() {
-				$("#infoModal").modal("show");
+			function showInfo(resid) {
+				$.ajax({
+					url: "../restaurant/info",
+					data: {"resid":resid},
+					success: function(data) {
+						parent.showInfo(data);
+					}
+				});
 			};
 
 			function onClickBtnAdd() {
@@ -187,7 +193,7 @@
 
 							<td>
 								<%-- <a href="info?resid=${restaurant.resid}">${restaurant.resname}</a> --%>
-								<a id="btnInfo" href="javascript:showInfo()">${restaurant.resname}</a>
+								<a id="btnInfo" href="javascript:showInfo(${restaurant.resid})">${restaurant.resname}</a>
 							</td>
 
 							<%-- <td> ${restaurant.reslocation} </td> --%>
@@ -335,72 +341,6 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog --> --%>
 	</div><!-- /.modal -->
-
-
-
-
-
-
-
-	 <%-- ## Info Modal ## --%>
-		<div id="infoModal" class="modal fade" tabindex="-1" role="dialog">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header"  style="background-color: #34495e">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" style="color: #FFFFFF;">Info</h4>
-		      </div>
-		      <div class="modal-body">
-				
-
-		     <div class="panel-body">
-			  <div align="right"><a href='#'><span class='info'></span> </a></div>
-				  <label>아이디 : </label><input type='number' class='form-control'  value="${resid}" disabled>
-			      <label>이름 : </label><input type='text' class='form-control'  value='just' disabled>
-				  <label>위치 : </label><input type='text' class='form-control'  value='just' disabled>
-				  <label>전화 번호 : </label><input type='text' class='form-control'  value='just' disabled>
-				  <label>전체 테이블 수 :</label><input type='number' class='form-control'  value='just' disabled>
-			      <label>오픈 타임 :</label><input type='text' class='form-control'  value='just' disabled>
-			      <label>클로즈 타임 :</label><input type='text' class='form-control'  value='just' disabled>
-			      <label>휴일 :</label><input type='text' class='form-control'  value='just' disabled>
-			      <label>사진 :</label><input type='file' class='form-control'  value='just' disabled>
-
-		    </div>
-		  
-
-				
-				
-				
-				<div>
-					<c:if test="${mrank==1}">
-						<c:if test="${resid==mresid }">
-							<a href="modify?mresid=${mresid}">[수정]</a>
-						</c:if>
-					</c:if>
-					<c:if test="${mrank==2}">
-
-							<a href="modify?mresid=${resid}">[수정]</a>
-
-					</c:if>
-
-
-					<c:if test="${mrank==2}">
-						<a href="delete?resid=${resid}">[삭제]</a>
-					</c:if>
-
-				</div>
-		      </div>
-		      <div class="modal-footer">
-				<c:if test="${mrank==0}">
-					<a href="/teamapp/reservation/add?rvresid=${resid}" class="btn btn-primary">[예약하러 가기]</a>
-					<a href="/teamapp/reservation/list?mid=${login}" class="btn btn-primary">[나의 예약 목록]</a>
-				</c:if>
-				<button type="button" class="btn btn-primary">수정</button>
-				 </div>
-
-		      </div>
-		    </div>
-		  </div>
 	
 	</body>
 </html>
