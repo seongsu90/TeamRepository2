@@ -1,4 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="application/json;charset=UTF-8"%>
+
+{
+	"result": "${result}"
+}
+
+
+<%--
 
 <!DOCTYPE html>
 <html> 
@@ -198,3 +205,5 @@
 	</form>
 	</body>
 </html>
+
+--%>

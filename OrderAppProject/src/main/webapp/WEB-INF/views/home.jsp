@@ -5,7 +5,8 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<met,a http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/style.css" />
 	<%-- <link href="${pageContext.servletContext.contextPath}/resources/css/bootstrap.css" rel='stylesheet' type='text/css' /> --%> 
@@ -333,7 +334,7 @@
 		 <div class="container">                                                   
 			<div class="col-md-3 footer-grid">
 					<div class="logo two">
-						<a href="${pageContext.servletContext.contextPath}/home"><h3>FOOD<span>House</span></h3></a>
+						<a href="${pageContext.servletContext.contextPath}/"><h3>주문<span>할게요!</span></h3></a>
 					</div>
 				</div>
 				<div class=" col-md-3 footer-grid footer-grid2">
@@ -355,23 +356,26 @@
 						</ul>
 					 </div>
 				</div>
-				<div class=" col-md-3 footer-grid">
+				<div class="col-md-3 footer-grid">
 					<div class="Office Address">
 				        <h4>ADDRESS</h4>
 				       <ul class="bottom-icons">
-							<li><a class="home" href="#"><span> </span></a>Lorem ipsy street,Newyork</li>
-							<li><a class="mail" href="mailto:info@example.com"><span> </span>123 int@example.com</a></li>
-							<li><a class="mbl" href="#"><span> </span></a>+91 000 00 00 00 0</li>	
+							<li><a class="glyphicon glyphicon-home" href="#"></a>　서울시 송파구 중대로 135, IT벤처타워 서관 12층 한국소프트웨어산업협회</li>
+							<li><a class="glyphicon glyphicon-envelope" href="#"></a>　gusqls0810@naver.com</li>
+							<li><a class="glyphicon glyphicon-phone" href="#"></a>　 010-9558-1893</li>	
 							<div class="clearfix"> </div>	
 						</ul>
 					 </div>
 				</div>
 				<div class="col-md-3 footer-grid">
 					<h4>SUPPORT WITH</h4>
-						<div class="support">
-						   <input type="text" class="text" value="Enter email to reset it" onfocus="this.value = '';" onblur="if (this.value == 'Enter email to reset it') {this.value = 'Enter email to reset it';}">
-						<input type="submit" value="SUBMIT" class="botton">
-						     						     <p>Lorem ipsum dolor sit amet conse aliqua. Ut enim ad minim veniam Lorem ctetur adipisicing .</p>
+						<div class="Office Address">
+						<ul class="bottom-icons">
+						<li><a class="glyphicon glyphicon-envelope" href="#"></a>　gusqls0810@naver.com</li>
+						   <!-- <input type="text" class="text" value="Enter email to reset it" onfocus="this.value = '';" onblur="if (this.value == 'Enter email to reset it') {this.value = 'Enter email to reset it';}"> -->
+						<!-- <input type="submit" value="SUBMIT" class="botton"> -->
+						     						     <p>고객지원 등 각종 문의사항은 해당 메일로 연락을 주시면 감사합니다.</p>
+						</ul>
 						</div>
 				    </div>
 			    	<div class="clearfix"> </div>	
@@ -419,10 +423,10 @@
         		    	</div>
 				        <div class="modal-footer">
                             <div>
-                                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="onClickLogin()">Login</button>
+                                <button type="button" class="btn btn-primary btn-lg btn-block" style="background-color: #1bbc9b" onclick="onClickLogin()">Login</button>
                             </div>
 				    	    <div>
-                                <button id="login_lost_btn" type="button" class="btn btn-link" >Lost Password?</button>
+                                <button id="login_lost_btn" type="button" class="btn btn-link"  onclick="onClickFindPw()" >비밀번호 찾기</button>
                            <!--      <button id="login_register_btn" type="button" class="btn btn-link">Register</button> -->
                             </div>
 				        </div>

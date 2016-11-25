@@ -35,6 +35,51 @@
 			$("#infoModal #resopen").val(data.resopen);
 			$("#infoModal #resclose").val(data.resclose);
 		};
+		
+		function resUpdate() {
+			var resid = $("#infoModal #resid").val();
+			var resname = $("#infoModal #resname").val();
+			var reslocation = $("#infoModal #reslocation").val();
+			var restotaltable = $("#infoModal #restotaltable").val();
+			var resinfo = $("#infoModal #resinfo").val();
+			var restel = $("#infoModal #restel").val();
+			var rescloseday = $("#infoModal #rescloseday").val();
+			var resopen = $("#infoModal #resopen").val();
+			var resclose = $("#infoModal #resclose").val();
+			var resphoto = $("#infoModal #resphoto")[0];
+			
+			var data = new FormData();
+			data.append("resid", resid);
+			data.append("resname", resname);
+			data.append("reslocation", reslocation);
+			data.append("restotaltable", restotaltable);
+			data.append("resinfo", resinfo);
+			data.append("restel", restel);
+			data.append("rescloseday", rescloseday);
+			data.append("resopen", resopen);
+			data.append("resclose", resclose);
+			if(resphoto.files.length != 0) {
+				data.append("resphoto", resphoto.files[0]);
+			}			
+			
+			$.ajax({
+				url:"../restaurant/modify",
+				data: data,
+				method: "post",
+				cache: false,
+				processData: false,
+				contentType: false,
+				success: function(data) {
+					if(data.result == "success") {
+						$("#infoModal").modal("hide");
+						$("#iframe")[0].contentDocument.location.reload(true);
+					} else {
+						alert("수정 실패");
+					}
+				}
+			});
+
+		}
 	</script>
 </head>
 
@@ -103,7 +148,7 @@
 		<div class="container">
 			<h2>Restaurant Management</h2>
 		
-			<iframe name="iframe"
+			<iframe id="iframe" name="iframe"
 				style="width: 100%; height: 650px; border-width: 0px;"
 				src="/teamapp/restaurant/list"> </iframe>
 		</div>
@@ -212,38 +257,100 @@
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<h4 class="modal-title">레스토랑 정보</h4>
 		      		</div>
-			<div class="modal-body">
-			
-
-			<div class="panel-body">
-				<div align="right"><a href='#'><span class='info'></span> </a></div>
-					<label>아이디 : </label><input id="resid" type='number' class='form-control'  disabled>
-					<label>이름 : </label><input id="resname" type='text' class='form-control'  value='just' disabled>
-					<label>위치 : </label><input id="reslocation" type='text' class='form-control'  value='just' disabled>
-					<label>전화 번호 : </label><input id="restel" type='text' class='form-control'  value='just' disabled>
-					<label>전체 테이블 수 :</label><input id="restotaltable" type='number' class='form-control'  value='just' disabled>
-					<label>오픈 타임 :</label><input id="resopen" type='text' class='form-control'  value='just' disabled>
-					<label>클로즈 타임 :</label><input id="resclose" type='text' class='form-control'  value='just' disabled>
-					<label>휴일 :</label><input id="rescloseday" type='text' class='form-control'  value='just' disabled>
-					<label>정보 :</label><input id="resinfo" type='text' class='form-control'  value='just' disabled>
-					<label>사진 :</label><input id="resphoto" type='file' class='form-control'  value='just' disabled>
-				</div>
+		
+				<div class="modal-body">
+		      		
+						<form id="info">
+							<input id="resid" type='hidden'/>
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px; padding:0px;" class="input-group-addon"><b>식당 이름</b></span>
+									<b><input id="resname" type='text' class="form-control"/></b>
+								</div>
+							</div>
+	
+	
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>전체 테이블 수</b></span>
+									<b><input id="restotaltable" type='number' class="form-control"/></b>
+								</div>
+							</div>
+	
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>레스토랑 정보</b></span>
+									<b><input id="resinfo" type='text' class="form-control"/></b>
+								</div>
+							</div>
+	
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>전화번호</b></span>
+								<b><input id="restel" type='text' class="form-control"/></b>
+								</div>
+							</div>
+	
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>주소</b></span>
+									
+									<b><input id="reslocation" type='text' class="form-control"/></b>
+								</div>
+							</div>
+	
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>휴일</b></span>
+									<b><input id="rescloseday" type='text' class="form-control"/></b>
+								</div>
+							</div>
+	
+	
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>오픈 타임</b></span>
+									<b><input id="resopen" type='time' class="form-control"/></b>
+								</div>
+							</div>
+	
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>클로즈 타임</b></span>
+									<b><input id="resclose" type='time' class="form-control"/></b>
+								</div>
+							</div>
+	
+						
+	
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>사진</b></span>
+								<b><input id="resphoto" type='file' class="form-control" multiple/></b>
+								</div>
+							</div>
+							
+	
+						</form>
+		      		</div>
+	      			
 			</div>
-			<div class="modal-footer">
+			
+			<div class="modal-footer" style="background-color:#34495e; color:white">
 				<div>
-					<c:if test="${mrank==1}" style="background-color: #34495e; color:white">
+					<c:if test="${mrank==1}">
 						<c:if test="${resid==mresid }">
 							<a href="modify?mresid=${mresid}" type="button" class="btn btn-primary">수정</a>
 						</c:if>
 					</c:if>
 					<c:if test="${mrank==2}">
-						<a href="modify?mresid=${resid}" type="button" class="btn btn-primary">수정</a>
+						<a href="javascript:resUpdate()" type="button" class="btn btn-primary">수정</a>
 						<a href="delete?resid=${resid}" type="button" class="btn btn-primary">삭제</a>
 					</c:if>
 				</div>
 			</div>
 	      </div>
 	    </div>
-	  </div>
+	 
 </body>
 </html>
