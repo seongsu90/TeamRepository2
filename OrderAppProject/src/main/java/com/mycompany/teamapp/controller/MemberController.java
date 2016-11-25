@@ -41,8 +41,10 @@ public class MemberController {
 		String result = "1";
 		try{
 			result = String.valueOf(memberService.login(mid, mpassword));
-			session.setAttribute("login", mid);
-			session.setAttribute("mrank", memberService.info(mid).getMrank());
+			if(result.equals("0")) {
+				session.setAttribute("login", mid);
+				session.setAttribute("mrank", memberService.info(mid).getMrank());
+			}
 		}catch(Exception e){
 			result = "1";
 		}	
