@@ -47,7 +47,7 @@ public class MemberController {
 			result = "-1";
 		}	
 		model.addAttribute("result", result);
-		return "member/modify";
+		return "member/result";
 	}
 	
 	// 아이디 찾기 폼
@@ -120,7 +120,7 @@ public class MemberController {
 		}
 		logger.info(result);
 		model.addAttribute("result", result);
-		return "member/modify";
+		return "member/result";
 	}
 	
 	// 회원가입 폼
@@ -314,7 +314,7 @@ public class MemberController {
 				result = "wrongData";
 			}
 			model.addAttribute("result", result);
-			return "member/modify";
+			return "member/result";
 		} else {
 			if ( dbmember.getMpassword().equals(member.getMpassword()) ) {
 				dbmember.setMphone(member.getMphone());
