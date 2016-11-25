@@ -3,19 +3,9 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		 <link href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css" rel="stylesheet">
-	    <link href="${pageContext.servletContext.contextPath}/resources/css/justified-nav.css" rel="stylesheet">
-		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-1.12.4.min.js"></script>
+		
 		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
-	 	<script>
-	 		$(function(){
-	 			$("nav li").on("click", function(){
-	 				$("nav li").removeClass("active");//jquery 이용
-	 				//this.setAttribute("class","active")//순수 DOM
-	 				$(this).addClass("active");
-	 			});
-	 		});
-	 	</script>
+	 	
 	 	
 	 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/lumen/bootstrap.min.css">

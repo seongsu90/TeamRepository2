@@ -38,15 +38,7 @@
 
  });
 	</script>
-	
-
-    
-    <link href="/myweb/resources/bootstrap-3.3/css/bootstrap.min.css" rel="stylesheet">
-
-  
-    <link href="/myweb/resources/css/justified-nav.css" rel="stylesheet">
-	<script type="text/javascript" src="/myweb/resources/js/jquery-1.12.4.min.js"></script>
-	<script type="text/javascript" src="/myweb/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
+   
  	<script>
  		$(function(){
  			$("nav li").on("click", function(){
@@ -139,15 +131,7 @@
 			</div>
 		</div>
 	</div>
-	<!--swipebox -->	
-			<link rel="stylesheet" href="css/swipebox.css">
-				<script src="js/jquery.swipebox.min.js"></script> 
-				<script type="text/javascript">
-					jQuery(function($) {
-						$(".swipebox").swipebox();
-					});
-				</script>
-			<!--//swipebox Ends -->
+	
 
 	<!--/start-reservations-->
           	<div class= "reservation">
@@ -223,14 +207,6 @@
 							<!--start-smooth-scrolling-->
 						<script type="text/javascript">
 									$(document).ready(function() {
-										/*
-										var defaults = {
-								  			containerID: 'toTop', // fading element id
-											containerHoverID: 'toTopHover', // fading element hover id
-											scrollSpeed: 1200,
-											easingType: 'linear' 
-								 		};
-										*/
 										
 										$().UItoTop({ easingType: 'easeOutQuart' });
 										

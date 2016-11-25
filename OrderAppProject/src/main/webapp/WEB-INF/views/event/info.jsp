@@ -1,5 +1,17 @@
-<%@ page  contentType="text/html;charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page  contentType="application/json;charset=UTF-8"%>
+
+{
+	"ename": "${event.ename}",
+	"eresid": ${event.eresid},
+	"esavedfile": "${event.esavedfile}",
+	"einfo" : "${event.einfo}",
+	"emlname": "${event.emlname}",
+	"eprice" : "${event.eprice}",
+	"estart" : "${event.estart}",
+	"eend" : "${event.end}"
+
+}
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -51,4 +63,4 @@
 			<a href="list">[목록]</a>
 		</div>	
 	</body>
-</html>
+</html> --%>
