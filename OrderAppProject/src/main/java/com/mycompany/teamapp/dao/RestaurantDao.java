@@ -48,23 +48,40 @@ public class RestaurantDao {
 	}
 
 	public int update(Restaurant restaurant) {
-		String sql="update restaurant set resname=?, reslocation=?, restotaltable=?, resinfo=?, restel=?, resopen=?, resclose=?, resoriginfile=?, ressavedfile=?, resmime=?, rescloseday=?  where resid=?";
-		int row=jdbcTemplate.update(
-				sql,
-				restaurant.getResname(),
-				restaurant.getReslocation(),
-				restaurant.getRestotaltable(),
-				restaurant.getResinfo(),
-				restaurant.getRestel(),
-				restaurant.getResopen(),
-				restaurant.getResclose(),
-				restaurant.getResoriginfile(),
-				restaurant.getRessavedfile(),
-				restaurant.getResmime(),
-				restaurant.getRescloseday(),
-				restaurant.getResid()
-				);
-		return row;
+		if(restaurant.getResoriginfile() != null) {
+			String sql = "update restaurant set resname=?, reslocation=?, restotaltable=?, resinfo=?, restel=?, resopen=?, resclose=?, resoriginfile=?, ressavedfile=?, resmime=?, rescloseday=?  where resid=?";
+			int row=jdbcTemplate.update(
+					sql,
+					restaurant.getResname(),
+					restaurant.getReslocation(),
+					restaurant.getRestotaltable(),
+					restaurant.getResinfo(),
+					restaurant.getRestel(),
+					restaurant.getResopen(),
+					restaurant.getResclose(),
+					restaurant.getResoriginfile(),
+					restaurant.getRessavedfile(),
+					restaurant.getResmime(),
+					restaurant.getRescloseday(),
+					restaurant.getResid()
+					);		
+			return row;
+		} else {
+			String sql = "update restaurant set resname=?, reslocation=?, restotaltable=?, resinfo=?, restel=?, resopen=?, resclose=?, rescloseday=?  where resid=?";
+			int row=jdbcTemplate.update(
+					sql,
+					restaurant.getResname(),
+					restaurant.getReslocation(),
+					restaurant.getRestotaltable(),
+					restaurant.getResinfo(),
+					restaurant.getRestel(),
+					restaurant.getResopen(),
+					restaurant.getResclose(),
+					restaurant.getRescloseday(),
+					restaurant.getResid()
+					);
+			return row;
+		}
 	}
 	
 	public List<Restaurant> selectByPage(int pageNo, int rowsPerPage, String find){

@@ -203,7 +203,7 @@
 							<td> ${restaurant.resopen} </td>
 							<td> ${restaurant.resclose} </td>
 							<td> ${restaurant.rescloseday} </td>
-							<td> <button>삭제</button> </td>
+							<td> <a href="delete?resid=${restaurant.resid}" type="button" class="btn btn-info">삭제</a> </td>
 						</tr>
 					</c:forEach>
 				</tbody>
