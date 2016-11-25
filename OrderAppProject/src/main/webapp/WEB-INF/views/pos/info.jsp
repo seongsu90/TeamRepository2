@@ -9,7 +9,7 @@
 	
 	<body>
 	 주문 상세정보
-	 <hr/>
+	 <hr/> 
 	 
 	 	<h3>${ptableno} 번 테이블</h3>
 	 	<table border="1">

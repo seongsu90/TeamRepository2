@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mycompany.teamapp.dao.PosDao;
 import com.mycompany.teamapp.dto.Pos;
@@ -28,12 +29,22 @@ public class PosService {
 	@Autowired
 	private PosDao posDao;
 
-	public int add(Pos pos) { 
-		int row = posDao.insert(pos);	
-		if(row == 0){
-			return ADD_FAIL;
+	public void add(Pos pos) { 
+		String[] arrMenu = pos.getTempmenu();			// 주문 메뉴
+		int[] arrCount = pos.getTempcount();				// 수량 배열
+				
+		for (int i = 0; i < arrMenu.length; i++) {
+			pos.setPmlname(arrMenu[i]);
+			pos.setPcount(arrCount[i]);
+			
+			Pos dbPos = posDao.selectInfo(pos.getPresid(), pos.getPtableno(), pos.getPmlname());
+			if(dbPos == null) {
+				posDao.insert(pos);	
+			} else {
+				dbPos.setPcount(pos.getPcount());
+				posDao.update(dbPos);
+			}
 		}
-		return ADD_SUCCESS;
 	}
 
 	public int modify(Pos pos) {

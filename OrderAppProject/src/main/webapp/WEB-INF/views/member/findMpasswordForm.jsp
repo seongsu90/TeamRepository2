@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+
 		<meta charset="UTF-8">
 		
 		<script>
@@ -14,21 +15,13 @@
 			}
 		
 		</script>
-		
-		
 	</head>
 	<body>
-		<!-- <b>비밀번호 찾기</b>
-		<hr/> --><%-- 
-		<form method="post">
-			아 이 디 : <input type="text" name="mid"/><br/>
-			휴대폰번호 : <input type="text" name="mphone"/>${error}<br/>
-			<input type="submit" value="확인"/>
-		</form> --%>
-		
-		
 
+		<!-- <b>비밀번호 찾기</b>
+		<hr/> -->
    		<!-- modal-header -->
+   		
    		<div class="modal-header" style="background-color: #34495e; color:white">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #FFFFFF;"><span aria-hidden="true">&times;</span></button>
 			<h4 class="modal-title">회원 정보 수정</h4>
@@ -60,10 +53,6 @@
 	        <button id="btnModify" type="button" class="btn btn-default" onclick="onClickChangepw()" style="color: #34495e"><b>확인</b></button>
 	        <button id="btnInit" type="button" data-dismiss="modal" class="btn btn-default"  style="color: #34495e"><b>취소</b></button>
 	    </div>
-		
-		
-		
-		
-		
+
 	</body>
 </html>
