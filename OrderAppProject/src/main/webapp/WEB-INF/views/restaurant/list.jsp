@@ -254,6 +254,7 @@
 
 	      		<!-- modal-modal-body -->
 	      		<div class="modal-body">
+	      		
 					<form id="addForm">
 						<div class="form-group">
 							<div class="input-group">
