@@ -32,16 +32,15 @@ public class PosDao {
 	}
 
 	public int update(Pos pos) {
-		String sql = "update pos set pmlname=?, pcount=? where presid=? and ptableno=?";
+		String sql = "update pos set pcount=? where presid=? and ptableno=? and pmlname=?";
 		int row = jdbcTemplate.update(
 				sql,
-				pos.getPmlname(),
 				pos.getPcount(),
 				pos.getPresid(),
-				pos.getPtableno()
-				
+				pos.getPtableno(),
+				pos.getPmlname()
 		);
-		return row;
+		return row; 
 	}
 
 	public int delete(int presid, int ptableno) {
@@ -86,6 +85,22 @@ public class PosDao {
 		
 		return list;
 	}
+	
+	public Pos selectInfo(int presid, int ptableno, String pmlname) {
+		String sql = "select presid, ptableno, pmlname, pcount from pos where presid=? and ptableno=? and pmlname=? order by ptableno";
+		List<Pos> list = jdbcTemplate.query(sql, new Object[] {presid, ptableno, pmlname}, new RowMapper<Pos>() {
+			@Override
+			public Pos mapRow(ResultSet rs, int row) throws SQLException {
+				Pos pos = new Pos();	
+				pos.setPresid(rs.getInt("presid"));
+				pos.setPtableno(rs.getInt("ptableno"));
+				pos.setPmlname(rs.getString("pmlname"));
+				pos.setPcount(rs.getInt("pcount"));
+				return pos;
+			}
+		});
+		return (list.size() != 0) ? list.get(0) : null;
+	}	
 	
 	public List<Pos> selectInfo(int presid) {
 		String sql = "select presid, ptableno, pmlname, pcount from pos where presid=? order by ptableno";

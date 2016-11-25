@@ -32,7 +32,50 @@
 			}
 						
 		</style>
+		<script type="text/javascript">
+			function onClickBtnTable(tableNo) {
+				var presid = $("#orderModal #presid").val();
+				var tableno = $("#orderModal #ptableno").val();
+				/* $.ajax({
+					url: "../pos/info",
+					data: {"presid":presid, "ptableno":tableno},
+					method: "post",
+					success: function(data) {
+						$("#orderModal").modal("show");
+						$("#orderModal #ptableno").val(tableNo);
+					}		
+				}); */
+				$("#orderModal").modal("show");
+				$("#orderModal #ptableno").val(tableNo);
+			}
 		
+			function onClickBtnOrder() {
+				var orderMenu = "";
+				var arrTr = $(".menu");				
+				for(var i=0; i<arrTr.length; i++) {
+					var tr = arrTr[i];
+					if($("#tempcount", tr).val() != 0) {
+						if(i!=0) orderMenu += "&"; 
+						orderMenu += "tempmenu=" + $("#tempmenu", tr).val();
+						orderMenu += "&tempcount=" + $("#tempcount", tr).val();
+					}
+				}
+				
+				var presid = $("#orderModal #presid").val();
+				var tableno = $("#orderModal #ptableno").val();
+				
+				$.ajax({
+					url: "../pos/add",
+					data: orderMenu + "&ptableno=" + tableno + "&presid=" + presid,
+					method: "post",
+					success: function(data) {
+						if(data.result == "success") {
+							$("#orderModal").modal("hide");
+						}
+					}
+				});
+			}
+		</script>
 	</head>
 	
 	<body>		
@@ -51,7 +94,7 @@
 							
 								<c:forEach var="i" begin="1" end="${totalTable}">
 									<div class="col-md-3">
-										<button data-toggle="modal"  style="width:150px; height:150px;" data-target="#showOrderModal" >${i} 번 테이블
+										<button onclick="onClickBtnTable(${i})" style="width:150px; height:150px;">${i} 번 테이블
 											<c:forEach  var="posList" items="${posList}">
 												<c:if test="${posList.ptableno == i}">	<br/>${posList.pmlname}&nbsp;&nbsp;${posList.pcount}<br/></c:if>
 											</c:forEach>									
@@ -68,15 +111,13 @@
 		</div>
 		
 		<!-- modal start-->
-		<div class="modal fade" id="showOrderModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+		<div id="orderModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 			<div class="modal-dialog">
-				<div class="modal-content">
-									
+				<div class="modal-content">		
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-						<h4 class="modal-title" id="myModalLabel">상세정보</h4>
-					</div>
-					          
+						<h4 class="modal-title" id="myModalLabel">주문 입력</h4>
+					</div>  
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-md-6">
@@ -101,14 +142,14 @@
 											<td style="width:100%; border: 1" align="center">수량</td>
 										</tr>
 										<c:forEach var="menuList" items="${menuList}">
-											<tr>
+											<tr class="menu">
 												<td>
-													<input type="hidden" name=presid value="${presid}"/> 							
-													<input type="hidden" name=ptableno value="${ptableno}"/>
-													<input type="text" style="border:1;" name=tempmenu value="${menuList.mlname}" readonly/>							
+													<input id="presid" type="hidden" name=presid value="${presid}"/> 							
+													<input id="ptableno" type="hidden" name=ptableno value="${ptableno}"/>
+													<input id="tempmenu" type="text" style="border:1;" name=tempmenu value="${menuList.mlname}" readonly/>							
 												</td>
 												<td>
-													<input style="width:100%; border:1;" type="number" min="0" max="99" name=tempcount value="0"/> 							
+													<input id="tempcount" style="width:100%; border:1;" type="number" min="0" max="99" name=tempcount value="0"/> 							
 												</td>				
 											</tr>					
 										</c:forEach>				
@@ -120,7 +161,7 @@
 					          
 					<div class="modal-footer">  
 						<button type="button" class="btn btn-default" data-dismiss="modal"  role="button">결제</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal"  role="button">주문</button>  
+						<button onclick="onClickBtnOrder()" type="button" class="btn btn-default" role="button">주문</button>  
 					</div>
 				</div>
 			</div>	                    	                    

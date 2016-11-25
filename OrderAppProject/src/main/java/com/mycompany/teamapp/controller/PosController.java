@@ -1,5 +1,6 @@
 package com.mycompany.teamapp.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -76,21 +77,16 @@ public class PosController {
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String add(Pos pos, HttpSession session) {		// 수기 주문, 모바일 주문
-		logger.info("pos add 실행");		
-		
-		String[] arrMenu = pos.getTempmenu();			// 주문 메뉴
-		int[] arrCount = pos.getTempcount();				// 수량 배열
-				
-		for (int i = 0; i < arrMenu.length; i++) {
-			if ( arrCount[i] != 0 ) {
-				pos.setPmlname(arrMenu[i]);
-				pos.setPcount(arrCount[i]);
-				posService.add(pos);
-			}
+	public String add(Pos pos, Model model) {		// 수기 주문, 모바일 주문
+		logger.info("pos add 실행");
+		try {
+			posService.add(pos);
+			model.addAttribute("result", "success");
+		} catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("result", "fail");
 		}
-		
-		return "redirect:/pos/index";	
+		return "pos/add";	
 	}
 
 	@RequestMapping(value="/modify", method=RequestMethod.GET)
@@ -112,6 +108,8 @@ public class PosController {
 		int row = posService.delete(presid, ptableno);
 		return "redirect:/pos/index";	
 	}
+	
+	
 	
 	@RequestMapping("/info")	
 	public String info(int presid, int ptableno, Model model) {
