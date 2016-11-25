@@ -72,7 +72,7 @@
      ※<a href="/teamapp/favorite/list">즐겨찾기 리스트</a><br/>
      
       -------------------------------------------------------<br/>
-      ※<a href="/teamapp/home">New Home page</a><br/>
+      ※<a href="/teamapp/home1">New Home page</a><br/>
 </body>
 	<!--  -->
 
