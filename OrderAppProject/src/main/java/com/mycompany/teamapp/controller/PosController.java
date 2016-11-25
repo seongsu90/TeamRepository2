@@ -64,10 +64,13 @@ public class PosController {
 		
 		List<Reservation> reservList =  reservationService.reservList(presid);		// 매장별 예약자 확인
 		
+		List<MenuList> menuList = menuListService.menuList(presid);			// 매장별 메뉴 리스트
+		
 		session.setAttribute("presid", presid);
 		model.addAttribute("posList", posList);		
 		model.addAttribute("totalTable", totalTable);
 		model.addAttribute("reservList", reservList);
+		model.addAttribute("menuList", menuList);
 		
 		return "pos/index";
 	}
