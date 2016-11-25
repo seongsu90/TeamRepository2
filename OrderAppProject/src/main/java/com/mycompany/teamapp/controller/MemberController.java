@@ -244,6 +244,18 @@ public class MemberController {
 		}
 	}
 	
+	// getCity
+	@RequestMapping(value="/getCity", method=RequestMethod.GET)
+	public String getCity() {
+		return "backup/member/getCity";	
+	}
+	
+	// getProvince
+	@RequestMapping(value="/getProvince", method=RequestMethod.GET)
+	public String getProvince() {
+		return "backup/member/getProvince";	
+	}
+	
 	// 회원 수정
 	/*@RequestMapping(value="/modifyInfo", method=RequestMethod.POST)
 	public String modifyInfo(Member member, String newmpassword, Model model, HttpSession session) {
