@@ -180,7 +180,7 @@
 			}
 		</script>
 	</head>
-	
+	 
 	<body>		
 		<div class="container" align="center"><h2>POS System</h2> <br/>
 			<div class="row">
