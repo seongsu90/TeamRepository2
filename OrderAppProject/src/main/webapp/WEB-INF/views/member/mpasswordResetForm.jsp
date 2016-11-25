@@ -21,28 +21,15 @@
 							$("#login-modal").modal("hide");
 							location.reload();
 						}else{
-								alert("비밀번호가 일치하지 않습니다");
+							alert("비밀번호가 일치하지 않습니다");
 						}
 					}
 				});
 			}
 		</script>
 	</head>
+	
 	<body>
-		<%-- <b>비밀번호 재설정</b>
-		<hr/>
-		<form method="post">
-			<input type="hidden" name="mid" value="${findMid}"/>
-			새로운 비밀번호 : <input type="password" name="mpassword"/><br/>
-			 비밀번호 확인  : <input type="password" name="mpassword2"/>${error}<br/>
-			<input type="submit" value="확인"/>
-		</form> --%>
-		
-		<!-- <div class="modal-header" style="background-color: #34495e; color:white">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #FFFFFF;"><span aria-hidden="true">&times;</span></button>
-			<h4 class="modal-title">비밀번호 재설정</h4>
-    	</div> -->
-    		
     	<!-- modal-modal-body -->
     	<div class="modal-body">
 			<form id="modifyForm">	

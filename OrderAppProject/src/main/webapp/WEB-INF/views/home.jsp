@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page  contentType="text/html;charset=UTF-8"%>
 
+<<<<<<< HEAD
 	<!DOCTYPE HTML>
 	<html>
 		<head>
@@ -38,6 +39,50 @@
 							}
 						}
 					});
+=======
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<met,a http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/style.css" />
+	<%-- <link href="${pageContext.servletContext.contextPath}/resources/css/bootstrap.css" rel='stylesheet' type='text/css' /> --%> 
+	<link href='http://fonts.googleapis.com/css?family=Niconne|Playball|Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
+	
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
+	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
+	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#login-modal").on('hidden.bs.modal', function () {
+				console.log("모달 히든");
+		    	parent.location.reload();
+		    	console.log("윈도우 리로드");
+		    });
+		}); 
+	
+		function onClickLogin()
+		{
+			var mid =$("#login_username").val();
+			var mpassword=$("#login_password").val();
+			
+			$.ajax({
+				url: "member/login",
+				data: {"mid":mid, "mpassword":mpassword},
+				method:"post",
+				success: function(data){
+					if(data.result=="0"){
+						alert("로그인 성공");
+						$("#login-modal").modal("hide");
+					}else{
+						alert("아이디 혹은 비밀번호가 틀렸습니다.");
+					}
+>>>>>>> c2bbf43672fb253de8c3916b0eafc03ff18a16fc
 				}
 
 				function onClickFindPw()
@@ -437,6 +482,7 @@
 				</div>
 			</div>
 			</div>
+<<<<<<< HEAD
 		    <!-- END # MODAL LOGIN -->
 		
 		<!-- END # BOOTSNIP INFO -->
@@ -481,3 +527,101 @@
 		    
 		</body>
 	</html>
+=======
+			
+			
+			
+<!-- END # BOOTSNIP INFO -->
+
+<!-- BEGIN # MODAL LOGIN -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; padding-top: 150px" >
+    	<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" align="center">
+					<img class="img-angle" id="img_logo" src="${pageContext.servletContext.contextPath}/resources/img/logo_reform2.png">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+				</div>
+                
+                <!-- Begin # DIV Form -->
+                <div id="div-forms">
+                
+                    <!-- Begin # Login Form -->
+                    <form id="login-form">
+		                <div class="modal-body">
+				    		<div id="div-login-msg">
+                                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-login-msg">Type your username and password.</span>
+                            </div>
+				    		<input id="login_username" class="form-control" type="text" placeholder="Username (type ERROR for error effect)" required>
+				    		<input id="login_password" class="form-control" type="password" placeholder="Password" required>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Remember me
+                                </label>
+                            </div>
+        		    	</div>
+				        <div class="modal-footer">
+                            <div>
+                                <button type="button" class="btn btn-primary btn-lg btn-block" style="background-color: #1bbc9b" onclick="onClickLogin()">Login</button>
+                            </div>
+				    	    <div>
+                                <button id="login_lost_btn" type="button" class="btn btn-link"  onclick="onClickFindPw()" >비밀번호 찾기</button>
+                           <!--      <button id="login_register_btn" type="button" class="btn btn-link">Register</button> -->
+                            </div>
+				        </div>
+                    </form>
+
+			</div>
+		</div>
+	</div>
+	</div>
+    <!-- END # MODAL LOGIN -->
+
+<!-- END # BOOTSNIP INFO -->
+
+<!--swipebox -->	
+			
+				<script src="/teamapp/resources/js/jquery.swipebox.min.js"></script> 
+				<script type="text/javascript">
+					jQuery(function($) {
+						$(".swipebox").swipebox();
+					});
+				</script>
+			<!--//swipebox Ends -->
+
+
+			<!--start-smoth-scrolling-->
+			<script type="text/javascript">
+								jQuery(document).ready(function($) {
+									$(".scroll").click(function(event){		
+										event.preventDefault();
+										$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+									});
+								});
+								</script>
+							<!--start-smooth-scrolling-->
+				<%--		<script type="text/javascript">
+									$(document).ready(function() {
+										/*
+										var defaults = {
+								  			containerID: 'toTop', // fading element id
+											containerHoverID: 'toTopHover', // fading element hover id
+											scrollSpeed: 1200,
+											easingType: 'linear' 
+								 		};
+										*/
+										
+										$().UItoTop({ easingType: 'easeOutQuart' });
+										
+									});
+								</script> --%>
+		<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+		
+		<input type="hidden" id="loginId"/>
+		<input type="hidden" id="loginPassword"/>
+    
+</body>
+</html>
+>>>>>>> c2bbf43672fb253de8c3916b0eafc03ff18a16fc

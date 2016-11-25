@@ -38,13 +38,13 @@ public class MemberController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(String mid, String mpassword, HttpSession session, Model model) {
 		logger.info("login() POST 실행");
-		String result = "";
+		String result = "1";
 		try{
 			result = String.valueOf(memberService.login(mid, mpassword));
 			session.setAttribute("login", mid);
 			session.setAttribute("mrank", memberService.info(mid).getMrank());
 		}catch(Exception e){
-			result = "-1";
+			result = "1";
 		}	
 		model.addAttribute("result", result);
 		return "member/result";
