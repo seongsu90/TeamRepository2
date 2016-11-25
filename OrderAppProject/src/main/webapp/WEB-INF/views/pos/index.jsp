@@ -16,11 +16,7 @@
 		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 		
 		<style type="text/css">
- 					
-		/* 	.center {
-			    margin-top:50px;   
-			} */
-	
+ 	
 			body { 
 				padding-top:20px; 
 			}
@@ -30,8 +26,115 @@
 				margin-bottom:20px; 
 				
 			}
-						
+			
+			table#acrylic {
+	            border-collapse: separate;
+	            background: #fff;
+	            -moz-border-radius: 10px;
+	            -webkit-border-radius: 10px;
+	            border-radius: 10px;
+	            margin: 10px auto;
+	            -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+	            -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+	            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+	            cursor: pointer;
+	        }
+	        
+	        #acrylic thead {
+	            -moz-border-radius: 10px;
+	            -webkit-border-radius: 10px;
+	            border-radius: 10px;
+	        }
+	        
+	        #acrylic thead th {
+	            font-family: 'Roboto';
+	            font-size: 16px;
+	            font-weight: 400;
+	            color: white;
+	            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+	            text-align: left;
+	            padding: 20px;
+	            background-size: 100%;
+	            background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3C5064), color-stop(100%, #34495e));
+	            background-image: -moz-linear-gradient(#3C5064, #34495e);
+	            background-image: -webkit-linear-gradient(#3C5064, #34495e);
+	            background-image: linear-gradient(#3C5064, #34495e);
+	            border-top: 1px solid #858d99;
+	        }
+	        
+	        #acrylic thead th:first-child {
+	            -moz-border-top-right-radius: 10px;
+	            -webkit-border-top-left-radius: 10px;
+	            border-top-left-radius: 10px;
+	        }
+	        
+	        #acrylic thead th:last-child {
+	            -moz-border-top-right-radius: 10px;
+	            -webkit-border-top-right-radius: 10px;
+	            border-top-right-radius: 10px;
+	        }
+	        
+	        #acrylic tbody tr td {
+	            font-family: 'Open Sans', sans-serif;
+	            font-weight: 400;
+	            color: #5f6062;
+	            font-size: 13px;
+	            padding: 20px 20px 20px 20px;
+	            border-bottom: 1px solid #e0e0e0;
+	        }
+	        
+	        #acrylic tbody tr:nth-child(2n) {
+	            background: #f0f3f5;
+	        }
+	        
+	        #acrylic tbody tr:last-child td {
+	            border-bottom: none;
+	        }
+	        
+	        #acrylic tbody tr:last-child td:first-child {
+	            -moz-border-bottom-right-radius: 10px;
+	            -webkit-border-bottom-left-radius: 10px;
+	            border-bottom-left-radius: 10px;
+	        }
+	        
+	        #acrylic tbody tr:last-child td:last-child {
+	            -moz-border-bottom-right-radius: 10px;
+	            -webkit-border-bottom-right-radius: 10px;
+	            border-bottom-right-radius: 10px;
+	        }
+	        
+	        #acrylic tbody:hover > tr td {
+	            filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=50);
+	            opacity: 0.5;
+	        }
+	        
+	        #acrylic tbody:hover > tr:hover td {
+	            text-shadow: none;
+	            color: #2d2d2d;
+	            filter: progid: DXImageTransform.Microsoft.Alpha(enabled=false);
+	            opacity: 1;
+	            transition: 0.2s all;
+	        }	
+	        
+			.form-group{
+				margin-bottom: 15px;
+			}	
+			
+			.input-group-addon {
+				color: #34495e;
+			}
+			
+			.custab{
+				border: 1px solid #ccc;
+				padding: 5px;
+				margin: 5% auto; 
+				/*transition: 0.5s;	 */			
+			}
+
+			
+					
 		</style>
+		
 		<script type="text/javascript">
 			function onClickBtnTable(tableNo) {
 				var presid = $("#orderModal #presid").val();
@@ -83,11 +186,11 @@
 			<div class="row">
 				<div class="col-md-8">
 				<div class="panel panel-primary">
-		                <!-- <div class="panel-heading">
-		                    <h3 class="panel-title">
-		                        <span class="glyphicon glyphicon-bookmark"></span> POS System 
-		                    </h3>
-		                </div> -->
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								<span class="glyphicon glyphicon-bookmark"></span> POS System 
+							</h3>
+						</div> 
 		                
 						<div class="panel-body">
 							<div class="row">
@@ -112,13 +215,86 @@
 		
 		<!-- modal start-->
 		<div id="orderModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">		
+			<div class="modal-dialog" style="width: 1000px;">
+				<div class="modal-content">	
+				
+					<!-- modal-header-->	
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 						<h4 class="modal-title" id="myModalLabel">주문 입력</h4>
-					</div>  
-					<div class="modal-body">
+					</div>
+					<!-- modal-body-->
+					<div class="modal-body" >
+						<div class="row" >
+							<div class="col-md-6">						
+								<table id="acrylic">
+									<thead>
+										<tr>
+											<th> 메뉴 </th>
+											<th> 수량 </th>
+											<th> 가격 </th>									
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="menuList" items="${menuList}">
+											<tr class="menu">
+												<td>
+													<input id="presid" type="hidden" name=presid value="${presid}"/> 							
+													<input id="ptableno" type="hidden" name=ptableno value="${ptableno}"/>
+													<input id="tempmenu" type="text" style="border: 0;" name=tempmenu value="${menuList.mlname}" readonly/>							
+												</td>
+												<td>
+													<input id="tempcount" type="number" style="border: 0;" min="0" max="99" name=tempcount value="0"/> 							
+												</td>
+												<td>
+													<input id="price" type="text" style="border: 0;" name=price value="${price}" readonly/> 							
+												</td>				
+											</tr>
+										</c:forEach>								
+									</tbody>
+								</table>	
+							</div>
+							<div class="col-md-6">
+								<table class="table table-striped custab" style="margin-top: 20em;" id="acrylic">
+									<tr>
+										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 합계 </th>
+										<th> ${totalPrice} </th>		
+									</tr>
+									<tr>
+										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 쿠폰 </th>
+										<th> ${coupon} </th>			
+									</tr>
+									<tr>
+										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 이벤트 </th>			
+										<th> ${eventPrice} </th>
+									</tr>
+									<tr>
+										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 포인트 </th>			
+										<th> ${point} </th>
+									</tr>
+									<tr>
+										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 결제 금액 </th>		
+										<th> ${result} </th>	
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>		
+	      			<!-- modal-footer-->
+		      		<div class="modal-footer">
+						<button type="button" style="width: 150px; height: 100px;" class="btn btn-danger" data-dismiss="modal"  role="button">결제</button>
+						<button onclick="onClickBtnOrder()" type="button" style="width: 150px; height: 100px;" class="btn btn-primary" role="button">주문</button>  
+					</div>
+				</div>
+			</div>	                    	                    
+		</div>	 
+		<!-- modal end -->
+	</body>
+</html>	      		
+	      		
+	      		
+	      		 
+					<%-- <div class="modal-body">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="well" style="height: 300px">
@@ -157,18 +333,6 @@
 								</form> 
 							</div>
 						</div>
-					</div>
+					</div> --%>
 					          
-					<div class="modal-footer">  
-						<button type="button" class="btn btn-default" data-dismiss="modal"  role="button">결제</button>
-						<button onclick="onClickBtnOrder()" type="button" class="btn btn-default" role="button">주문</button>  
-					</div>
-				</div>
-			</div>	                    	                    
-		</div>	 
-		<!-- modal end -->
-		
-		
-	
-	</body>
-</html>
+

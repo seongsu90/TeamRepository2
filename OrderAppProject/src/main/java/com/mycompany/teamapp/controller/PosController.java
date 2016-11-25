@@ -140,6 +140,7 @@ public class PosController {
 		
 		model.addAttribute("ptableno", ptableno);
 		model.addAttribute("posList", posList);
+		model.addAttribute("price", price);
 		model.addAttribute("totalPrice", totalPrice);
 		model.addAttribute("menuList", menuList);
 		model.addAttribute("eventPrice", eventPrice);
