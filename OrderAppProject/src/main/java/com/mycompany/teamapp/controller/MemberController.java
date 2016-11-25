@@ -38,16 +38,15 @@ public class MemberController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(String mid, String mpassword, HttpSession session, Model model) {
 		logger.info("login() POST 실행");
-		String result = "";
-		try{
-			result = String.valueOf(memberService.login(mid, mpassword));
+		String result = "1";
+		result = String.valueOf(memberService.login(mid, mpassword));
+		if(result.equals("0")) {
 			session.setAttribute("login", mid);
 			session.setAttribute("mrank", memberService.info(mid).getMrank());
-		}catch(Exception e){
-			result = "-1";
-		}	
+		}
+
 		model.addAttribute("result", result);
-		return "member/modify";
+		return "member/result";
 	}
 	
 	// 아이디 찾기 폼
@@ -81,26 +80,25 @@ public class MemberController {
 	@RequestMapping(value="/findMpassword", method=RequestMethod.POST)
 	public String findMpassword(String mid, String mphone, Model model, HttpSession session) {
 		logger.info("findMpassword() POST 실행");
-		Member member = memberService.info(mid);
-		if ( member == null ) {
-			model.addAttribute("error", " 존재하지 않는 id입니다.");
-			return "member/findMpasswordForm";
-		}
-		if ( member.getMphone().equals(mphone) ) {
-			session.setAttribute("findMid", mid);
-			return "/member/findMpasswordForm";
-			/*return "redirect:/member/mpasswordReset";*/
-		} else {
-			model.addAttribute("error", " 휴대폰 번호가 일치하지 않습니다.");
-			return "member/findMpasswordForm";
-		}
+		String result = "fail";
+		
+		try {
+			Member member = memberService.info(mid);
+			if ( member.getMphone().equals(mphone) ) {
+				result = "success";
+			}
+		} catch (Exception e) { }
+		
+		model.addAttribute("result", result);
+		return "member/result";
 		
 	}
 	
 	// 비밀번호 재설정 폼
 	@RequestMapping(value="/mpasswordReset", method=RequestMethod.GET)
-	public String mpasswordResetForm() {
+	public String mpasswordResetForm(String mid,Model model) {
 		logger.info("mpasswordResetForm() GET 실행");
+		model.addAttribute("mid",mid);
 		return "member/mpasswordResetForm";
 	}
 	
@@ -108,16 +106,19 @@ public class MemberController {
 	@RequestMapping(value="/mpasswordReset", method=RequestMethod.POST)
 	public String mpasswordReset(String mid, String mpassword, String mpassword2, Model model) {
 		logger.info("mpasswordReset() POST 실행");
+		String result = "success";
 		Member member = memberService.info(mid);
+		
 		if ( mpassword.equals(mpassword2) ) {
 			member.setMpassword(mpassword);
 			memberService.modify(member);
-			return "redirect:/member/login";
 		} else {
 			model.addAttribute("error", " 비밀번호가 일치하지 않습니다.");
-			return "member/mpasswordResetForm";
+			result = "fail";
 		}
-		
+		logger.info(result);
+		model.addAttribute("result", result);
+		return "member/result";
 	}
 	
 	// 회원가입 폼
@@ -244,6 +245,18 @@ public class MemberController {
 		}
 	}
 	
+	// getCity
+	@RequestMapping(value="/getCity", method=RequestMethod.GET)
+	public String getCity() {
+		return "backup/member/getCity";	
+	}
+	
+	// getProvince
+	@RequestMapping(value="/getProvince", method=RequestMethod.GET)
+	public String getProvince() {
+		return "backup/member/getProvince";	
+	}
+	
 	// 회원 수정
 	/*@RequestMapping(value="/modifyInfo", method=RequestMethod.POST)
 	public String modifyInfo(Member member, String newmpassword, Model model, HttpSession session) {
@@ -299,7 +312,7 @@ public class MemberController {
 				result = "wrongData";
 			}
 			model.addAttribute("result", result);
-			return "member/modify";
+			return "member/result";
 		} else {
 			if ( dbmember.getMpassword().equals(member.getMpassword()) ) {
 				dbmember.setMphone(member.getMphone());

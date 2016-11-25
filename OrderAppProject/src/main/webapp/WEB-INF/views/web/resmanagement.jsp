@@ -24,6 +24,8 @@
 		src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 	<script type="text/javascript">
 		function showInfo(data) {
+			
+	
 			$("#infoModal").modal("show");
 			$("#infoModal #resid").val(data.resid);
 			$("#infoModal #resname").val(data.resname);
@@ -34,9 +36,17 @@
 			$("#infoModal #rescloseday").val(data.rescloseday);
 			$("#infoModal #resopen").val(data.resopen);
 			$("#infoModal #resclose").val(data.resclose);
+		
+		
+	
+			
 		};
 		
+		
+		
+		
 		function resUpdate() {
+		
 			var resid = $("#infoModal #resid").val();
 			var resname = $("#infoModal #resname").val();
 			var reslocation = $("#infoModal #reslocation").val();
@@ -258,99 +268,97 @@
 						<h4 class="modal-title">레스토랑 정보</h4>
 		      		</div>
 		
-				<div class="modal-body">
-		      		
-						<form id="info">
-							<input id="resid" type='hidden'/>
-							<div class="form-group">
-								<div class="input-group">
-									<span style="width: 130px; padding:0px;" class="input-group-addon"><b>식당 이름</b></span>
-									<b><input id="resname" type='text' class="form-control"/></b>
-								</div>
+			<div class="modal-body">
+	<%-- 	 #################################################################################### 
+		
+		
+			$('input').attr("readonly",true)//input 요소 설정 readonly 위한 것이다
+			$('input').attr("readonly",false)//제거 input 요소를 readonly 속성
+	      		 --%>
+					<form id="info">
+						<input id="resid" type='hidden'/>
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px; padding:0px;" class="input-group-addon"><b>식당 이름</b></span>
+								<b><input id="resname" type='text' class="form-control" /></b>
 							</div>
-	
-	
-							<div class="form-group">
-								<div class="input-group">
-									<span style="width: 130px" class="input-group-addon"><b>전체 테이블 수</b></span>
-									<b><input id="restotaltable" type='number' class="form-control"/></b>
-								</div>
+						</div>
+
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>전체 테이블 수</b></span>
+								<b><input id="restotaltable" type='number' class="form-control" /></b>
 							</div>
-	
-							<div class="form-group">
-								<div class="input-group">
-									<span style="width: 130px" class="input-group-addon"><b>레스토랑 정보</b></span>
-									<b><input id="resinfo" type='text' class="form-control"/></b>
-								</div>
+						</div>
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>레스토랑 정보</b></span>
+								<b><input id="resinfo" type='text' class="form-control" /></b>
 							</div>
-	
-							<div class="form-group">
-								<div class="input-group">
-									<span style="width: 130px" class="input-group-addon"><b>전화번호</b></span>
-								<b><input id="restel" type='text' class="form-control"/></b>
-								</div>
+						</div>
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>전화번호</b></span>
+							<b><input id="restel" type='text' class="form-control" /></b>
 							</div>
-	
-							<div class="form-group">
-								<div class="input-group">
-									<span style="width: 130px" class="input-group-addon"><b>주소</b></span>
-									
-									<b><input id="reslocation" type='text' class="form-control"/></b>
-								</div>
+						</div>
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>주소</b></span>
+								
+								<b><input id="reslocation" type='text' class="form-control" /></b>
 							</div>
-	
-							<div class="form-group">
-								<div class="input-group">
-									<span style="width: 130px" class="input-group-addon"><b>휴일</b></span>
-									<b><input id="rescloseday" type='text' class="form-control"/></b>
-								</div>
+						</div>
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>휴일</b></span>
+								<b><input id="rescloseday" type='text' class="form-control"/></b>
 							</div>
-	
-	
-							<div class="form-group">
-								<div class="input-group">
-									<span style="width: 130px" class="input-group-addon"><b>오픈 타임</b></span>
-									<b><input id="resopen" type='time' class="form-control"/></b>
-								</div>
+						</div>
+
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>오픈 타임</b></span>
+								<b><input id="resopen" type='time' class="form-control" /></b>
 							</div>
-	
-							<div class="form-group">
-								<div class="input-group">
-									<span style="width: 130px" class="input-group-addon"><b>클로즈 타임</b></span>
-									<b><input id="resclose" type='time' class="form-control"/></b>
-								</div>
+						</div>
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>클로즈 타임</b></span>
+								<b><input id="resclose" type='time' class="form-control"/></b>
 							</div>
-	
+						</div>
+
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>사진</b></span>
+							<b><input id="resphoto" type='file' class="form-control" multiple /></b>
+							</div>
+						</div>
 						
-	
-							<div class="form-group">
-								<div class="input-group">
-									<span style="width: 130px" class="input-group-addon"><b>사진</b></span>
-								<b><input id="resphoto" type='file' class="form-control" multiple/></b>
-								</div>
-							</div>
-							
-	
 						</form>
-		      		</div>
-	      			
-			</div>
-			
+					</div>
 			<div class="modal-footer" style="background-color:#34495e; color:white">
-				<div>
-					<c:if test="${mrank==1}">
-						<c:if test="${resid==mresid }">
-							<a href="modify?mresid=${mresid}" type="button" class="btn btn-primary">수정</a>
-						</c:if>
-					</c:if>
-					<c:if test="${mrank==2}">
-						<a href="javascript:resUpdate()" type="button" class="btn btn-primary">수정</a>
-						<a href="delete?resid=${resid}" type="button" class="btn btn-primary">삭제</a>
-					</c:if>
-				</div>
+				<c:if test="${mrank==2}">
+						<a href="javascript:resUpdate()" type="button" onclick="showModifyModal()" class="btn btn-primary">수정</a>
+						
+						<a id="btnInfo" href="javascript:showInfo(${restaurant.resid})">${restaurant.resname}</a>
+											
+				</c:if>
 			</div>
-	      </div>
-	    </div>
+			</div>
+		</div>
+	</div>
+		
+		
+		
 	 
 </body>
 </html>

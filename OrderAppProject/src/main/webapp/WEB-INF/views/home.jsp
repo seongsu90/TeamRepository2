@@ -19,11 +19,18 @@
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 	
 	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#login-modal").on('hidden.bs.modal', function () {
+				console.log("모달 히든");
+		    	parent.location.reload();
+		    	console.log("윈도우 리로드");
+		    });
+		}); 
+	
 		function onClickLogin()
 		{
 			var mid =$("#login_username").val();
 			var mpassword=$("#login_password").val();
-			console.log("왔는감");
 			
 			$.ajax({
 				url: "member/login",
@@ -33,24 +40,23 @@
 					if(data.result=="0"){
 						alert("로그인 성공");
 						$("#login-modal").modal("hide");
-						location.reload();
 					}else{
-							alert("아이디 혹은 비밀번호가 틀렸습니다.");
+						alert("아이디 혹은 비밀번호가 틀렸습니다.");
 					}
 				}
 			});
 		}
 		
+		
 		function onClickFindPw()
 		{
-			console.log("onClickFindPw");
-			$(".modal-content").load("/teamapp/member/findMpassword", function() {
-				console.log("load 실행되쓰영");
-			});
-			
+			console.log("onClickFindPw")
+			$(".modal-content").load("/teamapp/member/findMpassword")
 		}
 		
 	</script>
+	
+	
 
 </head>
 <body>
@@ -75,10 +81,10 @@
 						</c:if>
 						<li class="lost"><a href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
 						<c:if test="${login==null}">
-						<li ><p class="text-center"><a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a></p></li>
+							<li ><p class="text-center"><a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a></p></li>
 						</c:if>
 						<c:if test="${login!=null}">
-						<li ><a href="${pageContext.servletContext.contextPath}/member/logout">로그아웃</a></li>
+							<li ><a href="${pageContext.servletContext.contextPath}/member/logout">로그아웃</a></li>
 						</c:if>
 						<div class="clearfix"> </div>
 					</ul>
@@ -436,16 +442,14 @@
                             </div>
 				    	    <div>
                                 <button id="login_lost_btn" type="button" class="btn btn-link"  onclick="onClickFindPw()" >비밀번호 찾기</button>
+                           <!--      <button id="login_register_btn" type="button" class="btn btn-link">Register</button> -->
                             </div>
 				        </div>
                     </form>
-                    <!-- End # Login Form -->
-                
-                </div>
-                <!-- End # DIV Form -->
-                
+
 			</div>
 		</div>
+	</div>
 	</div>
     <!-- END # MODAL LOGIN -->
 
@@ -488,6 +492,9 @@
 									});
 								</script> --%>
 		<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+		
+		<input type="hidden" id="loginId"/>
+		<input type="hidden" id="loginPassword"/>
     
 </body>
 </html>
