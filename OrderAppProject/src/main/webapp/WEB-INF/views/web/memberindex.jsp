@@ -120,7 +120,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="top-nav">
 					<span class="menu two"> </span>
 					<ul>					
-						<li><a href="${pageContext.servletContext.contextPath}/home">Home</a></li> 
+						<li><a href="${pageContext.servletContext.contextPath}">Home</a></li> 
 						<c:if test="${mrank==2}">
 						<li><a class="active"  href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
 						<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
