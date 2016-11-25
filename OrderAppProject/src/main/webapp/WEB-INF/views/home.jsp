@@ -19,11 +19,18 @@
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 	
 	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#login-modal").on('hidden.bs.modal', function () {
+				console.log("모달 히든");
+		    	parent.location.reload();
+		    	console.log("윈도우 리로드");
+		    });
+		}); 
+	
 		function onClickLogin()
 		{
 			var mid =$("#login_username").val();
 			var mpassword=$("#login_password").val();
-			location.reload();
 			
 			$.ajax({
 				url: "member/login",
@@ -33,10 +40,8 @@
 					if(data.result=="0"){
 						alert("로그인 성공");
 						$("#login-modal").modal("hide");
-						location.reload();
 					}else{
 						alert("아이디 혹은 비밀번호가 틀렸습니다.");
-						location.reload();
 					}
 				}
 			});
@@ -487,6 +492,9 @@
 									});
 								</script> --%>
 		<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+		
+		<input type="hidden" id="loginId"/>
+		<input type="hidden" id="loginPassword"/>
     
 </body>
 </html>
