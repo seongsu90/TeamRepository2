@@ -1,6 +1,5 @@
 package com.mycompany.teamapp.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -89,7 +88,7 @@ public class PosController {
 		return "pos/add";	
 	}
 
-	@RequestMapping(value="/modify", method=RequestMethod.GET)
+/*	@RequestMapping(value="/modify", method=RequestMethod.GET)
 	public String modifyForm() {
 		logger.info("pos modifyForm 실행");
 		return "pos/modifyForm";
@@ -101,21 +100,25 @@ public class PosController {
 		posService.modify(pos);
 		return "redirect:/pos/index";
 	}
-	
-	@RequestMapping("/delete")
-	public String delete(int presid, int ptableno) {
+	*/
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public String delete(int presid, int ptableno, Model model) {
 		logger.info("pos delete 실행");
-		int row = posService.delete(presid, ptableno);
-		return "redirect:/pos/index";	
+		try {
+			posService.delete(presid, ptableno);
+			model.addAttribute("result", "success");
+		} catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("result", "fail");
+		}
+		return "pos/delete";	
 	}
-	
-	
 	
 	@RequestMapping("/info")	
 	public String info(int presid, int ptableno, Model model) {
 		logger.info("pos info 실행");
 
-		List<Pos> posList = posService.info(presid);						// 테이블별 주문 내역		
+		List<Pos> posList = posService.info(presid);									// 테이블별 주문 내역		
 		List<Integer> price = posService.calcSum(presid, ptableno);				// 합계 계산
 		List<MenuList> menuList = menuListService.menuList(presid);			// 매장별 메뉴 리스트
 		List<Integer> eventList = posService.checkEvent(presid, ptableno);		// 매장별 이벤트 메뉴 할인 합계

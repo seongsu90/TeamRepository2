@@ -136,9 +136,47 @@
 		</style>
 		
 		<script type="text/javascript">
-			function onClickBtnTable(tableNo) {
+		
+			function onClickBtnConfirm() {											// 예약 확인 클릭
+				console.log("onClickBtnConfirm");
+				
+				/* var rvmid = $("").val();
+				var rvresid = $("").val();
+				$.ajax({
+					url: "../reservation/delete",
+					data: "&rvmid=" + rvmid + "&rvresid=" + rvresid,
+					method: "post",
+					success: function(data) {
+						if(data.result == "success") {
+							location.reload();
+						}
+					}
+				}); */
+			}
+			
+			function onClickBtnPenalty() {											// 예약 페널티
+				console.log("onClickBtnPenalty");
+				/* var rvmid = $("").val();
+				$.ajax({
+					url: "../pos/index",
+					data: "&rvmid=" + rvmid,
+					method: "post",
+					success: function(data) {
+						if(data.result == "success") {
+							location.reload();
+						}
+					}
+				}); */
+			}
+		
+			function onClickBtnTable(tableNo) {									// 테이블 번호 클릭
 				var presid = $("#orderModal #presid").val();
 				var tableno = $("#orderModal #ptableno").val();
+				/* var price = $("#orderModal #price").val();
+				var totalPrice = $("#orderModal #totalPrice").val();
+				var coupon = $("#orderModal #coupon").val();
+				var eventPrice = $("#orderModal #eventPrice").val();
+				var point = $("orderModal #point").val(); */
 				/* $.ajax({
 					url: "../pos/info",
 					data: {"presid":presid, "ptableno":tableno},
@@ -152,7 +190,7 @@
 				$("#orderModal #ptableno").val(tableNo);
 			}
 		
-			function onClickBtnOrder() {
+			function onClickBtnOrder() {											// 주문 클릭
 				var orderMenu = "";
 				var arrTr = $(".menu");				
 				for(var i=0; i<arrTr.length; i++) {
@@ -174,18 +212,37 @@
 					success: function(data) {
 						if(data.result == "success") {
 							$("#orderModal").modal("hide");
+							location.reload();
 						}
 					}
 				});
 			}
+			
+			function onClickBtnPay() {											// 결재 클릭
+				var presid = $("#orderModal #presid").val();
+				var tableno = $("#orderModal #ptableno").val();
+				
+				$.ajax({
+					url: "../pos/delete",
+					data: "&presid=" + presid + "&ptableno=" + tableno,
+					method: "post",
+					success: function(data) {
+						if(data.result == "success") {
+							$("#orderModal").modal("hide");
+							location.reload();
+						}
+					}
+				});
+			}
+			
 		</script>
 	</head>
 	 
 	<body>		
-		<div class="container" align="center"><h2>POS System</h2> <br/>
+		<div class="container" align="center"><br/>
 			<div class="row">
 				<div class="col-md-8">
-				<div class="panel panel-primary">
+					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h3 class="panel-title">
 								<span class="glyphicon glyphicon-bookmark"></span> POS System 
@@ -193,8 +250,7 @@
 						</div> 
 		                
 						<div class="panel-body">
-							<div class="row">
-							
+							<div class="row">							
 								<c:forEach var="i" begin="1" end="${totalTable}">
 									<div class="col-md-3">
 										<button onclick="onClickBtnTable(${i})" style="width:150px; height:150px;">${i} 번 테이블
@@ -203,15 +259,45 @@
 											</c:forEach>									
 										</button>
 									</div>
-								</c:forEach>
-				        			        		        	
+								</c:forEach> 
 							</div>	               	
 						</div>
 		            <!-- panel body end -->
 					</div>
-				</div>				
+				</div>
+				
+				<div class="col-md-4">					<!-- 예약자 확인 -->
+					<table id="acrylic" style="width:400px;">
+						<tr>
+							<th> 예약시간 </th>
+							<th> 인원수 </th>
+							<th> 예약자 </th>
+							<th> 확인 </th>									
+						</tr>
+						<c:forEach  var="reservList" items="${reservList}">
+							<tr>
+								<td>${reservList.rvtime}</td>
+								<td>${reservList.rvperson}</td>
+								<td>${reservList.rvmid}</td>
+								<td>
+									<%-- <form method="post" action="/teamapp/reservation/delete">
+										<input type="hidden" name="rvmid" value="${reservList.rvmid}"/>
+										<input type="hidden" name="rvresid" value="${reservList.rvresid}"/>
+										<input type="submit" value="확인"/>													
+									</form>							
+									<a href="index?rvmid=${reservList.rvmid}"><input type="submit" value="페널티"/></a> --%>
+									<button onclick="onClickBtnConfirm()" type="button" role="button">확인</button>
+									<button onclick="onClickBtnPenalty()" type="button" role="button">페널티</button>  
+								</td>							
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+				
 			</div>
 		</div>
+		
+		
 		
 		<!-- modal start-->
 		<div id="orderModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -255,7 +341,7 @@
 								</table>	
 							</div>
 							<div class="col-md-6">
-								<table class="table table-striped custab" style="margin-top: 20em;" id="acrylic">
+								<table class="table table-striped custab" style="margin-top: 18em;" id="acrylic">
 									<tr>
 										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 합계 </th>
 										<th> ${totalPrice} </th>		
@@ -282,7 +368,7 @@
 					</div>		
 	      			<!-- modal-footer-->
 		      		<div class="modal-footer">
-						<button type="button" style="width: 150px; height: 100px;" class="btn btn-danger" data-dismiss="modal"  role="button">결제</button>
+						<button onclick="onClickBtnPay()" type="button" style="width: 150px; height: 100px;" class="btn btn-danger" data-dismiss="modal"  role="button">결제</button>
 						<button onclick="onClickBtnOrder()" type="button" style="width: 150px; height: 100px;" class="btn btn-primary" role="button">주문</button>  
 					</div>
 				</div>
