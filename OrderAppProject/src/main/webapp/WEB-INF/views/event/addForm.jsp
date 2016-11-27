@@ -4,9 +4,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
-		<script type="text/javascript"></script>
 		
-	    <style type="text/css">
+		
+	  <!--   <style type="text/css">
 			Reset
 			body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select,blockquote,strong,xmp{margin:0; padding:0; font-size:14px; line-height:20px; font-weight:normal; font-family: 'NanumGothic', arial, '돋움', Helvetica, verdana, futura, tahoma, sans-serif; color:#555;}
 			legend,caption{display:none;}
@@ -21,7 +21,7 @@
 			ul{width:1000px; margin:auto;}
 			ul li{ margin-right:10px; margin-bottom:10px; padding:3px; width:200px; float:left;}
 			
-		</style> 
+		</style>  -->
 	</head> 
 	<body>
 	

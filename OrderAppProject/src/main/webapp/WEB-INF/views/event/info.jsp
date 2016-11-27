@@ -2,8 +2,8 @@
 
 {
 	"ename": "${event.ename}",
-	"eresid": ${event.eresid},
-	"esavedfile": "${event.esavedfile}",
+	"eresid": "${event.eresid}",
+	<%-- "ephoto": "${event.ephoto}", --%>
 	"einfo" : "${event.einfo}",
 	"emlname": "${event.emlname}",
 	"eprice" : "${event.eprice}",

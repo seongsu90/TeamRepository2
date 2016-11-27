@@ -105,10 +105,10 @@
 	        }
 		</style>
 		<script type="text/javascript">
-			function showInfo(){
+			function showInfo(eresid){
 				$.ajax({
 					url:"../event/info",
-					data: {},
+					data: {"eresid":eresid},
 					success: function(data){
 						parent.showInfo(data);
 					}
@@ -125,17 +125,17 @@
 				console.log("onClickBtnEventAdd() 실행");
 				
 				var ename = $("#ename").val();
-				var eresid = $("#eresid").val();
-				var esavedfile = $("#esavedfile").val();
+				var eresid = $("#eresid").val(); 
+				var ephoto = $("#ephoto").val();
 				var einfo = $("#einfo").val();
-				var emlname = $("#emlname").val();
+				var emlname = $("#emlname").val(); 
 				var eprice = $("#eprice").val();
 				var estart = $("#estart").val();
 				var eend = $("eend").val();	
 				
 				$.ajax({
 					url:"/event/add",
-					data:{},
+					data: {},
 					method:"post",
 					success: function(data){
 						if(data.result == "success"){
@@ -157,7 +157,10 @@
 		</script>
 	</head>
 	<body>
-		<div class="wrapper">
+		<div style="text-align: center;">
+			<div style="text-align: right;">
+				<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e">추가</button>
+			</div>
 	        <table id="acrylic" style="width:100%">
 	            <thead>
 	                <tr>
@@ -177,7 +180,7 @@
 	                <tr>
 	                    <td>${event.ename}</td>
 	                    <td>
-	                    	<a id="btnInfo" href="javascript:showInfo()">
+	                    	<a id="btnInfo" href="javascript:showInfo(${event.eresid})">
 	                    		${event.eresid}
 	                    	</a>
 	                    </td>
@@ -252,7 +255,7 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>이벤트 사진</b></span>
-								<input type="file" class="form-control" name="esavedfile" id="esavedfile"/>
+								<input type="file" class="form-control" name="ephoto" id="ephoto"/>
 							</div>
 						</div>
 
@@ -288,7 +291,7 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>종료일</b></span>
-								<input type="text" class="form-control" name="eend" id="eend"/>
+								<input type="date" class="form-control" name="eend" id="eend"/>
 							</div>
 						</div>
 					  </form>
@@ -298,7 +301,7 @@
 	      			<!--         footer               -->
 	      			<div class="modal-footer" style="background-color: #34495e; color:white">
 	      				<button id="btnEventAdd" type="button" class="btn btn-default" onclick="onClickBtnEventAdd()" style="color:#34495e"><b>추가</b></button>
-	      				<button id="btnInit" type="button" class="btn btn-default" onclick="onClickBtnCancel" style="color:#34495e"><b>취소</b></button>
+	      				<button id="btnInit" type="button" class="btn btn-default" onclick="onClickBtnCancel()" style="color:#34495e"><b>취소</b></button>
 	      			</div>
       			</div>
       		</div>

@@ -23,34 +23,42 @@
 	<script type="text/javascript"
 		src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 	<script type="text/javascript">
-			function showInfo(data){
-				$("#infoModal").modal("show");			
-				$("#infoModal #ename").val(data.ename);	
-				$("#infoModal #eresid").val(data.eresid);	
-				$("#infoModal #esavedfile").val(data.esavedfile);	
-				$("#infoModal #einfo").val(data.einfo);	
-				$("#infoModal #emlname").val(data.emlname);	
-				$("#infoModal #eprice").val(data.eprice);
-				$("#infoModal #estart").val(data.estart);
-				$("#infoModal #eend").val(data.eend);
-			};
+		function showInfo(data) {
+		
+		
+			$("#infoModal").modal("show");
+			$("#infoModal #ename").val(data.ename);
+			$("#infoModal #eresid").val(data.eresid);
+			$("#infoModal #einfo").val(data.einfo);
+			$("#infoModal #emlname").val(data.emlname);
+			$("#infoModal #eprice").val(data.eprice);
+			$("#infoModal #estart").val(data.estart);
+			$("#infoModal #eend").val(data.eend);
+	
+		};
+	
+		function eventUpdate() {
+	
+			var ename = $("#infoModal #ename").val();
+			var eresid = $("#infoModal #eresid").val();
+			var ephoto = $("#infoModal #ephoto")[0];
+			var einfo = $("#infoModal #einfo").val();
+			var emlname = $("#infoModal #emlname").val();
+			var eprice = $("#infoModal #eprice").val();
+			var estart = $("#infoModal #estart").val();
+			var eend = $("#infoModal #eend").val();
 			
-			function eUpdate(){
-				var ename = $("#infoModal #ename").val();
-				var eresid = $("#infoModal #eresid").val();
-				var esavedfile = $("#infoModal #esavedfile")[0];
-				var einfo = $("#infoModal #einfo").val();
-				var emlname = $("#infoModal #emlname").val();
-				var eprice = $("#infoModal #eprice").val();
-				var estart = $("#infoModal #estart").val();
-				var eend = $("#infoModal #eend").val();
-			}
-			var data = new Formdata();
+			var data = new FormData();
 			data.append("ename", ename);
 			data.append("eresid", eresid);
-			if(esavedfile.files.length!=0){
-				data.append("esavedfile",esavedfile.files[0]);
-			}
+			if(ephoto.files.length != 0) {
+				data.append("ephoto", ephoto.files[0]);
+			}	
+			data.append("einfo", einfo);
+			data.append("emlname", emlname);
+			data.append("eprice", eprice);
+			data.append("estart", estart);
+			data.append("eend", eend);
 			
 			$.ajax({
 				url:"../event/modify",
@@ -59,57 +67,19 @@
 				cache: false,
 				processData: false,
 				contentType: false,
-				success: function(data){
-					if(data.result == "success"){
+				success: function(data) {
+					if(data.result == "success") {
 						$("#infoModal").modal("hide");
-						$("$#iframe")[0].contentDocument.location.reload(true);
-					}else{
+						$("#iframe")[0].contentDocument.location.reload(true);
+					} else {
 						alert("수정 실패");
 					}
 				}
 			});
-			
-			/* function onClickBtnAdd(){
-				console.log("onClickBtnAdd");
-				$("#eventAddModal").modal("show");
-			}
-			
-			function onClickBtnEventAdd(){
-				console.log("onClickBtnEventAdd() 실행");
-				
-				var ename = $("#ename").val();
-				var eresid = $("#eresid").val();
-				var esavedfile = $("#esavedfile").val();
-				var einfo = $("#einfo").val();
-				var emlname = $("#emlname").val();
-				var eprice = $("#eprice").val();
-				var estart = $("#estart").val();
-				var eend = $("eend").val();	
-				
-				$.ajax({
-					url:"/event/add",
-					data:{},
-					method:"post",
-					success: function(data){
-						if(data.result == "success"){
-						alert("성공");
-						$("#eventAddModal").modal("hide");
-						location.reload();
-					}else if(data.result == "nonono"){
-						alert("제대로 입력하시오");	
-					}
-					}
-					
-				});
-			}
-			
-			function onClickBtnCancel(){
-				console.log("onClickBtnCancel() 실행");
-				$("#eventAddModal").modal("hide");
-			} */
-		</script>	
-</head>
 
+		}
+	</script>
+</head>
 
 <body>
 
@@ -175,7 +145,7 @@
 		<div class="container">
 			<h2>EVENT</h2>
 		
-			<iframe name="iframe"
+			<iframe name="iframe" id="iframe"
 				style="width: 100%; height: 650px; border-width: 0px;"
 				src="/teamapp/event/list"> </iframe>
 		</div>
@@ -246,49 +216,50 @@
 	</div>
 	<!--start-smoth-scrolling-->
 	<script type="text/javascript">
-								jQuery(document).ready(function($) {
-									$(".scroll").click(function(event){		
-										event.preventDefault();
-										$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-									});
-								});
-								</script>
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){		
+				event.preventDefault();
+				$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			});
+		});
+	</script>
 	<!--start-smooth-scrolling-->
 	<script type="text/javascript">
-									$(document).ready(function() {
-										/*
-										var defaults = {
-								  			containerID: 'toTop', // fading element id
-											containerHoverID: 'toTopHover', // fading element hover id
-											scrollSpeed: 1200,
-											easingType: 'linear' 
-								 		};
-										*/
-										
-										$().UItoTop({ easingType: 'easeOutQuart' });
-										
-									});
-								</script>
+		$(document).ready(function() {
+			/*
+			var defaults = {
+	  			containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+	 		};
+			*/
+			
+			$().UItoTop({ easingType: 'easeOutQuart' });
+			
+		});
+	</script>
 	<a href="#home" id="toTop" class="scroll" style="display: block;">
 		<span id="toTopHover" style="opacity: 1;"> </span>
 	</a>
 	
 	<%-- ## Info Modal ## --%>
-		<div id="infoModal" class="modal fade" tabindex="-1" role="dialog">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header"  style="background-color: #34495e">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" style="color: #FFFFFF;">이벤트 정보</h4>
-		      </div>
-		      <div class="modal-body">
-				
-				<form id="info">
-					<input id="eresid" type='hidden'/>
+	<div id="infoModal" class="modal fade" tabindex="-1" role="dialog" >
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<!-- modal-header -->
+		     		<div class="modal-header" style="background-color: #34495e; color:white">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">이벤트 정보</h4>
+		      		</div>
+		
+			<div class="modal-body">
+					<form id="info">
+						<input id="eresid" type='hidden'/>
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px; padding:0px;" class="input-group-addon"><b>이벤트 이름</b></span>
-								<b><input type="text" class="form-control" name="ename" id="ename"/></b>
+								<b><input id="ename" type='text' class="form-control" /></b>
 							</div>
 						</div>
 
@@ -296,71 +267,65 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>식당 아이디</b></span>
-								<input type="text" class="form-control" name="eresid" id="eresid"/>
+								<b><input id="eresid" type='number' class="form-control" /></b>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>이벤트 사진</b></span>
-								<input type="file" class="form-control" name="esavedfile" id="esavedfile" multiple/>
+							<b><input id="ephoto" type='file' class="form-control" multiple /></b>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>이벤트 정보</b></span>
-								<input type="text" class="form-control" name="einfo" id="einfo"/>
+								<b><input id="einfo" type='text' class="form-control" /></b>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>이벤트 메뉴</b></span>
-								<input type="text" class="form-control" name="emlname" id="emlname"/>
+								<span style="width: 130px" class="input-group-addon"><b>메뉴이름</b></span>
+							<b><input id="emlname" type='text' class="form-control" /></b>
 							</div>
 						</div>
 
-
 						<div class="form-group">
 							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>할인가격</b></span>
-								<input type="number" class="form-control" name="eprice" id="eprice"/>
+								<span style="width: 130px" class="input-group-addon"><b>이벤트 가격</b></span>	
+								<b><input id="eprice" type='number' class="form-control" /></b>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>시작일</b></span>
-								<input type="date" class="form-control" name="estart" id="estart"/>
+								<b><input id="estart" type='date' class="form-control"/></b>
 							</div>
 						</div>
+
 
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>종료일</b></span>
-								<input type="text" class="form-control" name="eend" id="eend"/>
+								<b><input id="eend" type='date' class="form-control" /></b>
 							</div>
 						</div>
-				</form>
-		      </div>
-		      
-		     </div>
-		     
-		     <div class="modal-footer" style="background-color:#34495e; color:white">
-		     	<div>
-		     		<c:if test="${mrank==1}">
-		     			
-		     				<a href="modify" type="button" class="btn btn-primary">수정</a>
-		     			
-		     		</c:if>
-		     		<c:if test="${mrank==2}">
-		     			<a href="javascript:eUpdate()" type="button" class="btn btn-primary">수정</a>
-		     			<a href="delete?eresid=${eresid}" type="button" class="btn btn-primary">삭제</a>
-		     		</c:if>
-		     	</div>
-		     </div>
-      	  </div>
-      	</div>
+						
+						</form>
+					</div>
+			<div class="modal-footer" style="background-color:#34495e; color:white">
+				
+						<a href="javascript:eventUpdate()" type="button" onclick="showModifyModal()" class="btn btn-primary">수정</a>
+						
+						<a id="btnInfo" href="javascript:showInfo(${event.eresid}&${event.emlname})">${event.eresid}</a>
+											
+				
+			</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
