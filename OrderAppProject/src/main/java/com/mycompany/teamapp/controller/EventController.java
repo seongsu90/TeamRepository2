@@ -9,6 +9,7 @@ package com.mycompany.teamapp.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.teamapp.dto.Event;
 import com.mycompany.teamapp.dto.Member;
@@ -101,6 +103,9 @@ public class EventController {
 		logger.info("modify 요청처리");
 		Event event = eventService.info(eresid,emlname);
 		model.addAttribute("event",event);
+		model.addAttribute("eresid", event.getEresid());
+		model.addAttribute("emlname", event.getEmlname());
+		
 		return "event/modify";
 	}
 	
@@ -132,7 +137,7 @@ public class EventController {
 		OutputStream os=response.getOutputStream();
 		
 		String filePath=request.getServletContext().getRealPath("/WEB-INF/photo/"+fileName);
-		FileInputStream is=new FileInputStream(filePath);
+		InputStream is=new FileInputStream(filePath);
 		
 		byte[] values=new byte[1024];
 		int byteNum=-1;

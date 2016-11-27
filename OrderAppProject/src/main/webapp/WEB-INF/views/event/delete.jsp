@@ -9,11 +9,11 @@
 		
 		이벤트 삭제
 		<hr/> <!-- 시작과 동시에 끝이다라는 의미<br/>// 태그의 의미는 수평선그리기 -->
+		삭제하려면 메뉴이름을 한번 더 입력하세요
 		<form method="post">
-		
 			메뉴:<input type="text" name="emlname" value="${event.emlname}"><br/>
-			
-		<input type="submit" value="삭제하기"/> <br/>
+				
+			<input type="submit" value="삭제하기"/> <br/>
 		</form>
 	</body>
 </html>
