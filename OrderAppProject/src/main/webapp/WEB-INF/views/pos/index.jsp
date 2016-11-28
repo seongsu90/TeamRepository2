@@ -138,11 +138,12 @@
 		<script type="text/javascript">
 		
 			function onClickBtnConfirm() {											// 예약 확인 클릭
-				console.log("onClickBtnConfirm");
+				console.log("onClickBtnConfirm");				
+				var rvmid = $(".reserv #rvmid").val();
+				var rvresid = $(".reserv #rvresid").val();
+				console.log(rvmid + rvresid);
 				
-				/* var rvmid = $("").val();
-				var rvresid = $("").val();
-				$.ajax({
+				/* $.ajax({
 					url: "../reservation/delete",
 					data: "&rvmid=" + rvmid + "&rvresid=" + rvresid,
 					method: "post",
@@ -151,7 +152,7 @@
 							location.reload();
 						}
 					}
-				}); */
+				});  */
 			}
 			
 			function onClickBtnPenalty() {											// 예약 페널티
@@ -275,18 +276,17 @@
 							<th> 확인 </th>									
 						</tr>
 						<c:forEach  var="reservList" items="${reservList}">
-							<tr>
+							<tr class="reserv">
 								<td>${reservList.rvtime}</td>
 								<td>${reservList.rvperson}</td>
 								<td>${reservList.rvmid}</td>
-								<td>
-									<%-- <form method="post" action="/teamapp/reservation/delete">
-										<input type="hidden" name="rvmid" value="${reservList.rvmid}"/>
-										<input type="hidden" name="rvresid" value="${reservList.rvresid}"/>
-										<input type="submit" value="확인"/>													
-									</form>							
-									<a href="index?rvmid=${reservList.rvmid}"><input type="submit" value="페널티"/></a> --%>
-									<button onclick="onClickBtnConfirm()" type="button" role="button">확인</button>
+								<td>									
+									<input id="rvmid" type="hidden" name="rvmid" value="${reservList.rvmid}"/>
+									<input id="rvresid" type="hidden" name="rvresid" value="${reservList.rvresid}"/>
+									<button onclick="onClickBtnConfirm()" type="button" role="button">확인</button>													
+																
+									<%--<a href="index?rvmid=${reservList.rvmid}"><input type="submit" value="페널티"/></a> --%>
+									
 									<button onclick="onClickBtnPenalty()" type="button" role="button">페널티</button>  
 								</td>							
 							</tr>
