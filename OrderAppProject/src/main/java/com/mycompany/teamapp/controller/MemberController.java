@@ -38,9 +38,9 @@ public class MemberController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(String mid, String mpassword, HttpSession session, Model model) {
 		logger.info("login() POST 실행");
-		String result = "1";
-		result = String.valueOf(memberService.login(mid, mpassword));
-		if(result.equals("0")) {
+		String result = MemberService.LOGIN_FAIL_MID;
+		result = memberService.login(mid, mpassword);
+		if(result.equals(MemberService.LOGIN_SUCCESS)) {
 			session.setAttribute("login", mid);
 			session.setAttribute("mrank", memberService.info(mid).getMrank());
 		}
@@ -60,13 +60,17 @@ public class MemberController {
 	@RequestMapping(value="/findMid", method=RequestMethod.POST)
 	public String findMid(String mname, String mphone, Model model, HttpSession session) {
 		logger.info("findMid() POST 실행");
+		String result = "fail";
+		
 		String mid = memberService.findMid(mname, mphone);
-		if ( mid == null ) {
-			model.addAttribute("error", " 입력하신 이름과 번호를 가진 id가 없습니다.");
-			return "member/findMidForm";
+		if ( mid != null ) {
+			result = "success";
 		}
+		
 		session.setAttribute("findMid", mid);
-		return "redirect:/member/login";
+		model.addAttribute("result", result);
+		model.addAttribute("mid", mid);
+		return "member/resultmid";
 	}
 	
 	// 비밀번호 찾기 폼

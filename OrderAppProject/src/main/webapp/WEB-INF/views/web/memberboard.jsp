@@ -306,6 +306,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<th> &nbsp; </th>
 					</tr>
 				</thead>
+				
 				<tbody>
 					<c:forEach var="member" items="${list}">
 						<tr>
