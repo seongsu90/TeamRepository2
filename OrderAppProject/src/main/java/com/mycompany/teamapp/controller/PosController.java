@@ -54,7 +54,7 @@ public class PosController {
 		Member member = memberService.info(mid);
 		int presid = member.getMresid();
 		
-		List<Pos> posList = posService.info(presid);						// 매장 별 주문 내역
+		List<Pos> posList = posService.info(presid);					// 매장 별 주문 내역
 		
 		Restaurant restaurant = restaurantService.info(presid);		// 매장별 총 테이블 수
 		int totalTable = restaurant.getRestotaltable();
@@ -64,19 +64,16 @@ public class PosController {
 		
 		List<Reservation> reservList =  reservationService.reservList(presid);		// 매장별 예약자 확인
 		
-		List<Menu> menuList = menuListService.menuList(presid);			// 매장별 메뉴 리스트
-		
 		session.setAttribute("presid", presid);
 		model.addAttribute("posList", posList);		
 		model.addAttribute("totalTable", totalTable);
-		model.addAttribute("reservList", reservList);
-		model.addAttribute("menuList", menuList);
+		model.addAttribute("reservList", reservList);		
 		
 		return "pos/index";
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String add(Pos pos, Model model) {		// 수기 주문, 모바일 주문
+	public String add(Pos pos, Model model) {		
 		logger.info("pos add 실행");
 		try {
 			posService.add(pos);
@@ -137,13 +134,11 @@ public class PosController {
 		int point = 0;		
 		for ( int i = 0; i < price.size(); i++ ) {
 			result = totalPrice - eventPrice;
-			/*point = (int) ((totalPrice - eventPrice) * 0.01);*/
 			point = (int) (result * 0.01);
 		}
 		
 		model.addAttribute("ptableno", ptableno);
 		model.addAttribute("posList", posList);
-		model.addAttribute("price", price);
 		model.addAttribute("totalPrice", totalPrice);
 		model.addAttribute("menuList", menuList);
 		model.addAttribute("eventPrice", eventPrice);

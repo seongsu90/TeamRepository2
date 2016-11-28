@@ -10,4 +10,5 @@
 	"rescloseday" : "${restaurant.rescloseday}",
 	"resopen" : "${restaurant.resopen}",
 	"resclose" : "${restaurant.resclose}"
+	
 }

@@ -2,6 +2,8 @@ package com.mycompany.teamapp.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +21,7 @@ public class RestaurantService {
 	
 	public static final int MODIFY_SUCCESS=0;
 	public static final int MODIFY_FAIL=1;
-
+	private static final Logger logger = LoggerFactory.getLogger(EventService.class);
 	
 @Autowired
 private RestaurantDao restaurantDao; 
@@ -34,7 +36,11 @@ private MemberDao memberDao;
 		}
 
 		public int add(Restaurant restaurant){
-			restaurantDao.insert(restaurant);
+			logger.info("add요청처리");
+			int row=restaurantDao.insert(restaurant);
+			if(row==0){
+				return ADD_FAIL;
+			}
 			return ADD_SUCCESS;
 		}
 			

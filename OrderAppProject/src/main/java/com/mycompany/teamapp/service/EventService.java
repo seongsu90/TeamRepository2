@@ -14,19 +14,21 @@ import com.mycompany.teamapp.dto.Restaurant;
 
 @Component
 public class EventService { 
-	public static final int ADD_SUCCESS=0;
-	public static final int ADD_FAIL=1;
+
+	public static final String ADD_SUCCESS = "success";
+	public static final String ADD_FAIL = "fail";
 	public static final int DELETE_SUCCESS=0;
 	public static final int DELETE_FAIL=1;
-	public static final int MODIFY_SUCCESS=0;
-	public static final int MODIFY_FAIL=1;
+	public static final int MODIFY_SUCCESS = 0;
+	public static final int MODIFY_FAIL = 1;
 	
 	private static final Logger logger = LoggerFactory.getLogger(EventService.class);
 	
 	@Autowired
 	private EventDao eventdao;
 	
-	public int add(Event event){
+	public String add(Event event){
+
 		logger.info("add 요청처리");
 		int row = eventdao.insert(event);
 		if(row == 0){

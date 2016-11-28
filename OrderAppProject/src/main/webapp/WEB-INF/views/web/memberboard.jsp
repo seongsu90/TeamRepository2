@@ -207,6 +207,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					setMlocation();
 			    });
 		});
+		
 		function setCity(selCity) {
 			console.log("setCity 실행");
 			$.ajax({
