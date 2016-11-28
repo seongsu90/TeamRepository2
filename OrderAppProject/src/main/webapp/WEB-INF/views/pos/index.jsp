@@ -173,22 +173,24 @@
 			function onClickBtnTable(tableNo) {									// 테이블 번호 클릭
 				var presid = $("#orderModal #presid").val();
 				var tableno = $("#orderModal #ptableno").val();
-				/* var price = $("#orderModal #price").val();
-				var totalPrice = $("#orderModal #totalPrice").val();
-				var coupon = $("#orderModal #coupon").val();
-				var eventPrice = $("#orderModal #eventPrice").val();
-				var point = $("orderModal #point").val(); */
-				/* $.ajax({
+
+				$.ajax({
 					url: "../pos/info",
 					data: {"presid":presid, "ptableno":tableno},
 					method: "post",
 					success: function(data) {
+						
+						
+						/*
 						$("#orderModal").modal("show");
 						$("#orderModal #ptableno").val(tableNo);
+						var price = $("#orderModal #price").val();
+						var totalPrice = $("#orderModal #totalPrice").val();
+						var coupon = $("#orderModal #coupon").val();
+						var eventPrice = $("#orderModal #eventPrice").val();
+						var point = $("orderModal #point").val(); */
 					}		
-				}); */
-				$("#orderModal").modal("show");
-				$("#orderModal #ptableno").val(tableNo);
+				});
 			}
 		
 			function onClickBtnOrder() {											// 주문 클릭
