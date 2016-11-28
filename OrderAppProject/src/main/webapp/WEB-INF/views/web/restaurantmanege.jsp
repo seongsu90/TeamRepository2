@@ -69,7 +69,7 @@
 				success: function(data) {
 					if(data.result == "success") {
 					    $("#infoModal").modal("hide");
-						$("#iframe")[0].contentDocument.location.reload(true); 
+					    $("#iframe")[0].contentDocument.location.reload(true); 
 					} else {
 						alert("수정 실패");
 					  }
@@ -304,7 +304,7 @@
 					</div>
 			<div class="modal-footer" style="background-color:#34495e; color:white">
 				
-						<a href="javascript:eventUpdate()" type="button" onclick="showModifyModal()" class="btn btn-primary">수정</a>
+						<a href="javascript:eventUpdate()" type="button"  class="btn btn-primary">수정</a>
 
 			</div>
 			</div>

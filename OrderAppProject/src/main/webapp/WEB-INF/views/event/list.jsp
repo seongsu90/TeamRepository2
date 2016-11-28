@@ -207,7 +207,7 @@
 	                    <td>${event.eprice}</td>
 	                    <td>${event.estart}</td>
 	                    <td>${event.eend}</td>
-	                    <td><a href="delete?eresid=${event.eresid}" type="button" class="btn btn-info">삭제</a></td>
+	                    <td><a href="delete?eresid=${event.eresid}&emlname=${event.emlname}" class="btn btn-info">삭제</a></td>
 	                </tr>
 	               </c:forEach> 
 	            </tbody>

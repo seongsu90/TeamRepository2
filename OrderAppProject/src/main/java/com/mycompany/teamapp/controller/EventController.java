@@ -66,7 +66,7 @@ public class EventController {
 		return "event/result";
 	}
 	
-	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	/*@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String delete(){
 		logger.info("delete 처리");
 		return "event/delete";
@@ -77,6 +77,13 @@ public class EventController {
 		logger.info("delete 요청처리");
 		eventService.delete(eresid,emlname);
 		return "redirect:/event/list";
+	}*/
+	
+	@RequestMapping(value="/delete")
+	public String delete(int eresid,String emlname){
+		logger.info("delete 처리");
+		eventService.delete(eresid, emlname);
+		return "event/index";
 	}
 	
 	@RequestMapping("/info")
@@ -126,7 +133,8 @@ public class EventController {
 			}else{
 				model.addAttribute("result", "fail");
 			}
-		return "event/list";
+			
+			return "event/modify";
 	}
 	
 	@RequestMapping("/showPhoto")
