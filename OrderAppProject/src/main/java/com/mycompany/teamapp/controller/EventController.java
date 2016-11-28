@@ -1,11 +1,5 @@
 package com.mycompany.teamapp.controller;
 
-
-
-
-
-
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,12 +19,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.teamapp.dto.Event;
-import com.mycompany.teamapp.dto.Member;
 import com.mycompany.teamapp.service.EventService;
-import com.mycompany.teamapp.service.MemberService;
 
 @Controller
 @RequestMapping("/event")
@@ -53,27 +44,26 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String add(Event event, HttpSession session){
+	public String add(Event event, HttpSession session, Model model){
 		logger.info("add 요청처리");
-		try{
+		String result = "fail";
 		
-			
-			event.setEoriginfile(event.getEphoto().getOriginalFilename());
-			String esavedfile = new Date().getTime() + event.getEphoto().getOriginalFilename(); // 저장하는 파일이 유일해야하기 때문에 날짜를 붙인다.
-			String realPath = session.getServletContext().getRealPath("/WEB-INF/photo/"+esavedfile);
-			event.getEphoto().transferTo(new File(realPath)); // 지정된 경로로 파일을 저장한다는것? 83,84,실제 파일시스템을 저장
-			event.setEsavedfile(esavedfile);
-			
-			event.setEmime(event.getEphoto().getContentType());
-		        
-			 eventService.add(event);
-			return "redirect:/event/list"; 
+		if ( event.getEphoto() != null && !event.getEphoto().isEmpty() ) {
+			try{
+				event.setEoriginfile(event.getEphoto().getOriginalFilename());
+				String esavedfile = new Date().getTime() + event.getEphoto().getOriginalFilename(); // 저장하는 파일이 유일해야하기 때문에 날짜를 붙인다.
+				String realPath = session.getServletContext().getRealPath("/WEB-INF/photo/"+esavedfile);
+				event.getEphoto().transferTo(new File(realPath)); // 지정된 경로로 파일을 저장한다는것? 83,84,실제 파일시스템을 저장
+				event.setEsavedfile(esavedfile);
+				
+				event.setEmime(event.getEphoto().getContentType());
+				result = eventService.add(event);
+				
+			} catch (Exception e) {}
 		}
-			
-			catch (Exception e) {
-				e.printStackTrace();
-				return "event/addForm";
-			}
+		
+		model.addAttribute("result", result);
+		return "event/result";
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)

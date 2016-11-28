@@ -125,26 +125,41 @@
 				console.log("onClickBtnEventAdd() 실행");
 				
 				var ename = $("#ename").val();
-				/* var eresid = $("#eresid").val();  */
-				var ephoto = $("#ephoto").val();
+				var eresid = $("#eresid").val();
+				var ephoto = $("#ephoto")[0];
 				var einfo = $("#einfo").val();
 				var emlname = $("#emlname").val(); 
 				var eprice = $("#eprice").val();
 				var estart = $("#estart").val();
-				var eend = $("eend").val();	
+				var eend = $("#eend").val();
+				
+				var data = new FormData();
+				data.append("ename", ename);
+				data.append("eresid", eresid);	
+				if(ephoto.files.length != 0) {
+					data.append("ephoto", ephoto.files[0]);
+				}	
+				data.append("einfo", einfo);
+				data.append("emlname", emlname);
+				data.append("eprice", eprice);
+				data.append("estart", estart);
+				data.append("eend", eend);
 				
 				$.ajax({
-					url:"/event/add",
-					data: {},
+					url:"/teamapp/event/add",
+					data: data,
 					method:"post",
+					contentType: false,
+					processData: false,
+					cache: false,
 					success: function(data){
 						if(data.result == "success"){
-						alert("성공");
-						$("#eventAddModal").modal("hide");
-						location.reload();
-					}else if(data.result == "nonono"){
-						alert("제대로 입력하시오");	
-					}
+							alert("추가 성공");
+							$("#eventAddModal").modal("hide");
+							location.reload();
+						} else {
+							alert("제대로 입력하시오");	
+						}
 					}
 					
 				});
@@ -248,7 +263,7 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>식당 아이디</b></span>
-								<input type="text" class="form-control" name="eresid" id="eresid"/>
+								<input type="number" class="form-control" name="eresid" id="eresid"/>
 							</div>
 						</div>
 

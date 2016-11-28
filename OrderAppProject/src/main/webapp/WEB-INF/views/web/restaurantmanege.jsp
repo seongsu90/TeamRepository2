@@ -24,8 +24,6 @@
 		src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 	<script type="text/javascript">
 		 function showInfo(data) {
-		
-		
 			$("#infoModal").modal("show");
 			$("#infoModal #ename").val(data.ename);
 			$("#infoModal #eresid").val(data.eresid);
@@ -223,22 +221,8 @@
 			});
 		});
 	</script>
-	<!--start-smooth-scrolling-->
-	<script type="text/javascript">
-		$(document).ready(function() {
-			/*
-			var defaults = {
-	  			containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear' 
-	 		};
-			*/
-			
-			$().UItoTop({ easingType: 'easeOutQuart' });
-			
-		});
-	</script>
+	
+
 	<a href="#home" id="toTop" class="scroll" style="display: block;">
 		<span id="toTopHover" style="opacity: 1;"> </span>
 	</a>
