@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="UTF-8">			
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css">
 		<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/style.css" />
@@ -104,6 +104,82 @@
 	            transition: 0.2s all;
 	        }
 		</style>
+		
+		
+		
+			<script type="text/javascript">
+		$(document).ready(function() {
+				console.log("ready 실행");
+				
+				$("#selCity").change(function () {
+					console.log("City Change");
+					var selCity = $("#selCity").val();
+			        setProvince(selCity, null);
+			      
+			    });
+				
+				$("#selProvince").change(function () {
+					console.log("Province Change");
+				
+			    });
+				
+				$("#detail").change(function () {
+ 					console.log("detail Change");
+ 					setReslocation();
+ 			    });
+				
+				
+		});
+ 			
+			function setCity() {
+				console.log("setCity 실행");
+				$.ajax({
+					url: "getCity",
+					data: {"selCity":null},
+					success: function (data) {
+						$("#selCity").html(data);
+					}
+				});
+			}
+			
+ 			function setProvince(selCity, selProvice) {
+ 				console.log("setProvince 실행");
+ 				$.ajax({
+					url: "getProvince",
+					data: {"selCity":selCity, "selProvince":null},
+					success: function (data) {
+						$("#selProvince").html(data);
+					}
+				});
+			}
+ 			
+ 			function setDetail() {
+ 				console.log("setDetail 실행");
+ 	
+ 				$.ajax({
+					url: "getDetail",
+					data: {"selCity":selCity, "selProvince":selProvince},
+					success: function (data) {
+						$("#detail").html(data);
+					}
+				});
+			}
+ 			
+ 			
+ 			function setReslocation() {
+ 				console.log("setReslocation() 실행");
+				$("#reslocation").val($("#selCity").val() + " "+ $("#selProvince").val() + " "+$("#detail").val());  				
+ 			}
+ 			
+ 			
+ 			
+	    </script>
+		
+		
+		
+	<!-- ################################################################################################################## -->
+		
+		
 		<script type="text/javascript">
 			function showInfo(resid) {
 				$.ajax({
@@ -115,12 +191,15 @@
 				});
 			};
 
+				
 			function onClickBtnAdd() {
 				console.log("onClickBtnAdd");
 				$("#restaurantAddModal").modal("show");
+				setCity();		
 			}
+		
 			
-			function onClickBtnResAdd() {
+		 	function onClickBtnResAdd() {
 				console.log("onClickBtnResAdd() 실행");
 				var resname = $("#resname").val();
 				var restotaltable = $("#restotaltable").val();
@@ -138,6 +217,7 @@
 					method:"post",
 					success: function(data) {
 						if(data.result == "success") {
+						
 							alert("추가 성공");
 							$("#restaurantAddModal").modal("hide");
 							location.reload();
@@ -147,7 +227,7 @@
 					}					
 					
 				});				
-			}
+			} 
 
 			
 			function onClickBtnCancel() {
@@ -237,81 +317,95 @@
 			</form>
 		</div>
 
+		<%-- 	 #################################################################################### 
 
-			 <%-- ## Add Modal ## --%>
+		 <%-- ## Add Modal ## --%>
 
-			<div id="restaurantAddModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
-				<div class="modal-dialog" role="document">
-	    			<div class="modal-content" style="width:500px">
-	    			<!-- modal-header -->
-		     		<div class="modal-header" style="background-color: #34495e; color:white">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title">레스토랑 추가</h4>
-		      		</div>
+	<div id="restaurantAddModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
+		<div class="modal-dialog" role="document">
+   			<div class="modal-content" style="width:500px">
+   			<!-- modal-header -->
+     		<div class="modal-header" style="background-color: #34495e; color:white">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">레스토랑 추가</h4>
+      		</div>
 
-	      		<!-- modal-modal-body -->
-	      		<div class="modal-body">
-	      		
-					<form id="addForm">
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px; padding:0px;" class="input-group-addon"><b>식당 이름</b></span>
-								<b><input type="text" class="form-control" name="resname" id="resname"/></b>
-							</div>
-						</div>
-
-
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>전체 테이블 수</b></span>
-								<input type="number" class="form-control" name="restotaltable" id="restotaltable"/>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>레스토랑 정보</b></span>
-								<input type="text" class="form-control" name="resinfo" id="resinfo"/>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>전화번호</b></span>
-								<input type="tel" class="form-control" name="restel" id="restel"/>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>관심지역</b></span>
-								<select class="form-control" style="width: 110px" id="selCity" name="selCity"></select>
-								<select class="form-control" style="width: 110px" id="selProvince" name="selProvince"></select><br/>
-								<input type="hidden" class="form-control" name="reslocation" id="reslocation" value="${restaurant.reslocation}"/>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>휴일</b></span>
-								<input type="text" class="form-control" name="rescloseday" id="rescloseday"/>
-							</div>
-						</div>
+     		<!-- modal-modal-body -->
+     		<div class="modal-body">
+     		
+			<form id="addForm">
+				<div class="form-group">
+					<div class="input-group">
+						<span style="width: 130px; padding:0px;" class="input-group-addon"><b>식당 이름</b></span>
+						<b><input type="text" class="form-control" name="resname" id="resname"/></b>
+					</div>
+				</div>
 
 
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>오픈 타임</b></span>
-								<input type="time" class="form-control" name="resopen" id="resopen"/>
-							</div>
-						</div>
+				<div class="form-group">
+					<div class="input-group">
+						<span style="width: 130px" class="input-group-addon"><b>전체 테이블 수</b></span>
+						<input type="number" class="form-control" name="restotaltable" id="restotaltable"/>
+					</div>
+				</div>
 
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>클로즈 타임</b></span>
-								<input type="time" class="form-control" name="resclose" id="resclose"/>
-							</div>
-						</div>
+				<div class="form-group">
+					<div class="input-group">
+						<span style="width: 130px" class="input-group-addon"><b>레스토랑 정보</b></span>
+						<input type="text" class="form-control" name="resinfo" id="resinfo"/>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="input-group">
+						<span style="width: 130px" class="input-group-addon"><b>전화번호</b></span>
+						<input type="tel" class="form-control" name="restel" id="restel"/>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="input-group">
+						<span style="width: 130px" class="input-group-addon"><b>주소</b></span>
+						<select class="form-control" style="width: 110px" id="selCity" name="selCity"></select>
+						<select class="form-control" style="width: 110px" id="selProvince" name="selProvince">
+							<option value="선택">선택</option>
+						</select>	
+						<input type="text" style="width: 320px" id="detail" name="detail"/><br/>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="input-group">
+					<span style="width: 130px ; padding:20px;" class="input-group-addon"><b>휴일</b></span>
+				
+						휴일 X<input type="checkbox" name="closeday" value="휴일 없음">
+	        			월요일<input type="checkbox" name="closeday" value="월요일">
+	        			화요일<input type="checkbox" name="closeday" value="화요일">
+	        			수요일<input type="checkbox" name="closeday" value="수요일"><br/>
+	        			목요일<input type="checkbox" name="closeday" value="목요일">
+	        			금요일<input type="checkbox" name="closeday" value="금요일">
+	        			토요일<input type="checkbox" name="closeday" value="토요일">
+	        			일요일<input type="checkbox" name="closeday" value="일요일">
+        	
+
+					
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<div class="input-group">
+						<span style="width: 130px" class="input-group-addon"><b>오픈 타임</b></span>
+						<input type="time" class="form-control" name="resopen" id="resopen"/>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="input-group">
+						<span style="width: 130px" class="input-group-addon"><b>클로즈 타임</b></span>
+						<input type="time" class="form-control" name="resclose" id="resclose"/>
+					</div>
+				</div>
 <!-- 
 						<div class="form-group">
 							<div class="input-group">
@@ -320,25 +414,25 @@
 							</div>
 						</div> -->
 
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>사진</b></span>
-								<input type="file" class="form-control" name="resphoto " id="resphoto"/>
-							</div>
-						</div>
-						
-
-					</form>
-	      		</div>
-
-		      	<!-- modal-modal-modal-footer -->
-				<div class="modal-footer" style="background-color: #34495e; color:white">
-			        <button id="btnResAdd" type="button" class="btn btn-default" onclick="onClickBtnResAdd()" style="color: #34495e"><b>추가</b></button>
-			        <button id="btnInit" type="button" class="btn btn-default" onclick="onClickBtnCancel()" style="color: #34495e"><b>취소</b></button>
+				<div class="form-group">
+					<div class="input-group">
+						<span style="width: 130px" class="input-group-addon"><b>사진</b></span>
+						<input type="file" class="form-control" name="resphoto " id="resphoto"/>
+					</div>
 				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog --> --%>
-	</div><!-- /.modal -->
-	
+				
+
+			</form>
+     		</div>
+
+      	<!-- modal-modal-modal-footer -->
+		<div class="modal-footer" style="background-color: #34495e; color:white">
+	        <button id="btnResAdd" type="button" class="btn btn-default" onclick="onClickBtnResAdd()" style="color: #34495e"><b>추가</b></button>
+	        <button id="btnInit" type="button" class="btn btn-default" onclick="onClickBtnCancel()" style="color: #34495e"><b>취소</b></button>
+		</div>
+	</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog --> --%>
+</div><!-- /.modal -->
+
 	</body>
 </html>

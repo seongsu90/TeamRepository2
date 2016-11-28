@@ -18,7 +18,9 @@ if ( selCity.equals("선택") ) {
 } else {
 	city = Arrays.copyOf(seoul, seoul.length);
 }
-
+%>
+	<option value=" "> </option>
+<%	
 for ( int i = 0 ; i < city.length ; i++ ) {
 	if ( selProvince.equals(city[i]) ) {
 %>

@@ -23,11 +23,12 @@
 	<script type="text/javascript"
 		src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 	<script type="text/javascript">
+	
+	
 		function showInfo(data) {
 			
-	
 			$("#infoModal").modal("show");
-			$("#infoModal #resid").val(data.resid);
+ 			$("#infoModal #resid").val(data.resid);
 			$("#infoModal #resname").val(data.resname);
 			$("#infoModal #reslocation").val(data.reslocation);
 			$("#infoModal #restotaltable").val(data.restotaltable);
@@ -35,14 +36,9 @@
 			$("#infoModal #restel").val(data.restel);
 			$("#infoModal #rescloseday").val(data.rescloseday);
 			$("#infoModal #resopen").val(data.resopen);
-			$("#infoModal #resclose").val(data.resclose);
-		
-		
-	
-			
+			$("#infoModal #resclose").val(data.resclose); 
+				
 		};
-		
-		
 		
 		
 		function resUpdate() {
@@ -159,7 +155,7 @@
 			<h2>Restaurant Management</h2>
 		
 			<iframe id="iframe" name="iframe"
-				style="width: 100%; height: 650px; border-width: 0px;"
+				style="width: 100%; height: 700px; border-width: 0px;"
 				src="/teamapp/restaurant/list"> </iframe>
 		</div>
 	</div>
@@ -347,17 +343,20 @@
 					</div>
 			<div class="modal-footer" style="background-color:#34495e; color:white">
 				<c:if test="${mrank==2}">
-						<a href="javascript:resUpdate()" type="button" onclick="showModifyModal()" class="btn btn-primary">수정</a>
+						<a href="javascript:resUpdate()" type="button" class="btn btn-primary">수정</a>
 						
-						<a id="btnInfo" href="javascript:showInfo(${restaurant.resid})">${restaurant.resname}</a>
+			
+											
+												
+											
 											
 				</c:if>
 			</div>
 			</div>
 		</div>
 	</div>
-		
-		
+	
+
 		
 	 
 </body>

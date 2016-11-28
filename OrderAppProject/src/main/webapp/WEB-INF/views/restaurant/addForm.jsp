@@ -65,8 +65,6 @@
 			}
  			
  			
- 			
- 			
  			function setReslocation() {
  				console.log("setReslocation() 실행");
 				$("#reslocation").val($("#selCity").val() + " "+ $("#selProvince").val() + " "+$("#detail").val());  				

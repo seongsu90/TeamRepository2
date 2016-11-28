@@ -143,6 +143,23 @@ public class RestaurantController {
 			
 	}
 	
+	// getCity
+	@RequestMapping(value="/getCity", method=RequestMethod.GET)
+	public String getCity() {
+		return "backup/restaurant/getCity";	
+	}
+	
+	// getProvince
+	@RequestMapping(value="/getProvince", method=RequestMethod.GET)
+	public String getProvince() {
+		return "backup/restaurant/getProvince";	
+	}
+	
+	@RequestMapping(value="/getDetail", method=RequestMethod.GET)
+	public String getDtail() {
+		return "backup/restaurant/getDetail";	
+	}
+	
 
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String delete(){
