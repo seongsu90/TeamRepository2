@@ -114,12 +114,12 @@
 	<div class="slider-bg">
 				<div class="side wow bounceInRight" data-wow-delay="0.7s">
 					 <div  id="top" class="callbacks_container">
-							<ul class="rslides" id="slider4">
+							<ul class="rslides" id="slider4" style="width: auto;">
 									<li>
-										<img src="${pageContext.servletContext.contextPath}/resources/img/bg2.jpg" class="img-responsive" alt="" />
+										<img src="${pageContext.servletContext.contextPath}/resources/img/bg1.jpg" class="img-responsive" alt="" />
 										<div class="caption1">
 										<div class="logo">
-											<a href="${pageContext.servletContext.contextPath}/home"><h1>주문<span>할게요!</span></h1></a>
+											<a href="${pageContext.servletContext.contextPath}/"><h1>주문<span>할게요!</span></h1></a>
 										</div>
 											<h2>BEST RECIPES WITH
 											BEST INGREDIENTS</h2>	
@@ -127,10 +127,10 @@
 										</div>
 									</li>
 									<li>
-									<img src="${pageContext.servletContext.contextPath}/resources/img/bg.jpg" class="img-responsive" alt="" />
+									<img src="${pageContext.servletContext.contextPath}/resources/img/bg2.jpg" class="img-responsive" alt="" />
 									  <div class="caption1">
 										<div class="logo">
-											<a href="/teamapp/home"><h1>주문<span>할게요!</span></h1></a>
+											<a href="/teamapp/"><h1>주문<span>할게요!</span></h1></a>
 										</div>
 										<h2>BEST RECIPES WITH
 											BEST INGREDIENTS</h2>	
@@ -141,7 +141,7 @@
 									<img src="${pageContext.servletContext.contextPath}/resources/img/bg3.jpg" class="img-responsive" alt="" />
 									<div class="caption1">
 									<div class="logo">
-										<a href="/teamapp/home"><h1>주문<span>할게요!</span></h1></a>
+										<a href="/teamapp/"><h1>주문<span>할게요!</span></h1></a>
 									</div>
 										<h2>BEST RECIPES WITH
 											BEST INGREDIENTS</h2>
@@ -184,7 +184,7 @@
 				   <div class="col-md-4 welcome-text">
 					   <h3>Welcome</h3>
 					   <h4>TO RESTAURANT!</h4>
-					   <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					   <p>[주문할게요!]를 통해 보다 쉽고 빠르게 음식점을 예약해보세요! 많은 할인 혜택과 음식점 정보제공을 하고 있습니다. 값싸고 질높은 음식과 서비스를 이용하실 수 있습니다. 항상 빠르고 편리한 서비스제공을 위해 노력하겠습니다. 많은 애정과 관심을 부탁드립니다.</p>
 				   </div>
 					<div class="col-md-8 welcome-img">
 					   <img src="${pageContext.servletContext.contextPath}/resources/img/img_03.jpg" class="img-responsive" alt="" />
