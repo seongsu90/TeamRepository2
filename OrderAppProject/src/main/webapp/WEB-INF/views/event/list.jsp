@@ -125,7 +125,7 @@
 				console.log("onClickBtnEventAdd() 실행");
 				
 				var ename = $("#ename").val();
-				var eresid = $("#eresid").val(); 
+				/* var eresid = $("#eresid").val();  */
 				var ephoto = $("#ephoto").val();
 				var einfo = $("#einfo").val();
 				var emlname = $("#emlname").val(); 
@@ -224,17 +224,17 @@
       
       
       	<%--    Add                  MODAL          --%>
-      	<div id="eventAddModal" class="modal fade" tabindex="-1" role="dialog" style="margin:auto">
+      	 <div id="eventAddModal" class="modal fade" tabindex="-1" role="dialog" style="margin:auto">
       		<div class="modal-dialog" role="document">
       			<div class="modal-content" style="width:500px">
-	      			<!-- header -->
+	      		<%--	header       --%>
 	      			<div class="modal-header" style="background-color:#34495e; color:white">
 	      				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	      				<h4 class="modal-title">이벤트 추가</h4>
 	      			</div>
 
-
-	      		<!-- modal-modal-body -->
+ 
+	      	<%--	modal-modal-body           --%>
 	      		<div class="modal-body">
 					<form id="addForm">
 						<div class="form-group">
@@ -298,13 +298,13 @@
 	      			</div>
 	      			
 	      			
-	      			<!--         footer               -->
+	      			    <!--      footer -->             
 	      			<div class="modal-footer" style="background-color: #34495e; color:white">
 	      				<button id="btnEventAdd" type="button" class="btn btn-default" onclick="onClickBtnEventAdd()" style="color:#34495e"><b>추가</b></button>
 	      				<button id="btnInit" type="button" class="btn btn-default" onclick="onClickBtnCancel()" style="color:#34495e"><b>취소</b></button>
 	      			</div>
       			</div>
       		</div>
-      	</div>
+      	</div> 
   </body>
    </html> 

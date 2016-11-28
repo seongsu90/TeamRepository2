@@ -23,7 +23,7 @@
 	<script type="text/javascript"
 		src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 	<script type="text/javascript">
-		function showInfo(data) {
+		 function showInfo(data) {
 		
 		
 			$("#infoModal").modal("show");
@@ -41,7 +41,7 @@
 	
 			var ename = $("#infoModal #ename").val();
 			var eresid = $("#infoModal #eresid").val();
-			var ephoto = $("#infoModal #ephoto")[0];
+			var ephoto = $("#infoModal #ephoto")[0]; 
 			var einfo = $("#infoModal #einfo").val();
 			var emlname = $("#infoModal #emlname").val();
 			var eprice = $("#infoModal #eprice").val();
@@ -53,7 +53,7 @@
 			data.append("eresid", eresid);
 			if(ephoto.files.length != 0) {
 				data.append("ephoto", ephoto.files[0]);
-			}	
+			}
 			data.append("einfo", einfo);
 			data.append("emlname", emlname);
 			data.append("eprice", eprice);
@@ -77,7 +77,7 @@
 				}
 			});
 
-		}
+		}  
 	</script>
 </head>
 
@@ -243,8 +243,8 @@
 		<span id="toTopHover" style="opacity: 1;"> </span>
 	</a>
 	
-	<%-- ## Info Modal ## --%>
-	<div id="infoModal" class="modal fade" tabindex="-1" role="dialog" >
+ <%-- ## Info Modal ## --%>
+	 <div id="infoModal" class="modal fade" tabindex="-1" role="dialog" >
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 			<!-- modal-header -->
@@ -259,50 +259,50 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px; padding:0px;" class="input-group-addon"><b>이벤트 이름</b></span>
-								<b><input id="ename" type='text' class="form-control" /></b>
+								<b><input id="ename" type="text" class="form-control" /></b>
 							</div>
 						</div>
 
-
-						<!-- <div class="form-group">
+	
+						 <!--  <div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>식당 아이디</b></span>
 								<b><input id="eresid" type='number' class="form-control" /></b>
 							</div>
-						</div>
- -->
-						<div class="form-group">
+						</div>  -->
+
+						 <div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>이벤트 사진</b></span>
-							<b><input id="ephoto" type='file' class="form-control" multiple /></b>
+							<b><input id="ephoto" type="file" class="form-control" multiple /></b>
 							</div>
-						</div>
+						</div> 
 
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>이벤트 정보</b></span>
-								<b><input id="einfo" type='text' class="form-control" /></b>
+								<b><input id="einfo" type="text" class="form-control" /></b>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>메뉴이름</b></span>
-							<b><input id="emlname" type='text' class="form-control" /></b>
+							<b><input id="emlname" type="text" class="form-control" /></b>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>이벤트 가격</b></span>	
-								<b><input id="eprice" type='number' class="form-control" /></b>
+								<b><input id="eprice" type="number" class="form-control" /></b>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>시작일</b></span>
-								<b><input id="estart" type='date' class="form-control"/></b>
+								<b><input id="estart" type="date" class="form-control"/></b>
 							</div>
 						</div>
 
@@ -310,7 +310,7 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>종료일</b></span>
-								<b><input id="eend" type='date' class="form-control" /></b>
+								<b><input id="eend" type="date" class="form-control" /></b>
 							</div>
 						</div>
 						
@@ -326,6 +326,6 @@
 			</div>
 			</div>
 		</div>
-	</div>
+	</div> 	
 </body>
 </html>

@@ -118,10 +118,10 @@ public class PosController {
 	public String info(int presid, int ptableno, Model model) {
 		logger.info("pos info 실행");
 
-		List<Pos> posList = posService.info(presid, ptableno);									// 테이블별 주문 내역		
-		List<Integer> price = posService.calcSum(presid, ptableno);				// 합계 계산
-		List<Menu> menuList = menuListService.menuList(presid);			// 매장별 메뉴 리스트
-		List<Integer> eventList = posService.checkEvent(presid, ptableno);		// 매장별 이벤트 메뉴 할인 합계
+		List<Pos> posList = posService.info(presid, ptableno); // 테이블별 주문 내역		
+		List<Integer> price = posService.calcSum(presid, ptableno);	// 합계 계산
+		List<Menu> menuList = menuListService.menuList(presid); // 매장별 메뉴 리스트
+		List<Integer> eventList = posService.checkEvent(presid, ptableno);	// 매장별 이벤트 메뉴 할인 합계
 				
 		int totalPrice = 0;
 		for ( int i = 0; i < price.size(); i++ ) {
