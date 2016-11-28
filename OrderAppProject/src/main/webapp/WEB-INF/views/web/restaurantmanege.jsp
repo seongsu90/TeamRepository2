@@ -264,13 +264,13 @@
 						</div>
 
 
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>식당 아이디</b></span>
 								<b><input id="eresid" type='number' class="form-control" /></b>
 							</div>
 						</div>
-
+ -->
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>이벤트 사진</b></span>
@@ -320,7 +320,7 @@
 				
 						<a href="javascript:eventUpdate()" type="button" onclick="showModifyModal()" class="btn btn-primary">수정</a>
 						
-						<a id="btnInfo" href="javascript:showInfo(${event.eresid}&${event.emlname})">${event.eresid}</a>
+						<a id="btnInfo" href="javascript:showInfo(${event.eresid})">${event.eresid}</a>
 											
 				
 			</div>
