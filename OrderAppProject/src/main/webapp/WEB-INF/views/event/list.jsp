@@ -188,12 +188,12 @@
 						<th> 시작일 </th>
 						<th> 종료일 </th>
 						<th> 삭제 </th>
-	                </tr>
+	                 </tr>
 	            </thead>
 	            <tbody>
 	            <c:forEach var="event" items="${list}">
 	                <tr>
-	                    <td>${event.ename}</td>
+	                    <td>${event.ename}</td>  
 	                    <td>
 	                    	<a id="btnInfo" href="javascript:showInfo(${event.eresid}, '${event.emlname}')">
 	                    		${event.eresid}
