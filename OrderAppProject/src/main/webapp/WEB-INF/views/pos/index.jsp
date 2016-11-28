@@ -167,7 +167,7 @@
 							location.reload();
 						}
 					}
-				}); */
+				}); */ 
 			}
 		
 			function onClickBtnTable(tableNo) {									// 테이블 번호 클릭
