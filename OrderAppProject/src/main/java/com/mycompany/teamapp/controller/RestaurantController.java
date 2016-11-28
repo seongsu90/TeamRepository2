@@ -107,7 +107,7 @@ public class RestaurantController {
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String add(Restaurant restaurant, HttpSession session, Model model){
+	public String add(Restaurant restaurant, HttpSession session, Model model, @RequestParam(value="closeday[]") List<String> arrayParams){
 		logger.info("add() 실행");
 		
 	
@@ -127,7 +127,7 @@ public class RestaurantController {
 				int i=1;
 				int size=restaurant.getCloseday().length;
 				String close="";
-			        for(String closeday : restaurant.getCloseday()){		        	
+			        for(String closeday : arrayParams){		        	
 			        	close+=closeday;
 			        	if(i<size){	
 			        		close+="/";
