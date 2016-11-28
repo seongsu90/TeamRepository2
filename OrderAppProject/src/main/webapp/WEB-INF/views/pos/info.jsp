@@ -1,7 +1,6 @@
 <%@ page contentType="application/json;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 {
 	"totalPrice":${totalPrice},
 	"eventPrice":${eventPrice},
@@ -13,12 +12,12 @@
 				"mname":"${menu.mlname}", 
 				"mcount":
 				<c:set var="mcount" value="0"></c:set>
-				<c:forEach var="pos" items="${posList}" varStatus="status">
+				<c:forEach var="pos" items="${posList}">
 					<c:if test="${pos.pmlname == menu.mlname}">
 						<c:set var="mcount" value="${pos.pcount}"></c:set>
 					</c:if>
 				</c:forEach>
-				${mcount},
+				"${mcount}",
 				"mprice":${menu.mlprice}
 			}
 			<c:if test="${!status.last}">,</c:if>
