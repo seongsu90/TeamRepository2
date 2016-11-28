@@ -25,8 +25,7 @@
 	<script type="text/javascript">
 	
 	
-		function showInfo(data) {
-			
+		function showInfo(data) {		
 			$("#infoModal").modal("show");
  			$("#infoModal #resid").val(data.resid);
 			$("#infoModal #resname").val(data.resname);
@@ -36,8 +35,7 @@
 			$("#infoModal #restel").val(data.restel);
 			$("#infoModal #rescloseday").val(data.rescloseday);
 			$("#infoModal #resopen").val(data.resopen);
-			$("#infoModal #resclose").val(data.resclose); 
-				
+			$("#infoModal #resclose").val(data.resclose); 				
 		};
 		
 		
@@ -265,7 +263,7 @@
 		      		</div>
 		
 			<div class="modal-body">
-	<%-- 	 #################################################################################### 
+	<%-- 	 ###############
 		
 		
 			$('input').attr("readonly",true)//input 요소 설정 readonly 위한 것이다

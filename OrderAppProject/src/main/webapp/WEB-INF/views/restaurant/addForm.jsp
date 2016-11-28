@@ -1,6 +1,22 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 
-<!DOCTYPE html>
+{
+	"resid" : ${restaurant.resid},
+	"resname" : "${restaurant.resname}",
+	"reslocation" : "${restaurant.reslocation}",
+	"restotaltable" : ${restaurant.restotaltable},
+	"resinfo" : "${restaurant.resinfo}",
+	"restel" : "${restaurant.restel}",
+	"rescloseday" : "${restaurant.rescloseday}",
+	"resopen" : "${restaurant.resopen}",
+	"resclose" : "${restaurant.resclose}"
+	
+}
+
+
+
+
+<%-- <!DOCTYPE html>
 <html> 
 	<head> 
 		<meta charset="UTF-8">
@@ -113,4 +129,4 @@
 			<input type="submit" value="식당 추가 완료"/><br/>		
 		</form>
 	</body>
-</html>
+</html> --%>

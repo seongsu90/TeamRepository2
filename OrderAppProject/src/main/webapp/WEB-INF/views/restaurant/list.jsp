@@ -211,18 +211,36 @@
 				var resclose = $("#resclose").val();
 				var resphoto = $("#resphoto").val();
 				
+				
+				var data=new FormData();
+				data.append("resname", resname);
+				data.append("reslocation", reslocation);
+				data.append("restotaltable", restotaltable);
+				data.append("resinfo", resinfo);
+				data.append("restel", restel);
+				data.append("rescloseday", rescloseday);
+				data.append("resopen", resopen);
+				data.append("resclose", resclose);
+				if(resphoto.files.length != 0) {
+					data.append("resphoto", resphoto.files[0]);
+				}			
+				
 				$.ajax({
-					url:"/restaurant/add",
-					data:{},
+					url:"/teamapp/restaurant/add",
+					data:data,
 					method:"post",
+					cache: false,
+					processData: false,
+					contentType: false,
 					success: function(data) {
 						if(data.result == "success") {
 						
 							alert("추가 성공");
 							$("#restaurantAddModal").modal("hide");
-							location.reload();
-						} else if(data.result == "wrongData") {
-							alert("입력 데이터가 올바르지 않음");
+							$("#iframe")[0].contentDocument.location.reload(true);
+							
+						} else{
+							alert("추가 실패");
 						}
 					}					
 					
@@ -406,14 +424,8 @@
 						<input type="time" class="form-control" name="resclose" id="resclose"/>
 					</div>
 				</div>
-<!-- 
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>보유 레스토랑id</b></span>
-								<input type="number" class="form-control" name="mresid" id="mresid"/>
-							</div>
-						</div> -->
 
+						
 				<div class="form-group">
 					<div class="input-group">
 						<span style="width: 130px" class="input-group-addon"><b>사진</b></span>

@@ -113,7 +113,7 @@
 						parent.showInfo(data);
 					}
 				});
-					
+			
 			};
 			
 			function onClickBtnAdd(){
