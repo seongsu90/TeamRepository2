@@ -8,7 +8,7 @@
 	"emlname": "${event.emlname}",
 	"eprice" : "${event.eprice}",
 	"estart" : "${event.estart}",
-	"eend" : "${event.end}"
+	"eend" : "${event.eend}"
 
 }
 <%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
