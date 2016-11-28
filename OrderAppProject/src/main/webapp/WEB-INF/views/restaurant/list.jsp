@@ -181,10 +181,10 @@
 		
 		
 		<script type="text/javascript">
-			function showInfo(resid) {
+			function showInfo(eresid) {
 				$.ajax({
 					url: "../restaurant/info",
-					data: {"resid":resid},
+					data: {"eresid":eresid},
 					success: function(data) {
 						parent.showInfo(data);
 					}

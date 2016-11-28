@@ -24,7 +24,7 @@
 		src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 	<script type="text/javascript">
 		 function showInfo(data) {
-			 console.log(data.ename);
+
 			$("#infoModal").modal("show");
 			$("#infoModal #ename").val(data.ename);
 			$("#infoModal #eresid").val(data.eresid);
@@ -305,10 +305,7 @@
 			<div class="modal-footer" style="background-color:#34495e; color:white">
 				
 						<a href="javascript:eventUpdate()" type="button" onclick="showModifyModal()" class="btn btn-primary">수정</a>
-						
-						<a id="btnInfo" href="javascript:showInfo(${event.eresid})">${event.eresid}</a>
-											
-				
+
 			</div>
 			</div>
 		</div>

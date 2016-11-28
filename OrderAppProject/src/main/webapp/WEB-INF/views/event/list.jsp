@@ -105,10 +105,10 @@
 	        }
 		</style>
 		<script type="text/javascript">
-			function showInfo(eresid){
+			function showInfo(eresid, emlname){
 				$.ajax({
 					url:"../event/info",
-					data: {"eresid":eresid},
+					data: {"eresid":eresid, "emlname":emlname},
 					success: function(data){
 						parent.showInfo(data);
 					}
@@ -195,7 +195,7 @@
 	                <tr>
 	                    <td>${event.ename}</td>
 	                    <td>
-	                    	<a id="btnInfo" href="javascript:showInfo(${event.eresid})">
+	                    	<a id="btnInfo" href="javascript:showInfo(${event.eresid}, '${event.emlname}')">
 	                    		${event.eresid}
 	                    	</a>
 	                    </td>

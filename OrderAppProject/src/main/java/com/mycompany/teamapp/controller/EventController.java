@@ -80,9 +80,13 @@ public class EventController {
 	}
 	
 	@RequestMapping("/info")
-	public String info(int eresid,String emlname, Model model){
+	public String info(int eresid, String emlname, Model model){
 		logger.info("info 성공");
+		
+		logger.info(String.valueOf(eresid));
+		logger.info(emlname);
 		Event event = eventService.info(eresid,emlname);
+		
 		model.addAttribute("event",event);
 		return "event/info";
 	}
@@ -122,7 +126,7 @@ public class EventController {
 			}else{
 				model.addAttribute("result", "fail");
 			}
-		return "event/modify";
+		return "event/list";
 	}
 	
 	@RequestMapping("/showPhoto")
