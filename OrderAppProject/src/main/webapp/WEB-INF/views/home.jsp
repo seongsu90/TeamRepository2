@@ -433,8 +433,8 @@
 							<span id="text-login-msg">Type your username and password.</span>
 						</div>
 						
-						<input id="login_userid" class="form-control" type="text" placeholder="ID (type ERROR for error effect)" required>
-						<input id="login_password" class="form-control" type="password" placeholder="Password" required>
+						<input id="login_userid" class="form-control" type="text" placeholder="ID (type ERROR for error effect)" onkeydown="if(event.keyCode==13){javascript:onClickLogin();}" required>
+						<input id="login_password" class="form-control" type="password" placeholder="Password" onkeydown="if(event.keyCode==13){javascript:onClickLogin();}" required>
 						
 						<div class="checkbox">
 							<label>	<input type="checkbox"> Remember me	</label>
@@ -443,7 +443,7 @@
 					
 					<div class="modal-footer">
 						<div>
-							<button type="button" class="btn btn-primary btn-lg btn-block" style="background-color: #1bbc9b" onclick="onClickLogin()">Login</button>
+							<button type="button" class="btn btn-primary btn-lg btn-block" style="background-color: #1bbc9b" onclick="onClickLogin()" >Login</button>
 						</div>
 						
 						<div>
