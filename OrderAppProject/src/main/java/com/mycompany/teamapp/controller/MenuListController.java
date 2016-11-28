@@ -17,7 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mycompany.teamapp.dto.MenuList;
+import com.mycompany.teamapp.dto.Menu;
 import com.mycompany.teamapp.service.MenuListService;
 
 @Controller
@@ -57,7 +57,7 @@ public class MenuListController {
 			
 			if(groupNo == totalGroupNo) {endPageNo=totalPageNo;}
 			
-			List<MenuList> list = menuListService.list(intPageNo,rowsPerPage);
+			List<Menu> list = menuListService.list(intPageNo,rowsPerPage);
 			
 			model.addAttribute("intPageNo",intPageNo);
 			model.addAttribute("rowsPerPage",rowsPerPage);	
@@ -84,7 +84,7 @@ public class MenuListController {
 		}
 		
 		@RequestMapping(value="/add", method=RequestMethod.POST)
-		public String add(MenuList menuList,HttpSession session) {
+		public String add(Menu menuList,HttpSession session) {
 			try{
 		
 				menuList.setMloriginfile(menuList.getMlphoto().getOriginalFilename());
@@ -107,13 +107,13 @@ public class MenuListController {
 
 		@RequestMapping(value="/modify", method=RequestMethod.GET)
 		public String modifyForm(int mlresid, String mlname, Model model) {
-			MenuList menuList = menuListService.info(mlresid, mlname);
+			Menu menuList = menuListService.info(mlresid, mlname);
 			model.addAttribute("menuList",menuList);
 			return "menulist/modify";
 		}
 		
 		@RequestMapping(value="/modify", method=RequestMethod.POST)
-		public String modify(MenuList menuList,HttpSession session) throws IllegalStateException, IOException {
+		public String modify(Menu menuList,HttpSession session) throws IllegalStateException, IOException {
 			
 			menuList.setMloriginfile(menuList.getMlphoto().getOriginalFilename());
 			String mlsavedfile = new Date().getTime() + menuList.getMlphoto().getOriginalFilename();
@@ -139,7 +139,7 @@ public class MenuListController {
 		
 		@RequestMapping("/info")	
 		public String info(int mlresid, String mlname, Model model) {
-			MenuList menuList = menuListService.info(mlresid, mlname);
+			Menu menuList = menuListService.info(mlresid, mlname);
 			model.addAttribute("menuList",menuList);
 			
 			return "menulist/info";
@@ -174,20 +174,20 @@ public class MenuListController {
 		
 		@RequestMapping("/hotlist")	
 		public String resHotList(boolean mlishot,Model model){
-			List<MenuList> menuList = menuListService.resHotList(mlishot);
+			List<Menu> menuList = menuListService.resHotList(mlishot);
 			model.addAttribute("menuList",menuList);
 			return "menulist/hotlist";
 		}
 		
 		@RequestMapping(value="/modifyhot",method=RequestMethod.GET)	
 		public String modifyhotForm(int mlresid, String mlname, boolean mlishot, Model model){
-			MenuList menuList = menuListService.hotinfo(mlresid, mlname,mlishot);
+			Menu menuList = menuListService.hotinfo(mlresid, mlname,mlishot);
 			model.addAttribute("menuList",menuList);
 			return "menulist/modifyhot";
 		}
 		
 		@RequestMapping(value="/modifyhot",method=RequestMethod.POST)	
-		public String modifyhot(MenuList menuList,HttpSession session) throws IllegalStateException, IOException{
+		public String modifyhot(Menu menuList,HttpSession session) throws IllegalStateException, IOException{
 			
 			menuList.setMloriginfile(menuList.getMlphoto().getOriginalFilename());
 			String mlsavedfile = new Date().getTime() + menuList.getMlphoto().getOriginalFilename(); // 저장하는 파일이 유일해야하기 때문에 날짜를 붙인다.
@@ -202,7 +202,7 @@ public class MenuListController {
 		
 		@RequestMapping(value="/hotinfo")
 		public String hotinfo(int mlresid, String mlname, boolean mlishot, Model model){
-			MenuList menuList = menuListService.hotinfo(mlresid,mlname,mlishot);
+			Menu menuList = menuListService.hotinfo(mlresid,mlname,mlishot);
 			model.addAttribute("menuList", menuList);
 			return "menulist/hotinfo";
 		}

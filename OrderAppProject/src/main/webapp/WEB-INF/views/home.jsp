@@ -19,17 +19,16 @@
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 	
 	<script type="text/javascript">
+
 		$(document).ready(function(){
 			$("#login-modal").on('hidden.bs.modal', function () {
-				console.log("모달 히든");
 		    	parent.location.reload();
-		    	console.log("윈도우 리로드");
 		    });
 		}); 
 	
 		function onClickLogin()
 		{
-			var mid =$("#login_username").val();
+			var mid =$("#login_userid").val();
 			var mpassword=$("#login_password").val();
 			
 			$.ajax({
@@ -37,7 +36,7 @@
 				data: {"mid":mid, "mpassword":mpassword},
 				method:"post",
 				success: function(data){
-					if(data.result=="0"){
+					if(data.result=="success"){
 						alert("로그인 성공");
 						$("#login-modal").modal("hide");
 					}else{
@@ -47,6 +46,11 @@
 			});
 		}
 		
+		function onClickFindId()
+		{
+			console.log("onClickFindId")
+			$(".modal-content").load("/teamapp/member/findMid")
+		}
 		
 		function onClickFindPw()
 		{
@@ -110,12 +114,12 @@
 	<div class="slider-bg">
 				<div class="side wow bounceInRight" data-wow-delay="0.7s">
 					 <div  id="top" class="callbacks_container">
-							<ul class="rslides" id="slider4">
+							<ul class="rslides" id="slider4" style="width: auto;">
 									<li>
-										<img src="${pageContext.servletContext.contextPath}/resources/img/bg2.jpg" class="img-responsive" alt="" />
+										<img src="${pageContext.servletContext.contextPath}/resources/img/bg1.jpg" class="img-responsive" alt="" />
 										<div class="caption1">
 										<div class="logo">
-											<a href="${pageContext.servletContext.contextPath}/home"><h1>주문<span>할게요!</span></h1></a>
+											<a href="${pageContext.servletContext.contextPath}/"><h1>주문<span>할게요!</span></h1></a>
 										</div>
 											<h2>BEST RECIPES WITH
 											BEST INGREDIENTS</h2>	
@@ -123,10 +127,10 @@
 										</div>
 									</li>
 									<li>
-									<img src="${pageContext.servletContext.contextPath}/resources/img/bg.jpg" class="img-responsive" alt="" />
+									<img src="${pageContext.servletContext.contextPath}/resources/img/bg2.jpg" class="img-responsive" alt="" />
 									  <div class="caption1">
 										<div class="logo">
-											<a href="/teamapp/home"><h1>주문<span>할게요!</span></h1></a>
+											<a href="/teamapp/"><h1>주문<span>할게요!</span></h1></a>
 										</div>
 										<h2>BEST RECIPES WITH
 											BEST INGREDIENTS</h2>	
@@ -137,7 +141,7 @@
 									<img src="${pageContext.servletContext.contextPath}/resources/img/bg3.jpg" class="img-responsive" alt="" />
 									<div class="caption1">
 									<div class="logo">
-										<a href="/teamapp/home"><h1>주문<span>할게요!</span></h1></a>
+										<a href="/teamapp/"><h1>주문<span>할게요!</span></h1></a>
 									</div>
 										<h2>BEST RECIPES WITH
 											BEST INGREDIENTS</h2>
@@ -180,7 +184,7 @@
 				   <div class="col-md-4 welcome-text">
 					   <h3>Welcome</h3>
 					   <h4>TO RESTAURANT!</h4>
-					   <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					   <p>[주문할게요!]를 통해 보다 쉽고 빠르게 음식점을 예약해보세요! 많은 할인 혜택과 음식점 정보제공을 하고 있습니다. 값싸고 질높은 음식과 서비스를 이용하실 수 있습니다. 항상 빠르고 편리한 서비스제공을 위해 노력하겠습니다. 많은 애정과 관심을 부탁드립니다.</p>
 				   </div>
 					<div class="col-md-8 welcome-img">
 					   <img src="${pageContext.servletContext.contextPath}/resources/img/img_03.jpg" class="img-responsive" alt="" />
@@ -409,49 +413,52 @@
 
 <!-- BEGIN # MODAL LOGIN -->
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; padding-top: 150px" >
-    	<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header" align="center">
-					<img class="img-angle" id="img_logo" src="${pageContext.servletContext.contextPath}/resources/img/logo_reform2.png">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-					</button>
-				</div>
-                
-                <!-- Begin # DIV Form -->
-                <div id="div-forms">
-                
-                    <!-- Begin # Login Form -->
-                    <form id="login-form">
-		                <div class="modal-body">
-				    		<div id="div-login-msg">
-                                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                                <span id="text-login-msg">Type your username and password.</span>
-                            </div>
-				    		<input id="login_username" class="form-control" type="text" placeholder="Username (type ERROR for error effect)" required>
-				    		<input id="login_password" class="form-control" type="password" placeholder="Password" required>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Remember me
-                                </label>
-                            </div>
-        		    	</div>
-				        <div class="modal-footer">
-                            <div>
-                                <button type="button" class="btn btn-primary btn-lg btn-block" style="background-color: #1bbc9b" onclick="onClickLogin()">Login</button>
-                            </div>
-				    	    <div>
-                                <button id="login_lost_btn" type="button" class="btn btn-link"  onclick="onClickFindPw()" >비밀번호 찾기</button>
-                           <!--      <button id="login_register_btn" type="button" class="btn btn-link">Register</button> -->
-                            </div>
-				        </div>
-                    </form>
+    <div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header" align="center">
+				<img class="img-angle" id="img_logo" src="${pageContext.servletContext.contextPath}/resources/img/logo_reform2.png">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				</button>
+			</div>
+               
+			<!-- Begin # DIV Form -->
+			<div id="div-forms">
+               
+				<!-- Begin # Login Form -->
+				<form id="login-form">
+					<div class="modal-body">
+						<div id="div-login-msg">
+							<div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+							<span id="text-login-msg">Type your username and password.</span>
+						</div>
+						
+						<input id="login_userid" class="form-control" type="text" placeholder="ID (type ERROR for error effect)" required>
+						<input id="login_password" class="form-control" type="password" placeholder="Password" required>
+						
+						<div class="checkbox">
+							<label>	<input type="checkbox"> Remember me	</label>
+						</div>
+					</div>
+					
+					<div class="modal-footer">
+						<div>
+							<button type="button" class="btn btn-primary btn-lg btn-block" style="background-color: #1bbc9b" onclick="onClickLogin()">Login</button>
+						</div>
+						
+						<div>
+							<button id="login_findId_btn" type="button" class="btn btn-link"  onclick="onClickFindId()" ><u>아이디 찾기</u></button>
+							<button id="login_findPw_btn" type="button" class="btn btn-link"  onclick="onClickFindPw()" ><u>비밀번호 찾기</u></button>
+							<!--      <button id="login_register_btn" type="button" class="btn btn-link">Register</button> -->
+						</div>
+					</div>
+				</form>
 
 			</div>
 		</div>
 	</div>
-	</div>
-    <!-- END # MODAL LOGIN -->
+</div>
+<!-- END # MODAL LOGIN -->
 
 <!-- END # BOOTSNIP INFO -->
 

@@ -189,7 +189,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			color: #34495e;
 		}
         
-        
 	</style>		
 	
 	<script type="text/javascript">
@@ -236,7 +235,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		}	
 	
 		function showModifyModal(member) {
-			
 			$("#modifyForm #mid").val(member.mid);
 			$("#modifyForm #mname").val(member.mname);
 			$("#modifyForm #mpassword").val(member.mpassword);
@@ -306,6 +304,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<th> &nbsp; </th>
 					</tr>
 				</thead>
+				
 				<tbody>
 					<c:forEach var="member" items="${list}">
 						<tr>

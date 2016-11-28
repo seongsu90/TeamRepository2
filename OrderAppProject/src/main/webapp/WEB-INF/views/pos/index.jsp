@@ -167,28 +167,45 @@
 							location.reload();
 						}
 					}
-				}); */
+				}); */ 
 			}
 		
 			function onClickBtnTable(tableNo) {									// 테이블 번호 클릭
 				var presid = $("#orderModal #presid").val();
-				var tableno = $("#orderModal #ptableno").val();
-				/* var price = $("#orderModal #price").val();
-				var totalPrice = $("#orderModal #totalPrice").val();
-				var coupon = $("#orderModal #coupon").val();
-				var eventPrice = $("#orderModal #eventPrice").val();
-				var point = $("orderModal #point").val(); */
-				/* $.ajax({
+
+				$.ajax({
 					url: "../pos/info",
-					data: {"presid":presid, "ptableno":tableno},
+					data: {"presid":presid, "ptableno":tableNo},
 					method: "post",
 					success: function(data) {
 						$("#orderModal").modal("show");
-						$("#orderModal #ptableno").val(tableNo);
+						for(var i=0; i<data.menu.length; i++) {
+							var menu = data.menu[i];
+							if(i==0) {
+								$("#menuTbody").empty();
+							}
+							$("#menuTbody").append(
+								'<tr class="menu">' +
+									'<td>'+
+										'<input class="mname" type="text" style="border: 0;" name="menuName" value="' + menu.mname + '" readonly/>' +							
+									'</td>' +
+									'<td>' +
+										'<input class="mcount" type="number" style="border: 0;" min="0" max="99" name="mcount" value="' + (menu.mcount.trim())  + '"/>' + 							
+									'</td>' +
+									'<td>' +
+										'<input class="mprice" type="text" style="border: 0;" name="mprice" value="' + menu.mprice + '" readonly/>' +							
+									'</td>'	+			
+								'</tr>'
+							);
+						}
+						$("#ptableno").val(tableNo);
+						$("#totalPrice").html(data.totalPrice);
+						$("#coupon").html(data.coupon);
+						$("#eventPrice").html(data.eventPrice);
+						$("#point").html(data.point);
+						$("#result").html(data.result);
 					}		
-				}); */
-				$("#orderModal").modal("show");
-				$("#orderModal #ptableno").val(tableNo);
+				});
 			}
 		
 			function onClickBtnOrder() {											// 주문 클릭
@@ -196,10 +213,10 @@
 				var arrTr = $(".menu");				
 				for(var i=0; i<arrTr.length; i++) {
 					var tr = arrTr[i];
-					if($("#tempcount", tr).val() != 0) {
+					if($(".mcount", tr).val() != 0) {
 						if(i!=0) orderMenu += "&"; 
-						orderMenu += "tempmenu=" + $("#tempmenu", tr).val();
-						orderMenu += "&tempcount=" + $("#tempcount", tr).val();
+						orderMenu += "tempmenu=" + $(".mname", tr).val();
+						orderMenu += "&tempcount=" + $(".mcount", tr).val();
 					}
 				}
 				
@@ -311,6 +328,8 @@
 					</div>
 					<!-- modal-body-->
 					<div class="modal-body" >
+						<input id="presid" type="hidden" name="presid" value="${presid}"/> 							
+						<input id="ptableno" type="hidden" name="ptableno"/>
 						<div class="row" >
 							<div class="col-md-6">						
 								<table id="acrylic">
@@ -321,22 +340,7 @@
 											<th> 가격 </th>									
 										</tr>
 									</thead>
-									<tbody>
-										<c:forEach var="menuList" items="${menuList}">
-											<tr class="menu">
-												<td>
-													<input id="presid" type="hidden" name=presid value="${presid}"/> 							
-													<input id="ptableno" type="hidden" name=ptableno value="${ptableno}"/>
-													<input id="tempmenu" type="text" style="border: 0;" name=tempmenu value="${menuList.mlname}" readonly/>							
-												</td>
-												<td>
-													<input id="tempcount" type="number" style="border: 0;" min="0" max="99" name=tempcount value="0"/> 							
-												</td>
-												<td>
-													<input id="price" type="text" style="border: 0;" name=price value="${price}" readonly/> 							
-												</td>				
-											</tr>
-										</c:forEach>								
+									<tbody id="menuTbody">							
 									</tbody>
 								</table>	
 							</div>
@@ -344,23 +348,23 @@
 								<table class="table table-striped custab" style="margin-top: 18em;" id="acrylic">
 									<tr>
 										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 합계 </th>
-										<th> ${totalPrice} </th>		
+										<th id="totalPrice"></th>		
 									</tr>
 									<tr>
 										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 쿠폰 </th>
-										<th> ${coupon} </th>			
+										<th id="coupon"></th>			
 									</tr>
 									<tr>
 										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 이벤트 </th>			
-										<th> ${eventPrice} </th>
+										<th id="eventPrice"></th>
 									</tr>
 									<tr>
 										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 포인트 </th>			
-										<th> ${point} </th>
+										<th id="point"></th>
 									</tr>
 									<tr>
 										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 결제 금액 </th>		
-										<th> ${result} </th>	
+										<th id="result"></th>	
 									</tr>
 								</table>
 							</div>
