@@ -81,16 +81,16 @@ public class EventController {
 	
 	@RequestMapping("/info")
 	public String info(int eresid,String emlname, Model model){
-		logger.info("info 처리 요청");
+		logger.info("info 성공");
 		Event event = eventService.info(eresid,emlname);
 		model.addAttribute("event",event);
-		
 		return "event/info";
 	}
 	
 	@RequestMapping(value="/modify", method=RequestMethod.GET)
 	public String modifyForm(int eresid,String emlname,Model model){
 		logger.info("modify 요청처리");
+		
 		Event event = eventService.info(eresid,emlname);
 		model.addAttribute("event",event);
 		model.addAttribute("eresid", event.getEresid());
@@ -101,18 +101,28 @@ public class EventController {
 	
 	
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
-	public String modify(Event event, HttpSession session) throws IllegalStateException, IOException{
+	public String modify(Event event, HttpSession session, Model model){
 		logger.info("modify 완료");
 		
-		event.setEoriginfile(event.getEphoto().getOriginalFilename());
-		String esavedfile = new Date().getTime() + event.getEphoto().getOriginalFilename(); // 저장하는 파일이 유일해야하기 때문에 날짜를 붙인다.
-		String realPath = session.getServletContext().getRealPath("/WEB-INF/photo/"+esavedfile);
-		event.getEphoto().transferTo(new File(realPath)); 
-		event.setEsavedfile(esavedfile);
-		
-		event.setEmime(event.getEphoto().getContentType());
-		eventService.modify(event);
-		return "redirect:/event/list";
+		if ( event.getEphoto() != null && !event.getEphoto().isEmpty() ) {
+			try{
+				event.setEoriginfile(event.getEphoto().getOriginalFilename());
+				String esavedfile = new Date().getTime() + event.getEphoto().getOriginalFilename(); // 저장하는 파일이 유일해야하기 때문에 날짜를 붙인다.
+				String realPath = session.getServletContext().getRealPath("/WEB-INF/photo/"+esavedfile);
+				event.getEphoto().transferTo(new File(realPath)); // 지정된 경로로 파일을 저장한다는것? 83,84,실제 파일시스템을 저장
+				event.setEsavedfile(esavedfile);
+				
+				event.setEmime(event.getEphoto().getContentType());
+				
+				} catch (Exception e) {}
+		}	
+			int result = eventService.modify(event);
+			if(result == EventService.MODIFY_SUCCESS){
+				model.addAttribute("result", "success");
+			}else{
+				model.addAttribute("result", "fail");
+			}
+		return "event/modify";
 	}
 	
 	@RequestMapping("/showPhoto")

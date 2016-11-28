@@ -24,6 +24,7 @@
 		src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 	<script type="text/javascript">
 		 function showInfo(data) {
+			 console.log(data.ename);
 			$("#infoModal").modal("show");
 			$("#infoModal #ename").val(data.ename);
 			$("#infoModal #eresid").val(data.eresid);
@@ -67,11 +68,11 @@
 				contentType: false,
 				success: function(data) {
 					if(data.result == "success") {
-						$("#infoModal").modal("hide");
-						$("#iframe")[0].contentDocument.location.reload(true);
+					    $("#infoModal").modal("hide");
+						$("#iframe")[0].contentDocument.location.reload(true); 
 					} else {
 						alert("수정 실패");
-					}
+					  }
 				}
 			});
 
@@ -239,7 +240,8 @@
 		
 			<div class="modal-body">
 					<form id="info">
-						<input id="eresid" type='hidden'/>
+						<input id="eresid" type="hidden"/>
+						
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px; padding:0px;" class="input-group-addon"><b>이벤트 이름</b></span>
@@ -286,7 +288,7 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>시작일</b></span>
-								<b><input id="estart" type="date" class="form-control"/></b>
+								<b><input id="estart" type="date" class="form-control" /></b>
 							</div>
 						</div>
 

@@ -50,20 +50,20 @@ public class EventDao {
 	
 	public int update(Event event){
 		logger.info("update 요청처리");
-		String sql = "update event set ename=?, esavedfile=?, einfo=?, eprice=?, estart=?, eend=? where eresid=? and emlname=?";
-		int row = jdbcTemplate.update(
-				sql,
-				event.getEname(),
-				event.getEsavedfile(),
-				event.getEinfo(),
-				event.getEprice(),
-				event.getEstart(),
-				event.getEend(),
-				event.getEresid(),
-				event.getEmlname()
-				
-				);
-		return row;
+			String sql = "update event set ename=?, esavedfile=?, einfo=?, eprice=?, estart=?, eend=? where eresid=? and emlname=?";
+			int row = jdbcTemplate.update(
+					sql,
+					event.getEname(),
+					event.getEsavedfile(),
+					event.getEinfo(),
+					event.getEprice(),
+					event.getEstart(),
+					event.getEend(),
+					event.getEresid(),
+					event.getEmlname()
+					
+					);
+			return row;
 	}
 	
 	public Event selectByEresidAndEmlname(int eresid, String emlname) {

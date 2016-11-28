@@ -18,8 +18,8 @@ public class EventService {
 	public static final String ADD_FAIL = "fail";
 	public static final int DELETE_SUCCESS=0;
 	public static final int DELETE_FAIL=1;
-	public static final int MODIFY_SUCCESS=0;
-	public static final int MODIFY_FAIL=1;
+	public static final int MODIFY_SUCCESS = 0;
+	public static final int MODIFY_FAIL = 1;
 	
 	private static final Logger logger = LoggerFactory.getLogger(EventService.class);
 	
