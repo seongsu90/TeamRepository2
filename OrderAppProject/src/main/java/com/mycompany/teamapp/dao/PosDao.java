@@ -69,7 +69,7 @@ public class PosDao {
 	public List<Integer> calc(int presid, int ptableno) {
 		String sql = "";
 				sql += "select (m.mlprice * p.pcount) price ";
-				sql += "from pos p, menulist m ";
+				sql += "from pos p, menu m ";
 				sql += "where p.presid = m.mlresid ";
 				sql += "and p.pmlname = m.mlname ";
 				sql += "and p.presid = ? ";

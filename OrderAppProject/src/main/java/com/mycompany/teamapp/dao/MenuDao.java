@@ -171,12 +171,13 @@ public class MenuDao {
 
 
 	public List<Menu> selectMenu(int mlresid) {
-		String sql="select mlname, mprice from menu where mlresid=? ";
+		String sql="select mlname, mlprice from menu where mlresid=? ";
 		List<Menu> list = jdbcTemplate.query(sql, new Object[]{mlresid}, new RowMapper<Menu>() {
 			@Override
 			public Menu mapRow(ResultSet rs, int row) throws SQLException {
 				Menu menu = new Menu();
-				menu.setMlname(rs.getString("mlname"));				
+				menu.setMlname(rs.getString("mlname"));	
+				menu.setMlprice(rs.getInt("mlprice"));
 				return menu;
 			}
 		});
