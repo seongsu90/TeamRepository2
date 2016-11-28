@@ -13,9 +13,9 @@ public class MemberService {
 	public static final int JOIN_SUCCESS = 0;
 	public static final int JOIN_FAIL = 1;
 	
-	public static final int LOGIN_SUCCESS = 0;
-	public static final int LOGIN_FAIL_MID = 1;
-	public static final int LOGIN_FAIL_MPASSWORD = 2;
+	public static final String LOGIN_SUCCESS = "success";
+	public static final String LOGIN_FAIL_MID = "fail_mid";
+	public static final String LOGIN_FAIL_MPASSWORD = "fail_mpassword";
 	
 	public static final int LOGOUT_SUCCESS = 0;
 	public static final int LOGOUT_FAIL = 1;
@@ -37,7 +37,7 @@ public class MemberService {
 		return JOIN_SUCCESS;
 	}
 	
-	public int login(String mid, String mpassword) {
+	public String login(String mid, String mpassword) {
 		Member member = memberDao.selectByMid(mid);
 		if ( member == null ) return LOGIN_FAIL_MID;
 		if ( member.getMpassword().equals(mpassword) == false ) return LOGIN_FAIL_MPASSWORD;
