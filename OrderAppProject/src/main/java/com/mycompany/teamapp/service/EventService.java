@@ -14,6 +14,7 @@ import com.mycompany.teamapp.dto.Restaurant;
 
 @Component
 public class EventService { 
+
 	public static final String ADD_SUCCESS = "success";
 	public static final String ADD_FAIL = "fail";
 	public static final int DELETE_SUCCESS=0;
@@ -27,6 +28,7 @@ public class EventService {
 	private EventDao eventdao;
 	
 	public String add(Event event){
+
 		logger.info("add 요청처리");
 		int row = eventdao.insert(event);
 		if(row == 0){

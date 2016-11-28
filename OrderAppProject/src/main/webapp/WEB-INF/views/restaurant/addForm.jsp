@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-
 {
 	"resid" : ${restaurant.resid},
 	"resname" : "${restaurant.resname}",
@@ -7,10 +6,10 @@
 	"restotaltable" : ${restaurant.restotaltable},
 	"resinfo" : "${restaurant.resinfo}",
 	"restel" : "${restaurant.restel}",
-	"rescloseday" : "${restaurant.rescloseday}",
+	"closeday" : "${restaurant.closeday}",
 	"resopen" : "${restaurant.resopen}",
-	"resclose" : "${restaurant.resclose}"
-	
+	"resclose" : "${restaurant.resclose}",
+	"resphoto" : "${restaurant.resphoto }"
 }
 
 
@@ -130,3 +129,4 @@
 		</form>
 	</body>
 </html> --%>
+

@@ -65,14 +65,14 @@
 </head>
 <body>
     <!--start-header-->
-	<div id="home" class="header">
+	<div id="home" class="header" >
 			<!--logo-->
-			<div class="header-top">
+			<div class="header-top" >
 			<div class="container">
 		<!--top-nav-->
-			<div class="top-nav">
-					<span class="menu"> </span>
-					<ul>					
+			<div class="top-nav" >
+					<span class="menu" > </span>
+					<ul>				
 						<li><a class="active" href="${pageContext.servletContext.contextPath}/">Home</a></li> 
 						<c:if test="${mrank==2}">
 						<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
@@ -127,7 +127,7 @@
 										</div>
 									</li>
 									<li>
-									<img src="${pageContext.servletContext.contextPath}/resources/img/bg2.jpg" class="img-responsive" alt="" />
+									<img src="${pageContext.servletContext.contextPath}/resources/img/bg4.jpg" class="img-responsive" alt="" />
 									  <div class="caption1">
 										<div class="logo">
 											<a href="/teamapp/"><h1>주문<span>할게요!</span></h1></a>
@@ -138,7 +138,7 @@
 										</div>
 									</li>
 									<li>
-									<img src="${pageContext.servletContext.contextPath}/resources/img/bg3.jpg" class="img-responsive" alt="" />
+									<img src="${pageContext.servletContext.contextPath}/resources/img/bg5.jpg" class="img-responsive" alt="" />
 									<div class="caption1">
 									<div class="logo">
 										<a href="/teamapp/"><h1>주문<span>할게요!</span></h1></a>

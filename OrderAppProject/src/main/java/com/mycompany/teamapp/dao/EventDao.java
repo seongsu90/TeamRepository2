@@ -64,6 +64,7 @@ public class EventDao {
 					
 					);
 			return row;
+
 	}
 	
 	public Event selectByEresidAndEmlname(int eresid, String emlname) {

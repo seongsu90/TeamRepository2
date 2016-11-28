@@ -120,7 +120,6 @@
 				
 				$("#selProvince").change(function () {
 					console.log("Province Change");
-				
 			    });
 				
 				$("#detail").change(function () {
@@ -206,7 +205,11 @@
 				var resinfo = $("#resinfo").val();
 				var restel = $("#restel").val();
 				var reslocation = $("#reslocation").val();
-				var rescloseday = $("#rescloseday").val();
+				var closeday =[];
+				$("input[name='closeday']:checked").each(function(i)){
+					closeday.push($(this).val());
+				}
+			
 				var resopen = $("#resopen").val();
 				var resclose = $("#resclose").val();
 				var resphoto = $("#resphoto").val();
@@ -218,7 +221,7 @@
 				data.append("restotaltable", restotaltable);
 				data.append("resinfo", resinfo);
 				data.append("restel", restel);
-				data.append("rescloseday", rescloseday);
+				data.append("closeday[]", closeday);
 				data.append("resopen", resopen);
 				data.append("resclose", resclose);
 				if(resphoto.files.length != 0) {
@@ -233,6 +236,7 @@
 					processData: false,
 					contentType: false,
 					success: function(data) {
+						
 						if(data.result == "success") {
 						
 							alert("추가 성공");
@@ -245,7 +249,7 @@
 					}					
 					
 				});				
-			} 
+			
 
 			
 			function onClickBtnCancel() {
@@ -396,14 +400,14 @@
 					<div class="input-group">
 					<span style="width: 130px ; padding:20px;" class="input-group-addon"><b>휴일</b></span>
 				
-						휴일 X<input type="checkbox" name="closeday" value="휴일 없음">
-	        			월요일<input type="checkbox" name="closeday" value="월요일">
-	        			화요일<input type="checkbox" name="closeday" value="화요일">
-	        			수요일<input type="checkbox" name="closeday" value="수요일"><br/>
-	        			목요일<input type="checkbox" name="closeday" value="목요일">
-	        			금요일<input type="checkbox" name="closeday" value="금요일">
-	        			토요일<input type="checkbox" name="closeday" value="토요일">
-	        			일요일<input type="checkbox" name="closeday" value="일요일">
+						휴일 X<input type="checkbox" name="closeday"  value="휴일 없음">
+	        			월요일<input type="checkbox" name="closeday"  value="월요일">
+	        			화요일<input type="checkbox" name="closeday"  value="화요일">
+	        			수요일<input type="checkbox" name="closeday"  value="수요일"><br/>
+	        			목요일<input type="checkbox" name="closeday"  value="목요일">
+	        			금요일<input type="checkbox" name="closeday"  value="금요일">
+	        			토요일<input type="checkbox" name="closeday"  value="토요일">
+	        			일요일<input type="checkbox" name="closeday"  value="일요일">
         	
 
 					

@@ -73,7 +73,7 @@
 				<p>Donec vel ornare orci. Donec gravida, felis eu venenatis ultricies, neque libero auctor tortor, nec aliquet dolor massa quis est. Ut ut molestie turpis. Curabitur semper purus tortor, vel mollis nunc vestibulum gravida. Proin vehicula magna non dui aliquet rhoncus. In massa nisl; sollicitudin et nulla ac, feugiat auctor nisl. Nulla sed nisl nisi. Phasellus et arcu augue? Praesent sit amet vestibulum est. Maecenas ut ultrices, nunc sed auctor eleifend, tellus enim placerat velit, id porttitor ante est non nisl. Duis molestie lacus varius suscipit ullamcorper. Nullam at auctor ante. Praesent laoreet elit varius odio porta tincidunt. Morbi in nisl id eros volutpat ornare a et diam. Phasellus tempus non arcu at eleifend.</p>
 			</div>
 		</div>
-		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10015.498657932954!2d-0.1570060357124469!3d51.129219866008135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4875f1c859d0e855%3A0xb0ce82410da5809!2sA2011%2C+Crawley%2C+West+Sussex+RH10%2C+UK!5e0!3m2!1sen!2sin!4v1409743498026" frameborder="0" style="border:0"></iframe>
+		<iframe src="https://www.google.com/maps/embed/v1/place?q=%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%20%EC%86%A1%ED%8C%8C%EA%B5%AC%20%ED%95%9C%EA%B5%AD%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%EC%82%B0%EC%97%85%ED%98%91%ED%9A%8C&key=AIzaSyA-E4erY82nScLLGd9UVaHlvgX2goBhIMI" frameborder="0" style="border:0"></iframe>
 
 		<div class="contact-inner">
 		  <div class="container">
@@ -118,28 +118,30 @@
 						</ul>
 					 </div>
 				</div>
-				<div class=" col-md-3 footer-grid">
+				<div class="col-md-3 footer-grid">
 					<div class="Office Address">
 				        <h4>ADDRESS</h4>
 				       <ul class="bottom-icons">
-							<li><a class="home" href="#"><span> </span></a>Lorem ipsy street,Newyork</li>
-							<li><a class="mail" href="mailto:info@example.com"><span> </span>123 int@example.com</a></li>
-							<li><a class="mbl" href="#"><span> </span></a>+91 000 00 00 00 0</li>	
+							<li><a class="glyphicon glyphicon-home" href="#"></a>　서울시 송파구 중대로 135, IT벤처타워 서관 12층 한국소프트웨어산업협회</li>
+							<li><a class="glyphicon glyphicon-envelope" href="#"></a>　gusqls0810@naver.com</li>
+							<li><a class="glyphicon glyphicon-phone" href="#"></a>　 010-9558-1893</li>	
 							<div class="clearfix"> </div>	
 						</ul>
 					 </div>
 				</div>
 				<div class="col-md-3 footer-grid">
 					<h4>SUPPORT WITH</h4>
-						<div class="support">
-						   <input type="text" class="text" value="Enter email to reset it" onfocus="this.value = '';" onblur="if (this.value == 'Enter email to reset it') {this.value = 'Enter email to reset it';}">
-						<input type="submit" value="SUBMIT" class="botton">
-						     						     <p>Lorem ipsum dolor sit amet conse aliqua. Ut enim ad minim veniam Lorem ctetur adipisicing .</p>
+						<div class="Office Address">
+						<ul class="bottom-icons">
+						<li><a class="glyphicon glyphicon-envelope" href="#"></a>　gusqls0810@naver.com</li>
+						   <!-- <input type="text" class="text" value="Enter email to reset it" onfocus="this.value = '';" onblur="if (this.value == 'Enter email to reset it') {this.value = 'Enter email to reset it';}"> -->
+						<!-- <input type="submit" value="SUBMIT" class="botton"> -->
+						     						     <p>고객지원 등 각종 문의사항은 해당 메일로 연락을 주시면 감사합니다.</p>
+						</ul>
 						</div>
 				    </div>
 			    	<div class="clearfix"> </div>	
 				</div>
-			</div>
 			<div class="copy-right">
 			  <div class="container">
 				 	 <p>Copyright &copy; 2015 All Rights Reserved Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
