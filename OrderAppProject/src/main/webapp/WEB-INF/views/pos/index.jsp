@@ -131,46 +131,45 @@
 				/*transition: 0.5s;	 */			
 			}
 
-			
-					
 		</style> 
 		
 		<script type="text/javascript">
 		
-			function onClickBtnConfirm() {											// 예약 확인 클릭
-				console.log("onClickBtnConfirm");				
-				var rvmid = $(".reserv #rvmid").val();
-				var rvresid = $(".reserv #rvresid").val();
-				console.log(rvmid + rvresid);
+			function onClickBtnConfirm(reservation) {		// 예약 확인 클릭
+				console.log("onClickBtnConfirm");			
+				var rvmid = reservation.rvmid;
+				var rvresid = reservation.rvresid;		
 				
-				/* $.ajax({
+				$.ajax({
 					url: "../reservation/delete",
-					data: "&rvmid=" + rvmid + "&rvresid=" + rvresid,
+					data: {"rvmid":rvmid, "rvresid":rvresid},
 					method: "post",
 					success: function(data) {
-						if(data.result == "success") {
+						/* if(data.result == "success") { */							
 							location.reload();
-						}
+						/* } */
 					}
-				});  */
+				}); 
 			}
 			
-			function onClickBtnPenalty() {											// 예약 페널티
+			function onClickBtnPenalty(reservation) {		// 예약 취소
 				console.log("onClickBtnPenalty");
-				/* var rvmid = $("").val();
+				var rvmid = reservation.rvmid;		
+				
 				$.ajax({
 					url: "../pos/index",
-					data: "&rvmid=" + rvmid,
+					data: {"rvmid":rvmid},
 					method: "post",
-					success: function(data) {
-						if(data.result == "success") {
-							location.reload();
-						}
+					success: function(data) {													
+						/* if(data.result == "success") { */							
+						location.reload();
+						/* } */						
 					}
-				}); */ 
+				}); 
+				
 			}
 		
-			function onClickBtnTable(tableNo) {									// 테이블 번호 클릭
+			function onClickBtnTable(tableNo) {		// 테이블 번호 클릭
 				var presid = $("#orderModal #presid").val();
 
 				$.ajax({
@@ -186,7 +185,7 @@
 							}
 							$("#menuTbody").append(
 								'<tr class="menu">' +
-									'<td>'+
+									'<td>' +
 										'<input class="mname" type="text" style="border: 0;" name="menuName" value="' + menu.mname + '" readonly/>' +							
 									'</td>' +
 									'<td>' +
@@ -194,7 +193,7 @@
 									'</td>' +
 									'<td>' +
 										'<input class="mprice" type="text" style="border: 0;" name="mprice" value="' + menu.mprice + '" readonly/>' +							
-									'</td>'	+			
+									'</td>' +			
 								'</tr>'
 							);
 						}
@@ -208,13 +207,13 @@
 				});
 			}
 		
-			function onClickBtnOrder() {											// 주문 클릭
+			function onClickBtnOrder() {			// 주문 클릭
 				var orderMenu = "";
 				var arrTr = $(".menu");				
 				for(var i=0; i<arrTr.length; i++) {
 					var tr = arrTr[i];
 					if($(".mcount", tr).val() != 0) {
-						if(i!=0) orderMenu += "&"; 
+						if(i != 0) orderMenu += "&"; 
 						orderMenu += "tempmenu=" + $(".mname", tr).val();
 						orderMenu += "&tempcount=" + $(".mcount", tr).val();
 					}
@@ -222,7 +221,7 @@
 				
 				var presid = $("#orderModal #presid").val();
 				var tableno = $("#orderModal #ptableno").val();
-				
+ 	
 				$.ajax({
 					url: "../pos/add",
 					data: orderMenu + "&ptableno=" + tableno + "&presid=" + presid,
@@ -233,10 +232,10 @@
 							location.reload();
 						}
 					}
-				});
+				}); 
 			}
 			
-			function onClickBtnPay() {											// 결재 클릭
+			function onClickBtnPay() {		// 결재 클릭
 				var presid = $("#orderModal #presid").val();
 				var tableno = $("#orderModal #ptableno").val();
 				
@@ -273,7 +272,7 @@
 									<div class="col-md-3">
 										<button onclick="onClickBtnTable(${i})" style="width:150px; height:150px;">${i} 번 테이블
 											<c:forEach  var="posList" items="${posList}">
-												<c:if test="${posList.ptableno == i}">	<br/>${posList.pmlname}&nbsp;&nbsp;${posList.pcount}<br/></c:if>
+												<c:if test="${posList.ptableno == i}"><br/>${posList.pmlname}&nbsp;&nbsp;${posList.pcount}<br/></c:if>
 											</c:forEach>									
 										</button>
 									</div>
@@ -289,28 +288,19 @@
 						<tr>
 							<th> 예약시간 </th>
 							<th> 인원수 </th>
-							<th> 예약자 </th>
-							<th> 확인 </th>									
+							<th> 예약자 </th>																
 						</tr>
-						<c:forEach  var="reservList" items="${reservList}">
-							<tr class="reserv">
-								<td>${reservList.rvtime}</td>
-								<td>${reservList.rvperson}</td>
-								<td>${reservList.rvmid}</td>
-								<td>									
-									<input id="rvmid" type="hidden" name="rvmid" value="${reservList.rvmid}"/>
-									<input id="rvresid" type="hidden" name="rvresid" value="${reservList.rvresid}"/>
-									<button onclick="onClickBtnConfirm()" type="button" role="button">확인</button>													
-																
-									<%--<a href="index?rvmid=${reservList.rvmid}"><input type="submit" value="페널티"/></a> --%>
-									
-									<button onclick="onClickBtnPenalty()" type="button" role="button">페널티</button>  
-								</td>							
-							</tr>
-						</c:forEach>
-					</table>
+						<c:forEach  var="reservarion" items="${reservList}">														
+							<tr>
+								<td>${reservarion.rvtime}</td>
+								<td>${reservarion.rvperson}</td>
+								<td>${reservarion.rvmid}</td>
+								<td><input onclick="onClickBtnConfirm({rvmid:'${reservarion.rvmid}', rvresid:${reservarion.rvresid}})" type="button" value="확인"/>
+										<input onclick="onClickBtnPenalty({rvmid:'${reservarion.rvmid}',})" type="button" value="취소"/></td>
+							</tr>		
+						</c:forEach>						
+					</table>							
 				</div>
-				
 			</div>
 		</div>
 		
@@ -345,7 +335,7 @@
 								</table>	
 							</div>
 							<div class="col-md-6">
-								<table class="table table-striped custab" style="margin-top: 18em;" id="acrylic">
+								<table class="table table-striped custab" id="acrylic">
 									<tr>
 										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 합계 </th>
 										<th id="totalPrice"></th>		
@@ -372,8 +362,8 @@
 					</div>		
 	      			<!-- modal-footer-->
 		      		<div class="modal-footer">
-						<button onclick="onClickBtnPay()" type="button" style="width: 150px; height: 100px;" class="btn btn-danger" data-dismiss="modal"  role="button">결제</button>
-						<button onclick="onClickBtnOrder()" type="button" style="width: 150px; height: 100px;" class="btn btn-primary" role="button">주문</button>  
+						<button onclick="onClickBtnPay()" type="button" style="width: 100px; height: 50px;" class="btn btn-default" role="button">결제</button>
+						<button onclick="onClickBtnOrder()" type="button" style="width: 100px; height: 50px;" class="btn btn-default" role="button">주문</button>  
 					</div>
 				</div>
 			</div>	                    	                    
@@ -382,47 +372,3 @@
 	</body>
 </html>	      		
 	      		
-	      		
-	      		 
-					<%-- <div class="modal-body">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="well" style="height: 300px">
-									<div class="form-group">
-										<table>
-											<tr>
-												<td style="width:100%;" align="center"><b>주문내역</b></td>															
-											</tr>			
-             	
-											<!-- 주문내역 출력 -->		                                  	
-                          																																															
-										</table>				                                  
-									</div>					                             
-								</div>
-							</div>
-							<div class="col-md-6">
-								<form method="post" action="/teamapp/pos/add">	
-									<table>
-										<tr>
-											<td style="width:200px; border: 1" align="center">메뉴</td>			<!-- 매장 메뉴 -->
-											<td style="width:100%; border: 1" align="center">수량</td>
-										</tr>
-										<c:forEach var="menuList" items="${menuList}">
-											<tr class="menu">
-												<td>
-													<input id="presid" type="hidden" name=presid value="${presid}"/> 							
-													<input id="ptableno" type="hidden" name=ptableno value="${ptableno}"/>
-													<input id="tempmenu" type="text" style="border:1;" name=tempmenu value="${menuList.mlname}" readonly/>							
-												</td>
-												<td>
-													<input id="tempcount" style="width:100%; border:1;" type="number" min="0" max="99" name=tempcount value="0"/> 							
-												</td>				
-											</tr>					
-										</c:forEach>				
-									</table>
-								</form> 
-							</div>
-						</div>
-					</div> --%>
-					          
-
