@@ -2,7 +2,7 @@ package com.mycompany.teamapp.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class Menu {
+public class MenuList {
 	private String mlname;
 	private int mlprice;
 	private int mlresid;

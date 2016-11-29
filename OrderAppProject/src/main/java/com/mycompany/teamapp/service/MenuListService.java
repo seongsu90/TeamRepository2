@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.mycompany.teamapp.dao.MenuDao;
-import com.mycompany.teamapp.dto.Menu;
+import com.mycompany.teamapp.dao.MenuListDao;
+import com.mycompany.teamapp.dto.MenuList;
 
 @Component
 public class MenuListService {
@@ -20,24 +20,24 @@ public class MenuListService {
 	public static final int MODIFY_FAIL=1;
 	
 	@Autowired
-	private MenuDao menuListdao;
+	private MenuListDao menuListdao;
 	
-	public List<Menu> list(int pageNo, int rowsPerPage){
+	public List<MenuList> list(int pageNo, int rowsPerPage){
 		return menuListdao.selectByPage(pageNo, rowsPerPage); 
 	}
 	
-	public List<Menu> hotlist(int pageNo, int rowsPerPage){
+	public List<MenuList> hotlist(int pageNo, int rowsPerPage){
 		return menuListdao.selectByPage(pageNo, rowsPerPage); 
 	}
 	
-	public int add(Menu menuList){
+	public int add(MenuList menuList){
 		int row = menuListdao.insert(menuList);
 		if(row==0){return ADD_FAIL;}
 	
 		return ADD_SUCCESS;
 	}
 	
-	public int modify(Menu menuList){
+	public int modify(MenuList menuList){
 		int row = menuListdao.update(menuList);
 		if(row==0){return MODIFY_FAIL;}
 		return MODIFY_SUCCESS;
@@ -49,17 +49,17 @@ public class MenuListService {
 		return DELETE_SUCCESS;
 	}
 	
-	public List<Menu> resHotList(boolean mlishot){
+	public List<MenuList> resHotList(boolean mlishot){
 		return menuListdao.resHotList(mlishot);
 	}
 	
-	public int modifyHot(Menu menuList){
+	public int modifyHot(MenuList menuList){
 		int row = menuListdao.update(menuList);
 		if(row==0){return MODIFY_FAIL;}
 		return MODIFY_SUCCESS;
 	}
 	
-	public Menu info(int mlresid, String mlname){
+	public MenuList info(int mlresid, String mlname){
 		return menuListdao.selectByMlresidAndMlname(mlresid, mlname);
 	}
 
@@ -67,12 +67,12 @@ public class MenuListService {
 		return menuListdao.count();
 	}
 
-	public Menu hotinfo(int mlresid, String mlname,boolean mlishot) {
+	public MenuList hotinfo(int mlresid, String mlname,boolean mlishot) {
 		return menuListdao.selectByMlresidAndMlnameAndMlishot(mlresid, mlname, mlishot);
 	}
 
-	public List<Menu> menuList(int mlresid) {
-		List<Menu> menuList = menuListdao.selectMenu(mlresid);
+	public List<MenuList> menuList(int mlresid) {
+		List<MenuList> menuList = menuListdao.selectMenu(mlresid);
 		return menuList; 
 	}
 	
