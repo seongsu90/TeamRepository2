@@ -341,7 +341,7 @@
 			
 			<div style="width: 600px">
 				<c:if test="${pageNo!=1}">
-				<a href="memberboard?pageNo=1&find=${find}">[처음]</a>
+					<a href="memberboard?pageNo=1&find=${find}">[처음]</a>
 				</c:if>
 				
 				<c:if test="${groupNo>1}">
@@ -359,7 +359,7 @@
 				</c:if>
 				
 				<c:if test="${pageNo!=totalPageNo}">
-				<a href="memberboard?pageNo=${totalPageNo}&find=${find}">[맨끝]</a>
+					<a href="memberboard?pageNo=${totalPageNo}&find=${find}">[맨끝]</a>
 				</c:if>
 			</div>
 		</div>
