@@ -61,7 +61,7 @@ public class RestaurantController {
 		
 		
 		
-		int rowsPerPage=8;
+		int rowsPerPage=7;
 		int pagesPerGroup=5;
 		int totalRestaurantNo=restaurantService.getCount(find);
 		
@@ -98,48 +98,35 @@ public class RestaurantController {
 		return "redirect:/restaurant/list";		
 	}
 	
-	
-	
-	@RequestMapping(value="/add", method=RequestMethod.GET)
-	public String addForm(){
-		logger.info("addForm() 실행");
-		return "restaurant/addForm";
-	}
-	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String add(Restaurant restaurant, HttpSession session, Model model, @RequestParam(value="closeday[]") List<String> arrayParams){
+	public String add(Restaurant restaurant, HttpSession session, Model model){
 		logger.info("add() 실행");
-		
-	
 
-		if ( restaurant.getResphoto() != null && ! restaurant.getResphoto().isEmpty() ) {
-			try{
-				
-				restaurant.setResoriginfile(restaurant.getResphoto().getOriginalFilename());
-				String ressavedfile = new Date().getTime() + restaurant.getResphoto().getOriginalFilename(); // 저장하는 파일이 유일해야하기 때문에 날짜를 붙인다.
-				String realPath = session.getServletContext().getRealPath("/WEB-INF/photo/"+ressavedfile);
-				restaurant.getResphoto().transferTo(new File(realPath)); // 지정된 경로로 파일을 저장한다는것? 83,84,실제 파일시스템을 저장
-				restaurant.setRessavedfile(ressavedfile);
-				
-				restaurant.setResmime(restaurant.getResphoto().getContentType());
-				
-				
-				int i=1;
-				int size=restaurant.getCloseday().length;
-				String close="";
-			        for(String closeday : arrayParams){		        	
-			        	close+=closeday;
-			        	if(i<size){	
-			        		close+="/";
-			        		i++;
-			        	}
-			        }        
-			    restaurant.setRescloseday(close);	
-			}
-			catch (Exception e) {
+		if (restaurant.getResphoto() != null && ! restaurant.getResphoto().isEmpty() ) {
+			restaurant.setResoriginfile(restaurant.getResphoto().getOriginalFilename());
+			String ressavedfile = new Date().getTime() + restaurant.getResphoto().getOriginalFilename(); // 저장하는 파일이 유일해야하기 때문에 날짜를 붙인다.
+			String realPath = session.getServletContext().getRealPath("/WEB-INF/photo/"+ressavedfile);
+			try {
+				restaurant.getResphoto().transferTo(new File(realPath));
+			} catch (Exception e) {
 				e.printStackTrace();
-				return "restaurant/addForm";
-			}
+			} 
+			restaurant.setRessavedfile(ressavedfile);
+			
+			restaurant.setResmime(restaurant.getResphoto().getContentType());
+			
+			
+			int i=1;
+			int size=restaurant.getCloseday().length;
+			String close="";
+		        for(String closeday : restaurant.getCloseday()){		        	
+		        	close+=closeday;
+		        	if(i<size){	
+		        		close+="/";
+		        		i++;
+		        	}
+		        }        
+		    restaurant.setRescloseday(close);	
 		}
 		
 		int result = restaurantService.add(restaurant);
@@ -149,7 +136,7 @@ public class RestaurantController {
 			model.addAttribute("result", "fail");
 		}
 	
-		return "restaurant/list";	
+		return "restaurant/add";	
 	}
 	
 	// getCity
@@ -167,27 +154,14 @@ public class RestaurantController {
 	@RequestMapping(value="/getDetail", method=RequestMethod.GET)
 	public String getDtail() {
 		return "backup/restaurant/getDetail";	
-	}
+	}	
 	
-
-	@RequestMapping(value="/delete", method=RequestMethod.GET)
-	public String delete(){
-		logger.info("deleteForm() 실행");
-		return "restaurant/deleteForm";
-		
-	}
-	
-	
-	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	@RequestMapping(value="/delete")
 	public String delete(int resid){
-		
 		restaurantService.delete(resid);
-		
 		return "redirect:/restaurant/list";
 	}
-	
-	
-	
+
 	@RequestMapping("/showPhoto")
 	public void showPhoto(String ressavedfile, HttpServletRequest request, HttpServletResponse response){
 		try{

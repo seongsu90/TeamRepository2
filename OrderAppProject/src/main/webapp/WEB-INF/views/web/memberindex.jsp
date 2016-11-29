@@ -150,21 +150,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					});
 				</script>
 		</div>
-	<!--End-top-nav-script-->
-				<div class="clearfix"> </div>
+		
+		<!--End-top-nav-script-->
+		<div class="clearfix"> </div>
 		</div>
 		<div class="head-bg">
-					<div class="logo three">
-							<a href="/teamapp/home"><h1>FOOD<span>House</span></h1></a>
-					</div>
+			<div class="logo three">
+					<a href="/teamapp/home"><h1>FOOD<span>House</span></h1></a>
+			</div>
 		</div>
 		<!--/header-->
 	</div>
-<!--start-slider-->
-	 
-		   	<iframe src="memberboard?pageNo=1" style="width:100%; height:680px; border:0px;" scrolling="no"></iframe>
+	
+	<!--start-slider-->
+	 <iframe src="memberboard?pageNo=1" style="width:100%; height:680px; border:0px;" scrolling="no"></iframe>
 
-<!--/start-footer-->
+	<!--/start-footer-->
 	<div class= "footer">
 		 <div class="container">                                                   
 			<div class="col-md-3 footer-grid">
