@@ -104,7 +104,7 @@ span.menu{
 	  background: #34495E;
 }
 .top-nav ul li a:hover, .top-nav ul li a.active {
-  color: #fff;
+  color: #ffff00;
     background: #1BBC9B;
 }
 li.lost {
@@ -580,7 +580,7 @@ a.more {
 }
 
 .ch-item:hover {
-	  box-shadow: inset 0 0 0 110px rgba(27, 188, 155, 0.88), inset 0 0 0 10px rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.1);
+	  box-shadow: inset 0 0 0 110px rgba(27, 188, 155, 0.88), inset 0 0 0 10px rgba(255,255,255,0.8), 0 1px 2px rgba(255,0,0,0.1);
 }
 
 .ch-item:hover .ch-info {
