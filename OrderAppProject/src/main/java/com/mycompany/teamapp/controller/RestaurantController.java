@@ -130,7 +130,7 @@ public class RestaurantController {
 		}
 		
 		int result = restaurantService.add(restaurant);
-		if(result == RestaurantService.MODIFY_SUCCESS) {
+		if(result == RestaurantService.ADD_SUCCESS) {
 			model.addAttribute("result", "success");
 		} else {
 			model.addAttribute("result", "fail");

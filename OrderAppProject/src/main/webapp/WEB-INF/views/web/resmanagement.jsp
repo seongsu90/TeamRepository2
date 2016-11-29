@@ -14,7 +14,7 @@
 		rel='stylesheet' type='text/css'>
 	<link rel="stylesheet"
 		href="${pageContext.servletContext.contextPath}/resources/css/common.css" />	
-		
+	
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<script type="text/javascript"
 		src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
@@ -22,20 +22,80 @@
 		src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
+		
+	
 	<script type="text/javascript">
+	$(document).ready(function() {
+			console.log("ready 실행");
+			
+			$("#selCity").change(function () {
+				console.log("City Change");
+				var selCity = $("#selCity").val();
+		        setProvince(selCity, null);
+		    });
+			
+			$("#selProvince").change(function () {
+				$("#reslocation").val($("#selCity").val() + " "+ $("#selProvince").val() + " "); 
+		    });				
+	});
+			
+		function setCity() {
+			console.log("setCity 실행");
+			$.ajax({
+				url: "getCity",
+				data: {"selCity":null},
+				success: function (data) {
+					$("#selCity").html(data);
+				}
+			});
+		}
+		
+			function setProvince(selCity, selProvice) {
+				console.log("setProvince 실행");
+				$.ajax({
+				url: "getProvince",
+				data: {"selCity":selCity, "selProvince":null},
+				success: function (data) {
+					$("#selProvince").html(data);
+				}
+			});
+		}
+    </script>
 	
-	
-		function showInfo(data) {		
-			$("#infoModal").modal("show");
+	<script type="text/javascript">
+		function showInfo(data) {	
+		
+			$("#btnModifySuccess").hide();
  			$("#infoModal #resid").val(data.resid);
 			$("#infoModal #resname").val(data.resname);
+		
+
+			var location =[];
+			location=data.reslocation.split(" ");
 			$("#infoModal #reslocation").val(data.reslocation);
 			$("#infoModal #restotaltable").val(data.restotaltable);
 			$("#infoModal #resinfo").val(data.resinfo);
 			$("#infoModal #restel").val(data.restel);
 			$("#infoModal #rescloseday").val(data.rescloseday);
 			$("#infoModal #resopen").val(data.resopen);
-			$("#infoModal #resclose").val(data.resclose); 				
+			$("#infoModal #resclose").val(data.resclose); 		
+			$("#infoModal #resphoto").val(data.resphoto);
+			$('input').attr("readonly",true)//input 요소 설정 readonly 위한 것이다
+			setCity(location[0]);
+			setProvince(location[0], location[1]);
+			$("#infoModal").modal("show");
+		};
+		
+		
+		function onClickBtnModify(){
+		
+						
+			$('input').attr("readonly",false);
+					
+			$("#btnModify").hide();
+			$("#btnModifySuccess").show();
+			setCity();		
+			
 		};
 		
 		
@@ -47,7 +107,12 @@
 			var restotaltable = $("#infoModal #restotaltable").val();
 			var resinfo = $("#infoModal #resinfo").val();
 			var restel = $("#infoModal #restel").val();
-			var rescloseday = $("#infoModal #rescloseday").val();
+			
+			var closeday =[];
+			$("input[name='closeday']:checked").each(function(i) {
+				closeday.push($(this).val());
+			});
+			
 			var resopen = $("#infoModal #resopen").val();
 			var resclose = $("#infoModal #resclose").val();
 			var resphoto = $("#infoModal #resphoto")[0];
@@ -59,9 +124,16 @@
 			data.append("restotaltable", restotaltable);
 			data.append("resinfo", resinfo);
 			data.append("restel", restel);
-			data.append("rescloseday", rescloseday);
+			
+			for(var i=0; i<closeday.length; i++) {
+				data.append("closeday", closeday[i]);
+			}
+			
 			data.append("resopen", resopen);
 			data.append("resclose", resclose);
+			
+			
+			
 			if(resphoto.files.length != 0) {
 				data.append("resphoto", resphoto.files[0]);
 			}			
@@ -75,8 +147,12 @@
 				contentType: false,
 				success: function(data) {
 					if(data.result == "success") {
+						location.reload(true);
 						$("#infoModal").modal("hide");
 						$("#iframe")[0].contentDocument.location.reload(true);
+					
+						
+						
 					} else {
 						alert("수정 실패");
 					}
@@ -233,12 +309,7 @@
 		      		</div>
 		
 			<div class="modal-body">
-	<%-- 	 ###############
-		
-		
-			$('input').attr("readonly",true)//input 요소 설정 readonly 위한 것이다
-			$('input').attr("readonly",false)//제거 input 요소를 readonly 속성
-	      		 --%>
+
 					<form id="info">
 						<input id="resid" type='hidden'/>
 						<div class="form-group">
@@ -266,26 +337,52 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>전화번호</b></span>
-							<b><input id="restel" type='text' class="form-control" /></b>
+								<b><input id="restel" type='text' class="form-control" /></b>
 							</div>
 						</div>
+
+ 						<!-- <div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>주소</b></span>
+								<b><input id="reslocation" type='text' class="form-control" /></b>
+							</div>
+						</div> --> 
 
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>주소</b></span>
-								
-								<b><input id="reslocation" type='text' class="form-control" /></b>
+								<select class="form-control" style="width: 110px" id="selCity" name="selCity"></select>
+								<select class="form-control" style="width: 110px" id="selProvince" name="selProvince">
+									<option value="선택">선택</option>
+								</select>	
+								<input type="text" class="form-control" style="width: 340px" id="reslocation" name="reslocation"/><br/>
 							</div>
 						</div>
-
-						<div class="form-group">
+						
+						<!-- <div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>휴일</b></span>
 								<b><input id="rescloseday" type='text' class="form-control"/></b>
 							</div>
+						</div> -->
+						
+						
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px; margin-right: 10px; border-right: 1px solid #ccc;" class="input-group-addon"><b>휴일</b></span>&nbsp;
+								<input type="checkbox" name="closeday"  value="휴일없음">휴일 X&nbsp;
+			        			<input type="checkbox" name="closeday"  value="월요일">월요일&nbsp;
+			        			<input type="checkbox" name="closeday"  value="화요일">화요일&nbsp;
+			        			<input type="checkbox" name="closeday"  value="수요일">수요일&nbsp;
+			        			<input type="checkbox" name="closeday"  value="목요일">목요일&nbsp;
+			        			<input type="checkbox" name="closeday"  value="금요일">금요일&nbsp;
+			        			<input type="checkbox" name="closeday"  value="토요일">토요일&nbsp;
+			        			<input type="checkbox" name="closeday"  value="일요일">일요일
+							</div>
 						</div>
 
 
+					
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>오픈 타임</b></span>
@@ -303,21 +400,17 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>사진</b></span>
-							<b><input id="resphoto" type='file' class="form-control" multiple /></b>
+								<b><input id="resphoto" type='file' class="form-control" multiple /></b>
 							</div>
 						</div>
 						
 						</form>
 					</div>
 			<div class="modal-footer" style="background-color:#34495e; color:white">
+				
 				<c:if test="${mrank==2}">
-						<a href="javascript:resUpdate()" type="button" class="btn btn-primary">수정</a>
-						
-			
-											
-												
-											
-											
+					<button id="btnModify" type="button" class="btn btn-primary" onclick="onClickBtnModify()" ><b>수정하기</b></button>
+					<a href="javascript:resUpdate()" type="button" id="btnModifySuccess" class="btn btn-primary">수정완료</a>								
 				</c:if>
 			</div>
 			</div>
