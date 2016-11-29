@@ -1,25 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page  contentType="text/html;charset=UTF-8"%>
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+
 <!DOCTYPE HTML>
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/style.css" />
-	<%-- <link href="${pageContext.servletContext.contextPath}/resources/css/bootstrap.css" rel='stylesheet' type='text/css' /> --%>
 	<link href='http://fonts.googleapis.com/css?family=Niconne|Playball|Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
-	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
-	
 
 	<!-- Website Font style -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -118,7 +110,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             transition: 0.2s all;
         }
         
-        
         /* 모달 폼 */
         body, html{
 		    height: 100%;
@@ -165,7 +156,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 		    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 		    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-		
 		}
 		
 		.main-center{
@@ -173,7 +163,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		 	margin: 0 auto;
 		 	max-width: 330px;
 		    padding: 40px 40px;
-		
 		}
 		
 		.login-button{
@@ -286,6 +275,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		}
 	</script>	
 </head>
+
 <body>
 	<div class="about-section"> 
 	   <div class="container" align="center"><h2>Member List</h2> <br/>
@@ -345,7 +335,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	 		
 			<form action="${pageContext.servletContext.contextPath}/member/memberboard">
 				<input type="hidden" name="pageNo" value="1"/>
-				검색 <input type="text" name="find" value="${find}"/>			
+				검색<input type="text" name="find" value="${find}"/>			
 				<input type="submit" value="찾기"/>
 			</form><br/>
 			
@@ -375,20 +365,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 	</div>
 	
-	<!-- 수정 Modal ############################################## -->
+	<!-- ########################## 수정 Modal ########################## -->
 	
 	<div id="memberModifyModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
 		<div class="modal-dialog" role="document">
 	    	<div class="modal-content" style="width:500px">
+	    	
 	    		<!-- modal-header -->
 	     		<div class="modal-header" style="background-color: #34495e; color:white">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title">회원 정보 수정</h4>
 	      		</div>
 	      		
-	      		<!-- modal-modal-body -->
+	      		<!-- modal-body -->
 	      		<div class="modal-body">
 					<form id="modifyForm">
+					
 						<input type="hidden" name="mid" value="${member.mid}"/>				
 							
 						<div class="form-group">
@@ -459,16 +451,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</form>		
 	      		</div>
 	      	
-		      	<!-- modal-modal-modal-footer -->	
+		      	<!-- modal-footer -->	
 				<div class="modal-footer" style="background-color: #34495e; color:white">
 			        <button id="btnModify" type="button" class="btn btn-default" onclick="onClickBtnModify()" style="color: #34495e"><b>수정하기</b></button>
 			        <button id="btnInit" type="button" class="btn btn-default" onclick="onClickBtnCancel()" style="color: #34495e"><b>취소</b></button>
 				</div>
+				
 			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog --> --%>
+		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-	<!-- ####################################################### -->	
-	
-	
+
+	<!-- ########################## 수정 Modal ########################## -->
+
 </body>
 </html>
