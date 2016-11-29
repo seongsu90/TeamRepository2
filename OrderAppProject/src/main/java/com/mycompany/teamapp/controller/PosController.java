@@ -57,7 +57,7 @@ public class PosController {
 		List<Pos> posList = posService.info(presid);					// 매장 별 주문 내역
 		
 		Restaurant restaurant = restaurantService.info(presid);		// 매장별 총 테이블 수
-		int totalTable = restaurant.getRestotaltable();
+		int totalTables = restaurant.getRestotaltable();
 
 		memberService.addPenalty(rvmid);									// 블랙리스트
 		reservationService.delete(rvmid, presid);
@@ -66,7 +66,7 @@ public class PosController {
 		
 		session.setAttribute("presid", presid);
 		model.addAttribute("posList", posList);		
-		model.addAttribute("totalTable", totalTable);
+		model.addAttribute("totalTables", totalTables);
 		model.addAttribute("reservList", reservList);		
 		
 		return "pos/index";

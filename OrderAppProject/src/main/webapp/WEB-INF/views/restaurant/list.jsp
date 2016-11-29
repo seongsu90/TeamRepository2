@@ -107,7 +107,7 @@
 		
 		
 		
-			<script type="text/javascript">
+		<script type="text/javascript">
 		$(document).ready(function() {
 				console.log("ready 실행");
 				
@@ -119,14 +119,8 @@
 			    });
 				
 				$("#selProvince").change(function () {
-					console.log("Province Change");
-			    });
-				
-				$("#detail").change(function () {
- 					console.log("detail Change");
- 					setReslocation();
- 			    });
-				
+					$("#reslocation").val($("#selCity").val() + " "+ $("#selProvince").val() + " "); 
+			    });				
 				
 		});
  			
@@ -151,27 +145,6 @@
 					}
 				});
 			}
- 			
- 			function setDetail() {
- 				console.log("setDetail 실행");
- 	
- 				$.ajax({
-					url: "getDetail",
-					data: {"selCity":selCity, "selProvince":selProvince},
-					success: function (data) {
-						$("#detail").html(data);
-					}
-				});
-			}
- 			
- 			
- 			function setReslocation() {
- 				console.log("setReslocation() 실행");
-				$("#reslocation").val($("#selCity").val() + " "+ $("#selProvince").val() + " "+$("#detail").val());  				
- 			}
- 			
- 			
- 			
 	    </script>
 		
 		
@@ -187,6 +160,7 @@
 					data: {"resid":resid},
 
 					success: function(data) {
+						location.reload(true);
 						parent.showInfo(data);
 					}
 				});
@@ -201,21 +175,29 @@
 		
 			
 		 	function onClickBtnResAdd() {
-				console.log("onClickBtnResAdd() 실행");
 				var resname = $("#resname").val();
 				var restotaltable = $("#restotaltable").val();
 				var resinfo = $("#resinfo").val();
 				var restel = $("#restel").val();
-				var reslocation = $("#reslocation").val();
-/* 				var closeday =[];
-				$("input[name='closeday']:checked").each(function(i)){
-					closeday.push($(this).val());
-				} */
-			
+				var reslocation = $("#reslocation").val();			
 				var resopen = $("#resopen").val();
 				var resclose = $("#resclose").val();
-				var resphoto = $("#resphoto").val();
 				
+				console.log(resname);
+				console.log(restotaltable);
+				console.log(resinfo);
+				console.log(restel);
+				console.log(reslocation);
+				console.log(resopen);
+				console.log(resclose);
+				
+				 
+				var closeday =[];
+				$("input[name='closeday']:checked").each(function(i) {
+					closeday.push($(this).val());
+				});				
+				
+				var resphoto = $("#resphoto")[0];
 				
 				var data=new FormData();
 				data.append("resname", resname);
@@ -223,7 +205,11 @@
 				data.append("restotaltable", restotaltable);
 				data.append("resinfo", resinfo);
 				data.append("restel", restel);
-				data.append("closeday[]", closeday);
+				
+				for(var i=0; i<closeday.length; i++) {
+					data.append("closeday", closeday[i]);
+				}
+				
 				data.append("resopen", resopen);
 				data.append("resclose", resclose);
 				if(resphoto.files.length != 0) {
@@ -238,19 +224,16 @@
 					processData: false,
 					contentType: false,
 					success: function(data) {
-						
 						if(data.result == "success") {
-						
 							alert("추가 성공");
 							$("#restaurantAddModal").modal("hide");
-							$("#iframe")[0].contentDocument.location.reload(true);
-							
+							//$("#iframe")[0].contentDocument.location.reload(true);
+							location.reload(true);
 						} else{
 							alert("추가 실패");
 						}
 					}					
-					
-				});				
+				});	
 		 	}
 
 			
@@ -265,10 +248,10 @@
 	</head>
 	<body>
 		<div style="text-align: center;">
-			<div style="text-align: right;">
+			<div style="text-align: right; width:1200px; display: inline-block; margin-top: 20px;">
 				<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e">추가</button>
 			</div>
-			<table id="acrylic" style="width:100%">
+			<table id="acrylic" style="width:1200px;">
 				<thead>
 					<tr>
 						<c:if test="${mrank==2}">
@@ -346,8 +329,8 @@
 		 <%-- ## Add Modal ## --%>
 
 	<div id="restaurantAddModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
-		<div class="modal-dialog" role="document">
-   			<div class="modal-content" style="width:500px">
+		<div class="modal-dialog" role="document" style="width:750px">
+   			<div class="modal-content">
    			<!-- modal-header -->
      		<div class="modal-header" style="background-color: #34495e; color:white">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -361,31 +344,42 @@
 				<div class="form-group">
 					<div class="input-group">
 						<span style="width: 130px; padding:0px;" class="input-group-addon"><b>식당 이름</b></span>
-						<b><input type="text" class="form-control" name="resname" id="resname"/></b>
+						<b><input type="text" style="width:225px" class="form-control" name="resname" id="resname" value="은지네식당"/></b>
 					</div>
 				</div>
-
-
+				
 				<div class="form-group">
 					<div class="input-group">
 						<span style="width: 130px" class="input-group-addon"><b>전체 테이블 수</b></span>
-						<input type="number" class="form-control" name="restotaltable" id="restotaltable"/>
+						<input type="number"  style="width:225px" class="form-control" name="restotaltable" id="restotaltable" value="10"/>
 					</div>
-				</div>
+				</div>				
+				
+				<div class="form-group">
+					<div class="input-group">
+						<span style="width: 130px" class="input-group-addon"><b>전화번호</b></span>
+						<input type="tel"  style="width:225px" class="form-control" name="restel" id="restel" value="010-4711-1129"/>
+					</div>
+				</div>	
 
 				<div class="form-group">
 					<div class="input-group">
 						<span style="width: 130px" class="input-group-addon"><b>레스토랑 정보</b></span>
-						<input type="text" class="form-control" name="resinfo" id="resinfo"/>
+						<input type="text"  style="width:225px" class="form-control" name="resinfo" id="resinfo" value="맛있어요"/>
 					</div>
 				</div>
-
+				
 				<div class="form-group">
 					<div class="input-group">
-						<span style="width: 130px" class="input-group-addon"><b>전화번호</b></span>
-						<input type="tel" class="form-control" name="restel" id="restel"/>
+						<span style="width: 130px" class="input-group-addon"><b>오픈 타임</b></span>
+						<input type="time" style="width:225px" class="form-control" name="resopen" id="resopen" value="13:00"/>
+					</div>
+					<div class="input-group">
+						<span style="width: 130px" class="input-group-addon"><b>클로즈 타임</b></span>
+						<input type="time" style="width:225px" class="form-control" name="resclose" id="resclose" value="23:00"/>
 					</div>
 				</div>
+				
 
 				<div class="form-group">
 					<div class="input-group">
@@ -394,48 +388,38 @@
 						<select class="form-control" style="width: 110px" id="selProvince" name="selProvince">
 							<option value="선택">선택</option>
 						</select>	
-						<input type="text" style="width: 320px" id="detail" name="detail"/><br/>
+						<input type="text" class="form-control" style="width: 340px" id="reslocation" name="reslocation" value="가락동"/><br/>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<div class="input-group">
-					<span style="width: 130px ; padding:20px;" class="input-group-addon"><b>휴일</b></span>
-				
-						휴일 X<input type="checkbox" name="closeday"  value="휴일 없음">
-	        			월요일<input type="checkbox" name="closeday"  value="월요일">
-	        			화요일<input type="checkbox" name="closeday"  value="화요일">
-	        			수요일<input type="checkbox" name="closeday"  value="수요일"><br/>
-	        			목요일<input type="checkbox" name="closeday"  value="목요일">
-	        			금요일<input type="checkbox" name="closeday"  value="금요일">
-	        			토요일<input type="checkbox" name="closeday"  value="토요일">
-	        			일요일<input type="checkbox" name="closeday"  value="일요일">
-        	
-
-					
+						<span style="width: 130px; margin-right: 10px; border-right: 1px solid #ccc;" class="input-group-addon"><b>휴일</b></span>&nbsp;
+						<input type="checkbox" name="closeday"  value="휴일없음">휴일 X&nbsp;
+	        			<input type="checkbox" name="closeday"  value="월요일" checked>월요일&nbsp;
+	        			<input type="checkbox" name="closeday"  value="화요일">화요일&nbsp;
+	        			<input type="checkbox" name="closeday"  value="수요일">수요일&nbsp;
+	        			<input type="checkbox" name="closeday"  value="목요일">목요일&nbsp;
+	        			<input type="checkbox" name="closeday"  value="금요일" checked>금요일&nbsp;
+	        			<input type="checkbox" name="closeday"  value="토요일">토요일&nbsp;
+	        			<input type="checkbox" name="closeday"  value="일요일">일요일
 					</div>
 				</div>
 
 
-				<div class="form-group">
-					<div class="input-group">
-						<span style="width: 130px" class="input-group-addon"><b>오픈 타임</b></span>
-						<input type="time" class="form-control" name="resopen" id="resopen"/>
-					</div>
-				</div>
 
-				<div class="form-group">
+				<!-- <div class="form-group" style="display:inline-block;">
 					<div class="input-group">
 						<span style="width: 130px" class="input-group-addon"><b>클로즈 타임</b></span>
 						<input type="time" class="form-control" name="resclose" id="resclose"/>
 					</div>
-				</div>
+				</div> -->
 
 						
 				<div class="form-group">
 					<div class="input-group">
 						<span style="width: 130px" class="input-group-addon"><b>사진</b></span>
-						<input type="file" class="form-control" name="resphoto " id="resphoto"/>
+						<input type="file" style="width:225px" class="form-control" name="resphoto " id="resphoto"/>
 					</div>
 				</div>
 				

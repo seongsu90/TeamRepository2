@@ -39,7 +39,7 @@
 			
 			/* table*/
 			#user .panel-table{
-			  animation-duration:3s;
+			  animation-duration:1s;
 			}
 			
 			#user .panel-table .panel-body .table{
@@ -78,7 +78,7 @@
 				<div class="row">
 					<div id="user" class="col-md-12" >
 					  <div class="panel panel-primary panel-table animated slideInDown">
-					   <div class="panel-heading " style="padding:5px; background-color:purple;">
+					   <div class="panel-heading " style="padding:5px; background-color:#34495e;">
 					        <div class="row">
 					        
 					        <div class="col col-xs-5 text-center">

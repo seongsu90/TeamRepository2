@@ -89,10 +89,10 @@ public class RestaurantDao {
 		sql += "select rn, resid, resname, reslocation, resinfo, restotaltable, restel, resopen, resclose, rescloseday ,ressavedfile ";
 		sql += "from( " ;
 		sql += "select rownum as rn, resid, resname, reslocation, resinfo, restotaltable, restel, resopen, resclose, rescloseday ,ressavedfile ";
-		sql += "from (select resid, resname, reslocation, resinfo, restotaltable, restel, resopen, resclose, rescloseday ,ressavedfile from Restaurant) ";
+		sql += "from (select resid, resname, reslocation, resinfo, restotaltable, restel, resopen, resclose, rescloseday ,ressavedfile from Restaurant order by resid desc) ";
 		sql += "where resname like ? and rownum<=? ";
 		sql += ") ";
-		sql += "where rn>=? order by resid ";
+		sql += "where rn>=? ";
 		
 		
 		List<Restaurant> list=jdbcTemplate.query(

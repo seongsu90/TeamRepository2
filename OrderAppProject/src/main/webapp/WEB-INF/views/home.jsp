@@ -68,8 +68,13 @@
 			$("#login-modal").on('hidden.bs.modal', function () {
 		    	parent.location.reload();
 		    });
+			
+			$("#login-modal").on('shown.bs.modal', function() {
+	            console.log("온로드");
+	            $("#login_userid").focus();
+	         }); 
 		}); 
-	
+		
 		function onClickLogin()
 		{
 			var mid =$("#login_userid").val();
@@ -80,12 +85,13 @@
 				data: {"mid":mid, "mpassword":mpassword},
 				method:"post",
 				success: function(data){
-					if(data.result=="success"){
-						alert("로그인 성공");
-						$("#login-modal").modal("hide");
+					
+					if(data.result=="success"){						
+						$("#login-modal").modal("hide");						
 					}else{
-						alert("아이디 혹은 비밀번호가 틀렸습니다.");
-					}
+						/* alert("아이디 혹은 비밀번호가 틀렸습니다."); */						
+						$("#loginInCorrect-modal").modal("show");
+					}					
 				}
 			});
 		}
@@ -111,6 +117,48 @@
 				$(".top-nav ul").slideToggle(200);
 			});
 		});
+	</script>
+	
+	<script>
+		// 이전 모달 포커스
+		//모달 목록 (Modal List)
+		var recentModalList = [];		 
+		$(document).ready(function () {
+		    //Modal on Modal : jquery-1.9.1.js:3257 Uncaught RangeError: Maximum call stack size exceeded.
+		    $.fn.modal.Constructor.prototype.enforceFocus = function () { };
+		 
+		    //모달이 뜰 때 객체를 리스트에 추가 (Add modal to list)
+		    $('.modal').on('shown.bs.modal', function (e) {
+		        recentModalList.push(e.target);
+		    });
+		 
+		    //모달이 닫힐 때 객체를 리스트에서 삭제. (Remove modal from list)
+		    $('.modal').on('hide.bs.modal', function (e) {
+		        customModalClosed(e);
+		        /* console.log(recentModalList.length); */
+		    });
+		});
+		 
+		var customModalClosed = function (e) {
+		    //나를 지운다.(Remove me in list)
+		    for (var i = recentModalList.length - 1; i >= 0; i--) {
+		        if (recentModalList[i] == e.target) {
+		            recentModalList.splice(i, 1);
+		        }
+		    }		 
+		    //이전 모달이 있으면 포커싱.(Focus to before modal)
+		    if (recentModalList.length > 0) {
+		        recentModalList[recentModalList.length - 1].focus();		         
+		    }
+		}; 
+		
+		
+		/* $(document).keypress(function(e) {
+		    if(e.which == 13) {
+		        alert('You pressed enter!');
+		    }
+		}); */
+
 	</script>
 
 </head>
@@ -220,7 +268,9 @@
 					<div class="col-md-8 about-text">
 					   <h3>About</h3>
 					   <h4>OUR RESTAURANT!</h4>
-					   <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					   <!-- <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
+					   <p>[주문할게요!] 를 통해 자신의 관심 지역을 설정하고 해당 지역의 이벤트를 진행하고 있는 식당을 한 눈에 살펴 볼 수 있습니다. 
+					   		[주문할게요!] 에 회원가입시 다양한 쿠폰 및 이벤트 알림을 받아 보실 수 있습니다. 앱을 통해 제휴 식당에 예약하고 주문하시면 이벤트 혜택뿐만아니라 포인트 적립도 가능합니다.</p>
 				   </div>
 				   <div class="clearfix"> </div>
 			   </div>
@@ -369,68 +419,72 @@
 			</div>
 		</div>
 	</div>
-	
-<!--/start-footer-->
+
+	<!-- start-footer -->
 	<div class= "footer">
-		 <div class="container">                                                   
+		<div class="container">                                                   
 			<div class="col-md-3 footer-grid">
-					<div class="logo two">
-						<a href="${pageContext.servletContext.contextPath}/"><h3>주문<span>할게요!</span></h3></a>
-					</div>
+				<div class="logo two">
+					<a href="${pageContext.servletContext.contextPath}"><h3>주문<span>할게요!</span></h3></a>
 				</div>
-				<div class=" col-md-3 footer-grid footer-grid2">
-					<div class="bottom-nav">
-					       <h4>LEARN</h4>
-							<ul>
-							<li><a class="active" href="${pageContext.servletContext.contextPath}/">Home</a></li> 
-							<c:if test="${mrank==2}">
-							<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
+			</div>
+			
+			<div class=" col-md-3 footer-grid footer-grid2">
+				<div class="bottom-nav">
+			    	<h4>LEARN</h4>
+					<ul>
+						<li><a href="${pageContext.servletContext.contextPath}">Home</a></li> 
+						
+						<c:if test="${mrank==2}">
+							<li><a class="active"  href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
 							<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
-							</c:if>
-							<c:if test="${mrank==1}">
+						</c:if>
+						
+						<c:if test="${mrank==1}">
 							<li><a href="${pageContext.servletContext.contextPath}/web/ordermanagement">주문관리</a></li> 
 							<li><a href="${pageContext.servletContext.contextPath}/web/restaurantmanege">매장관리</a></li>
 							<li><a href="${pageContext.servletContext.contextPath}/web/menumanagement">메뉴관리</a></li> 
-							</c:if>
-							<li class="lost"><a href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
-							<div class="clearfix"> </div>
-						</ul>
-					 </div>
+						</c:if>
+						
+						<li class="lost"><a href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
+						<div class="clearfix"> </div>
+					</ul>
 				</div>
-				<div class="col-md-3 footer-grid">
-					<div class="Office Address">
-				        <h4>ADDRESS</h4>
-				       <ul class="bottom-icons">
-							<li><a class="glyphicon glyphicon-home" href="#"></a>　서울시 송파구 중대로 135, IT벤처타워 서관 12층 한국소프트웨어산업협회</li>
-							<li><a class="glyphicon glyphicon-envelope" href="#"></a>　gusqls0810@naver.com</li>
-							<li><a class="glyphicon glyphicon-phone" href="#"></a>　 010-9558-1893</li>	
-							<div class="clearfix"> </div>	
-						</ul>
-					 </div>
-				</div>
-				<div class="col-md-3 footer-grid">
-					<h4>SUPPORT WITH</h4>
-						<div class="Office Address">
-						<ul class="bottom-icons">
+			</div>
+			
+			<div class=" col-md-3 footer-grid">
+				<div class="Office Address">
+			        <h4>ADDRESS</h4>
+					<ul class="bottom-icons">
+						<li><a class="glyphicon glyphicon-home" href="#"></a>　서울시 송파구 중대로 135, <br/>　　IT벤처타워 서관 12층<br/>　　한국소프트웨어산업협회</li>
 						<li><a class="glyphicon glyphicon-envelope" href="#"></a>　gusqls0810@naver.com</li>
-						   <!-- <input type="text" class="text" value="Enter email to reset it" onfocus="this.value = '';" onblur="if (this.value == 'Enter email to reset it') {this.value = 'Enter email to reset it';}"> -->
-						<!-- <input type="submit" value="SUBMIT" class="botton"> -->
-						     						     <p>고객지원 등 각종 문의사항은 해당 메일로 연락을 주시면 감사합니다.</p>
-						</ul>
-						</div>
-				    </div>
-			    	<div class="clearfix"> </div>	
+						<li><a class="glyphicon glyphicon-phone" href="#"></a>　 010-9558-1893</li>	
+						<div class="clearfix"> </div>	
+					</ul>
+				 </div>
+			</div>
+			
+			<div class="col-md-3 footer-grid">
+				<h4>SUPPORT WITH</h4>
+				<div class="Office Address">
+					<ul class="bottom-icons">
+						<li><a class="glyphicon glyphicon-envelope" href="#"></a>　gusqls0810@naver.com</li>
+						<li>고객지원 등 각종 문의사항은 해당 메일로 연락을 주시면 감사합니다.</li>
+					</ul>
 				</div>
 			</div>
-			<div class="copy-right">
-			  <div class="container">
-				 	 <p>Copyright &copy; 2015 All Rights Reserved Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
-			   </div>		
-
-			</div>
-			
-			
-			
+			<div class="clearfix"> </div>	
+		</div>
+	</div>
+	
+	<!-- last footer ( go to top ) -->	
+	<div class="copy-right">
+		<div class="container">
+			<p>Copyright &copy; 2015 All Rights Reserved Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+		</div>
+	</div>
+	<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+		
 <!-- END # BOOTSNIP INFO -->
 
 <!-- BEGIN # MODAL LOGIN -->
@@ -483,11 +537,30 @@
 <!-- END # MODAL LOGIN -->
 
 <!-- END # BOOTSNIP INFO -->
+	<div class="modal fade" id="loginInCorrect-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" style="padding-top: 150px">
+		<div class="modal-dialog" style="width: 300px;">
+			<div class="modal-content">				
+				<div class="modal-header">					
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="modalLabel">로그인 실패</h4>										
+				</div>				
+				<div class="modal-body" >
+					<h5>아이디 혹은 비밀번호가 틀렸습니다.</h5>
+				</div>
+				<div class="modal-footer">
+				  	<button type="button" class="btn btn-default" data-dismiss="modal" role="button" >확인</button>				  	
+				</div>
+			</div>
+		</div>
+	</div>
 
+<<<<<<< HEAD
 		<a href="#home" id="toTop" class="scroll" style="display: block;" > <span id="toTopHover" style="opacity: 1;"> </span></a>
 		
 <!-- 		<input type="text" id="loginId"/>
 		<input type="hidden" id="loginPassword"/> -->
     
+=======
+>>>>>>> branch 'master' of https://github.com/seongsu90/TeamRepository2
 </body>
 </html>

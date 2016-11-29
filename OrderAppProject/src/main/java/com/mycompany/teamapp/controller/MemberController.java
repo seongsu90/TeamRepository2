@@ -188,7 +188,7 @@ public class MemberController {
 		}
 		session.setAttribute("pageNo", String.valueOf(intPageNo));
 		
-		int rowsPerPage = 5;
+		int rowsPerPage = 8;
 		int pagesPerGroup = 5;
 		
 		int totalMemberNo = memberService.getCount(find);
@@ -398,7 +398,7 @@ public class MemberController {
 	public String withdraw(String mpassword, HttpSession session, Model model) {
 		logger.info("withdraw() POST 실행");
 		String mid = (String) session.getAttribute("login");
-		int result = memberService.withdraw(mid, mpassword); 
+		String result = memberService.withdraw(mid, mpassword); 
 		if ( result == MemberService.WITHDRAW_SUCCESS ){
 			session.removeAttribute("login");
 			return "redirect:/";			
@@ -407,6 +407,20 @@ public class MemberController {
 			return "member/withdrawForm";
 		}
 						
+	}
+	
+	// 회원 삭제
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public String delete(String deletemid, String inputmid, Model model) {
+		logger.info("delete() POST 실행");
+		String result = "fail";
+		if ( deletemid.equals(inputmid) ) {
+			memberService.withdraw(deletemid, memberService.info(deletemid).getMpassword());
+			result = MemberService.WITHDRAW_SUCCESS;
+		}
+		
+		model.addAttribute("result", result);
+		return "member/result";						
 	}
 	
 	

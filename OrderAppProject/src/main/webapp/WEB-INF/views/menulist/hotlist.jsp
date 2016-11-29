@@ -166,7 +166,7 @@
                     </td>
                     <td data-label="Profession">${menuList.mlinfo}</td>
                     <td>
-                    	<img src="showPhoto?mlsavedfile=${menuList.mlsavedfile}"/>
+                    	<img src="showPhoto?mlsavedfile=${menuList.mlsavedfile}" style="width:50px;"/>
                     </td>
                     <td>${menuList.mlishot}</td>
                 </tr>
@@ -174,6 +174,32 @@
                </c:forEach> 
             </tbody>
         </table>
+        <form action="${pageContext.servletContext.contextPath}/menulist/hotlist">
+			<input type="hidden" name="pageNo" value="1"/>
+		</form><br/>
+        <div style="text-align:center;">
+			<c:if test="${pageNo!=1}">
+			<a href="hotlist?pageNo=1&find=${find}">[처음]</a>
+			</c:if>
+			
+			<c:if test="${groupNo>1}">
+				<a href="hotlist?pageNo=${startPageNo-1}&find=${find}">[이전]</a>
+			</c:if>
+			
+			<c:forEach var="i" begin="${startPageNo}" end="${endPageNo}">
+				<a href="hotlist?pageNo=${i}&find=${find}"
+					<c:if test="${pageNo==i}">style="color:red" </c:if>
+				>${i}</a>
+			</c:forEach>
+			
+			<c:if test="${groupNo<totalGroupNo}">
+				<a href="hotlist?pageNo=${endPageNo+1}&find=${find}">[다음]</a>
+			</c:if>
+			
+			<c:if test="${pageNo!=totalPageNo}">
+			<a href="hotlist?pageNo=${totalPageNo}&find=${find}">[맨끝]</a>
+			</c:if>
+		</div>
     </div>	
 		
 	</body>

@@ -66,24 +66,11 @@ public class EventController {
 		return "event/result";
 	}
 	
-	/*@RequestMapping(value="/delete", method=RequestMethod.GET)
-	public String delete(){
-		logger.info("delete 처리");
-		return "event/delete";
-	}
-	
-	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public String delete(int eresid,String emlname){
-		logger.info("delete 요청처리");
-		eventService.delete(eresid,emlname);
-		return "redirect:/event/list";
-	}*/
-	
 	@RequestMapping(value="/delete")
 	public String delete(int eresid,String emlname){
 		logger.info("delete 처리");
 		eventService.delete(eresid, emlname);
-		return "event/index";
+		return "event/list";
 	}
 	
 	@RequestMapping("/info")
@@ -114,6 +101,7 @@ public class EventController {
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
 	public String modify(Event event, HttpSession session, Model model){
 		logger.info("modify 완료");
+		Event oldEvent = eventService.info(event.getEresid(), event.getEmlname());
 		
 		if ( event.getEphoto() != null && !event.getEphoto().isEmpty() ) {
 			try{
@@ -126,7 +114,12 @@ public class EventController {
 				event.setEmime(event.getEphoto().getContentType());
 				
 				} catch (Exception e) {}
-		}	
+		} else {
+			event.setEsavedfile(oldEvent.getEsavedfile());
+			event.setEoriginfile(oldEvent.getEoriginfile());
+			event.setEmime(oldEvent.getEmime());			
+		}
+		
 			int result = eventService.modify(event);
 			if(result == EventService.MODIFY_SUCCESS){
 				model.addAttribute("result", "success");
@@ -181,9 +174,10 @@ public class EventController {
 		
 		int rowsPerPage=8;
 		int pagesPerGroup=5;
-		int totalRestaurantNo=eventService.getCount();
+		int totalEventNo=eventService.getCount();
+		if ( totalEventNo == 0 ) totalEventNo = 1;
 		
-		int totalPageNo=totalRestaurantNo/rowsPerPage+((totalRestaurantNo%rowsPerPage!=0)?1:0);
+		int totalPageNo=totalEventNo/rowsPerPage+((totalEventNo%rowsPerPage!=0)?1:0);
 		int totalGroupNo=totalPageNo/pagesPerGroup+((totalPageNo%pagesPerGroup!=0)?1:0);
 		
 		int groupNo=(intPageNo-1)/pagesPerGroup+1;
@@ -198,7 +192,7 @@ public class EventController {
 		model.addAttribute("pageNo", intPageNo);
 		model.addAttribute("rowsPerPage", rowsPerPage);
 		model.addAttribute("pagesPerGroup", pagesPerGroup);
-		model.addAttribute("totalRestaurantNo", totalRestaurantNo);
+		model.addAttribute("totalEventNo", totalEventNo);
 		model.addAttribute("totalPageNo", totalPageNo);
 		model.addAttribute("totalGroupNo", totalGroupNo);
 		model.addAttribute("groupNo", groupNo);
