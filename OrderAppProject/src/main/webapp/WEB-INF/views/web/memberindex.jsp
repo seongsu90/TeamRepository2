@@ -176,7 +176,7 @@
 	<!--start-slider-->
 	 <iframe src="memberboard?pageNo=1" style="width:100%; height:680px; border:0px;" scrolling="no"></iframe>
 
-	<!-- start-footer -->
+	<!-- start-footer --> 
 	<div class= "footer">
 		<div class="container">                                                   
 			<div class="col-md-3 footer-grid">
