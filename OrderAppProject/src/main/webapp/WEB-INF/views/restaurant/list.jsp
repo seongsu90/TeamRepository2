@@ -180,10 +180,10 @@
 		
 		
 		<script type="text/javascript">
-			function showInfo(eresid) {
+			function showInfo(resid) {
 				$.ajax({
-					url: "../restaurant/info",
-					data: {"eresid":eresid},
+					url: "/teamapp/restaurant/info",
+					data:resid,
 					success: function(data) {
 						parent.showInfo(data);
 					}
@@ -205,10 +205,10 @@
 				var resinfo = $("#resinfo").val();
 				var restel = $("#restel").val();
 				var reslocation = $("#reslocation").val();
-				var closeday =[];
+/* 				var closeday =[];
 				$("input[name='closeday']:checked").each(function(i)){
 					closeday.push($(this).val());
-				}
+				} */
 			
 				var resopen = $("#resopen").val();
 				var resclose = $("#resclose").val();
@@ -249,7 +249,7 @@
 					}					
 					
 				});				
-			
+		 	}
 
 			
 			function onClickBtnCancel() {
