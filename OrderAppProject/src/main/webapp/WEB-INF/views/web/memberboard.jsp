@@ -221,7 +221,9 @@
 		function setMlocation() {
 			$("#mlocation").val($("#selCity").val() + " "+ $("#selProvince").val()); 				
 		}	
-	
+
+		/* ################## Modify Modal################## */  
+		/* Show Modify Modal */
 		function showModifyModal(member) {
 			$("#modifyForm #mid").val(member.mid);
 			$("#modifyForm #mname").val(member.mname);
@@ -239,6 +241,7 @@
 			$("#memberModifyModal").modal("show");
 		}
 		
+		/* Modify Button */
 		function onClickBtnModify() {
 			var mid = $("#modifyForm #mid").val();
 			var mname = $("#modifyForm #mname").val();
@@ -268,15 +271,19 @@
 			});
 		}
 		
+		/* Modify Cancel Button */
 		function onClickBtnModifyCancel() {
 			$("#memberModifyModal").modal("hide");
 		}
 		
+		/* ################## Delete Modal################## */
+		/* Show Delete Modal */
 		function showDeleteModal(mid) {
 			$("#deleteForm #deletemid").val(mid);
 			$("#memberDeleteModal").modal("show");
 		}
 		
+		/* Delete Button */
 		function onClickBtnDelete() {
 			var deletemid = $("#deletemid").val();
 			var inputmid = $("#inputmid").val();
@@ -287,18 +294,29 @@
 				method: "post",
 				success: function(data) {
 					if ( data.result == "success" ) {
-						alert("삭제 성공");
+						$("#message").html("삭제 성공");
+						$("#errorIcon").attr('class', "fa-check-circle-o");
+						$("#messageModal").modal("show");
 						$("#memberDeleteModal").modal("hide");
 						location.reload();
 					} else {
-						alert("삭제 실패");
+						$("#message").html("삭제 실패");
+						$("#messageModal").modal("show");
 					}
 				}
 			});
 		}
 		
+		/* Delete Cancel Button */
 		function onClickBtnDeleteCancel() {
 			$("#memberDeleteModal").modal("hide");
+		}
+		
+		/* ################## Message Modal################## */
+		/* Show Message Modal */
+		function onClickBtnOK() {
+			$("#message").html("");
+			$("#messageModal").modal("hide");
 		}
 	</script>	
 </head>
@@ -538,6 +556,35 @@
 	</div><!-- /.modal -->
 
 	<!-- ########################## 삭제 Modal ########################## -->
+	
+	<!-- ########################## Message Modal ########################## -->
+	
+	<div id="messageModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
+		<div class="modal-dialog" role="document">
+	    	<div class="modal-content" style="width:500px">
+	    	
+	    		<!-- modal-header -->
+	     		<div class="modal-header" style="background-color: #34495e; color:white; text-align: center">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Warning</h4>
+	      		</div>
+	      		
+	      		<!-- modal-body -->
+	      		<div class="modal-body" align="center">
+	      			<i id="errorIcon" class="fa fa-exclamation-triangle" style="font-size: 150px; color: #34495e" aria-hidden="true"></i><br/>
+					<b style="font-family: sans-serif; color: red" id="message">하이요</b>
+	      		</div>
+	      	
+		      	<!-- modal-footer -->	
+				<div class="modal-footer" style="background-color: #34495e; color:white">
+			        <button id="messageOk" type="button" class="btn btn-default" onclick="onClickBtnOK()" style="color: #34495e"><b>확인</b></button>
+				</div>
+				
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 
+	<!-- ########################## Message Modal ########################## -->
+	
 </body>
 </html>
