@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.mycompany.teamapp.dto.Event;
 import com.mycompany.teamapp.dto.MenuList;
 import com.mycompany.teamapp.service.MenuListService;
 
@@ -29,46 +30,44 @@ public class MenuListController {
 		
 		@RequestMapping("/list")
 		public String list(String pageNo, Model model, HttpSession session){
-			int intPageNo=1;
-			if(pageNo==null){
-				pageNo=(String) session.getAttribute("pageNo");
-				if(pageNo != null){
+			
+			int intPageNo = 1;
+			if ( pageNo == null ) {
+				pageNo = (String) session.getAttribute("pageNo");
+				if ( pageNo != null ) {
 					intPageNo = Integer.parseInt(pageNo);
 				}
-			}else{
+			} else {
 				intPageNo = Integer.parseInt(pageNo);
 			}
 			session.setAttribute("pageNo", String.valueOf(intPageNo));
-			int rowsPerPage = 8;//한페이지당 보이는 갯수
-			int pagesPerGroup = 5;//한그룹당 페이지수 
 			
-			int totalBoardNo = menuListService.getCount();//총 게시판 갯수
+			int rowsPerPage=8;
+			int pagesPerGroup=5;
+			int totalMenuListNo=menuListService.getCount();
+			if ( totalMenuListNo == 0 ) totalMenuListNo = 1;
 			
-			int totalPageNo = (totalBoardNo/rowsPerPage)+((totalBoardNo%rowsPerPage!=0)?1:0);//총 페이지수
-			//                       정수/정수 =정수               나머지가있다면 1을 더해주고 없다면 0 
+			int totalPageNo=totalMenuListNo/rowsPerPage+((totalMenuListNo%rowsPerPage!=0)?1:0);
+			int totalGroupNo=totalPageNo/pagesPerGroup+((totalPageNo%pagesPerGroup!=0)?1:0);
 			
-			int totalGroupNo = (totalPageNo/pagesPerGroup)+((totalPageNo%pagesPerGroup!=0)?1:0);
+			int groupNo=(intPageNo-1)/pagesPerGroup+1;
+			int startPageNo=(groupNo-1)*pagesPerGroup+1;
+			int endPageNo=startPageNo+pagesPerGroup-1;
+			if(groupNo==totalGroupNo){
+				endPageNo=totalPageNo;
+			}
 			
-			int groupNo = (intPageNo-1)/pagesPerGroup+1;
-			
-			int startPageNo = (groupNo-1)*pagesPerGroup+1;
-			
-			int endPageNo = startPageNo+pagesPerGroup-1;
-			
-			if(groupNo == totalGroupNo) {endPageNo=totalPageNo;}
-			
-			List<MenuList> list = menuListService.list(intPageNo,rowsPerPage);
-			
-			model.addAttribute("intPageNo",intPageNo);
-			model.addAttribute("rowsPerPage",rowsPerPage);	
-			model.addAttribute("pagesPerGroup",pagesPerGroup);
-			model.addAttribute("totalBoardNo",totalBoardNo);
-			model.addAttribute("totalPageNo",totalPageNo);
-			model.addAttribute("totalGroupNo",totalGroupNo);
-			model.addAttribute("groupNo",groupNo);
-			model.addAttribute("startPageNo",startPageNo);
-			model.addAttribute("endPageNo",endPageNo);
+			List<MenuList> list= menuListService.list(intPageNo, rowsPerPage);
 			model.addAttribute("list", list);
+			model.addAttribute("pageNo", intPageNo);
+			model.addAttribute("rowsPerPage", rowsPerPage);
+			model.addAttribute("pagesPerGroup", pagesPerGroup);
+			model.addAttribute("totalMenuListNo", totalMenuListNo);
+			model.addAttribute("totalPageNo", totalPageNo);
+			model.addAttribute("totalGroupNo", totalGroupNo);
+			model.addAttribute("groupNo", groupNo);
+			model.addAttribute("startPageNo", startPageNo);
+			model.addAttribute("endPageNo", endPageNo);
 			
 			return "menulist/list";
 		}
@@ -129,7 +128,7 @@ public class MenuListController {
 		@RequestMapping("/delete")
 		public String delete(int mlresid, String mlname){
 			menuListService.delete(mlresid, mlname);
-			return "menulist/list";
+			return "redirect:/menulist/list";
 		}
 		
 		@RequestMapping("/info")	

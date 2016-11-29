@@ -6,10 +6,9 @@
 	<head>
 		<meta charset="UTF-8"> 
 		 <link href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css" rel="stylesheet">
-	    <link href="${pageContext.servletContext.contextPath}/resources/css/justified-nav.css" rel="stylesheet">
-		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-1.12.4.min.js"></script>
+	   
 		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
-	 	<script>
+	 	<!-- <script>
 	 		$(function(){
 	 			$("nav li").on("click", function(){
 	 				$("nav li").removeClass("active");//jquery 이용
@@ -17,7 +16,7 @@
 	 				$(this).addClass("active");
 	 			});
 	 		});
-	 	</script>
+	 	</script> -->
 		
 		<style>
 			table#acrylic {
@@ -53,6 +52,7 @@
 	            background-image: -webkit-linear-gradient(#646f7f, #4a5564);
 	            background-image: linear-gradient(#646f7f, #4a5564);
 	            border-top: 1px solid #858d99;
+	       		background:#34495e;
 	        }
 	        
 	        #acrylic thead th:first-child {

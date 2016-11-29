@@ -27,7 +27,7 @@ public class MenuListService {
 	}
 	
 	public List<MenuList> hotlist(int pageNo, int rowsPerPage){
-		return menuListdao.selectByPage(pageNo, rowsPerPage); 
+		return menuListdao.selectByHotPage(pageNo, rowsPerPage); 
 	}
 	
 	public int add(MenuList menuList){

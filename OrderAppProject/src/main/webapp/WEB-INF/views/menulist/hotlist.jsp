@@ -53,6 +53,7 @@
 	            background-image: -webkit-linear-gradient(#646f7f, #4a5564);
 	            background-image: linear-gradient(#646f7f, #4a5564);
 	            border-top: 1px solid #858d99;
+	            background:#34495e;
 	        }
 	        
 	        #acrylic thead th:first-child {
@@ -151,7 +152,6 @@
 					<th> 식당아이디 </th>
 					<th> 메뉴 정보 </th>
 					<th> 메뉴 사진  </th>
-					<th> 핫메뉴? </th>
                 </tr>
             </thead>
             <tbody>
@@ -168,36 +168,35 @@
                     <td>
                     	<img src="showPhoto?mlsavedfile=${menuList.mlsavedfile}" style="width:50px;"/>
                     </td>
-                    <td>${menuList.mlishot}</td>
                 </tr>
                 
                </c:forEach> 
             </tbody>
         </table>
-        <form action="${pageContext.servletContext.contextPath}/menulist/hotlist">
+        <form action="${pageContext.servletContext.contextPath}/menulist/list">
 			<input type="hidden" name="pageNo" value="1"/>
 		</form><br/>
         <div style="text-align:center;">
 			<c:if test="${pageNo!=1}">
-			<a href="hotlist?pageNo=1&find=${find}">[처음]</a>
+			<a href="list?pageNo=1&find=${find}">[처음]</a>
 			</c:if>
 			
 			<c:if test="${groupNo>1}">
-				<a href="hotlist?pageNo=${startPageNo-1}&find=${find}">[이전]</a>
+				<a href="list?pageNo=${startPageNo-1}&find=${find}">[이전]</a>
 			</c:if>
 			
 			<c:forEach var="i" begin="${startPageNo}" end="${endPageNo}">
-				<a href="hotlist?pageNo=${i}&find=${find}"
+				<a href="list?pageNo=${i}&find=${find}"
 					<c:if test="${pageNo==i}">style="color:red" </c:if>
 				>${i}</a>
 			</c:forEach>
 			
 			<c:if test="${groupNo<totalGroupNo}">
-				<a href="hotlist?pageNo=${endPageNo+1}&find=${find}">[다음]</a>
+				<a href="list?pageNo=${endPageNo+1}&find=${find}">[다음]</a>
 			</c:if>
 			
 			<c:if test="${pageNo!=totalPageNo}">
-			<a href="hotlist?pageNo=${totalPageNo}&find=${find}">[맨끝]</a>
+			<a href="list?pageNo=${totalPageNo}&find=${find}">[맨끝]</a>
 			</c:if>
 		</div>
     </div>	

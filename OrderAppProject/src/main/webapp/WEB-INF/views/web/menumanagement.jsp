@@ -12,7 +12,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Niconne|Playball|Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
+	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script> --%>
 	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 	<script>
@@ -120,7 +120,7 @@
 							            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/hotlist?mlishot=1">핫메뉴</a></li>
 							          </ul>
 						  			</nav>
-									<iframe name="iframe" style="width:1200px; height:840px; border-width:0;" src="/teamapp/menulist/add"></iframe>
+									<iframe name="iframe" style="width:1200px; height:840px; border-width:0;" src="/teamapp/menulist/list"></iframe>
 								</section>					
 							</div>
 						</div>
@@ -203,14 +203,6 @@
 										$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 									});
 								});
-								</script>
-							<!--start-smooth-scrolling-->
-						<script type="text/javascript">
-									$(document).ready(function() {
-										
-										$().UItoTop({ easingType: 'easeOutQuart' });
-										
-									});
 								</script>
 		<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 

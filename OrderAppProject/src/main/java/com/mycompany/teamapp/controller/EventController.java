@@ -70,7 +70,7 @@ public class EventController {
 	public String delete(int eresid,String emlname){
 		logger.info("delete 처리");
 		eventService.delete(eresid, emlname);
-		return "event/list";
+		return "redirect:/event/list";
 	}
 	
 	@RequestMapping("/info")
