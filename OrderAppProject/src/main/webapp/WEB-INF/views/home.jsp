@@ -68,8 +68,13 @@
 			$("#login-modal").on('hidden.bs.modal', function () {
 		    	parent.location.reload();
 		    });
+			
+			$("#login-modal").on('shown.bs.modal', function() {
+	            console.log("온로드");
+	            $("#login_userid").focus();
+	         }); 
 		}); 
-	
+		
 		function onClickLogin()
 		{
 			var mid =$("#login_userid").val();
@@ -80,12 +85,13 @@
 				data: {"mid":mid, "mpassword":mpassword},
 				method:"post",
 				success: function(data){
-					if(data.result=="success"){
-						alert("로그인 성공");
-						$("#login-modal").modal("hide");
+					
+					if(data.result=="success"){						
+						$("#login-modal").modal("hide");						
 					}else{
-						alert("아이디 혹은 비밀번호가 틀렸습니다.");
-					}
+						/* alert("아이디 혹은 비밀번호가 틀렸습니다."); */						
+						$("#loginInCorrect-modal").modal("show");
+					}					
 				}
 			});
 		}
@@ -111,6 +117,48 @@
 				$(".top-nav ul").slideToggle(200);
 			});
 		});
+	</script>
+	
+	<script>
+		// 이전 모달 포커스
+		//모달 목록 (Modal List)
+		var recentModalList = [];		 
+		$(document).ready(function () {
+		    //Modal on Modal : jquery-1.9.1.js:3257 Uncaught RangeError: Maximum call stack size exceeded.
+		    $.fn.modal.Constructor.prototype.enforceFocus = function () { };
+		 
+		    //모달이 뜰 때 객체를 리스트에 추가 (Add modal to list)
+		    $('.modal').on('shown.bs.modal', function (e) {
+		        recentModalList.push(e.target);
+		    });
+		 
+		    //모달이 닫힐 때 객체를 리스트에서 삭제. (Remove modal from list)
+		    $('.modal').on('hide.bs.modal', function (e) {
+		        customModalClosed(e);
+		        /* console.log(recentModalList.length); */
+		    });
+		});
+		 
+		var customModalClosed = function (e) {
+		    //나를 지운다.(Remove me in list)
+		    for (var i = recentModalList.length - 1; i >= 0; i--) {
+		        if (recentModalList[i] == e.target) {
+		            recentModalList.splice(i, 1);
+		        }
+		    }		 
+		    //이전 모달이 있으면 포커싱.(Focus to before modal)
+		    if (recentModalList.length > 0) {
+		        recentModalList[recentModalList.length - 1].focus();		         
+		    }
+		};
+		
+		
+		/* $(document).keypress(function(e) {
+		    if(e.which == 13) {
+		        alert('You pressed enter!');
+		    }
+		}); */
+
 	</script>
 
 </head>
@@ -220,7 +268,9 @@
 					<div class="col-md-8 about-text">
 					   <h3>About</h3>
 					   <h4>OUR RESTAURANT!</h4>
-					   <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					   <!-- <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
+					   <p>[주문할게요!] 를 통해 자신의 관심 지역을 설정하고 해당 지역의 이벤트를 진행하고 있는 식당을 한 눈에 살펴 볼 수 있습니다. 
+					   		[주문할게요!] 에 회원가입시 다양한 쿠폰 및 이벤트 알림을 받아 보실 수 있습니다. 앱을 통해 제휴 식당에 예약하고 주문하시면 이벤트 혜택뿐만아니라 포인트 적립도 가능합니다.</p>
 				   </div>
 				   <div class="clearfix"> </div>
 			   </div>
@@ -487,6 +537,22 @@
 <!-- END # MODAL LOGIN -->
 
 <!-- END # BOOTSNIP INFO -->
+	<div class="modal fade" id="loginInCorrect-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" style="padding-top: 150px">
+		<div class="modal-dialog">
+			<div class="modal-content">				
+				<div class="modal-header">					
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="modalLabel">로그인 실패</h4>										
+				</div>				
+				<div class="modal-body" >
+					<h5>아이디 혹은 비밀번호가 틀렸습니다.</h5>
+				</div>
+				<div class="modal-footer">
+				  	<button type="button" class="btn btn-default" data-dismiss="modal" role="button" >확인</button>				  	
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

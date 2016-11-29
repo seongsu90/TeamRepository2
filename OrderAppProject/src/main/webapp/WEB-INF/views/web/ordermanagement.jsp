@@ -29,6 +29,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			});
 		});
 	</script>
+	
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
 			$(".scroll").click(function(event){		
@@ -37,7 +38,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			});
 		});
 	</script>
-	<!--start-smooth-scrolling-->
+	
 	<script type="text/javascript">
 		$(document).ready(function() {
 			/*
@@ -53,6 +54,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			
 		});
 	</script>	
+	
 
 </head>
 <body>
@@ -65,13 +67,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="top-nav">
 					<span class="menu two"> </span>
 					<ul>					
-						<li><a class="active" href="${pageContext.servletContext.contextPath}/">Home</a></li> 
+						<li><a href="${pageContext.servletContext.contextPath}/">Home</a></li> 
 						<c:if test="${mrank==2}">
 						<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
 						<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
 						</c:if>
 						<c:if test="${mrank==1}">
-						<li><a href="${pageContext.servletContext.contextPath}/web/ordermanagement">주문관리</a></li> 
+						<li><a class="active"  href="${pageContext.servletContext.contextPath}/web/ordermanagement">주문관리</a></li> 
 						<li><a href="${pageContext.servletContext.contextPath}/web/restaurantmanege">매장관리</a></li>
 						<li><a href="${pageContext.servletContext.contextPath}/web/menumanagement">메뉴관리</a></li> 
 						</c:if>
@@ -90,9 +92,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="clearfix"> </div>
 			</div>
 			<div class="head-bg">
-				<div class="logo three">
-						<a href="/teamapp"><h1>FOOD<span>House</span></h1></a>
-				</div>
+			<div class="logo three">
+					<a href="/teamapp"><h1>FOOD<span>House</span></h1></a>
+			</div>
 			</div>
 		<!--/header-->
 	</div>
