@@ -126,15 +126,10 @@ public class MenuListController {
 			return "redirect:/menulist/list";
 		}
 		
-		@RequestMapping(value="/delete", method=RequestMethod.GET)
-		public String delete(){
-			return "menulist/delete";
-		}
-		
-		@RequestMapping(value="/delete", method=RequestMethod.POST)
-		public String delete(int mlresid, String mlname) {
+		@RequestMapping("/delete")
+		public String delete(int mlresid, String mlname){
 			menuListService.delete(mlresid, mlname);
-			return "redirect:/menulist/list";	
+			return "menulist/list";
 		}
 		
 		@RequestMapping("/info")	

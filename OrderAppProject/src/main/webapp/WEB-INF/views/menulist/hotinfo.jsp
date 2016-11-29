@@ -30,7 +30,7 @@
 		<div>
 			<c:if test="${mrank!=0}">
 			    <a href="modifyhot?mlresid=${menuList.mlresid}&mlname=${menuList.mlname}&mlishot=1">[수정]</a>
-				<a href="delete?mlresid=${menuList.mlresid}">[삭제]</a>
+				<a href="delete?mlresid=${menuList.mlresid}&mlname=${menuList.mlname}">[삭제]</a>
 			</c:if>
 			<a href="hotlist?mlishot=1">[목록]</a>
 		</div>

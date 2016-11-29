@@ -48,6 +48,7 @@
 	            background-image: -webkit-linear-gradient(#646f7f, #4a5564);
 	            background-image: linear-gradient(#646f7f, #4a5564);
 	            border-top: 1px solid #858d99;
+	            background: #34495e;
 	        }
 
 	        #acrylic thead th:first-child {
@@ -212,9 +213,13 @@
 	               </c:forEach> 
 	            </tbody>
 	        </table>
+	        <form action="${pageContext.servletContext.contextPath}/event/list">
+				<input type="hidden" name="pageNo" value="1"/>
+			</form><br/>
+			
 	        <div style="text-align:center;">
 				<c:if test="${pageNo!=1}">
-				<a href="list?pageNo=1&find=${find}">[처음]</a>
+					<a href="list?pageNo=1&find=${find}">[처음]</a>
 				</c:if>
 				
 				<c:if test="${groupNo>1}">
@@ -232,7 +237,7 @@
 				</c:if>	
 				
 				<c:if test="${pageNo!=totalPageNo}">
-				<a href="list?pageNo=${totalPageNo}&find=${find}">[맨끝]</a>
+					<a href="list?pageNo=${totalPageNo}&find=${find}">[맨끝]</a>
 				</c:if>
 		    </div>
       </div>

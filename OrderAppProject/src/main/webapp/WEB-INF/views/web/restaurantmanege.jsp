@@ -23,7 +23,17 @@
 	<script type="text/javascript"
 		src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#infoModal #ephoto").change(function(){
+				$("#photoTag").html("");
+			});
+		});
+		
 		 function showInfo(data) {
+			 
+			var hi = data.esavedfile;
+			console.log(data.esavedfile);
+			console.log(data.ephoto);
 
 			$("#infoModal").modal("show");
 			$("#infoModal #ename").val(data.ename);
@@ -33,7 +43,7 @@
 			$("#infoModal #eprice").val(data.eprice);
 			$("#infoModal #estart").val(data.estart);
 			$("#infoModal #eend").val(data.eend);
-	
+			$("#infoModal #photoEx").attr('src', "/teamapp/event/showPhoto?esavedfile=" + data.esavedfile);
 		};
 	
 		function eventUpdate() {
@@ -69,7 +79,7 @@
 				success: function(data) {
 					if(data.result == "success") {
 					    $("#infoModal").modal("hide");
-					    $("#iframe")[0].contentDocument.location.reload(true); 
+					    location.reload(true); 
 					} else {
 						alert("수정 실패");
 					  }
@@ -260,7 +270,11 @@
 						 <div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>이벤트 사진</b></span>
-							<b><input id="ephoto" type="file" class="form-control" multiple /></b>
+								
+								<div id="photoTag">
+									<img id="photoEx" class="form-control" style="width: 302px; height:auto; padding: 10px"/>
+								</div>
+								<b><input id="ephoto" type="file" class="form-control" multiple /></b>
 							</div>
 						</div> 
 

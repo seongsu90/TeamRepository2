@@ -166,7 +166,7 @@
                     </td>
                     <td data-label="Profession">${menuList.mlinfo}</td>
                     <td>
-                    	<img src="showPhoto?mlsavedfile=${menuList.mlsavedfile}"/>
+                    	<img src="showPhoto?mlsavedfile=${menuList.mlsavedfile}" style="width:50px;"/>
                     </td>
                     <td>${menuList.mlishot}</td>
                 </tr>
@@ -174,6 +174,9 @@
                </c:forEach> 
             </tbody>
         </table>
+        <form action="${pageContext.servletContext.contextPath}/menulist/list">
+			<input type="hidden" name="pageNo" value="1"/>
+		</form><br/>
         <div style="text-align:center;">
 			<c:if test="${pageNo!=1}">
 			<a href="list?pageNo=1&find=${find}">[처음]</a>
