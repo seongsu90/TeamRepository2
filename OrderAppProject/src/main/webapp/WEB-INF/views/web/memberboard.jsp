@@ -182,17 +182,14 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
-				console.log("ready 실행");
 				
 				$("#selCity").change(function () {
-					console.log("City Change");
 					var selCity = $("#selCity").val();
 			        setProvince(selCity, null);
 			        $("#mlocation").val(""); 
 			    });
 				
 				$("#selProvince").change(function () {
-					console.log("Province Change");
 					setMlocation();
 			    });
 				
@@ -202,7 +199,6 @@
 		});
 		
 		function setCity(selCity) {
-			console.log("setCity 실행");
 			$.ajax({
 				url: "getCity",
 				data: {"selCity":selCity},
@@ -213,7 +209,6 @@
 		}
 		
 		function setProvince(selCity, selProvince) {
-			console.log("setProvince 실행");
 			$.ajax({
 				url: "getProvince",
 				data: {"selCity":selCity, "selProvince":selProvince},
@@ -224,7 +219,6 @@
 		}
 			
 		function setMlocation() {
-			console.log("setMlocation() 실행");
 			$("#mlocation").val($("#selCity").val() + " "+ $("#selProvince").val()); 				
 		}	
 	
