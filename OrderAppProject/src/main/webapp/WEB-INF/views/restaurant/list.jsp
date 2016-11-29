@@ -182,8 +182,13 @@
 		<script type="text/javascript">
 			function showInfo(resid) {
 				$.ajax({
+<<<<<<< HEAD
 					url: "../restaurant/info",
 					data: {"resid":resid},
+=======
+					url: "/teamapp/restaurant/info",
+					data:resid,
+>>>>>>> branch 'master' of https://github.com/seongsu90/TeamRepository2
 					success: function(data) {
 						parent.showInfo(data);
 					}
@@ -205,10 +210,10 @@
 				var resinfo = $("#resinfo").val();
 				var restel = $("#restel").val();
 				var reslocation = $("#reslocation").val();
-				var closeday =[];
+/* 				var closeday =[];
 				$("input[name='closeday']:checked").each(function(i)){
 					closeday.push($(this).val());
-				}
+				} */
 			
 				var resopen = $("#resopen").val();
 				var resclose = $("#resclose").val();
@@ -249,7 +254,7 @@
 					}					
 					
 				});				
-			
+		 	}
 
 			
 			function onClickBtnCancel() {
