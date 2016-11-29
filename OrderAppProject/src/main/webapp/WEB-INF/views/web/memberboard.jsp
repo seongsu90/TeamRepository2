@@ -195,7 +195,18 @@
 				
 				$("#memberDeleteModal").on('shown.bs.modal', function() {
 					$("#inputmid").focus();
+				});
+				
+				$("#memberDeleteModal").on('hidden.bs.modal', function() {
+					$("#inputmid").val("");
+					location.reload();
 				}); 
+				
+				$("#messageModal").on('hidden.bs.modal', function() {
+					$("#inputmid").focus();
+					$("#successMessage").html("");
+					$("#failMessage").html("");
+				});
 		});
 		
 		function setCity(selCity) {
@@ -294,13 +305,14 @@
 				method: "post",
 				success: function(data) {
 					if ( data.result == "success" ) {
-						$("#message").html("삭제 성공");
-						$("#errorIcon").attr('class', "fa-check-circle-o");
+						$("#successMessage").html("삭제 성공");
+						$("#errorIcon").attr('class', "fa fa-check-circle");
 						$("#messageModal").modal("show");
-						$("#memberDeleteModal").modal("hide");
-						location.reload();
+						$("#messageModal").on('hidden.bs.modal', function() {
+							$("#memberDeleteModal").modal("hide");
+						}); 
 					} else {
-						$("#message").html("삭제 실패");
+						$("#failMessage").html("삭제 실패");
 						$("#messageModal").modal("show");
 					}
 				}
@@ -313,9 +325,8 @@
 		}
 		
 		/* ################## Message Modal################## */
-		/* Show Message Modal */
+		/* Message OK Button */
 		function onClickBtnOK() {
-			$("#message").html("");
 			$("#messageModal").modal("hide");
 		}
 	</script>	
@@ -538,7 +549,7 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>아이디 입력</b></span>
-								<input type="text" class="form-control" name="inputmid" id="inputmid"/>
+								<input type="text" class="form-control" name="inputmid" id="inputmid" onkeydown="if(event.keyCode==13){javascript:onClickBtnDelete();}"/>
 							</div>
 						</div>
 						
@@ -559,20 +570,21 @@
 	
 	<!-- ########################## Message Modal ########################## -->
 	
-	<div id="messageModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
+	<div id="messageModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto" onkeydown="if(event.keyCode==13){javascript:onClickBtnOK();}">
 		<div class="modal-dialog" role="document">
 	    	<div class="modal-content" style="width:500px">
 	    	
 	    		<!-- modal-header -->
-	     		<div class="modal-header" style="background-color: #34495e; color:white; text-align: center">
+	     		<div class="modal-header" style="background-color: #34495e; color:white; text-align: left">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Warning</h4>
+					<i id="headerIcon" class="fa fa-bell-o" style="font-size: 20px" aria-hidden="true"> 알림</i>
 	      		</div>
 	      		
 	      		<!-- modal-body -->
 	      		<div class="modal-body" align="center">
 	      			<i id="errorIcon" class="fa fa-exclamation-triangle" style="font-size: 150px; color: #34495e" aria-hidden="true"></i><br/>
-					<b style="font-family: sans-serif; color: red" id="message">하이요</b>
+					<b style="font-family: sans-serif; font-size: 20px; color: #1bbc9b" id="successMessage"></b>
+					<b style="font-family: sans-serif; font-size: 20px; color: red" id="failMessage"></b>
 	      		</div>
 	      	
 		      	<!-- modal-footer -->	
