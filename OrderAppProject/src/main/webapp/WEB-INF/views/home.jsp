@@ -150,7 +150,7 @@
 		    if (recentModalList.length > 0) {
 		        recentModalList[recentModalList.length - 1].focus();		         
 		    }
-		};
+		}; 
 		
 		
 		/* $(document).keypress(function(e) {
@@ -538,7 +538,7 @@
 
 <!-- END # BOOTSNIP INFO -->
 	<div class="modal fade" id="loginInCorrect-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" style="padding-top: 150px">
-		<div class="modal-dialog">
+		<div class="modal-dialog" style="width: 300px;">
 			<div class="modal-content">				
 				<div class="modal-header">					
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
