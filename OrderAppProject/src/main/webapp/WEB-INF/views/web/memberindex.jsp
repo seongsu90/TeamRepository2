@@ -23,12 +23,18 @@
 	
 	<!--start-smoth-scrolling-->
 	<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){		
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){		
+				event.preventDefault();
+				$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			});
 		});
-	});
+		
+		function autoResize(i) {
+		    var iframeHeight=
+		    (i).contentWindow.document.body.scrollHeight;
+		    (i).height=iframeHeight;
+		}
 	</script>
 	
 	<style type="text/css">
@@ -175,7 +181,7 @@
 	 
 	<!-- start-body -->
 	<!-- memberboard.jsp -> Member List -->
-	<iframe src="memberboard?pageNo=1" style="width:100%; height:680px; border:0px;" scrolling="auto"></iframe>
+	<iframe id="memberIframe" src="memberboard?pageNo=1" style="width:100%;" onload="autoResize(this)" scrolling="no" frameborder="0"></iframe>
 
 	<!-- start-footer -->
 	<div class= "footer">

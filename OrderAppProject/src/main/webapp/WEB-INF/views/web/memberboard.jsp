@@ -195,6 +195,10 @@
 					console.log("Province Change");
 					setMlocation();
 			    });
+				
+				$("#memberDeleteModal").on('shown.bs.modal', function() {
+					$("#inputmid").focus();
+				}); 
 		});
 		
 		function setCity(selCity) {
@@ -270,8 +274,37 @@
 			});
 		}
 		
-		function onClickBtnCancel() {
+		function onClickBtnModifyCancel() {
 			$("#memberModifyModal").modal("hide");
+		}
+		
+		function showDeleteModal(mid) {
+			$("#deleteForm #deletemid").val(mid);
+			$("#memberDeleteModal").modal("show");
+		}
+		
+		function onClickBtnDelete() {
+			var deletemid = $("#deletemid").val();
+			var inputmid = $("#inputmid").val();
+			
+			$.ajax({
+				url: "delete",
+				data: {"deletemid":deletemid, "inputmid":inputmid},
+				method: "post",
+				success: function(data) {
+					if ( data.result == "success" ) {
+						alert("삭제 성공");
+						$("#memberDeleteModal").modal("hide");
+						location.reload();
+					} else {
+						alert("삭제 실패");
+					}
+				}
+			});
+		}
+		
+		function onClickBtnDeleteCancel() {
+			$("#memberDeleteModal").modal("hide");
 		}
 	</script>	
 </head>
@@ -313,10 +346,11 @@
 								<c:if test="${member.mrank==-2}"> <span style="color: red">경고2회 </span></c:if>
 								<c:if test="${member.mrank==-3}"> <b style="color: red">블랙리스트</b> </c:if>
 								
-							 </td>
+							</td>
 							<td> ${member.mpoint} </td>
 							<td> ${member.mresid} </td>
-							<td><input onclick="showModifyModal({
+							<td>
+								<input onclick="showModifyModal({
 													mid:'${member.mid}',
 													mname:'${member.mname}',
 													mpassword:'${member.mpassword}',
@@ -326,7 +360,9 @@
 													mrank:${member.mrank},
 													mpoint:${member.mpoint},
 													mresid:${member.mresid}
-												})" type="button" value="수정"/></td>
+												})" type="button" value="수정"/> &nbsp;
+								<button type="button" onclick="showDeleteModal('${member.mid}')">삭제</button>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -335,13 +371,13 @@
 	 		
 			<form action="${pageContext.servletContext.contextPath}/member/memberboard">
 				<input type="hidden" name="pageNo" value="1"/>
-				검색<input type="text" name="find" value="${find}"/>			
-				<input type="submit" value="찾기"/>
+				<i class="fa fa-search" aria-hidden="true" style="font-size: 20px"></i> &nbsp;<input type="text" name="find" value="${find}"/>			
+				<input type="submit" value="검색"/>
 			</form><br/>
 			
 			<div style="width: 600px">
 				<c:if test="${pageNo!=1}">
-				<a href="memberboard?pageNo=1&find=${find}">[처음]</a>
+					<a href="memberboard?pageNo=1&find=${find}">[처음]</a>
 				</c:if>
 				
 				<c:if test="${groupNo>1}">
@@ -359,7 +395,7 @@
 				</c:if>
 				
 				<c:if test="${pageNo!=totalPageNo}">
-				<a href="memberboard?pageNo=${totalPageNo}&find=${find}">[맨끝]</a>
+					<a href="memberboard?pageNo=${totalPageNo}&find=${find}">[맨끝]</a>
 				</c:if>
 			</div>
 		</div>
@@ -421,8 +457,8 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>관심지역</b></span>
-								<select class="form-control" style="width: 110px" id="selCity" name="selCity"></select>
-								<select class="form-control" style="width: 110px" id="selProvince" name="selProvince"></select><br/>
+								<select class="form-control" style="width: auto" id="selCity" name="selCity"></select>
+								<select class="form-control" style="width: auto" id="selProvince" name="selProvince"></select><br/>
 								<input type="hidden" class="form-control" name="mlocation" id="mlocation" value="${member.mlocation}"/>		
 							</div>
 						</div>
@@ -454,7 +490,7 @@
 		      	<!-- modal-footer -->	
 				<div class="modal-footer" style="background-color: #34495e; color:white">
 			        <button id="btnModify" type="button" class="btn btn-default" onclick="onClickBtnModify()" style="color: #34495e"><b>수정하기</b></button>
-			        <button id="btnInit" type="button" class="btn btn-default" onclick="onClickBtnCancel()" style="color: #34495e"><b>취소</b></button>
+			        <button id="btnModifyCancel" type="button" class="btn btn-default" onclick="onClickBtnModifyCancel()" style="color: #34495e"><b>취소</b></button>
 				</div>
 				
 			</div><!-- /.modal-content -->
@@ -462,6 +498,52 @@
 	</div><!-- /.modal -->
 
 	<!-- ########################## 수정 Modal ########################## -->
+	
+	<!-- ########################## 삭제 Modal ########################## -->
+	
+	<div id="memberDeleteModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
+		<div class="modal-dialog" role="document">
+	    	<div class="modal-content" style="width:500px">
+	    	
+	    		<!-- modal-header -->
+	     		<div class="modal-header" style="background-color: #34495e; color:white">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">회원 삭제</h4>
+	      		</div>
+	      		
+	      		<!-- modal-body -->
+	      		<div class="modal-body">
+					<form id="deleteForm">
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px; padding:0px; background-color: #34495e; color:white" class="input-group-addon"><b>아이디</b></span>
+								<b><input type="text" class="form-control" name="deletemid" id="deletemid" readonly/></b>
+							</div>
+						</div>
+						
+						<b style="font-family: sans-serif; color: #34495e"> 삭제할 아이디를 한 번 더 입력해 주세요</b><br/><br/>
+						
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>아이디 입력</b></span>
+								<input type="text" class="form-control" name="inputmid" id="inputmid"/>
+							</div>
+						</div>
+						
+					</form>		
+	      		</div>
+	      	
+		      	<!-- modal-footer -->	
+				<div class="modal-footer" style="background-color: #34495e; color:white">
+			        <button id="btnDelete" type="button" class="btn btn-default" onclick="onClickBtnDelete()" style="color: #34495e"><b>삭제</b></button>
+			        <button id="btnDeleteCancel" type="button" class="btn btn-default" onclick="onClickBtnDeleteCancel()" style="color: #34495e"><b>취소</b></button>
+				</div>
+				
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<!-- ########################## 삭제 Modal ########################## -->
 
 </body>
 </html>
