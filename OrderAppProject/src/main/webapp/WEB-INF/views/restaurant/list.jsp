@@ -182,13 +182,10 @@
 		<script type="text/javascript">
 			function showInfo(resid) {
 				$.ajax({
-<<<<<<< HEAD
+
 					url: "../restaurant/info",
 					data: {"resid":resid},
-=======
-					url: "/teamapp/restaurant/info",
-					data:resid,
->>>>>>> branch 'master' of https://github.com/seongsu90/TeamRepository2
+
 					success: function(data) {
 						parent.showInfo(data);
 					}
