@@ -3,6 +3,7 @@
 {
 	"ename" : "${event.ename}",
 	"eresid" : "${event.eresid}",
+	"esavedfile" : "${event.esavedfile}",
 	"einfo" : "${event.einfo}",
 	"emlname" : "${event.emlname}",
 	"eprice" : "${event.eprice}",

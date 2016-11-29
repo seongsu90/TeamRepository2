@@ -71,10 +71,6 @@
 			    transition: all .2s ease-out;
 			}
 			
-			.project figure img {
-			    border: 0;
-			    width: 100%;
-			}
 			.btn-warning bnt-action{
 			    margin: 0% 0% auto;    
 			}
@@ -226,7 +222,7 @@
 		    <div class="col-ms-10 col-md-4" style="width:350px; margin:auto;">
 		        <div class="project">
 		            <figure class="img-responsive">
-		                <img src="http://lorempixel.com/400/300/sports/6/">
+		               <img src="showPhoto?mlsavedfile=${menuList.mlsavedfile}" style="width:282px; height:300px;"/>
 		                <figcaption>
 		                    <span class="project-details">${menuList.mlname}</span>
 		                    <span class="project-price"><strong>${menuList.mlprice}</strong></span>
@@ -248,7 +244,7 @@
 							</div>
 						</div>
 				    </a>
-					<a href="delete?mlresid=${menuList.mlresid}">
+					<a href="delete?mlresid=${menuList.mlresid}&mlname=${menuList.mlname}">
 						<div class="text">
 							<div class="row">
        							 <div class="col-md-12">
