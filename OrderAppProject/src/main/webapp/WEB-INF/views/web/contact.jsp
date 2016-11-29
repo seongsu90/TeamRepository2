@@ -220,15 +220,15 @@
 						<div class="modal-body">
 							<div id="div-login-msg">
 								<div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-								<span id="text-login-msg">Type your username and password.</span>
+								<span id="text-login-msg">아이디와 비밀번호를 입력해 주세요.</span>
 							</div>	
 							
 							<input id="login_userid" class="form-control" type="text" placeholder="ID (type ERROR for login_userid)" onkeydown="if(event.keyCode==13){javascript:onClickLogin();}" required>
 							<input id="login_password" class="form-control" type="password" placeholder="Password" onkeydown="if(event.keyCode==13){javascript:onClickLogin();}" required>
 							
-							<div class="checkbox">
+							<!-- <div class="checkbox">
 								<label>	<input type="checkbox"> Remember me	</label>
-							</div>
+							</div> -->
 						</div>
 						
 						<div class="modal-footer">
