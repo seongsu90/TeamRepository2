@@ -195,6 +195,10 @@
 					console.log("Province Change");
 					setMlocation();
 			    });
+				
+				$("#memberDeleteModal").on('shown.bs.modal', function() {
+					$("#inputmid").focus();
+				}); 
 		});
 		
 		function setCity(selCity) {
