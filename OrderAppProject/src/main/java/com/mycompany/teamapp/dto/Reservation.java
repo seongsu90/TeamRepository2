@@ -1,8 +1,5 @@
 package com.mycompany.teamapp.dto;
 
-
-
-
 public class Reservation {
 
 	private String rvtime;
@@ -10,6 +7,14 @@ public class Reservation {
 	private String rvmid;
 	private int rvresid;
 	private String rvresname;
+	private String rvmname;
+	
+	public String getRvmname() {
+		return rvmname;
+	}
+	public void setRvmname(String rvmname) {
+		this.rvmname = rvmname;
+	}
 	
 	public String getRvresname() {
 		return rvresname;

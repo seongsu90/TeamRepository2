@@ -294,7 +294,7 @@
 							<tr>
 								<td>${reservarion.rvtime}</td>
 								<td>${reservarion.rvperson}</td>
-								<td>${reservarion.rvmid}</td>
+								<td>${reservarion.rvmname}(${reservarion.rvmid})</td>
 								<td><input onclick="onClickBtnConfirm({rvmid:'${reservarion.rvmid}', rvresid:${reservarion.rvresid}})" type="button" value="확인"/>
 										<input onclick="onClickBtnPenalty({rvmid:'${reservarion.rvmid}',})" type="button" value="취소"/></td>
 							</tr>		
