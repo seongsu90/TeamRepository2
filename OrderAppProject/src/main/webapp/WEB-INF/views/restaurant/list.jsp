@@ -180,10 +180,10 @@
 		
 		
 		<script type="text/javascript">
-			function showInfo(eresid) {
+			function showInfo(resid) {
 				$.ajax({
 					url: "../restaurant/info",
-					data: {"eresid":eresid},
+					data: {"resid":resid},
 					success: function(data) {
 						parent.showInfo(data);
 					}
