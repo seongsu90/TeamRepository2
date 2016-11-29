@@ -39,24 +39,24 @@
 		    });				
 	});
 			
-		function setCity() {
+		function setCity(selCity) {
 			console.log("setCity 실행");
 			$.ajax({
-				url: "getCity",
-				data: {"selCity":null},
+				url: "/teamapp/restaurant/getCity",
+				data: {"selCity":selCity},
 				success: function (data) {
 					$("#selCity").html(data);
 				}
 			});
 		}
 		
-			function setProvince(selCity, selProvice) {
+			function setProvince(selCity, selProvince) {
 				console.log("setProvince 실행");
 				$.ajax({
-				url: "getProvince",
-				data: {"selCity":selCity, "selProvince":null},
-				success: function (data) {
-					$("#selProvince").html(data);
+					url: "/teamapp/restaurant/getProvince",
+					data: {"selCity":selCity, "selProvince":selProvince},
+					success: function (data) {
+						$("#selProvince").html(data);
 				}
 			});
 		}
@@ -72,6 +72,8 @@
 
 			var location =[];
 			location=data.reslocation.split(" ");
+			
+			console.log(location);
 			$("#infoModal #reslocation").val(data.reslocation);
 			$("#infoModal #restotaltable").val(data.restotaltable);
 			$("#infoModal #resinfo").val(data.resinfo);
@@ -80,9 +82,17 @@
 			$("#infoModal #resopen").val(data.resopen);
 			$("#infoModal #resclose").val(data.resclose); 		
 			$("#infoModal #resphoto").val(data.resphoto);
-			$('input').attr("readonly",true)//input 요소 설정 readonly 위한 것이다
+			$('input').attr("readonly",true);//input 요소 설정 readonly 위한 것이다
+			
+			console.log(location[0]);
+
 			setCity(location[0]);
 			setProvince(location[0], location[1]);
+			
+			
+			
+		 	$("#selCity").not(":selected").attr("disabled", "disabled");
+			$("#selProvince").not(":selected").attr("disabled", "disabled"); 
 			$("#infoModal").modal("show");
 		};
 		
@@ -91,7 +101,10 @@
 		
 						
 			$('input').attr("readonly",false);
-					
+		
+			$("#selCity").removeAttr("disabled");
+			$("#selProvince").removeAttr("disabled");
+		
 			$("#btnModify").hide();
 			$("#btnModifySuccess").show();
 			setCity();		
