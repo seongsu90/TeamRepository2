@@ -279,10 +279,6 @@
 			$("#memberDeleteModal").modal("show");
 		}
 		
-		function onClickBtnDeleteCancel() {
-			$("#memberDeleteModal").modal("hide");
-		}
-		
 		function onClickBtnDelete() {
 			var deletemid = $("#deletemid").val();
 			var inputmid = $("#inputmid").val();
@@ -301,7 +297,10 @@
 					}
 				}
 			});
-
+		}
+		
+		function onClickBtnDeleteCancel() {
+			$("#memberDeleteModal").modal("hide");
 		}
 	</script>	
 </head>
@@ -358,7 +357,7 @@
 													mpoint:${member.mpoint},
 													mresid:${member.mresid}
 												})" type="button" value="수정"/> &nbsp;
-								<button type="button" onclick="showDeleteModal(${member.mid})">삭제</button>
+								<button type="button" onclick="showDeleteModal('${member.mid}')">삭제</button>
 							</td>
 						</tr>
 					</c:forEach>
