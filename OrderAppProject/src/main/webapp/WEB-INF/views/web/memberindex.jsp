@@ -175,7 +175,7 @@
 	 
 	<!-- start-body -->
 	<!-- memberboard.jsp -> Member List -->
-	<iframe src="memberboard?pageNo=1" style="width:100%; height:680px; border:0px;" scrolling="no"></iframe>
+	<iframe src="memberboard?pageNo=1" style="width:100%; height:680px; border:0px;" scrolling="auto"></iframe>
 
 	<!-- start-footer -->
 	<div class= "footer">

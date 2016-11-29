@@ -188,7 +188,7 @@ public class MemberController {
 		}
 		session.setAttribute("pageNo", String.valueOf(intPageNo));
 		
-		int rowsPerPage = 5;
+		int rowsPerPage = 10;
 		int pagesPerGroup = 5;
 		
 		int totalMemberNo = memberService.getCount(find);
