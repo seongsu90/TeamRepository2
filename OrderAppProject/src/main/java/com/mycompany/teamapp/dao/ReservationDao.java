@@ -89,7 +89,13 @@ public class ReservationDao {
 	}
 	
 	public List<Reservation> reservList(int presid) {
-		String sql = "select * from reservation where rvresid=? order by rvtime ";
+
+		String sql = "";
+				sql += "select r.rvtime, r.rvperson, r.rvmid, r.rvresid, m.mname "; 
+				sql += "from reservation r, member m ";
+				sql += "where r.rvmid = m.mid ";
+				sql += "and rvresid=? ";
+				sql += "order by r.rvtime ";
 		List<Reservation> list = jdbcTemplate.query(sql, new Object[]{presid}, new RowMapper<Reservation>() {
 			@Override
 			public Reservation mapRow(ResultSet rs, int row) throws SQLException {
@@ -97,7 +103,9 @@ public class ReservationDao {
 				reservation.setRvtime(rs.getString("rvtime"));
 				reservation.setRvperson(rs.getInt("rvperson"));
 				reservation.setRvmid(rs.getString("rvmid"));
-				reservation.setRvresid(rs.getInt("rvresid"));				
+				reservation.setRvresid(rs.getInt("rvresid"));		
+				reservation.setRvmname(rs.getString("mname"));
+
 				return reservation;
 			}
 		});
