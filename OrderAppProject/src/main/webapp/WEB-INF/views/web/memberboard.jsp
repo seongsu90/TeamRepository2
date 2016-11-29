@@ -335,8 +335,8 @@
 	 		
 			<form action="${pageContext.servletContext.contextPath}/member/memberboard">
 				<input type="hidden" name="pageNo" value="1"/>
-				검색<input type="text" name="find" value="${find}"/>			
-				<input type="submit" value="찾기"/>
+				<i class="fa fa-search" aria-hidden="true" style="font-size: 20px"></i> &nbsp;<input type="text" name="find" value="${find}"/>			
+				<input type="submit" value="검색"/>
 			</form><br/>
 			
 			<div style="width: 600px">
