@@ -23,8 +23,8 @@ public class MemberService {
 	public static final int MODIFY_SUCCESS = 0;
 	public static final int MODIFY_FAIL = 1;
 	
-	public static final int WITHDRAW_SUCCESS = 0;
-	public static final int WITHDRAW_FAIL = 1;
+	public static final String WITHDRAW_SUCCESS = "success";
+	public static final String WITHDRAW_FAIL = "fail";
 	
 	public static final int ADD_PENALTY_SUCCESS = 0;
 	public static final int ADD_PENALTY_FAIL = 1;
@@ -72,7 +72,7 @@ public class MemberService {
 		return MODIFY_SUCCESS;
 	}
 	
-	public int withdraw(String mid, String mpassword) {
+	public String withdraw(String mid, String mpassword) {
 		Member member = memberDao.selectByMid(mid);
 		if ( member.getMpassword().equals(mpassword) == false ) return WITHDRAW_FAIL;
 		memberDao.delete(mid);
