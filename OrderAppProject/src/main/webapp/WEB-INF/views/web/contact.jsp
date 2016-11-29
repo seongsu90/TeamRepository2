@@ -15,6 +15,58 @@
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
 	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
+	
+				<!--start-smoth-scrolling-->
+			<script type="text/javascript">
+				jQuery(document).ready(function($) {
+					$(".scroll").click(function(event){		
+						event.preventDefault();
+						$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+					});
+				});
+			</script>
+	
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+			$("#login-modal").on('hidden.bs.modal', function () {
+		    	parent.location.reload();
+		    });
+		}); 
+	
+		function onClickLogin()
+		{
+			var mid =$("#login_userid").val();
+			var mpassword=$("#login_password").val();
+			
+			$.ajax({
+				url: "../member/login",
+				data: {"mid":mid, "mpassword":mpassword},
+				method:"post",
+				success: function(data){
+					if(data.result=="success"){
+						alert("로그인 성공");
+						$("#login-modal").modal("hide");
+					}else{
+						alert("아이디 혹은 비밀번호가 틀렸습니다.");
+					}
+				}
+			});
+		}
+		
+		function onClickFindId()
+		{
+			console.log("onClickFindId")
+			$(".modal-content").load("/teamapp/member/findMid")
+		}
+		
+		function onClickFindPw()
+		{
+			console.log("onClickFindPw")
+			$(".modal-content").load("/teamapp/member/findMpassword")
+		}
+		
+	</script>
 </head>
 <body>
 	<!--start-header-->
@@ -38,7 +90,7 @@
 						</c:if>
 						<li><a class="active"  href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
 						<c:if test="${login==null}">
-						<li ><p class="text-center"><a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a></p></li>
+							<li ><p class="text-center"><a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a></p></li>
 						</c:if>
 						<c:if test="${login!=null}">
 						<li ><a href="${pageContext.servletContext.contextPath}/member/logout">로그아웃</a></li>
@@ -148,31 +200,58 @@
 			   </div>		
 
 			</div>		
-			<!--start-smoth-scrolling-->
-			<script type="text/javascript">
-								jQuery(document).ready(function($) {
-									$(".scroll").click(function(event){		
-										event.preventDefault();
-										$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-									});
-								});
-								</script>
-							<!--start-smooth-scrolling-->
-						<script type="text/javascript">
-									$(document).ready(function() {
-										/*
-										var defaults = {
-								  			containerID: 'toTop', // fading element id
-											containerHoverID: 'toTopHover', // fading element hover id
-											scrollSpeed: 1200,
-											easingType: 'linear' 
-								 		};
-										*/
-										
-										$().UItoTop({ easingType: 'easeOutQuart' });
-										
-									});
-								</script>
+			
+	<!-- BEGIN # MODAL LOGIN -->
+	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; padding-top: 150px" >
+	    <div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" align="center">
+					<img class="img-angle" id="img_logo" src="${pageContext.servletContext.contextPath}/resources/img/logo_reform2.png">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
+				</div>
+	               
+				<!-- Begin # DIV Form -->
+				<div id="div-forms">
+	               
+					<!-- Begin # Login Form -->
+					<form id="login-form">
+						<div class="modal-body">
+							<div id="div-login-msg">
+								<div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+								<span id="text-login-msg">Type your username and password.</span>
+							</div>	
+							
+							<input id="login_userid" class="form-control" type="text" placeholder="ID (type ERROR for login_userid)" onkeydown="if(event.keyCode==13){javascript:onClickLogin();}" required>
+							<input id="login_password" class="form-control" type="password" placeholder="Password" onkeydown="if(event.keyCode==13){javascript:onClickLogin();}" required>
+							
+							<div class="checkbox">
+								<label>	<input type="checkbox"> Remember me	</label>
+							</div>
+						</div>
+						
+						<div class="modal-footer">
+							<div>
+								<button type="button" class="btn btn-primary btn-lg btn-block" style="background-color: #1bbc9b" onclick="onClickLogin()" >Login</button>
+							</div>
+							
+							<div>
+								<button id="login_findId_btn" type="button" class="btn btn-link"  onclick="onClickFindId()" ><u>아이디 찾기</u></button>
+								<button id="login_findPw_btn" type="button" class="btn btn-link"  onclick="onClickFind w()" ><u>비밀번호 찾기</u></button>
+								<!--      <button id="login_register_btn" type="button" class="btn btn-link">Register</button> -->
+							</div>
+						</div>
+					</form>
+	
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END # MODAL LOGIN -->
+
+
+
 		<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 
 </body>

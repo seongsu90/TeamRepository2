@@ -18,6 +18,50 @@
 	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 	
+	<!--- banner Slider starts Here --->
+ 	<script src="${pageContext.servletContext.contextPath}/resources/js/responsiveslides.min.js"></script>
+		 <script>
+		    // You can also use "$(window).load(function() {"
+		    $(function () {
+		      // Slideshow 4
+		      $("#slider4").responsiveSlides({
+		        auto: true,
+		        pager: true,
+		        nav: true,
+		        speed: 500,
+		        namespace: "callbacks",
+		        before: function () {
+		          $('.events').append("<li>before event fired.</li>");
+		        },
+		        after: function () {
+		          $('.events').append("<li>after event fired.</li>");
+		        }
+		      });
+		
+		    });
+		  </script>
+			<!----//End-slider-script---->
+	
+	<!--swipebox -->	
+			
+	<script src="/teamapp/resources/js/jquery.swipebox.min.js"></script> 
+		<script type="text/javascript">
+			jQuery(function($) {
+				$(".swipebox").swipebox();
+			});
+	</script>
+	<!--//swipebox Ends -->
+	
+	<!--start-smoth-scrolling-->
+	<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+	</script>
+	
 	<script type="text/javascript">
 
 		$(document).ready(function(){
@@ -60,7 +104,14 @@
 		
 	</script>
 	
-	
+		<!-- script-for-menu -->
+	<script>
+		$(document).ready(function(){
+			$("span.menu").click(function(){
+				$(".top-nav ul").slideToggle(200);
+			});
+		});
+	</script>
 
 </head>
 <body>
@@ -96,14 +147,7 @@
 
 				<div class="clearfix"> </div>
 				
-		<!-- script-for-menu -->
-				<script>
-					$(document).ready(function(){
-						$("span.menu").click(function(){
-							$(".top-nav ul").slideToggle(200);
-						});
-					});
-				</script>
+	
 		</div>
 	<!--End-top-nav-script-->
 		<div class="clearfix"> </div>
@@ -152,29 +196,7 @@
 							</div>
 						</div>
 					</div>	
-				<!--- banner Slider starts Here --->
-	  			<script src="${pageContext.servletContext.contextPath}/resources/js/responsiveslides.min.js"></script>
-			 <script>
-			    // You can also use "$(window).load(function() {"
-			    $(function () {
-			      // Slideshow 4
-			      $("#slider4").responsiveSlides({
-			        auto: true,
-			        pager: true,
-			        nav: true,
-			        speed: 500,
-			        namespace: "callbacks",
-			        before: function () {
-			          $('.events').append("<li>before event fired.</li>");
-			        },
-			        after: function () {
-			          $('.events').append("<li>after event fired.</li>");
-			        }
-			      });
-			
-			    });
-			  </script>
-			<!----//End-slider-script---->
+				
 				<div class="clearfix"> </div>
 
 		<!--start-welcome-->
@@ -434,7 +456,7 @@
 						</div>	
 						
 						<input id="login_userid" class="form-control" type="text" placeholder="ID (type ERROR for login_userid)" onkeydown="if(event.keyCode==13){javascript:onClickLogin();}" required>
-						<input id="login_password" cID s="form-control" type="password" placeholder="Password" onkeydown="if(event.keyCode==13){javascript:onClickLogin();}" required>
+						<input id="login_password" class="form-control" type="password" placeholder="Password" onkeydown="if(event.keyCode==13){javascript:onClickLogin();}" required>
 						
 						<div class="checkbox">
 							<label>	<input type="checkbox"> Remember me	</label>
@@ -462,42 +484,6 @@
 
 <!-- END # BOOTSNIP INFO -->
 
-<!--swipebox -->	
-			
-				<script src="/teamapp/resources/js/jquery.swipebox.min.js"></script> 
-				<script type="text/javascript">
-					jQuery(function($) {
-						$(".swipebox").swipebox();
-					});
-				</script>
-			<!--//swipebox Ends -->
-
-
-			<!--start-smoth-scrolling-->
-			<script type="text/javascript">
-								jQuery(document).ready(function($) {
-									$(".scroll").click(function(event){		
-										event.preventDefault();
-										$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-									});
-								});
-								</script>
-							<!--start-smooth-scrolling-->
-				<%--		<script type="text/javascript">
-									$(document).ready(function() {
-										/*
-										var defaults = {
-								  			containerID: 'toTop', // fading element id
-											containerHoverID: 'toTopHover', // fading element hover id
-											scrollSpeed: 1200,
-											easingType: 'linear' 
-								 		};
-										*/
-										
-										$().UItoTop({ easingType: 'easeOutQuart' });
-										
-									});
-								</script> --%>
 		<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 		
 		<input type="hidden" id="loginId"/>
