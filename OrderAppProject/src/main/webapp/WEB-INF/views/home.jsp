@@ -265,7 +265,7 @@
 				   <div class="col-md-4 about-img">
 					   <img src="${pageContext.servletContext.contextPath}/resources/img/img_02.jpg" class="img-responsive" alt="" />
 					</div>
-					<div class="col-md-8 about-text">
+					<div class="col-md-8 about-text" style="height: 452px;">
 					   <h3>About</h3>
 					   <h4>OUR RESTAURANT!</h4>
 					   <!-- <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
@@ -354,10 +354,10 @@
 		   <div class="container">
 		         <h3>Blog</h3>
 				 <div class="blog">
-				   <div class="col-md-4 blog-text">
-					   <h5>THU 14 May, 2015</h5>
-					   <a href="single.html"><h4>EXCEPTEUR SINT OCCAECAT CUPIDATAT NON</h4></a>
-					   <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				   <div class="col-md-4 blog-text" style="height: 343px;">					   
+					   <h5>Restaurant Growth Partner</h5>
+					   <a href="single.html"><h4>레스토랑 성장 파트너</h4></a><br/>
+					   <p>[주문할게요!]는 동네의 작은 가게로서 흩어져 있을 때 얻지 못했던 시너지를, 주문앱이라는 플랫폼을 통해 만들어낼 수 있습니다. 성실하게 사업하는 음식점들의 성장을 돕는, 신뢰할 수 있는 파트너가 되겠습니다.</p>				   	   
 				   </div>
 					<div class="col-md-8 welcome-img">
 					 <a href="single.html" class="mask"><img src="${pageContext.servletContext.contextPath}/resources/img/b2.jpg" alt="image" class="img-responsive zoom-img"></a>
@@ -365,21 +365,25 @@
 				   <div class="clearfix"> </div>
 			   </div>
 			    <div class="blog">
-				 <div class="col-md-4 blog-text two">
-					   <h5>THU 14 May, 2015</h5>
-					  <a href="single.html"><h4>LOREM IPSUM DOLOR SIT AMET CONSE</h4></a>
-					   <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				   </div>
-					<div class="col-md-8 blog-img two">
+				<div class="col-md-4 blog-text two" style="height: 343px;">
+					<h5>Excellent Restaurant</h5>
+					<a href="single.html"><h4>매달 우수음식점 선정</h4></a><br/>
+					<p>[주문할게요!] 우수음식점은 예약 건수, 모바일 주문건수 등의 활동지수와 주문한 고객들의 리뷰 평점을 분석하여 공정하게 선정합니다. 매월 1일 선정되신 음식점을 발표하며 해당지역 제일 상단에 노출됩니다.</p>					
+				</div>
+				<div class="col-md-8 blog-img two">
 					 <a href="single.html" class="mask"><img src="${pageContext.servletContext.contextPath}/resources/img/b3.jpg" alt="image" class="img-responsive zoom-img"></a>
 					</div>
-				   <div class="clearfix"> </div>
-			   </div> 
+				<div class="clearfix"> </div>
+			    </div> 
 			    <div class="blog">
-				   <div class="col-md-4 blog-text">
-					   <h5>THU 14 May, 2015</h5>
-					   <a href="single.html"><h4>EXCEPTEUR SINT OCCAECAT CUPIDATAT NON</h4></a>
-					   <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				   <div class="col-md-4 blog-text" style="height: 343px;">
+					   <h5>Benefits of using Our App</h5>
+					   <a href="single.html"><h4>[주문할게요!] 사용 시 장점</h4></a><br/>
+					   <p>1. 시간과 상관없이 우리 업소를 홍보할 수 있습니다.<br/>					   		
+							2. 전단지, 지역광고 등에 비해 광고비가 저렴합니다.<br/>
+							3. 이벤트를 사장님들이 관리하고 적용하실 수 있습니다.<br/>
+							4. 메뉴를 편리하고 효과적으로 관리할 수 있습니다.<br/>
+							5. 명절, 연휴엔 임시 휴무일을 설정할 수 있습니다.<br/></p>
 				   </div>
 					<div class="col-md-8 welcome-img">
 					 <a href="single.html" class="mask"><img src="${pageContext.servletContext.contextPath}/resources/img/b1.jpg" alt="image" class="img-responsive zoom-img"></a>
@@ -388,6 +392,7 @@
 			   </div>
 		</div>
 	</div>
+	
 <!--gallery-->
 	<div class="gallery">
 		<div class="container">
