@@ -203,7 +203,7 @@ public class RestaurantController {
 		model.addAttribute("restaurant", restaurant);
 		model.addAttribute("resid", restaurant.getResid());
 		
-		String selectedLocation[] = restaurant.getReslocation().split(" ");
+		//String selectedLocation[] = restaurant.getReslocation().split(" ");
 /*		if ( selectedLocation.length == 3 ) {
 			selectedLocation[1] += (" " + selectedLocation[2]);
 		}
@@ -221,39 +221,11 @@ public class RestaurantController {
 	
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
 	public String modify(Restaurant restaurant , Model model, HttpSession session) throws Exception{
+	
+		Restaurant preRestaurant=restaurantService.info(restaurant.getResid());
 		
 		if(restaurant.getResphoto() != null && !restaurant.getResphoto().isEmpty()) {
 			
-			String mid = (String) session.getAttribute("login");
-			Member member=memberService.info(mid);
-		
-			
-			if(member.getMrank()==1){
-			restaurant.setResid(member.getMresid());
-			
-			
-			restaurant.setResoriginfile(restaurant.getResphoto().getOriginalFilename());
-			//String ressavedfile = new Date().getTime() + restaurant.getResphoto().getOriginalFilename(); // 저장하는 파일이 유일해야하기 때문에 날짜를 붙인다.
-			String ressavedfile = restaurant.getResphoto().getOriginalFilename();
-			String realPath = session.getServletContext().getRealPath("/WEB-INF/photo/"+ressavedfile);
-			restaurant.getResphoto().transferTo(new File(realPath)); 
-			restaurant.setRessavedfile(ressavedfile);
-			restaurant.setResmime(restaurant.getResphoto().getContentType());
-
-			int i=1;
-			int size=restaurant.getCloseday().length;
-			String close="";
-		        for(String closeday : restaurant.getCloseday()){		        	
-		        	close+=closeday;
-		        	if(i<size){	
-		        		close+="/";
-		        		i++;
-		        	}  	
-		        }
-		    restaurant.setRescloseday(close);
-		
-			}
-			else if(member.getMrank()==2){
 				restaurant.setResid(restaurant.getResid());
 				
 				
@@ -277,8 +249,24 @@ public class RestaurantController {
 			        	
 			        }      
 			    restaurant.setRescloseday(close);
+			}else{
+				restaurant.setRessavedfile(preRestaurant.getRessavedfile());
+				restaurant.setResoriginfile(preRestaurant.getResoriginfile());
+				restaurant.setResmime(preRestaurant.getResmime());
+				int i=1;
+				int size=restaurant.getCloseday().length;
+				String close="";
+			        for(String closeday : restaurant.getCloseday()){		        	
+			        	close+=closeday;
+			        	if(i<size){	
+			        		close+="/";
+			        		i++;
+			        	}
+			        	
+			        }      
+			    restaurant.setRescloseday(close);
 			}
-		}
+	
 			int result = restaurantService.modify(restaurant);
 			if(result == RestaurantService.MODIFY_SUCCESS) {
 				model.addAttribute("result", "success");

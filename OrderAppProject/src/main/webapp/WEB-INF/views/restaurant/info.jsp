@@ -9,6 +9,7 @@
 	"restel" : "${restaurant.restel}",
 	"rescloseday" : "${restaurant.rescloseday}",
 	"resopen" : "${restaurant.resopen}",
-	"resclose" : "${restaurant.resclose}"
+	"resclose" : "${restaurant.resclose}",
+	"ressavedfile" : "${restaurant.ressavedfile}"
 	
 }

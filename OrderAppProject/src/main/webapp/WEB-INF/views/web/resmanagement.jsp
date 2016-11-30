@@ -36,7 +36,15 @@
 			
 			$("#selProvince").change(function () {
 				$("#reslocation").val($("#selCity").val() + " "+ $("#selProvince").val() + " "); 
-		    });				
+		    });
+			
+			$("#infoModal").on('hidden.bs.modal', function() {
+				
+				$("input[name=closeday]").attr("checked", false); 
+				location.reload();
+			}); 
+			
+			
 	});
 			
 		function setCity(selCity) {
@@ -64,24 +72,39 @@
 	
 	<script type="text/javascript">
 		function showInfo(data) {	
-		
+	
+			
 			$("#btnModifySuccess").hide();
  			$("#infoModal #resid").val(data.resid);
 			$("#infoModal #resname").val(data.resname);
 		
-
+			$("#infoModal #reslocation").val(data.reslocation);
 			var location =[];
 			location=data.reslocation.split(" ");
 			
-			console.log(location);
-			$("#infoModal #reslocation").val(data.reslocation);
 			$("#infoModal #restotaltable").val(data.restotaltable);
 			$("#infoModal #resinfo").val(data.resinfo);
 			$("#infoModal #restel").val(data.restel);
 			$("#infoModal #rescloseday").val(data.rescloseday);
+			
+			
+			
+			var closeday=[];
+			closeday=data.rescloseday.split("/");
+			
+		
+			
+		 	for(var i=0; i<closeday.length; i++) {
+				console.log(closeday[i]);
+		 	 	$("input[name=closeday][value="+closeday[i]+"]").attr("checked", true); 
+		 	 
+			} 
+			
+			
 			$("#infoModal #resopen").val(data.resopen);
-			$("#infoModal #resclose").val(data.resclose); 		
-			$("#infoModal #resphoto").val(data.resphoto);
+			$("#infoModal #resclose").val(data.resclose); 
+			$("#infoModal #photo").attr('src', "/teamapp/restaurant/showPhoto?ressavedfile=" + data.ressavedfile);
+	
 			
 			
 			
@@ -94,6 +117,7 @@
 			
 		 	$("#selCity").not(":selected").attr("disabled", "disabled");
 			$("#selProvince").not(":selected").attr("disabled", "disabled"); 
+			$("#resphoto")
 			$("#infoModal").modal("show");
 		};
 		
@@ -130,6 +154,7 @@
 			var resopen = $("#infoModal #resopen").val();
 			var resclose = $("#infoModal #resclose").val();
 			var resphoto = $("#infoModal #resphoto")[0];
+
 			
 			var data = new FormData();
 			data.append("resid", resid);
@@ -325,7 +350,7 @@
 			<div class="modal-body">
 
 					<form id="info">
-						<input id="resid" type='hidden'/>
+								<input id="resid" type='hidden'/>
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px; padding:0px;" class="input-group-addon"><b>식당 이름</b></span>
@@ -383,20 +408,23 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px; margin-right: 10px; border-right: 1px solid #ccc;" class="input-group-addon"><b>휴일</b></span>&nbsp;
-								<input type="checkbox" name="closeday"  value="휴일없음">휴일 X&nbsp;
-			        			<input type="checkbox" name="closeday"  value="월요일">월요일&nbsp;
-			        			<input type="checkbox" name="closeday"  value="화요일">화요일&nbsp;
-			        			<input type="checkbox" name="closeday"  value="수요일">수요일&nbsp;
-			        			<input type="checkbox" name="closeday"  value="목요일">목요일&nbsp;
-			        			<input type="checkbox" name="closeday"  value="금요일">금요일&nbsp;
-			        			<input type="checkbox" name="closeday"  value="토요일">토요일&nbsp;
-			        			<input type="checkbox" name="closeday"  value="일요일">일요일
+								<input type="checkbox"  name="closeday"  value="휴일없음" >휴일 X&nbsp;
+			        			<input type="checkbox"  name="closeday"  value="월요일" >월요일&nbsp;
+			        			<input type="checkbox"  name="closeday"  value="화요일" >화요일&nbsp;
+			        			<input type="checkbox"  name="closeday"  value="수요일" >수요일&nbsp;
+			        			<input type="checkbox"  name="closeday"  value="목요일" >목요일&nbsp;
+			        			<input type="checkbox"  name="closeday"  value="금요일" >금요일&nbsp;
+			        			<input type="checkbox"  name="closeday"  value="토요일" >토요일&nbsp;
+			        			<input type="checkbox"  name="closeday"  value="일요일" >일요일
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>사진</b></span>
+								<div id="photoTag">
+									<img id="photo" class="form-control" style="width: 225px; height:auto; padding: 10px"/>
+								</div>
 								<b><input id="resphoto" type='file' style="width:225px" class="form-control" multiple /></b>
 							</div>
 						</div>
