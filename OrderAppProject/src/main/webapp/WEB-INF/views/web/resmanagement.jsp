@@ -82,13 +82,14 @@
 			$("#infoModal #resopen").val(data.resopen);
 			$("#infoModal #resclose").val(data.resclose); 		
 			$("#infoModal #resphoto").val(data.resphoto);
+			
+			
+			
 			$('input').attr("readonly",true);//input 요소 설정 readonly 위한 것이다
 			
-			console.log(location[0]);
 
 			setCity(location[0]);
 			setProvince(location[0], location[1]);
-			
 			
 			
 		 	$("#selCity").not(":selected").attr("disabled", "disabled");
@@ -313,7 +314,7 @@
 	<%-- #################################################################################### --%>
 	<%-- ## Info Modal ## --%>
 	<div id="infoModal" class="modal fade" tabindex="-1" role="dialog" >
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog" role="document" style="width:750px">
 			<div class="modal-content">
 			<!-- modal-header -->
 		     		<div class="modal-header" style="background-color: #34495e; color:white">
@@ -328,7 +329,7 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px; padding:0px;" class="input-group-addon"><b>식당 이름</b></span>
-								<b><input id="resname" type='text' class="form-control" /></b>
+								<b><input id="resname" type='text' style="width:225px" class="form-control" /></b>
 							</div>
 						</div>
 
@@ -336,48 +337,47 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>전체 테이블 수</b></span>
-								<b><input id="restotaltable" type='number' class="form-control" /></b>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>레스토랑 정보</b></span>
-								<b><input id="resinfo" type='text' class="form-control" /></b>
+								<b><input id="restotaltable" type='number' style="width:225px" class="form-control" /></b>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>전화번호</b></span>
-								<b><input id="restel" type='text' class="form-control" /></b>
+								<b><input id="restel" type='text' style="width:225px" class="form-control" /></b>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>오픈 타임</b></span>
+								<b><input id="resopen" type='time' style="width:225px" class="form-control" /></b>
+							</div>
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>클로즈 타임</b></span>
+								<b><input id="resclose" type='time' style="width:225px" class="form-control"/></b>
 							</div>
 						</div>
 
- 						<!-- <div class="form-group">
+						<div class="form-group">
 							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>주소</b></span>
-								<b><input id="reslocation" type='text' class="form-control" /></b>
+								<span style="width: 130px" class="input-group-addon"><b>레스토랑 정보</b></span>
+								<b><input id="resinfo" type='text' style="width:555px" class="form-control" /></b>
 							</div>
-						</div> --> 
+						</div>
+
+					
 
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>주소</b></span>
-								<select class="form-control" style="width: 110px" id="selCity" name="selCity"></select>
-								<select class="form-control" style="width: 110px" id="selProvince" name="selProvince">
+								<select class="form-control" style="width: 120px" id="selCity" name="selCity"></select>
+								<select class="form-control" style="width: 105px" id="selProvince" name="selProvince">
 									<option value="선택">선택</option>
 								</select>	
-								<input type="text" class="form-control" style="width: 340px" id="reslocation" name="reslocation"/><br/>
+								<input type="text" class="form-control" style="width: 330px" id="reslocation" name="reslocation"/><br/>
 							</div>
 						</div>
-						
-						<!-- <div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>휴일</b></span>
-								<b><input id="rescloseday" type='text' class="form-control"/></b>
-							</div>
-						</div> -->
 						
 						
 						<div class="form-group">
@@ -394,26 +394,10 @@
 							</div>
 						</div>
 
-
-					
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>오픈 타임</b></span>
-								<b><input id="resopen" type='time' class="form-control" /></b>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>클로즈 타임</b></span>
-								<b><input id="resclose" type='time' class="form-control"/></b>
-							</div>
-						</div>
-
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>사진</b></span>
-								<b><input id="resphoto" type='file' class="form-control" multiple /></b>
+								<b><input id="resphoto" type='file' style="width:225px" class="form-control" multiple /></b>
 							</div>
 						</div>
 						

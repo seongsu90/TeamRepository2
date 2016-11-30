@@ -221,6 +221,7 @@ public class RestaurantController {
 	
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
 	public String modify(Restaurant restaurant , Model model, HttpSession session) throws Exception{
+		
 		if(restaurant.getResphoto() != null && !restaurant.getResphoto().isEmpty()) {
 			
 			String mid = (String) session.getAttribute("login");
