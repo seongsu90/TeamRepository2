@@ -195,7 +195,7 @@
 						for(var i=0; i<data.menu.length; i++) {
 							var menu = data.menu[i];
 							if(i==0) {
-								$("#menuTbody").empty();
+								$("#menuTbody").empty();			// 메뉴리스트 중복 출력 제거
 							}
 							$("#menuTbody").append(
 								'<tr class="menu">' +
@@ -268,7 +268,7 @@
 			
 		/* ------------------------------- */
 		
-			  jQuery(document).ready(function($) {			
+			jQuery(document).ready(function($) {			
 		        $('#myCarousel').carousel({
 		                interval: 5000
 		        });
@@ -286,7 +286,9 @@
 		        
 		        $('#myCarousel').on('slid.bs.carousel', function (e) {
 		                 var id = $('.item.active').data('slide-number');
-		                $('#carousel-text').html($('#slide-content-'+id).html());
+		                 console.log(id);
+		                /* $('#carousel-text').html($('#slide-content-'+id).html()); */
+		                
 		        });
 			});
 			
@@ -405,11 +407,11 @@
 					</div>
 				</div>
 			</div>	                    	                    
-		</div>	  
+		</div>	 
 		<!-- modal end -->
 
-	
-		<%-- <div class="container">
+	<%-- 
+		<div class="container">
 		    <div id="main_area">
 		        <div class="row">
 		            <div class="col-sm-6" id="slider-thumbs">
@@ -425,11 +427,12 @@
 		                <div class="col-xs-12" id="slider">		                    
 		                    <div class="row">
 		                        <div class="col-sm-12" id="carousel-bounding-box">
-		                            <div class="carousel slide" id="myCarousel">		                                
-		                                <div class="carousel-inner">                            
-											<c:forEach var="i" begin="1" end="${totalTables}">
+		                            <div class="carousel slide" id="myCarousel">	                          
+		                                <div class="carousel-inner">
+		                                
+		                                	<c:forEach var="i" begin="1" end="${totalTables}">
 												<c:if test="${i == 1}">
-		                                    		<div class="active item" data-slide-number="1"><img src="http://placehold.it/470x480&text=1"></div>
+		                                    		<div class="active item" data-slide-number="${i}"><img src="http://placehold.it/470x480&text=${i}"></div>
 		                                    	</c:if>
 		                                    	<c:if test="${i != 1}">		                                   
 		                                    		<div class="item" data-slide-number="${i}"><img src="http://placehold.it/470x480&text=${i}"></div>
@@ -450,8 +453,8 @@
 		            </div>		            
 		        </div>
 		    </div>
-		</div> --%>
-			
+		</div> 
+			 --%>
 		
 	</body>
 </html>	      		
