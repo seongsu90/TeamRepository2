@@ -26,8 +26,8 @@ public class MenuListService {
 		return menuListdao.selectByPage(pageNo, rowsPerPage, mlresid); 
 	}
 	
-	public List<MenuList> hotlist(int pageNo, int rowsPerPage, int mlresid, boolean mlishot){
-		return menuListdao.selectByHotPage(pageNo, rowsPerPage, mlresid, mlishot); 
+	public List<MenuList> hotlist(int pageNo, int rowsPerPage, int mlresid){
+		return menuListdao.selectByHotPage(pageNo, rowsPerPage, mlresid); 
 	}
 	
 	public int add(MenuList menuList){

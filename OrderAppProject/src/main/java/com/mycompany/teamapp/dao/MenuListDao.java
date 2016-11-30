@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.mycompany.teamapp.dto.MenuList;
+import com.mycompany.teamapp.service.MemberService;
 
 
 @Component
@@ -19,13 +20,14 @@ public class MenuListDao {
 	private JdbcTemplate jdbcTemplate;
 	private MenuList menuList;
 	
+	
 	public int insert(MenuList menuList){
-		String sql="insert into menulist(mlname,mlprice,mlresid,mlinfo,mlsavedfile,mlishot,mloriginfile,mlmime) values(?,?,?,?,?,?,?,?)";
+		String sql="insert into menulist(mlname,mlresid,mlprice,mlinfo,mlsavedfile,mlishot,mloriginfile,mlmime) values(?,?,?,?,?,?,?,?)";
 		int row = jdbcTemplate.update(
 				sql,
 				menuList.getMlname(),
-				menuList.getMlprice(),
 				menuList.getMlresid(),
+				menuList.getMlprice(),
 				menuList.getMlinfo(),
 				menuList.getMlsavedfile(),
 				menuList.getMlishot(),
@@ -144,19 +146,19 @@ public class MenuListDao {
 		return list;
 	}
 	
-	public List<MenuList> selectByHotPage(int pageNo, int rowsPerPage, int mlresid, boolean mlishot) {
+	public List<MenuList> selectByHotPage(int pageNo, int rowsPerPage, int mlresid) {
 		String sql="";
 		sql+="select rn, mlname, mlresid, mlprice, mlinfo, mlsavedfile, mlishot ";
 		sql+="from( ";
 		sql+="select rownum as rn, mlname, mlresid, mlprice, mlinfo, mlsavedfile, mlishot ";
-		sql+="from (select mlname, mlresid, mlprice, mlinfo, mlsavedfile, mlishot from menulist order by mlname desc) ";
-		sql+="where mlresid=? and mlishot=? and rownum<=? ";
+		sql+="from (select mlname, mlresid, mlprice, mlinfo, mlsavedfile, mlishot from menulist where mlresid=? and mlishot=1 order by mlname desc) ";
+		sql+="where rownum<=? ";
 		sql+=") ";
 		sql+="where rn>=? ";
 		
 		List<MenuList> list = jdbcTemplate.query(
 				sql,
-				new Object[]{mlresid,mlishot,(pageNo*rowsPerPage),((pageNo-1))*rowsPerPage+1},
+				new Object[]{mlresid,(pageNo*rowsPerPage),((pageNo-1))*rowsPerPage+1},
 				new RowMapper<MenuList>(){
 					@Override
 					public MenuList mapRow(ResultSet rs, int row) throws SQLException {

@@ -3,6 +3,7 @@ package com.mycompany.teamapp.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mycompany.teamapp.dto.Event;
 import com.mycompany.teamapp.dto.Member;
 import com.mycompany.teamapp.dto.MenuList;
 import com.mycompany.teamapp.service.MemberService;
@@ -40,12 +40,14 @@ public class MenuListController {
 		}
 		
 		@RequestMapping(value="/add", method=RequestMethod.GET)
-		public String addForm() {				
+		public String addForm() {		
 			return "menulist/addForm";
 		}
 		
 		@RequestMapping(value="/add", method=RequestMethod.POST)
 		public String add(MenuList menuList,HttpSession session) {
+			String mresid = (String) session.getAttribute("login");
+			System.out.println(mresid);
 			try{
 		
 				menuList.setMloriginfile(menuList.getMlphoto().getOriginalFilename());
@@ -55,11 +57,9 @@ public class MenuListController {
 				menuList.setMlsavedfile(mlsavedfile);
 				
 				menuList.setMlmime(menuList.getMlphoto().getContentType());
-			        
 				menuListService.add(menuList);
-				return "redirect:/menulist/list"; 
+				return "redirect:/menulist/selectlist"; 
 			}
-				
 				catch (Exception e) {
 					e.printStackTrace();
 					return "menulist/addForm";
@@ -107,13 +107,13 @@ public class MenuListController {
 			String fileName=mlsavedfile;
 			
 			
-			String mlmime=request.getServletContext().getMimeType(fileName);
-			response.setContentType(mlmime);
+			String emime=request.getServletContext().getMimeType(fileName);
+			response.setContentType(emime);
 			
 			OutputStream os=response.getOutputStream();
 			
 			String filePath=request.getServletContext().getRealPath("/WEB-INF/photo/"+fileName);
-			FileInputStream is=new FileInputStream(filePath);
+			InputStream is=new FileInputStream(filePath);
 			
 			byte[] values=new byte[1024];
 			int byteNum=-1;
@@ -202,12 +202,10 @@ public class MenuListController {
 		}
 		
 		@RequestMapping("/selecthotlist")
-		public String selectHotList(boolean mlishot, String pageNo, Model model, HttpSession session){
+		public String selectHotList(String pageNo, Model model, HttpSession session){
 			String mid = (String) session.getAttribute("login");			
 			Member member = memberService.info(mid);
 			
-			System.out.println(member.getMresid());
-			System.out.println(menuListService.selectHotList(member.getMresid(), mlishot));
 			int intPageNo = 1;
 			if ( pageNo == null ) {
 				pageNo = (String) session.getAttribute("pageNo");
@@ -233,7 +231,7 @@ public class MenuListController {
 				endPageNo=totalPageNo;
 			}
 			
-			List<MenuList> list= menuListService.hotlist(intPageNo, rowsPerPage,member.getMresid(),mlishot);
+			List<MenuList> list= menuListService.hotlist(intPageNo, rowsPerPage,member.getMresid());
 			model.addAttribute("list", list);
 			model.addAttribute("pageNo", intPageNo);
 			model.addAttribute("rowsPerPage", rowsPerPage);

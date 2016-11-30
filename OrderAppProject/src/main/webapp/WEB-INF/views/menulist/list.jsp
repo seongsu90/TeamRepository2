@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8"> 
+		<meta charset="UTF-8">			
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css">
 		<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/style.css" />
