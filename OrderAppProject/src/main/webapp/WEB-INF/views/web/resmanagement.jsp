@@ -82,15 +82,10 @@
 			var location =[];
 			location=data.reslocation.split(" ");
 			
-<<<<<<< HEAD
-=======
-			$("#infoModal #reslocation").val(data.reslocation);
->>>>>>> branch 'master' of https://github.com/seongsu90/TeamRepository2
 			$("#infoModal #restotaltable").val(data.restotaltable);
 			$("#infoModal #resinfo").val(data.resinfo);
 			$("#infoModal #restel").val(data.restel);
 			$("#infoModal #rescloseday").val(data.rescloseday);
-<<<<<<< HEAD
 			
 			
 			
@@ -106,9 +101,6 @@
 			} 
 			
 			
-=======
-			console.log(data.rescloseday);
->>>>>>> branch 'master' of https://github.com/seongsu90/TeamRepository2
 			$("#infoModal #resopen").val(data.resopen);
 			$("#infoModal #resclose").val(data.resclose); 
 			$("#infoModal #photo").attr('src', "/teamapp/restaurant/showPhoto?ressavedfile=" + data.ressavedfile);
