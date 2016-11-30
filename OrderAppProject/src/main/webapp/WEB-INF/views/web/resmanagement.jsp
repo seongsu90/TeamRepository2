@@ -73,12 +73,12 @@
 			var location =[];
 			location=data.reslocation.split(" ");
 			
-			console.log(location);
 			$("#infoModal #reslocation").val(data.reslocation);
 			$("#infoModal #restotaltable").val(data.restotaltable);
 			$("#infoModal #resinfo").val(data.resinfo);
 			$("#infoModal #restel").val(data.restel);
 			$("#infoModal #rescloseday").val(data.rescloseday);
+			console.log(data.rescloseday);
 			$("#infoModal #resopen").val(data.resopen);
 			$("#infoModal #resclose").val(data.resclose); 		
 			$("#infoModal #resphoto").val(data.resphoto);
