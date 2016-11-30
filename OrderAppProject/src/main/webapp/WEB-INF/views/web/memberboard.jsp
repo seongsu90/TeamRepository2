@@ -19,6 +19,7 @@
 	<!-- Google Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/earlyaccess/nanumpenscript.css'>
 	
 	<style type="text/css">
 		table#acrylic {
@@ -118,10 +119,6 @@
 		 	font-family: 'Oxygen', sans-serif;
 		}
 		
-		.main{
-		 	margin-top: 70px;
-		}
-		
 		h1.title { 
 			font-size: 50px;
 			font-family: 'Passion One', cursive; 
@@ -146,34 +143,7 @@
 		    font-size: 11px;
 		    padding-top: 3px;
 		}
-		
-		.main-login{
-		 	background-color: #fff;
-		    /* shadows and rounded borders */
-		    -moz-border-radius: 2px;
-		    -webkit-border-radius: 2px;
-		    border-radius: 2px;
-		    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-		    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-		    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-		}
-		
-		.main-center{
-		 	margin-top: 30px;
-		 	margin: 0 auto;
-		 	max-width: 330px;
-		    padding: 40px 40px;
-		}
-		
-		.login-button{
-			margin-top: 5px;
-		}
-		
-		.login-register{
-			font-size: 11px;
-			text-align: center;
-		}
-		
+
 		.input-group-addon {
 			color: #34495e;
 		}
@@ -192,6 +162,10 @@
 				$("#selProvince").change(function () {
 					setMlocation();
 			    });
+				
+				$("#memberModifyModal").on('shown.bs.modal', function() {
+					$("#mname").focus();
+				});
 				
 				$("#memberDeleteModal").on('shown.bs.modal', function() {
 					$("#inputmid").focus();
@@ -270,13 +244,19 @@
 				method:"post",
 				success: function(data) {
 					if(data.result == "success") {
-						alert("수정 성공");
-						$("#memberModifyModal").modal("hide");
-						location.reload();
+						$("#successMessage").html("수정 성공");
+						$("#messageIcon").attr('class', "fa fa-check-circle");
+						$("#messageModal").modal("show");
+						$("#messageModal").on('hidden.bs.modal', function() {
+							$("#memberModifyModal").modal("hide"); 
+							location.reload();
+						});
 					} else if(data.result == "noRestaurant") {
-						alert("레스토랑이 없음");
+						$("#failMessage").html("No Restaurant");
+						$("#messageModal").modal("show");
 					} else if(data.result == "wrongData") {
-						alert("입력 데이터가 올바르지 않음");
+						$("#failMessage").html("잘못된 입력입니다");
+						$("#messageModal").modal("show");
 					}
 				}
 			});
@@ -306,13 +286,13 @@
 				success: function(data) {
 					if ( data.result == "success" ) {
 						$("#successMessage").html("삭제 성공");
-						$("#errorIcon").attr('class', "fa fa-check-circle");
+						$("#messageIcon").attr('class', "fa fa-check-circle");
 						$("#messageModal").modal("show");
 						$("#messageModal").on('hidden.bs.modal', function() {
 							$("#memberDeleteModal").modal("hide");
 						}); 
 					} else {
-						$("#failMessage").html("삭제 실패");
+						$("#failMessage").html("잘못된 입력입니다");
 						$("#messageModal").modal("show");
 					}
 				}
@@ -427,8 +407,8 @@
 	<!-- ########################## 수정 Modal ########################## -->
 	
 	<div id="memberModifyModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
-		<div class="modal-dialog" role="document">
-	    	<div class="modal-content" style="width:500px">
+		<div class="modal-dialog" role="document" style="width:450px;">
+	    	<div class="modal-content" style="width:450px; margin: 0">
 	    	
 	    		<!-- modal-header -->
 	     		<div class="modal-header" style="background-color: #34495e; color:white">
@@ -524,9 +504,9 @@
 	
 	<!-- ########################## 삭제 Modal ########################## -->
 	
-	<div id="memberDeleteModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
-		<div class="modal-dialog" role="document">
-	    	<div class="modal-content" style="width:500px">
+	<div id="memberDeleteModal" class="modal fade" tabindex="-1" role="dialog" style="position: fixed">
+		<div class="modal-dialog" role="document" style="width: 450px;">
+	    	<div class="modal-content" style="width:450px; margin: 0">
 	    	
 	    		<!-- modal-header -->
 	     		<div class="modal-header" style="background-color: #34495e; color:white">
@@ -544,7 +524,7 @@
 							</div>
 						</div>
 						
-						<b style="font-family: sans-serif; color: #34495e"> 삭제할 아이디를 한 번 더 입력해 주세요</b><br/><br/>
+						<b style="color: #34495e"> 삭제할 아이디를 한 번 더 입력해 주세요</b><br/><br/>
 						
 						<div class="form-group">
 							<div class="input-group">
@@ -571,8 +551,8 @@
 	<!-- ########################## Message Modal ########################## -->
 	
 	<div id="messageModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto" onkeydown="if(event.keyCode==13){javascript:onClickBtnOK();}">
-		<div class="modal-dialog" role="document">
-	    	<div class="modal-content" style="width:500px">
+		<div class="modal-dialog" role="document" style="width:300px;">
+	    	<div class="modal-content" style="width:300px; margin: 0">
 	    	
 	    		<!-- modal-header -->
 	     		<div class="modal-header" style="background-color: #34495e; color:white; text-align: left">
@@ -582,9 +562,9 @@
 	      		
 	      		<!-- modal-body -->
 	      		<div class="modal-body" align="center">
-	      			<i id="errorIcon" class="fa fa-exclamation-triangle" style="font-size: 150px; color: #34495e" aria-hidden="true"></i><br/>
-					<b style="font-family: sans-serif; font-size: 20px; color: #1bbc9b" id="successMessage"></b>
-					<b style="font-family: sans-serif; font-size: 20px; color: red" id="failMessage"></b>
+	      			<i id="messageIcon" class="fa fa-exclamation-triangle" style="font-size: 100px; color: #34495e" aria-hidden="true"></i><br/>
+					<b style="font-size: 20px; color: #1bbc9b" id="successMessage"></b>
+					<b style="font-size: 20px; color: red" id="failMessage"></b>
 	      		</div>
 	      	
 		      	<!-- modal-footer -->	

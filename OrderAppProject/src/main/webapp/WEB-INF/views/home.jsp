@@ -553,14 +553,6 @@
 			</div>
 		</div>
 	</div>
-
-<<<<<<< HEAD
-		<a href="#home" id="toTop" class="scroll" style="display: block;" > <span id="toTopHover" style="opacity: 1;"> </span></a>
-		
-<!-- 		<input type="text" id="loginId"/>
-		<input type="hidden" id="loginPassword"/> -->
-    
-=======
->>>>>>> branch 'master' of https://github.com/seongsu90/TeamRepository2
+	
 </body>
 </html>

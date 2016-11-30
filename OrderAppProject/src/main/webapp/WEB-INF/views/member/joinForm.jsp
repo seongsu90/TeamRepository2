@@ -78,7 +78,7 @@
 			이름 : <input type="text" name="mname" value="${member.mname}"/>
 			<br/>
 			
-			패스워드 : <input type="password" name="mpassword"/>
+			패스워드 : <input type="text" name="mpassword"/>
 			<br/>
 			
 			휴대전화 : <input type="tel" name="mphone" value="${member.mphone}"/> <button id="requestcnum" onclick="requestcnum()">인증번호요청</button>
