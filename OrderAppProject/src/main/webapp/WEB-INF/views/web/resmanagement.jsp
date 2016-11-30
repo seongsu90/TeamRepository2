@@ -117,7 +117,8 @@
 			
 		 	$("#selCity").not(":selected").attr("disabled", "disabled");
 			$("#selProvince").not(":selected").attr("disabled", "disabled"); 
-			$("#resphoto")
+			
+			
 			$("#infoModal").modal("show");
 		};
 		

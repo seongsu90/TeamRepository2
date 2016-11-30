@@ -318,11 +318,21 @@
 				</c:if>
 			</div>
 			<br/>
-			<form method="post" action="/teamapp/restaurant/list?pageNo=1">
-				식당 이름으로 검색 <input type="text" name="find" value="${find}"/>
-				<input type="submit" value="찾기" class="btn btn-success"/>
-			</form>
-		</div>
+			
+			
+
+			
+			<div class="container">    
+			    <div id="quick-access">
+			      <form class="form-inline quick-search-form"  method="post" role="form" action="/teamapp/restaurant/list?pageNo=1">
+			        <div class="form-group">
+			        		<input type="text" style="width:250px" name="find" value="${find}" class="form-control" placeholder="Restaurant name search">
+			        </div>
+			        <button type="submit" id="quick-search" class="btn btn-custom"><span class="glyphicon glyphicon-search custom-glyph-color"></span></button>
+			      </form>
+			    </div>
+			</div>
+						
 
 		<%-- 	 #################################################################################### 
 
