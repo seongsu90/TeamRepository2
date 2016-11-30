@@ -130,7 +130,7 @@
 				margin: 5% auto; 
 				/*transition: 0.5s;	 */			
 			}
-		/* ---------------------------------------- */	
+			
 			.hide-bullets {
 			    list-style:none;
 			    margin-left: -40px;
@@ -212,6 +212,7 @@
 							);
 						}
 						$("#ptableno").val(tableNo);
+						$("#myModalLabel").html(tableNo);
 						$("#totalPrice").html(data.totalPrice);
 						$("#coupon").html(data.coupon);
 						$("#eventPrice").html(data.eventPrice);
@@ -265,30 +266,28 @@
 					}
 				});
 			}
-			
-		/* ------------------------------- */
+		
 		
 			jQuery(document).ready(function($) {			
 		        $('#myCarousel').carousel({
-		                interval: 5000
+		                interval: 10000
 		        });
-		 
+		 		
+		        var id_selector = 0;		        
 		        $('[id^=carousel-selector-]').click(function () {
-			        var id_selector = $(this).attr("id");
+			        id_selector = $(this).attr("id");
 			        try {
 			            var id = /-(\d+)$/.exec(id_selector)[1];
 			            console.log(id_selector, id);
-			            jQuery('#myCarousel').carousel(parseInt(id));
+			            jQuery('#myCarousel').carousel(parseInt(id)-1);
 			        } catch (e) {
 			            console.log('Regex failed!', e);
 			        }
 				});
 		        
 		        $('#myCarousel').on('slid.bs.carousel', function (e) {
-		                 var id = $('.item.active').data('slide-number');
-		                 console.log(id);
-		                /* $('#carousel-text').html($('#slide-content-'+id).html()); */
-		                
+					var id = $('.item.active').data('slide-number');					
+					$('#carousel-text').html($('#slide-content-'+id).html());
 		        });
 			});
 			
@@ -297,7 +296,7 @@
 	 
 	<body>
 	
-		<div class="container" align="center"><br/>
+		<%--  <div class="container" align="center"><br/>
 			<div class="row">
 				<div class="col-md-8">
 					<div class="panel panel-primary">
@@ -344,7 +343,73 @@
 				</div>
 			</div>
 		</div>
-		
+		 --%>
+		 
+		 <div class="container">
+		    <div id="main_area">
+		        <div class="row">
+		            <div class="col-sm-4" id="slider-thumbs">
+		                <ul class="hide-bullets">
+		                    <c:forEach var="i" begin="1" end="${totalTables}">
+			                    <li class="col-sm-3">
+			                        <a class="thumbnail" id="carousel-selector-${i}"><img src="http://placehold.it/150x150&text=${i}"></a>
+			                    </li>
+							</c:forEach>
+		                </ul>
+		            </div>
+		            
+		            <div class="col-sm-6">
+		                <div class="col-xs-12" id="slider">		                    
+		                    <div class="row">
+		                        <div class="col-sm-12" id="carousel-bounding-box">
+		                            <div class="carousel slide" id="myCarousel">	                          
+		                                <div class="carousel-inner">		                                
+		                                	<c:forEach var="i" begin="1" end="${totalTables}">
+		                                		<c:if test="${i == 1}">
+		                                    		<div class="item active" data-slide-number="${i}">
+		                                    			<a class="trigger" data-toggle="modal" data-target="#orderModal" onclick="onClickBtnTable(${i})"><img src="http://placehold.it/470x480&text=${i}"></a>
+		                                    		</div>
+												</c:if>
+												<c:if test="${i != 1}"> 
+		                                    		<div class="item" data-slide-number="${i}">
+		                                    			<a class="trigger" data-toggle="modal" data-target="#orderModal" onclick="onClickBtnTable(${i})"><img src="http://placehold.it/470x480&text=${i}"></a>
+		                                    		</div>
+												</c:if>													
+											</c:forEach>			
+		                                </div>
+		                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+		                                    <span class="glyphicon glyphicon-chevron-left"></span>
+		                                </a>
+		                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+		                                    <span class="glyphicon glyphicon-chevron-right"></span>
+		                                </a>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		            
+		            <div class="col-md-2">					<!-- 예약자 확인 -->
+						<table id="acrylic" style="width:350px;">
+							<tr>
+								<th> 예약시간 </th>
+								<th> 인원수 </th>
+								<th> 예약자 </th>																
+							</tr>
+							<c:forEach  var="reservarion" items="${reservList}">														
+								<tr>
+									<td>${reservarion.rvtime}</td>
+									<td>${reservarion.rvperson}</td>
+									<td>${reservarion.rvmname}(${reservarion.rvmid})</td>
+									<td><input onclick="onClickBtnConfirm({rvmid:'${reservarion.rvmid}', rvresid:${reservarion.rvresid}})" type="button" value="확인"/>
+											<input onclick="onClickBtnPenalty({rvmid:'${reservarion.rvmid}',})" type="button" value="취소"/></td>
+								</tr>		
+							</c:forEach>						
+						</table>							
+					</div>         
+		        </div>
+		    </div>
+		</div> 
 		
 		<!-- modal start-->
 		<div id="orderModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -354,7 +419,7 @@
 					<!-- modal-header-->	
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-						<h4 class="modal-title" id="myModalLabel">주문 입력</h4>
+						<h4 class="modal-title" id="myModalLabel"></h4>
 					</div>
 					<!-- modal-body-->
 					<div class="modal-body" >
@@ -407,54 +472,8 @@
 					</div>
 				</div>
 			</div>	                    	                    
-		</div>	 
+		</div>	  
 		<!-- modal end -->
-
-	<%-- 
-		<div class="container">
-		    <div id="main_area">
-		        <div class="row">
-		            <div class="col-sm-6" id="slider-thumbs">
-		                <ul class="hide-bullets">
-		                    <c:forEach var="i" begin="1" end="${totalTables}">
-			                    <li class="col-sm-3">
-			                        <a class="thumbnail" id="carousel-selector-${i}"><img src="http://placehold.it/150x150&text=${i}"></a>
-			                    </li>
-							</c:forEach>
-		                </ul>
-		            </div>
-		            <div class="col-sm-6">
-		                <div class="col-xs-12" id="slider">		                    
-		                    <div class="row">
-		                        <div class="col-sm-12" id="carousel-bounding-box">
-		                            <div class="carousel slide" id="myCarousel">	                          
-		                                <div class="carousel-inner">
-		                                
-		                                	<c:forEach var="i" begin="1" end="${totalTables}">
-												<c:if test="${i == 1}">
-		                                    		<div class="active item" data-slide-number="${i}"><img src="http://placehold.it/470x480&text=${i}"></div>
-		                                    	</c:if>
-		                                    	<c:if test="${i != 1}">		                                   
-		                                    		<div class="item" data-slide-number="${i}"><img src="http://placehold.it/470x480&text=${i}"></div>
-		                                    	</c:if>
-											</c:forEach>
-											
-		                                </div>
-		                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-		                                    <span class="glyphicon glyphicon-chevron-left"></span>
-		                                </a>
-		                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-		                                    <span class="glyphicon glyphicon-chevron-right"></span>
-		                                </a>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>		            
-		        </div>
-		    </div>
-		</div> 
-			 --%>
 		
 	</body>
 </html>	      		

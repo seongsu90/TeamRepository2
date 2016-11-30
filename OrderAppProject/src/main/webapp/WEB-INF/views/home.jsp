@@ -69,8 +69,7 @@
 		    	parent.location.reload();
 		    });
 			
-			$("#login-modal").on('shown.bs.modal', function() {
-	            console.log("온로드");
+			$("#login-modal").on('shown.bs.modal', function() {	            
 	            $("#login_userid").focus();
 	         }); 
 		}); 
@@ -88,8 +87,7 @@
 					
 					if(data.result=="success"){						
 						$("#login-modal").modal("hide");						
-					}else{
-						/* alert("아이디 혹은 비밀번호가 틀렸습니다."); */						
+					}else{											
 						$("#loginInCorrect-modal").modal("show");
 					}					
 				}
