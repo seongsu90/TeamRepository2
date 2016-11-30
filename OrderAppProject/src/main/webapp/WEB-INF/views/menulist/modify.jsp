@@ -11,7 +11,7 @@
 		</style>
 	</head>
 	<body>
-		<%-- <h4 style="width:400px; margin:auto;">메뉴 수정</h4>
+	    <h4 style="width:400px; margin:auto;">메뉴 수정</h4>
 		<form method="post" enctype="multipart/form-data">
 		
 			<table style="width:700px; margin:auto;">
@@ -38,14 +38,14 @@
 				<tr>
 					<td style="background-color:#1bbc9b; width:120px;">초이스</td>
 					<td>
-						<input type="radio" name="mlishot" value="true"/>핫
-						<input type="radio" name="mlishot" value="false"/>일반
+						<input type="radio" name="mlishot" value="핫"/>핫
+						<input type="radio" name="mlishot" value="일반"/>일반
 					</td>
 				</tr>
 			</table>
 			<div style="margin-left:605px;">
 				<input type="submit" value="수정"/>
-			</div>
-		</form> --%>
+			</div>		
+		</form> 
    </body>
 </html>

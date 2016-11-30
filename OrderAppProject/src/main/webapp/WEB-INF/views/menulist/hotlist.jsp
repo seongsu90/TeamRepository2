@@ -156,18 +156,18 @@
 	                </tr>
 	            </thead>
 	            <tbody>
-	            <c:forEach var="menuList" items="${menuList}">
+	            <c:forEach var="menuList" items="${list}">
 	                <tr>
-	                    <td data-label="Name">${menuList.mlname}</td>
-	                    <td data-label="Age">${menuList.mlprice}</td>
+	                    <td data-label="Name">${list.mlname}</td>
+	                    <td data-label="Age">${list.mlprice}</td>
 	                    <td data-label="Weight">
-	                    	<a href="info?mlresid=${menuList.mlresid}&mlname=${menuList.mlname}">
-	                    		${menuList.mlresid}
+	                    	<a href="info?mlresid=${list.mlresid}&mlname=${list.mlname}">
+	                    		${list.mlresid}
 	                    	</a>
 	                    </td>
-	                    <td data-label="Profession">${menuList.mlinfo}</td>
+	                    <td data-label="Profession">${list.mlinfo}</td>
 	                    <td>
-	                    	<img src="showPhoto?mlsavedfile=${menuList.mlsavedfile}" style="width:50px;"/>
+	                    	<img src="showPhoto?mlsavedfile=${list.mlsavedfile}" style="width:50px;"/>
 	                    </td>
 	                </tr>
 	                

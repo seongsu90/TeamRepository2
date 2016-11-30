@@ -18,7 +18,8 @@
         <activity android:name=".IdSearch" />
         <activity android:name=".PwSearch" />
         <activity android:name=".PwModify" />
-        <activity android:name=".Join"></activity>
+        <activity android:name=".Join" />
+        <activity android:name=".MainFunction"></activity>
     </application>
 
 </manifest>

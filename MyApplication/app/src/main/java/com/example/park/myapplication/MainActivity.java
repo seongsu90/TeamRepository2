@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnIDsearch;
     private Button btnPwSearch;
     private Button btnJoin;
+    private Button btnGuest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Join.class);
+                startActivity(intent);
+            }
+        });
+
+        btnGuest = (Button) findViewById(R.id.btnGuest);
+        btnGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,MainFunction.class);
                 startActivity(intent);
             }
         });

@@ -108,11 +108,11 @@
 									<nav>
 							          <ul class="nav nav-justified" style="width:1200px;">
 							            <li class="active" style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/add">생성</a></li>
-							            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/list">메뉴</a></li>
-							            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/hotlist?mlishot=1&pageNo=1">핫메뉴</a></li>
+							            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/selectlist?pageNo=1">메뉴</a></li>
+							            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/selecthotlist?mlishot=1&pageNo=1">핫메뉴</a></li>
 							          </ul>
 						  			</nav>
-									<iframe name="iframe" style="width:1200px; height:840px; border-width:0;" src="/teamapp/menulist/list?pageNo=1"></iframe>
+									<iframe name="iframe" style="width:1200px; height:840px; border-width:0;" src="/teamapp/menulist/selectlist?pageNo=1"></iframe>
 								</section>					
 							</div>
 						</div>

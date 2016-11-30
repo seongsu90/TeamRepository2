@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="info">
+        <item>내 쿠폰함</item>
+        <item>포인트 확인</item>
+        <item>회원정보 수정</item>
+        <item>예약 현황</item>
+        <item>F/A/Q</item>
+        <item>설정</item>
+        <item>로그아웃</item>
+        <item>탈퇴</item>
+    </string-array>
+</resources>

@@ -97,24 +97,24 @@
 					          <tr class="ok">
 					             <td>메뉴이름</td>
 					             <td>메뉴가격</td>
-					             <td>식당아이디</td>
+					            <!--  <td>식당아이디</td> -->
 					             <td>메뉴정보</td>
 					             <td>메뉴사진</td>
-					             <td>핫메뉴 선택</td>
+					           <td>핫메뉴 선택</td> 
 					          </tr>
 					          <tr class="ban">
 					          	 <td><input type="text" name="mlname" value="${menuList.mlname}"/></td>
 					             <td><input type="number" name="mlprice" value="${menuList.mlprice}"/></td>
-					             <td><input type="text" name="mlresid" value="${menuList.mlresid}"/></td>
+					           <%--   <td><input type="text" name="mlresid" value="${menuList.mlresid}"/></td> --%>
 					             <td><input type="text" name="mlinfo" value="${menuList.mlinfo}"/></td>
 					             <td><input type="file" name="mlphoto" value="${menuList.mlsavedfile}"/></td>
-					             <td>
+					              <td>
 					             	<input type="radio" name="mlishot" value="true"/>핫메뉴
 							  		<input type="radio" name="mlishot" value="false"/>일반메뉴
-					             </td> 
+					             </td>  
 					          </tr>
 					          <tr class="new" style="text-align:center;">
-					             <td colspan="6"><input type="submit" value="생성"/></td>
+					             <td colspan="6"><input type="submit" value="추가"/></td>
 					            </tr>
 					          </tbody>  
 					        </table>

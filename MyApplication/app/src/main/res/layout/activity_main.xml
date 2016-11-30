@@ -133,7 +133,7 @@
                     android:layout_height="0dp"
                     android:background="#FFFFFF"
                     android:layout_weight="1"
-                    android:id="@+id/button6" />
+                    android:id="@+id/btnGuest" />
 
                 <LinearLayout
                     android:orientation="horizontal"
