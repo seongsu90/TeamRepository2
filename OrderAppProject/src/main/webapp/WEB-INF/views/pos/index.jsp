@@ -59,7 +59,7 @@
 	            background-image: -moz-linear-gradient(#3C5064, #34495e);
 	            background-image: -webkit-linear-gradient(#3C5064, #34495e);
 	            background-image: linear-gradient(#3C5064, #34495e);
-	            border-top: 1px solid #858d99;
+	            border-top: 1px solid #858d99;	            
 	        }
 	        
 	        #acrylic thead th:first-child {
@@ -78,7 +78,7 @@
 	            font-family: 'Open Sans', sans-serif;
 	            font-weight: 400;
 	            color: #5f6062;
-	            font-size: 13px;
+	            font-size: 14px;
 	            padding: 20px 20px 20px 20px;
 	            border-bottom: 1px solid #e0e0e0;
 	        }
@@ -212,7 +212,7 @@
 							);
 						}
 						$("#ptableno").val(tableNo);
-						$("#myModalLabel").html(tableNo);
+						/* $("#myModalLabel").html(tableNo); */
 						$("#totalPrice").html(data.totalPrice);
 						$("#coupon").html(data.coupon);
 						$("#eventPrice").html(data.eventPrice);
@@ -390,21 +390,26 @@
 		            </div>
 		            
 		            <div class="col-md-2">					<!-- 예약자 확인 -->
-						<table id="acrylic" style="width:350px;">
-							<tr>
-								<th> 예약시간 </th>
-								<th> 인원수 </th>
-								<th> 예약자 </th>																
-							</tr>
-							<c:forEach  var="reservarion" items="${reservList}">														
+						<table id="acrylic" style="width: 450px;">
+							<thead>
 								<tr>
-									<td>${reservarion.rvtime}</td>
-									<td>${reservarion.rvperson}</td>
-									<td>${reservarion.rvmname}(${reservarion.rvmid})</td>
-									<td><input onclick="onClickBtnConfirm({rvmid:'${reservarion.rvmid}', rvresid:${reservarion.rvresid}})" type="button" value="확인"/>
-											<input onclick="onClickBtnPenalty({rvmid:'${reservarion.rvmid}',})" type="button" value="취소"/></td>
-								</tr>		
-							</c:forEach>						
+									<th> 예약시간 </th>
+									<th> 인원수 </th>
+									<th> 예약자 </th>	
+									<th></th>															
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach  var="reservarion" items="${reservList}">														
+									<tr>
+										<td>${reservarion.rvtime}</td>
+										<td>${reservarion.rvperson}</td>
+										<td>${reservarion.rvmname}(${reservarion.rvmid})</td>
+										<td><input onclick="onClickBtnConfirm({rvmid:'${reservarion.rvmid}', rvresid:${reservarion.rvresid}})" type="button" value="확인"/>
+												<input onclick="onClickBtnPenalty({rvmid:'${reservarion.rvmid}',})" type="button" value="취소"/></td>
+									</tr>		
+								</c:forEach>
+							</tbody>
 						</table>							
 					</div>         
 		        </div>
@@ -419,7 +424,7 @@
 					<!-- modal-header-->	
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-						<h4 class="modal-title" id="myModalLabel"></h4>
+						<h4 class="modal-title" id="myModalLabel">주문 입력</h4>
 					</div>
 					<!-- modal-body-->
 					<div class="modal-body" >
@@ -440,7 +445,7 @@
 								</table>	
 							</div>
 							<div class="col-md-6">
-								<table class="table table-striped custab" id="acrylic">
+								<table class="table table-striped custab" id="acrylic" style="width: 400px;">
 									<tr>
 										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 합계 </th>
 										<th id="totalPrice"></th>		
