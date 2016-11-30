@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mycompany.teamapp.dto.Event;
+import com.mycompany.teamapp.dto.Member;
 import com.mycompany.teamapp.dto.MenuList;
+import com.mycompany.teamapp.service.MemberService;
 import com.mycompany.teamapp.service.MenuListService;
 
 @Controller
@@ -29,49 +31,8 @@ public class MenuListController {
 		@Autowired
 		private MenuListService menuListService;
 		
-		@RequestMapping("/list")
-		public String list(String pageNo, Model model, HttpSession session){
-			
-			int intPageNo = 1;
-			if ( pageNo == null ) {
-				pageNo = (String) session.getAttribute("pageNo");
-				if ( pageNo != null ) {
-					intPageNo = Integer.parseInt(pageNo);
-				}
-			} else {
-				intPageNo = Integer.parseInt(pageNo);
-			}
-			session.setAttribute("pageNo", String.valueOf(intPageNo));
-			
-			int rowsPerPage=8;
-			int pagesPerGroup=5;
-			int totalMenuListNo=menuListService.getCount();
-			if ( totalMenuListNo == 0 ) totalMenuListNo = 1;
-			
-			int totalPageNo=totalMenuListNo/rowsPerPage+((totalMenuListNo%rowsPerPage!=0)?1:0);
-			int totalGroupNo=totalPageNo/pagesPerGroup+((totalPageNo%pagesPerGroup!=0)?1:0);
-			
-			int groupNo=(intPageNo-1)/pagesPerGroup+1;
-			int startPageNo=(groupNo-1)*pagesPerGroup+1;
-			int endPageNo=startPageNo+pagesPerGroup-1;
-			if(groupNo==totalGroupNo){
-				endPageNo=totalPageNo;
-			}
-			
-			List<MenuList> list= menuListService.list(intPageNo, rowsPerPage);
-			model.addAttribute("list", list);
-			model.addAttribute("pageNo", intPageNo);
-			model.addAttribute("rowsPerPage", rowsPerPage);
-			model.addAttribute("pagesPerGroup", pagesPerGroup);
-			model.addAttribute("totalMenuListNo", totalMenuListNo);
-			model.addAttribute("totalPageNo", totalPageNo);
-			model.addAttribute("totalGroupNo", totalGroupNo);
-			model.addAttribute("groupNo", groupNo);
-			model.addAttribute("startPageNo", startPageNo);
-			model.addAttribute("endPageNo", endPageNo);
-			
-			return "menulist/list";
-		}
+		@Autowired
+		private MemberService memberService;
 		
 		@RequestMapping("/index")
 		public String index() {
@@ -167,51 +128,6 @@ public class MenuListController {
 			}
 		}
 		
-		@RequestMapping("/hotlist")	
-		public String resHotList(boolean mlishot, String pageNo, Model model, HttpSession session){
-			List<MenuList> menuList = menuListService.resHotList(mlishot);
-			model.addAttribute("menuList",menuList);
-			int intPageNo = 1;
-			if ( pageNo == null ) {
-				pageNo = (String) session.getAttribute("pageNo");
-				if ( pageNo != null ) {
-					intPageNo = Integer.parseInt(pageNo);
-				}
-			} else {
-				intPageNo = Integer.parseInt(pageNo);
-			}
-			session.setAttribute("pageNo", String.valueOf(intPageNo));
-			
-			int rowsPerPage=8;
-			int pagesPerGroup=5;
-			int totalMenuListNo=menuListService.getHotmenuCount();
-			if ( totalMenuListNo == 0 ) totalMenuListNo = 1;
-			
-			int totalPageNo=totalMenuListNo/rowsPerPage+((totalMenuListNo%rowsPerPage!=0)?1:0);
-			int totalGroupNo=totalPageNo/pagesPerGroup+((totalPageNo%pagesPerGroup!=0)?1:0);
-			
-			int groupNo=(intPageNo-1)/pagesPerGroup+1;
-			int startPageNo=(groupNo-1)*pagesPerGroup+1;
-			int endPageNo=startPageNo+pagesPerGroup-1;
-			if(groupNo==totalGroupNo){
-				endPageNo=totalPageNo;
-			}
-			
-			List<MenuList> list= menuListService.list(intPageNo, rowsPerPage);
-			model.addAttribute("list", list);
-			model.addAttribute("pageNo", intPageNo);
-			model.addAttribute("rowsPerPage", rowsPerPage);
-			model.addAttribute("pagesPerGroup", pagesPerGroup);
-			model.addAttribute("totalMenuListNo", totalMenuListNo);
-			model.addAttribute("totalPageNo", totalPageNo);
-			model.addAttribute("totalGroupNo", totalGroupNo);
-			model.addAttribute("groupNo", groupNo);
-			model.addAttribute("startPageNo", startPageNo);
-			model.addAttribute("endPageNo", endPageNo);
-			
-			return "menulist/hotlist";
-		}
-		
 		@RequestMapping(value="/modifyhot",method=RequestMethod.GET)	
 		public String modifyhotForm(int mlresid, String mlname, boolean mlishot, Model model){
 			MenuList menuList = menuListService.hotinfo(mlresid, mlname,mlishot);
@@ -240,5 +156,95 @@ public class MenuListController {
 			return "menulist/hotinfo";
 		}
 		
+		@RequestMapping("/selectlist")
+		public String selectList(String pageNo, Model model, HttpSession session){
+			String mid = (String) session.getAttribute("login");			
+			Member member = memberService.info(mid);			
+			
+			int intPageNo = 1;
+			if ( pageNo == null ) {
+				pageNo = (String) session.getAttribute("pageNo");
+				if ( pageNo != null ) {
+					intPageNo = Integer.parseInt(pageNo);
+				}
+			} else {
+				intPageNo = Integer.parseInt(pageNo);
+			 }
+			session.setAttribute("pageNo", String.valueOf(intPageNo));
+			int rowsPerPage=8;
+			int pagesPerGroup=5;
+			int totalMenuListNo=menuListService.getCount();
+			if ( totalMenuListNo == 0 ) totalMenuListNo = 1;
+			
+			int totalPageNo=totalMenuListNo/rowsPerPage+((totalMenuListNo%rowsPerPage!=0)?1:0);
+			int totalGroupNo=totalPageNo/pagesPerGroup+((totalPageNo%pagesPerGroup!=0)?1:0);
+			
+			int groupNo=(intPageNo-1)/pagesPerGroup+1;
+			int startPageNo=(groupNo-1)*pagesPerGroup+1;
+			int endPageNo=startPageNo+pagesPerGroup-1;
+			if(groupNo==totalGroupNo){
+				endPageNo=totalPageNo;
+			}
+			
+			List<MenuList> list= menuListService.list(intPageNo, rowsPerPage, member.getMresid());
+			model.addAttribute("list", list);
+			model.addAttribute("pageNo", intPageNo);
+			model.addAttribute("rowsPerPage", rowsPerPage);
+			model.addAttribute("pagesPerGroup", pagesPerGroup);
+			model.addAttribute("totalMenuListNo", totalMenuListNo);
+			model.addAttribute("totalPageNo", totalPageNo);
+			model.addAttribute("totalGroupNo", totalGroupNo);
+			model.addAttribute("groupNo", groupNo);
+			model.addAttribute("startPageNo", startPageNo);
+			model.addAttribute("endPageNo", endPageNo);
+			
+			return "menulist/selectlist";
+		}
 		
+		@RequestMapping("/selecthotlist")
+		public String selectHotList(boolean mlishot, String pageNo, Model model, HttpSession session){
+			String mid = (String) session.getAttribute("login");			
+			Member member = memberService.info(mid);
+			
+			System.out.println(member.getMresid());
+			System.out.println(menuListService.selectHotList(member.getMresid(), mlishot));
+			int intPageNo = 1;
+			if ( pageNo == null ) {
+				pageNo = (String) session.getAttribute("pageNo");
+				if ( pageNo != null ) {
+					intPageNo = Integer.parseInt(pageNo);
+				}
+			} else {
+				intPageNo = Integer.parseInt(pageNo);
+			 }
+			session.setAttribute("pageNo", String.valueOf(intPageNo));
+			int rowsPerPage=8;
+			int pagesPerGroup=5;
+			int totalMenuListNo=menuListService.getHotmenuCount();
+			if ( totalMenuListNo == 0 ) totalMenuListNo = 1;
+			
+			int totalPageNo=totalMenuListNo/rowsPerPage+((totalMenuListNo%rowsPerPage!=0)?1:0);
+			int totalGroupNo=totalPageNo/pagesPerGroup+((totalPageNo%pagesPerGroup!=0)?1:0);
+			
+			int groupNo=(intPageNo-1)/pagesPerGroup+1;
+			int startPageNo=(groupNo-1)*pagesPerGroup+1;
+			int endPageNo=startPageNo+pagesPerGroup-1;
+			if(groupNo==totalGroupNo){
+				endPageNo=totalPageNo;
+			}
+			
+			List<MenuList> list= menuListService.hotlist(intPageNo, rowsPerPage,member.getMresid(),mlishot);
+			model.addAttribute("list", list);
+			model.addAttribute("pageNo", intPageNo);
+			model.addAttribute("rowsPerPage", rowsPerPage);
+			model.addAttribute("pagesPerGroup", pagesPerGroup);
+			model.addAttribute("totalMenuListNo", totalMenuListNo);
+			model.addAttribute("totalPageNo", totalPageNo);
+			model.addAttribute("totalGroupNo", totalGroupNo);
+			model.addAttribute("groupNo", groupNo);
+			model.addAttribute("startPageNo", startPageNo);
+			model.addAttribute("endPageNo", endPageNo);
+			
+			return "menulist/selecthotlist";
+		}
 	}

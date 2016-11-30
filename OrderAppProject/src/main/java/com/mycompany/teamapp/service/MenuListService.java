@@ -22,8 +22,12 @@ public class MenuListService {
 	@Autowired
 	private MenuListDao menuListdao;
 	
-	public List<MenuList> list(int pageNo, int rowsPerPage){
-		return menuListdao.selectByPage(pageNo, rowsPerPage); 
+	public List<MenuList> list(int pageNo, int rowsPerPage, int mlresid){
+		return menuListdao.selectByPage(pageNo, rowsPerPage, mlresid); 
+	}
+	
+	public List<MenuList> hotlist(int pageNo, int rowsPerPage, int mlresid, boolean mlishot){
+		return menuListdao.selectByHotPage(pageNo, rowsPerPage, mlresid, mlishot); 
 	}
 	
 	public int add(MenuList menuList){
@@ -76,4 +80,14 @@ public class MenuListService {
 		return menuListdao.hotMenuCount();
 	}
 	
+	public List<MenuList> selectList(int mlresid){
+		List<MenuList> menuList = menuListdao.selectList(mlresid);
+		return menuList;
+	}
+	
+	public List<MenuList> selectHotList(int mlresid, boolean mlishot){
+		List<MenuList> menuHotList = menuListdao.selectHotList(mlresid,mlishot);
+		return menuHotList;
+	}
+
 }

@@ -144,10 +144,8 @@
 	                <tr>
 		                <th> 메뉴 이름</th>
 						<th> 메뉴 가격</th>
-						<th> 식당아이디 </th>
 						<th> 메뉴 정보 </th>
 						<th> 메뉴 사진  </th>
-						<th> 핫메뉴? </th>
 	                </tr>
 	            </thead>
 	            <tbody>
@@ -159,43 +157,40 @@
 	                    	</a>	
 	                    </td>
 	                    <td data-label="Age">${menuList.mlprice}</td>
-	                    <td data-label="Weight">${menuList.mlresid}</td>
 	                    <td data-label="Profession">${menuList.mlinfo}</td>
 	                    <td>
 	                    	<img src="showPhoto?mlsavedfile=${menuList.mlsavedfile}" style="width:50px;"/>
 	                    </td>
-	                    <td>${menuList.mlishot}</td>
 	                </tr>
-	                
 	               </c:forEach> 
 	            </tbody>
 	        </table>
 	        
-	        <form action="${pageContext.servletContext.contextPath}/menulist/list">
+	        <form action="${pageContext.servletContext.contextPath}/menulist/selectlist">
 				<input type="hidden" name="pageNo" value="1"/>
 			</form><br/>
 			
 	        <div style="text-align:center;">
 				<c:if test="${pageNo!=1}">
-					<a href="list?pageNo=1">[처음]</a>
+					<a href="selectlist?pageNo=1">[처음]</a>
 				</c:if>
 				
 				<c:if test="${groupNo>1}">
-					<a href="list?pageNo=${startPageNo-1}">[이전]</a>
+					<a href="selectlist?pageNo=${startPageNo-1}">[이전]</a>
 				</c:if>
 				
 				<c:forEach var="i" begin="${startPageNo}" end="${endPageNo}">
-					<a href="list?pageNo=${i}"
+					<a href="selectlist?pageNo=${i}"
 						<c:if test="${pageNo==i}">style="color:red"</c:if>
 					>${i}</a>
 				</c:forEach>
 				
 				<c:if test="${groupNo<totalGroupNo}">
-					<a href="list?pageNo=${endPageNo+1}">[다음]</a>
+					<a href="selectlist?pageNo=${endPageNo+1}">[다음]</a>
 				</c:if>	
 				
 				<c:if test="${pageNo!=totalPageNo}">
-					<a href="list?pageNo=${totalPageNo}">[맨끝]</a>
+					<a href="selectlist?pageNo=${totalPageNo}">[맨끝]</a>
 				</c:if>
 			</div>
     	</div>	

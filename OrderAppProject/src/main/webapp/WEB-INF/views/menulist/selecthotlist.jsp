@@ -5,14 +5,19 @@
 <html>
 	<head>
 		<meta charset="UTF-8"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css">
-		<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/style.css" />
-		<link href='http://fonts.googleapis.com/css?family=Niconne|Playball|Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
-		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
+		<link href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css" rel="stylesheet">
+	    <%-- <link href="${pageContext.servletContext.contextPath}/resources/css/justified-nav.css" rel="stylesheet">
+		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
+	 	<script>
+	 		$(function(){
+	 			$("nav li").on("click", function(){
+	 				$("nav li").removeClass("active");//jquery 이용
+	 				//this.setAttribute("class","active")//순수 DOM
+	 				$(this).addClass("active");
+	 			});
+	 		});
+	 	</script> --%>
 		
 		<style>
 			table#acrylic {
@@ -48,7 +53,7 @@
 	            background-image: -webkit-linear-gradient(#646f7f, #4a5564);
 	            background-image: linear-gradient(#646f7f, #4a5564);
 	            border-top: 1px solid #858d99;
-	       		background:#34495e;
+	            background:#34495e;
 	        }
 	        
 	        #acrylic thead th:first-child {
@@ -135,69 +140,65 @@
 	        tbody tr td {
 	        	text-align:center;
 	        }
-	   </style>     
+	   </style>    
+		
 	</head>
-	<body>
+	</body>
 		<div class="wrapper">
 	        <table id="acrylic">
 	            <thead>
 	                <tr>
 		                <th> 메뉴 이름</th>
 						<th> 메뉴 가격</th>
-						<th> 식당아이디 </th>
 						<th> 메뉴 정보 </th>
 						<th> 메뉴 사진  </th>
-						<th> 핫메뉴? </th>
 	                </tr>
 	            </thead>
 	            <tbody>
-	            <c:forEach var="menuList" items="${list}">
+	            <c:forEach var="menuList" items="${menuList}">
 	                <tr>
 	                    <td data-label="Name">
-	                    	<a href="info?mlresid=${menuList.mlresid}&mlname=${menuList.mlname}">
-	                    		${menuList.mlname}
-	                    	</a>	
+	                   	 <a href="info?mlresid=${menuList.mlresid}&mlname=${menuList.mlname}">
+	                  	 	 ${menuList.mlname}
+	                  	  </a>
 	                    </td>
 	                    <td data-label="Age">${menuList.mlprice}</td>
-	                    <td data-label="Weight">${menuList.mlresid}</td>
 	                    <td data-label="Profession">${menuList.mlinfo}</td>
 	                    <td>
 	                    	<img src="showPhoto?mlsavedfile=${menuList.mlsavedfile}" style="width:50px;"/>
 	                    </td>
-	                    <td>${menuList.mlishot}</td>
 	                </tr>
 	                
 	               </c:forEach> 
 	            </tbody>
 	        </table>
-	        
-	        <form action="${pageContext.servletContext.contextPath}/menulist/list">
+	      
+	         <form action="${pageContext.servletContext.contextPath}/menulist/selecthotlist">
 				<input type="hidden" name="pageNo" value="1"/>
 			</form><br/>
-			
 	        <div style="text-align:center;">
-				<c:if test="${pageNo!=1}">
-					<a href="list?pageNo=1">[처음]</a>
+	        	<c:if test="${pageNo!=1}">
+					<a href="selecthotlist?pageNo=1">[처음]</a>
 				</c:if>
-				
-				<c:if test="${groupNo>1}">
-					<a href="list?pageNo=${startPageNo-1}">[이전]</a>
-				</c:if>
-				
-				<c:forEach var="i" begin="${startPageNo}" end="${endPageNo}">
-					<a href="list?pageNo=${i}"
-						<c:if test="${pageNo==i}">style="color:red"</c:if>
-					>${i}</a>
-				</c:forEach>
-				
-				<c:if test="${groupNo<totalGroupNo}">
-					<a href="list?pageNo=${endPageNo+1}">[다음]</a>
-				</c:if>	
-				
-				<c:if test="${pageNo!=totalPageNo}">
-					<a href="list?pageNo=${totalPageNo}">[맨끝]</a>
-				</c:if>
-			</div>
-    	</div>	
-	</body>
+	 	
+			 	<c:if test="${groupNo>1}">
+			 		<a href="selecthotlist?pageNo=${startPageNo-1}">[이전]</a>
+			 	</c:if><!-- 이전번호가 나오게하는 조건 pageNo가 2부터 이전버튼 나오게함 -->
+			 	
+			 	<c:forEach var="i" begin="${startPageNo}" end="${endPageNo}">
+			 		<a href="selecthotlist?pageNo=${i}"
+			 		<c:if test="${pageNo==i}">style="color:red"</c:if>
+			 		>${i}</a>
+			 	</c:forEach>
+			 	
+			 	<c:if test="${groupNo<totalGroupNo}">
+			 		<a href="selecthotlist?pageNo=${endPageNo+1}">[다음]</a>
+			 	</c:if>
+			 	
+			 	<c:if test="${pageNo!=totalPageNo}">
+			 		<a href="selecthotlist?pageNo=${totalPageNo}">[맨끝]</a>
+			 	</c:if>
+			</div> 
+	    </div>		
+   </body>
 </html>

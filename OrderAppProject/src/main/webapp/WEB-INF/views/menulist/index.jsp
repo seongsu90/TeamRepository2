@@ -41,8 +41,8 @@
 						
 					</c:if>
 				</c:if>
-				<li><a href="/teamapp/menulist/list">메뉴 리스트보기</a><br/></li>
-				<li><a href="/teamapp/menulist/hotlist?mlishot=1">핫메뉴리스트 보기</a><br/></li>
+				<li><a href="/teamapp/menulist/selectlist?mlresid=41">메뉴 리스트보기</a><br/></li>
+				<li><a href="/teamapp/menulist/selecthotlist?mlresid=41&mlishot=1">핫메뉴리스트 보기</a><br/></li>
 			</ul>
 		</div>	
 	</body>
