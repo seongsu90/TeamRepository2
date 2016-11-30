@@ -1,54 +1,53 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <!DOCTYPE HTML>
 <html>
 <head>
 <title>Food House a Hotels and Restaurants Category Flat Bootstarp responsive Website Template | Home :: w3layouts</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/style.css" />
-	<%-- <link href="${pageContext.servletContext.contextPath}/resources/css/bootstrap.css" rel='stylesheet' type='text/css' /> --%>
 	<link href='http://fonts.googleapis.com/css?family=Niconne|Playball|Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
-	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script> --%>
-	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
+	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
+	
 	<script>
-	$(document).ready(function () {
-
-	$('.star').on('click', function () {
-      $(this).toggleClass('star-checked');
-    });
-
-    $('.ckbox label').on('click', function () {
-      $(this).parents('tr').toggleClass('selected');
-    });
-
-    $('.btn-filter').on('click', function () {
-      var $target = $(this).data('target');
-      if ($target != 'all') {
-        $('.table tr').css('display', 'none');
-        $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
-      } else {
-        $('.table tr').css('display', 'none').fadeIn('slow');
-      }
-    });
-
- });
+		$(document).ready(function () {
+			$("span.menu").click(function(){
+				$(".top-nav ul").slideToggle(200);
+			});
+	
+			$('.star').on('click', function () {
+				$(this).toggleClass('star-checked');
+			});
+		
+		    $('.ckbox label').on('click', function () {
+		      $(this).parents('tr').toggleClass('selected');
+		    });
+		
+			$('.btn-filter').on('click', function () {
+				var $target = $(this).data('target');
+				if ($target != 'all') {
+					$('.table tr').css('display', 'none');
+					$('.table tr[data-status="' + $target + '"]').fadeIn('slow');
+				} else {
+					$('.table tr').css('display', 'none').fadeIn('slow');
+				}
+			});
+		
+		 });
+		
+		$(function(){
+			$("nav li").on("click", function(){
+				$("nav li").removeClass("active");//jquery 이용
+				//this.setAttribute("class","active")//순수 DOM
+				$(this).addClass("active");
+			});
+		});
 	</script>
-   
- 	<script>
- 		$(function(){
- 			$("nav li").on("click", function(){
- 				$("nav li").removeClass("active");//jquery 이용
- 				//this.setAttribute("class","active")//순수 DOM
- 				$(this).addClass("active");
- 			});
- 		});
- 	</script>
 	 
 </head>
 <body>
@@ -59,7 +58,7 @@
 			<div class="container">
 		<!--top-nav-->
 			<div class="top-nav">
-						<span class="menu two"> </span>
+				<span class="menu two"> </span>
 					<ul>					
 						<li><a href="${pageContext.servletContext.contextPath}/home">Home</a></li> 
 						<c:if test="${mrank==2}">
@@ -82,14 +81,6 @@
 					</ul>
 				</div>
 				<div class="clearfix"> </div>
-		<!-- script-for-menu -->
-				<script>
-					$(document).ready(function(){
-						$("span.menu").click(function(){
-							$(".top-nav ul").slideToggle(200);
-						});
-					});
-				</script>
 		</div>
 	<!--End-top-nav-script-->
 				<div class="clearfix"> </div>
@@ -118,10 +109,10 @@
 							          <ul class="nav nav-justified" style="width:1200px;">
 							            <li class="active" style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/add">생성</a></li>
 							            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/list">메뉴</a></li>
-							            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/hotlist?mlishot=1">핫메뉴</a></li>
+							            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/hotlist?mlishot=1&pageNo=1">핫메뉴</a></li>
 							          </ul>
 						  			</nav>
-									<iframe name="iframe" style="width:1200px; height:840px; border-width:0;" src="/teamapp/menulist/list"></iframe>
+									<iframe name="iframe" style="width:1200px; height:840px; border-width:0;" src="/teamapp/menulist/list?pageNo=1"></iframe>
 								</section>					
 							</div>
 						</div>

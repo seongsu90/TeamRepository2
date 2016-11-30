@@ -71,5 +71,9 @@ public class MenuListService {
 		List<MenuList> menuList = menuListdao.selectMenu(mlresid);
 		return menuList; 
 	}
+
+	public int getHotmenuCount() {
+		return menuListdao.hotMenuCount();
+	}
 	
 }

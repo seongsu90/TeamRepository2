@@ -168,7 +168,7 @@ public class MenuListController {
 		}
 		
 		@RequestMapping("/hotlist")	
-		public String resHotList(boolean mlishot,Model model,String pageNo, HttpSession session){
+		public String resHotList(boolean mlishot, String pageNo, Model model, HttpSession session){
 			List<MenuList> menuList = menuListService.resHotList(mlishot);
 			model.addAttribute("menuList",menuList);
 			int intPageNo = 1;
@@ -184,7 +184,7 @@ public class MenuListController {
 			
 			int rowsPerPage=8;
 			int pagesPerGroup=5;
-			int totalMenuListNo=menuListService.getCount();
+			int totalMenuListNo=menuListService.getHotmenuCount();
 			if ( totalMenuListNo == 0 ) totalMenuListNo = 1;
 			
 			int totalPageNo=totalMenuListNo/rowsPerPage+((totalMenuListNo%rowsPerPage!=0)?1:0);

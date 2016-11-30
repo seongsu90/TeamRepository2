@@ -183,4 +183,10 @@ public class MenuListDao {
 		});
 		return list;
 	}
+
+	public int hotMenuCount() {
+		String sql="select count(*) from menulist where mlishot=1";
+		int count = jdbcTemplate.queryForObject(sql, Integer.class);
+		return count;
+	}
 }
