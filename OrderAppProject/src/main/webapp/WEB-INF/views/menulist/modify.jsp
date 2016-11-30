@@ -7,14 +7,13 @@
 		<meta charset="UTF-8">
 		
 		<style>
-			
+
 		</style>
 	</head>
 	<body>
+		<%-- <h4 style="width:400px; margin:auto;">메뉴 수정</h4>
+		<form method="post" enctype="multipart/form-data">
 		
-		<h4 style="width:400px; margin:auto;">메뉴 수정</h4>
-			<form method="post" enctype="multipart/form-data">
-			
 			<table style="width:700px; margin:auto;">
 				<tr>
 					<td style="background-color:#1bbc9b; width:120px;">메뉴이름</td>
@@ -29,7 +28,7 @@
 					<td><input type="text" name="mlinfo" value="${menuList.mlinfo}" style="width:600px"/></td>
 				</tr>   
 				<tr>
-					<td style="background-color:#1bbc9b; width:120px;">기존 메뉴사진</td>
+					<td style="background-color:#1bbc9b; width:130px;">기존 사진</td>
 					<td><img src="showPhoto?mlsavedfile=${menuList.mlsavedfile}" width="100px"/></td>
 				</tr>
 				<tr>
@@ -47,7 +46,6 @@
 			<div style="margin-left:605px;">
 				<input type="submit" value="수정"/>
 			</div>
-			</form>
-			
-	</body>
+		</form> --%>
+   </body>
 </html>

@@ -249,7 +249,7 @@
 	<body>
 		<div style="text-align: center;">
 			<div style="text-align: right; width:1200px; display: inline-block; margin-top: 20px;">
-				<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e">추가</button>
+				<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e">레스토랑 등록</button>
 			</div>
 			<table id="acrylic" style="width:1200px;">
 				<thead>
@@ -334,7 +334,7 @@
    			<!-- modal-header -->
      		<div class="modal-header" style="background-color: #34495e; color:white">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">레스토랑 추가</h4>
+				<h4 class="modal-title">레스토랑 등록</h4>
       		</div>
 
      		<!-- modal-modal-body -->
@@ -362,12 +362,6 @@
 					</div>
 				</div>	
 
-				<div class="form-group">
-					<div class="input-group">
-						<span style="width: 130px" class="input-group-addon"><b>레스토랑 정보</b></span>
-						<input type="text"  style="width:225px" class="form-control" name="resinfo" id="resinfo" value="맛있어요"/>
-					</div>
-				</div>
 				
 				<div class="form-group">
 					<div class="input-group">
@@ -379,23 +373,29 @@
 						<input type="time" style="width:225px" class="form-control" name="resclose" id="resclose" value="23:00"/>
 					</div>
 				</div>
-				
+
+				<div class="form-group">
+					<div class="input-group">
+						<span style="width: 130px" class="input-group-addon"><b>레스토랑 정보</b></span>
+						<input type="text"  style="width:555px" class="form-control" name="resinfo" id="resinfo" value="맛있어요"/>
+					</div>
+				</div>				
 
 				<div class="form-group">
 					<div class="input-group">
 						<span style="width: 130px" class="input-group-addon"><b>주소</b></span>
-						<select class="form-control" style="width: 110px" id="selCity" name="selCity"></select>
-						<select class="form-control" style="width: 110px" id="selProvince" name="selProvince">
+						<select class="form-control" style="width: 120px" id="selCity" name="selCity"></select>
+						<select class="form-control" style="width: 105px" id="selProvince" name="selProvince">
 							<option value="선택">선택</option>
 						</select>	
-						<input type="text" class="form-control" style="width: 340px" id="reslocation" name="reslocation" value="가락동"/><br/>
+						<input type="text" class="form-control" style="width: 330px" id="reslocation" name="reslocation" value="가락동"/><br/>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<div class="input-group">
 						<span style="width: 130px; margin-right: 10px; border-right: 1px solid #ccc;" class="input-group-addon"><b>휴일</b></span>&nbsp;
-						<input type="checkbox" name="closeday"  value="휴일없음">휴일 X&nbsp;
+						<input type="checkbox" name="closeday"  value="휴일 없음">휴일 X&nbsp;
 	        			<input type="checkbox" name="closeday"  value="월요일" checked>월요일&nbsp;
 	        			<input type="checkbox" name="closeday"  value="화요일">화요일&nbsp;
 	        			<input type="checkbox" name="closeday"  value="수요일">수요일&nbsp;
@@ -405,15 +405,6 @@
 	        			<input type="checkbox" name="closeday"  value="일요일">일요일
 					</div>
 				</div>
-
-
-
-				<!-- <div class="form-group" style="display:inline-block;">
-					<div class="input-group">
-						<span style="width: 130px" class="input-group-addon"><b>클로즈 타임</b></span>
-						<input type="time" class="form-control" name="resclose" id="resclose"/>
-					</div>
-				</div> -->
 
 						
 				<div class="form-group">
@@ -429,7 +420,7 @@
 
       	<!-- modal-modal-modal-footer -->
 		<div class="modal-footer" style="background-color: #34495e; color:white">
-	        <button id="btnResAdd" type="button" class="btn btn-default" onclick="onClickBtnResAdd()" style="color: #34495e"><b>추가</b></button>
+	        <button id="btnResAdd" type="button" class="btn btn-default" onclick="onClickBtnResAdd()" style="color: #34495e"><b>등록</b></button>
 	        <button id="btnInit" type="button" class="btn btn-default" onclick="onClickBtnCancel()" style="color: #34495e"><b>취소</b></button>
 		</div>
 	</div><!-- /.modal-content -->
