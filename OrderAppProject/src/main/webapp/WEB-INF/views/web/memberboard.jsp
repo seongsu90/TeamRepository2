@@ -439,7 +439,7 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>비밀번호</b></span>
-								<input type="text" class="form-control" name="mpassword" id="mpassword"/>
+								<input type="text" class="form-control" name="mpassword" id="mpassword" placeholder="8~20글자 입력하세요"/>
 							</div>
 						</div>
 						

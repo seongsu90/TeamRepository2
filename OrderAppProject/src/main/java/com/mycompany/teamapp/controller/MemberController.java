@@ -308,7 +308,11 @@ public class MemberController {
 		if (dbmember.getMrank() == 2) {
 			String result = "success";
 			try {
-				memberService.modify(member);
+				if ( member.getMpassword().length() < 8 ) {
+					result = "wrongData";
+				} else {
+					memberService.modify(member);					
+				}
 			} catch (DataIntegrityViolationException e) {
 				result = "noRestaurant";
 			} catch (Exception e1) {
