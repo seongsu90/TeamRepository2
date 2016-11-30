@@ -183,36 +183,4 @@ public class MenuListDao {
 		});
 		return list;
 	}
-
-	public List<MenuList> selectByHotPage(int pageNo, int rowsPerPage) {
-		String sql="";
-		sql+="select rn, mlresid, mlname, mlprice, mlinfo, mlsavedfile, mlishot ";
-		sql+="from( ";
-		sql+="select rownum as rn, mlresid, mlname, mlprice, mlinfo, mlsavedfile, mlishot ";
-		sql+="from (select mlresid, mlname, mlprice, mlinfo, mlsavedfile, mlishot from menulist order by mlname desc) ";
-		sql+="where rownum<=? ";
-		sql+=") ";
-		sql+="where rn>=? ";
-		
-		List<MenuList> list = jdbcTemplate.query(
-				sql,
-				new Object[]{(pageNo*rowsPerPage),((pageNo-1))*rowsPerPage+1},
-				new RowMapper<MenuList>(){
-					@Override
-					public MenuList mapRow(ResultSet rs, int row) throws SQLException {
-						MenuList menuList = new MenuList();
-						menuList.setMlresid(rs.getInt("mlresid"));
-						menuList.setMlname(rs.getString("mlname"));
-						menuList.setMlprice(rs.getInt("mlprice"));
-						menuList.setMlinfo(rs.getString("mlinfo"));
-						menuList.setMlsavedfile(rs.getString("mlsavedfile"));
-						menuList.setMlishot(rs.getBoolean("mlishot"));
-						return menuList;
-					}
-					
-				}
-				);
-		return list;
-	}
-
 }

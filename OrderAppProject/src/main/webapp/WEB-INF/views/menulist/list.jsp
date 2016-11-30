@@ -7,7 +7,7 @@
 		<meta charset="UTF-8"> 
 		 <link href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css" rel="stylesheet">
 	   
-		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
+	<%-- 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script> --%>
 	 	<!-- <script>
 	 		$(function(){
 	 			$("nav li").on("click", function(){

@@ -25,6 +25,7 @@ import com.mycompany.teamapp.service.MenuListService;
 @RequestMapping("/menulist")
 public class MenuListController {
 	
+	
 		@Autowired
 		private MenuListService menuListService;
 		

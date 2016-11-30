@@ -26,10 +26,6 @@ public class MenuListService {
 		return menuListdao.selectByPage(pageNo, rowsPerPage); 
 	}
 	
-	public List<MenuList> hotlist(int pageNo, int rowsPerPage){
-		return menuListdao.selectByHotPage(pageNo, rowsPerPage); 
-	}
-	
 	public int add(MenuList menuList){
 		int row = menuListdao.insert(menuList);
 		if(row==0){return ADD_FAIL;}
