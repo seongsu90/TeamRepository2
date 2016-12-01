@@ -9,5 +9,4 @@
 	"eprice" : "${event.eprice}",
 	"estart" : "${event.estart}",
 	"eend" : "${event.eend}" 
-	
 } 

@@ -26,18 +26,18 @@ public class EventDao {
 		logger.info("insert 요청처리");
 		String sql="insert into event(ename,eresid,esavedfile,einfo,emlname,eprice,estart,eend,eoriginfile,emime) values(?,?,?,?,?,?,?,?,?,?)";
 		int row = jdbcTemplate.update(
-				sql,
-				event.getEname(),
-				event.getEresid(),
-				event.getEsavedfile(),
-				event.getEinfo(),
-				event.getEmlname(),
-				event.getEprice(),
-				event.getEstart(),
-				event.getEend(),
-				event.getEoriginfile(),
-				event.getEmime()
-				);
+					sql,
+					event.getEname(),
+					event.getEresid(),
+					event.getEsavedfile(),
+					event.getEinfo(),
+					event.getEmlname(),
+					event.getEprice(),
+					event.getEstart(),
+					event.getEend(),
+					event.getEoriginfile(),
+					event.getEmime()
+				  );
 		return row;
 	}
 	
@@ -52,19 +52,18 @@ public class EventDao {
 		logger.info("update 요청처리");
 			String sql = "update event set ename=?, esavedfile=?, einfo=?, eprice=?, estart=?, eend=? where eresid=? and emlname=?";
 			int row = jdbcTemplate.update(
-					sql,
-					event.getEname(),
-					event.getEsavedfile(),
-					event.getEinfo(),
-					event.getEprice(),
-					event.getEstart(),
-					event.getEend(),
-					event.getEresid(),
-					event.getEmlname()
+						sql,
+						event.getEname(),
+						event.getEsavedfile(),
+						event.getEinfo(),
+						event.getEprice(),
+						event.getEstart(),
+						event.getEend(),
+						event.getEresid(),
+						event.getEmlname()
 					
-					);
+					 );
 			return row;
-
 	}
 	
 	public Event selectByEresidAndEmlname(int eresid, String emlname) {

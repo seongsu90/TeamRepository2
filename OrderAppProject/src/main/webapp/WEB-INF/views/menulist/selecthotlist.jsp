@@ -31,6 +31,7 @@
 	            -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 	            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 	            cursor: pointer;
+	            width:100%;
 	        }
 	        
 	        #acrylic thead {
@@ -45,7 +46,7 @@
 	            font-weight: 400;
 	            color: #fff;
 	            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
-	            text-align: left;
+	            text-align: center;
 	            padding: 20px;
 	            background-size: 100%;
 	            background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #646f7f), color-stop(100%, #4a5564));
@@ -54,6 +55,7 @@
 	            background-image: linear-gradient(#646f7f, #4a5564);
 	            border-top: 1px solid #858d99;
 	            background:#34495e;
+	         
 	        }
 	        
 	        #acrylic thead th:first-child {
@@ -155,7 +157,7 @@
 	                </tr>
 	            </thead>
 	            <tbody>
-	            <c:forEach var="list" items="${list}">
+	            	<c:forEach var="list" items="${list}">
 	                <tr>
 	                    <td data-label="Name">
 	                   	 <a href="info?mlresid=${list.mlresid}&mlname=${list.mlname}">

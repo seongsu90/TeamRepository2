@@ -206,13 +206,9 @@
 			  transform: rotateX(-90deg) translateZ(-50px);
 			}
 			
-			/* END CORE CSS */
-			
-			
-			
-			
-			</style>
-			
+			/* END CORE CSS */	
+	   </style>	
+	   
 	</head>
 	<body>		
 		<div class="container">
@@ -233,67 +229,37 @@
 		    </div>
 		</div>    	
 		<div style="width:350px; margin:auto;">	
-		<c:if test="${login!=null}">
-				<c:if test="${mrank!=0}">
-				    <a href="modify?mlresid=${menuList.mlresid}&mlname=${menuList.mlname}">
-				   		<div class="text">
-							<div class="row">
-       							 <div class="col-md-12">
-		    						<button class="btn btn-default orange-circle-button">수정</button>
-       						     </div>   
+			<c:if test="${login!=null}">
+					<c:if test="${mrank!=0}">
+					    <a href="modify?mlresid=${menuList.mlresid}&mlname=${menuList.mlname}">
+					   		<div class="text">
+								<div class="row">
+	       							 <div class="col-md-12">
+			    						<button class="btn btn-default orange-circle-button">수정</button>
+	       						     </div>   
+								</div>
 							</div>
-						</div>
-				    </a>
-					<a href="delete?mlresid=${menuList.mlresid}&mlname=${menuList.mlname}">
-						<div class="text">
-							<div class="row">
-       							 <div class="col-md-12">
-		    						<button class="btn btn-default orange-circle-button">삭제</button>
-	
-       						     </div>   
+					    </a>
+						<a href="delete?mlresid=${menuList.mlresid}&mlname=${menuList.mlname}">
+							<div class="text">
+								<div class="row">
+	       							 <div class="col-md-12">
+			    						<button class="btn btn-default orange-circle-button">삭제</button>	
+	       						     </div>   
+								</div>
 							</div>
-						</div>
-					</a>
-				</c:if>
-			</c:if>
-			<a href="list">
-				<div class="text">
-					<div class="row">
-       					<div class="col-md-12">
-		    				<button class="btn btn-default orange-circle-button">목록</button>
-	
-       					 </div>   
-					</div>
+						</a>
+					</c:if>
+		   </c:if>
+		   <a href="selectlist">
+			<div class="text">
+				<div class="row">
+   					<div class="col-md-12">
+   						<button class="btn btn-default orange-circle-button">목록</button>
+   					</div>   
 				</div>
-			</a>	       
-			</div>                           
+			</div>
+		  </a>	       
+		</div>                           
 	</body>
-	
-	<%-- 메뉴리스트 정보
-		<hr/>
-		<table style="width:570px text-align=center;">
-			 <tr>
-				<td style="background-color:blue; width:100px">메뉴 가격</td>	
-				<td>${menuList.mlprice}</td>
-			 </tr>
-			 <tr>
-				<td style="background-color:blue; width:100px">정보</td>
-				<td>${menuList.mlinfo}</td>	
-			 </tr>
-			<tr>
-				<td style="background-color:blue; width:100px">메뉴 사진</td>
-				<td><img src="showPhoto?mlsavedfile=${menuList.mlsavedfile}" width="500px"/></td>
-			</tr>
-			<tr>
-				<td style="background-color:blue; width:100px">핫해하태</td>
-				<td>${menuList.mlishot}</td>
-			</tr>
-		</table>
-		 	 <c:if test="${login!=null}">
-				<c:if test="${mrank!=0}">
-				    <a href="modify?mlresid=${menuList.mlresid}&mlname=${menuList.mlname}">[수정]</a>
-					<a href="delete?mlresid=${menuList.mlresid}">[삭제]</a>
-				</c:if>
-			</c:if>
-			<a href="list">[목록]</a> --%>
 </html>

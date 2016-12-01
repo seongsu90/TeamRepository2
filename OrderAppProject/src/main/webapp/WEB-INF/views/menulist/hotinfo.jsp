@@ -6,7 +6,6 @@
 		<meta charset="UTF-8">
 	</head>
 	<body>
-		
 		핫메뉴리스트 정보
 		<hr/>
 		<table style="width:570px text-align=center;">

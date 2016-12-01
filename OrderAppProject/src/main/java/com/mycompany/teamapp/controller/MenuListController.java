@@ -27,7 +27,6 @@ import com.mycompany.teamapp.service.MenuListService;
 @RequestMapping("/menulist")
 public class MenuListController {
 	
-	
 		@Autowired
 		private MenuListService menuListService;
 		
@@ -79,8 +78,6 @@ public class MenuListController {
 		
 		@RequestMapping(value="/modify", method=RequestMethod.POST)
 		public String modify(MenuList menuList,HttpSession session) throws IllegalStateException, IOException {
-			/*String mid = (String) session.getAttribute("login");			
-			Member member = memberService.info(mid);*/
 			
 			menuList.setMloriginfile(menuList.getMlphoto().getOriginalFilename());
 			String mlsavedfile = new Date().getTime() + menuList.getMlphoto().getOriginalFilename();
@@ -117,29 +114,29 @@ public class MenuListController {
 		@RequestMapping("/showPhoto")
 		public void showPhoto(String mlsavedfile, HttpServletRequest request, HttpServletResponse response){
 			try{
-			String fileName=mlsavedfile;
-			
-			
-			String emime=request.getServletContext().getMimeType(fileName);
-			response.setContentType(emime);
-			
-			OutputStream os=response.getOutputStream();
-			
-			String filePath=request.getServletContext().getRealPath("/WEB-INF/photo/"+fileName);
-			InputStream is=new FileInputStream(filePath);
-			
-			byte[] values=new byte[1024];
-			int byteNum=-1;
-			while((byteNum=is.read(values))!=-1){
-				os.write(values, 0, byteNum);
-			}
-			os.flush();
-			is.close();
-			os.close();
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-		}
+				String fileName=mlsavedfile;
+				
+				
+				String emime=request.getServletContext().getMimeType(fileName);
+				response.setContentType(emime);
+				
+				OutputStream os=response.getOutputStream();
+				
+				String filePath=request.getServletContext().getRealPath("/WEB-INF/photo/"+fileName);
+				InputStream is=new FileInputStream(filePath);
+				
+				byte[] values=new byte[1024];
+				int byteNum=-1;
+				while((byteNum=is.read(values))!=-1){
+					os.write(values, 0, byteNum);
+				}
+				os.flush();
+				is.close();
+				os.close();
+			   }catch(Exception e){
+				   e.printStackTrace();
+			   	}
+		 }
 		
 		@RequestMapping(value="/modifyhot",method=RequestMethod.GET)	
 		public String modifyhotForm(int mlresid, String mlname, boolean mlishot, Model model){

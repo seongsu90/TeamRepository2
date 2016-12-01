@@ -24,34 +24,33 @@ public class MenuListDao {
 	public int insert(MenuList menuList){
 		String sql="insert into menulist(mlname,mlresid,mlprice,mlinfo,mlsavedfile,mlishot,mloriginfile,mlmime) values(?,?,?,?,?,?,?,?)";
 		int row = jdbcTemplate.update(
-				sql,
-				menuList.getMlname(),
-				menuList.getMlresid(),
-				menuList.getMlprice(),
-				menuList.getMlinfo(),
-				menuList.getMlsavedfile(),
-				menuList.getMlishot(),
-				menuList.getMloriginfile(),
-				menuList.getMlmime()
-				);
+					sql,
+					menuList.getMlname(),
+					menuList.getMlresid(),
+					menuList.getMlprice(),
+					menuList.getMlinfo(),
+					menuList.getMlsavedfile(),
+					menuList.getMlishot(),
+					menuList.getMloriginfile(),
+					menuList.getMlmime()
+				 );
 		return row;
 	}
 	
 	public int update(MenuList menuList){
 		String sql="update menulist set mlname=?, mlprice=?, mlinfo=?, mlsavedfile=?, mlishot=? where mlresid=? and mlname=?";
 		int row = jdbcTemplate.update(
-				sql,
-				menuList.getMlname(),
-				menuList.getMlprice(),
-				menuList.getMlinfo(),
-				menuList.getMlsavedfile(),
-				menuList.getMlishot(),
-				menuList.getMlresid(),
-				menuList.getMlname()
-				);
+					sql,
+					menuList.getMlname(),
+					menuList.getMlprice(),
+					menuList.getMlinfo(),
+					menuList.getMlsavedfile(),
+					menuList.getMlishot(),
+					menuList.getMlresid(),
+					menuList.getMlname()
+				  );
 		return row;
 	}
-	
 	
 	public int delete(int mlresid, String mlname){
 		String sql="delete from menulist where mlresid=? and mlname=?";
@@ -76,22 +75,20 @@ public class MenuListDao {
 			}
 		});
 		return list;
-		
 	}
 		
 	public int modifyHot(int mlresid,String mlname,boolean mlishot){
 		String sql="update menulist set mlprice=?,mlinfo=?,mlsavedfile=? where mlresid=? and mlname=? and mlishot=?";
 		int row = jdbcTemplate.update(
-				sql,
-				menuList.getMlprice(),
-				menuList.getMlinfo(),
-				menuList.getMlsavedfile(),
-				menuList.getMlresid(),
-				menuList.getMlname(),
-				menuList.getMlishot()
-	               );
+					sql,
+					menuList.getMlprice(),
+					menuList.getMlinfo(),
+					menuList.getMlsavedfile(),
+					menuList.getMlresid(),
+					menuList.getMlname(),
+					menuList.getMlishot()
+	              );
 		return row;
-	
 	}
 
 	public MenuList selectByMlresidAndMlname(int mlresid, String mlname) {
@@ -142,7 +139,7 @@ public class MenuListDao {
 					}
 					
 				}
-				);
+		);
 		return list;
 	}
 	
@@ -174,7 +171,7 @@ public class MenuListDao {
 					}
 					
 				}
-				);
+		);
 		return list;
 	}
 	
@@ -203,8 +200,6 @@ public class MenuListDao {
 		return (list.size() != 0)?list.get(0) : null;
 	}
  
-
-
 	public List<MenuList> selectMenu(int mlresid) {
 		String sql="select mlname, mlprice from menulist where mlresid=? ";
 		List<MenuList> list = jdbcTemplate.query(sql, new Object[]{mlresid}, new RowMapper<MenuList>() {
