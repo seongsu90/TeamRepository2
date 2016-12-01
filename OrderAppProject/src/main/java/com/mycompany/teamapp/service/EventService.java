@@ -57,12 +57,12 @@ public class EventService {
 		return eventdao.selectByEresidAndEmlname(eresid,emlname);
 	}
 	
-	public List<Event> list(int pageNo, int rowsPerPage){
-		return eventdao.selectByPage(pageNo, rowsPerPage);
+	public List<Event> list(int pageNo, int rowsPerPage, int eresid){
+		return eventdao.selectByPage(pageNo, rowsPerPage, eresid);
 	}
 	
-	public int getCount(){
-		return eventdao.count();
+	public int getCount(int eresid){
+		return eventdao.count(eresid);
 	}
 	
 	/*public List<Integer> checkEvent(int eresid, int ptableno) {

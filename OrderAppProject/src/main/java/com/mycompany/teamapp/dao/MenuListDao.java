@@ -178,9 +178,9 @@ public class MenuListDao {
 		return list;
 	}
 	
-	public int count(){
-		String sql="select count(*) from menulist";
-		int count = jdbcTemplate.queryForObject(sql, Integer.class);
+	public int count(int mlresid){
+		String sql="select count(*) from menulist where mlresid=?";
+		int count = jdbcTemplate.queryForObject(sql, new Object[]{mlresid},Integer.class);
 		return count;
 	}
 	
@@ -251,9 +251,9 @@ public class MenuListDao {
 		return list;
 	}*/
 	
-	public int hotMenuCount() {
-		String sql="select count(*) from menulist where mlishot=1";
-		int count = jdbcTemplate.queryForObject(sql, Integer.class);
+	public int hotMenuCount(int mlresid) {
+		String sql="select count(*) from menulist where mlresid=? and mlishot=1";
+		int count = jdbcTemplate.queryForObject(sql, new Object[]{mlresid}, Integer.class);
 		return count;
 	}
 }

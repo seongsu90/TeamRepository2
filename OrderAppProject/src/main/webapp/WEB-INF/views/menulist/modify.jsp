@@ -7,11 +7,11 @@
 		<meta charset="UTF-8">
 		
 		<style>
-
+			
 		</style>
 	</head>
 	<body>
-	    <h4 style="width:400px; margin:auto;">메뉴 수정</h4>
+	    <!-- <h4 style="width:400px; margin:auto;">메뉴 수정</h4> -->
 		<form method="post" enctype="multipart/form-data">
 		
 			<table style="width:700px; margin:auto;">
@@ -42,8 +42,8 @@
 						<input type="radio" name="mlishot" value="false"/>일반
 					</td>
 				</tr>
-			</table>
-			<div style="margin-left:605px;">
+			</table> 
+			<div style="margin-left:650px;">
 				<input type="submit" value="수정"/>
 			</div>		
 		</form> 

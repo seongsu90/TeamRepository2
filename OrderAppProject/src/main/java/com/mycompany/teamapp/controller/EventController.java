@@ -2,7 +2,6 @@ package com.mycompany.teamapp.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
@@ -21,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mycompany.teamapp.dto.Event;
+import com.mycompany.teamapp.dto.Member;
 import com.mycompany.teamapp.service.EventService;
+import com.mycompany.teamapp.service.MemberService;
 
 @Controller
 @RequestMapping("/event")
@@ -29,7 +30,9 @@ public class EventController {
 	private static final Logger logger = LoggerFactory.getLogger(EventController.class);
 	@Autowired
 	private EventService eventService;
-
+	
+	@Autowired
+	private MemberService memberSerivce;
 	
 	@RequestMapping("/index")
 	public String index() {
@@ -48,6 +51,9 @@ public class EventController {
 		logger.info("add 요청처리");
 		String result = "fail";
 		
+		String mid = (String) session.getAttribute("login");			
+		Member member = memberSerivce.info(mid);
+		
 		if ( event.getEphoto() != null && !event.getEphoto().isEmpty() ) {
 			try{
 				event.setEoriginfile(event.getEphoto().getOriginalFilename());
@@ -57,6 +63,7 @@ public class EventController {
 				event.setEsavedfile(esavedfile);
 				
 				event.setEmime(event.getEphoto().getContentType());
+				event.setEresid(member.getMresid());
 				result = eventService.add(event);
 				
 			} catch (Exception e) {}
@@ -161,6 +168,9 @@ public class EventController {
 	@RequestMapping("/list")
 	public String list(String pageNo, Model model, HttpSession session){
 		
+		String mid = (String) session.getAttribute("login");			
+		Member member = memberSerivce.info(mid);
+		
 		int intPageNo = 1;
 		if ( pageNo == null ) {
 			pageNo = (String) session.getAttribute("pageNo");
@@ -174,7 +184,7 @@ public class EventController {
 		
 		int rowsPerPage=8;
 		int pagesPerGroup=5;
-		int totalEventNo=eventService.getCount();
+		int totalEventNo=eventService.getCount(member.getMresid());
 		if ( totalEventNo == 0 ) totalEventNo = 1;
 		
 		int totalPageNo=totalEventNo/rowsPerPage+((totalEventNo%rowsPerPage!=0)?1:0);
@@ -187,7 +197,7 @@ public class EventController {
 			endPageNo=totalPageNo;
 		}
 		
-		List<Event> list= eventService.list(intPageNo, rowsPerPage);
+		List<Event> list= eventService.list(intPageNo, rowsPerPage,member.getMresid());
 		model.addAttribute("list", list);
 		model.addAttribute("pageNo", intPageNo);
 		model.addAttribute("rowsPerPage", rowsPerPage);

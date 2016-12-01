@@ -126,7 +126,7 @@
 				console.log("onClickBtnEventAdd() 실행");
 				
 				var ename = $("#ename").val();
-				var eresid = $("#eresid").val();
+				/* var eresid = $("#eresid").val(); */
 				var ephoto = $("#ephoto")[0];
 				var einfo = $("#einfo").val();
 				var emlname = $("#emlname").val(); 
@@ -136,7 +136,7 @@
 				
 				var data = new FormData();
 				data.append("ename", ename);
-				data.append("eresid", eresid);	
+			/* 	data.append("eresid", eresid);	 */
 				if(ephoto.files.length != 0) {
 					data.append("ephoto", ephoto.files[0]);
 				}	
@@ -181,7 +181,6 @@
 	            <thead>
 	                <tr>
 		                <th> 이벤트 이름</th>
-						<th> 식당아이디 </th>
 						<th> 이벤트 사진 </th>
 						<th> 이벤트 정보 </th>
 						<th> 이벤트 메뉴  </th>
@@ -194,11 +193,10 @@
 	            <tbody>
 	            <c:forEach var="event" items="${list}">
 	                <tr>
-	                    <td>${event.ename}</td>  
 	                    <td>
-	                    	<a id="btnInfo" href="javascript:showInfo(${event.eresid}, '${event.emlname}')">
-	                    		${event.eresid}
-	                    	</a>
+	                  	  <a id="btnInfo" href="javascript:showInfo(${event.eresid}, '${event.emlname}')">	
+	                    		${event.ename}
+	                      </a>
 	                    </td>
 	                    <td>
 	                    	<img src="showPhoto?esavedfile=${event.esavedfile}" width="50px"/>
@@ -219,25 +217,25 @@
 			
 	        <div style="text-align:center;">
 				<c:if test="${pageNo!=1}">
-					<a href="list?pageNo=1&find=${find}">[처음]</a>
+					<a href="list?pageNo=1">[처음]</a>
 				</c:if>
 				
 				<c:if test="${groupNo>1}">
-					<a href="list?pageNo=${startPageNo-1}&find=${find}">[이전]</a>
+					<a href="list?pageNo=${startPageNo-1}">[이전]</a>
 				</c:if>
 				
 				<c:forEach var="i" begin="${startPageNo}" end="${endPageNo}">
-					<a href="list?pageNo=${i}&find=${find}"
+					<a href="list?pageNo=${i}"
 						<c:if test="${pageNo==i}">style="color:red" </c:if>
 					>${i}</a>
 				</c:forEach>
 				
 				<c:if test="${groupNo<totalGroupNo}">
-					<a href="list?pageNo=${endPageNo+1}&find=${find}">[다음]</a>
+					<a href="list?pageNo=${endPageNo+1}">[다음]</a>
 				</c:if>	
 				
 				<c:if test="${pageNo!=totalPageNo}">
-					<a href="list?pageNo=${totalPageNo}&find=${find}">[맨끝]</a>
+					<a href="list?pageNo=${totalPageNo}">[맨끝]</a>
 				</c:if>
 		    </div>
       </div>
@@ -265,12 +263,12 @@
 						</div>
 
 
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>식당 아이디</b></span>
 								<input type="number" class="form-control" name="eresid" id="eresid"/>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="form-group">
 							<div class="input-group">

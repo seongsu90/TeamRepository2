@@ -63,8 +63,8 @@ public class MenuListService {
 		return menuListdao.selectByMlresidAndMlname(mlresid, mlname);
 	}
 
-	public int getCount() {
-		return menuListdao.count();
+	public int getCount(int mlresid) {
+		return menuListdao.count(mlresid);
 	}
 
 	public MenuList hotinfo(int mlresid, String mlname,boolean mlishot) {
@@ -76,8 +76,8 @@ public class MenuListService {
 		return menuList; 
 	}
 
-	public int getHotmenuCount() {
-		return menuListdao.hotMenuCount();
+	public int getHotmenuCount(int mlresid) {
+		return menuListdao.hotMenuCount(mlresid);
 	}
 	
 	/*public List<MenuList> selectList(int mlresid){

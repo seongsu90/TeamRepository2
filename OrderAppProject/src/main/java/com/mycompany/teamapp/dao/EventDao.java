@@ -90,25 +90,25 @@ public class EventDao {
 		return (list.size() != 0)?list.get(0) : null;
 	}
 	
-	public int count(){
-		String sql="select count(*) from event";
-		int count=jdbcTemplate.queryForObject(sql, Integer.class);   
+	public int count(int eresid){
+		String sql="select count(*) from event where eresid=?";
+		int count=jdbcTemplate.queryForObject(sql, new Object[]{eresid}, Integer.class);   
 		return count;
 	}
 	
-	public List<Event> selectByPage(int pageNo, int rowsPerPage){
+	public List<Event> selectByPage(int pageNo, int rowsPerPage, int eresid){
 		String sql="";
 		sql+="select rn, ename, eresid, esavedfile, einfo, emlname, eprice, estart, eend ";
 		sql+="from( " ;
 		sql+="select rownum as rn, ename, eresid, esavedfile, einfo, emlname, eprice, estart, eend ";
 		sql+="from (select ename, eresid, esavedfile, einfo, emlname, eprice, estart, eend from Event order by eresid desc) ";
-		sql+="where rownum<=? ";
+		sql+="where eresid=? and rownum<=? ";
 		sql+=") ";
 		sql+="where rn>=? ";
 		
 		List<Event> list=jdbcTemplate.query(
 				sql, 
-				new Object[]{(pageNo*rowsPerPage),((pageNo-1)*rowsPerPage+1)},
+				new Object[]{eresid, (pageNo*rowsPerPage),((pageNo-1)*rowsPerPage+1)},
 				new RowMapper<Event>(){
 					@Override
 					public Event mapRow(ResultSet rs, int row)throws SQLException{

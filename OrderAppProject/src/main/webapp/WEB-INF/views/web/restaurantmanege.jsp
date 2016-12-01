@@ -14,7 +14,7 @@
 		rel='stylesheet' type='text/css'>
 	<link rel="stylesheet"
 		href="${pageContext.servletContext.contextPath}/resources/css/common.css" />	
-		
+	
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<script type="text/javascript"
 		src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
@@ -144,21 +144,30 @@
 		<!--/header-->
 	</div>
 
+		<section class="content">
+			<nav>
+	          <ul class="nav nav-justified" style="width:1200px;">
+	            <li class="active" style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/add">생성</a></li>
+	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/event/list?pageNo=1">이벤트</a></li>
+	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/selecthotlist?mlishot=1&pageNo=1">핫메뉴</a></li>
+	          </ul>
+  			</nav>
+			<iframe name="iframe" style="width:1200px; height:840px; border-width:0;" src="/teamapp/event/list?pageNo=1"></iframe>
+		</section>		
 
 
 
 
 
-
-	<div class="menu-section">
+	<!-- <div class="menu-section">
 		<div class="container">
 			<h2>EVENT</h2>
 		
 			<iframe name="iframe" id="iframe"
 				style="width: 100%; height: 650px; border-width: 0px;"
-				src="/teamapp/event/list"> </iframe>
+				src="/teamapp/event/list?pageNo=1"> </iframe>
 		</div>
-	</div>
+	</div> -->
 
 	<!--/start-footer-->
 	<div class="footer">
@@ -174,7 +183,7 @@
 				<div class="bottom-nav">
 					<h4>LEARN</h4>
 					<ul>
-						<li><a class="active" href="/teamapp/home">Home</a></li>
+						<li><a href="${pageContext.servletContext.contextPath}">Home</a></li>
 						<li><a href="/teamapp/web/memberindex">회원관리</a></li>
 						<li><a href="/teamapp/web/resmanagement">가맹점관리</a></li>
 						<li><a href="/teamapp/web/ordermanagement">주문관리</a></li>

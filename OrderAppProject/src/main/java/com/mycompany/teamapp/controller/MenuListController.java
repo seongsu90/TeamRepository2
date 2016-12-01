@@ -184,9 +184,10 @@ public class MenuListController {
 				intPageNo = Integer.parseInt(pageNo);
 			 }
 			session.setAttribute("pageNo", String.valueOf(intPageNo));
+			
 			int rowsPerPage=8;
 			int pagesPerGroup=5;
-			int totalMenuListNo=menuListService.getCount();
+			int totalMenuListNo=menuListService.getCount(member.getMresid());
 			if ( totalMenuListNo == 0 ) totalMenuListNo = 1;
 			
 			int totalPageNo=totalMenuListNo/rowsPerPage+((totalMenuListNo%rowsPerPage!=0)?1:0);
@@ -201,7 +202,7 @@ public class MenuListController {
 			
 			List<MenuList> list= menuListService.list(intPageNo, rowsPerPage, member.getMresid());
 			model.addAttribute("list", list);
-			/*model.addAttribute("pageNo", intPageNo);*/
+			model.addAttribute("intpageNo", intPageNo);
 			model.addAttribute("rowsPerPage", rowsPerPage);
 			model.addAttribute("pagesPerGroup", pagesPerGroup);
 			model.addAttribute("totalMenuListNo", totalMenuListNo);
@@ -210,7 +211,6 @@ public class MenuListController {
 			model.addAttribute("groupNo", groupNo);
 			model.addAttribute("startPageNo", startPageNo);
 			model.addAttribute("endPageNo", endPageNo);
-			
 			return "menulist/selectlist";
 		}
 		
@@ -231,7 +231,7 @@ public class MenuListController {
 			session.setAttribute("pageNo", String.valueOf(intPageNo));
 			int rowsPerPage=8;
 			int pagesPerGroup=5;
-			int totalMenuListNo=menuListService.getHotmenuCount();
+			int totalMenuListNo=menuListService.getHotmenuCount(member.getMresid());
 			if ( totalMenuListNo == 0 ) totalMenuListNo = 1;
 			
 			int totalPageNo=totalMenuListNo/rowsPerPage+((totalMenuListNo%rowsPerPage!=0)?1:0);
