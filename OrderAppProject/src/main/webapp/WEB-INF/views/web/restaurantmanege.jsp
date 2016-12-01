@@ -137,35 +137,6 @@
 		</div>		
 	</div>
 	
-	<div class="gallery services">
-		<div class="container">		
-			<h3>Restaurant</h3>	
-			<div class="portfolio-bottom">
-				<div class="gallery-one two">
-					<div class="col-md-3 gallery-left two">
-						<a href="/teamapp/resources/img/g1.jpg" class=" mask b-link-stripe b-animate-go   swipebox"  title="Image Title"></a>
-						<div class="container">
-							<div class="row">
-							
-								<section class="content">
-									<nav>
-										<ul class="nav nav-justified" style="width:1200px;">
-											<li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/restaurant/list">나의 Restaurant</a></li>
-											<li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/event/list?pageNo=1">이벤트</a></li>
-											<li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/coupon/resCouponList">쿠폰</a></li>
-										</ul>
-									</nav>
-									<iframe name="iframe" style="width:1200px; height:840px; border-width:0;" src="/teamapp/restaurant/list"></iframe>			
-								</section>
-								
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
 	<!-- 내용 -->
 	<div class="about-section"> 
 	   <div class="container" align="center"><h2>Restaurant Management</h2> <br/>
@@ -173,9 +144,9 @@
 		<section class="content">
 			<nav style="width:1000px">
 	          <ul class="nav nav-justified">
-	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/restaurant/myres">나의 Restaurant</a></li>
-	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/event/list?pageNo=1">이벤트</a></li>
-	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/coupon/resCouponList">쿠폰</a></li>
+	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/restaurant/myres"><b>나의 Restaurant</b></a></li>
+	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/event/list?pageNo=1"><b>이벤트</b></a></li>
+	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/coupon/resCouponList"><b>쿠폰</b></a></li>
 	          </ul>
   			</nav>
 			<iframe name="iframe" style="width:100%; height:840px; border-width:0;" src="/teamapp/restaurant/myres"></iframe>
@@ -184,6 +155,20 @@
 		
 		</div>
 	</div>
+
+
+
+
+
+	<!-- <div class="menu-section">
+		<div class="container">
+			<h2>EVENT</h2>
+		
+			<iframe name="iframe" id="iframe"
+				style="width: 100%; height: 650px; border-width: 0px;"
+				src="/teamapp/event/list?pageNo=1"> </iframe>
+		</div>
+	</div> -->
 
 	<!--/start-footer-->
 	<div class="footer">
