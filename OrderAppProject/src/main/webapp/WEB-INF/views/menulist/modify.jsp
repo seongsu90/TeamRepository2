@@ -38,8 +38,8 @@
 				<tr>
 					<td style="background-color:#1bbc9b; width:120px;">초이스</td>
 					<td>
-						<input type="radio" name="mlishot" value="핫"/>핫
-						<input type="radio" name="mlishot" value="일반"/>일반
+						<input type="radio" name="mlishot" value="true"/>핫
+						<input type="radio" name="mlishot" value="false"/>일반
 					</td>
 				</tr>
 			</table>

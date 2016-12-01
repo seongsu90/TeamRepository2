@@ -46,8 +46,9 @@ public class MenuListController {
 		
 		@RequestMapping(value="/add", method=RequestMethod.POST)
 		public String add(MenuList menuList,HttpSession session) {
-			String mresid = (String) session.getAttribute("login");
-			System.out.println(mresid);
+			String mid = (String) session.getAttribute("login");			
+			Member member = memberService.info(mid);
+			
 			try{
 		
 				menuList.setMloriginfile(menuList.getMlphoto().getOriginalFilename());
@@ -57,6 +58,7 @@ public class MenuListController {
 				menuList.setMlsavedfile(mlsavedfile);
 				
 				menuList.setMlmime(menuList.getMlphoto().getContentType());
+				menuList.setMlresid(member.getMresid());
 				menuListService.add(menuList);
 				return "redirect:/menulist/selectlist"; 
 			}
@@ -67,14 +69,18 @@ public class MenuListController {
 		}
 
 		@RequestMapping(value="/modify", method=RequestMethod.GET)
-		public String modifyForm(int mlresid, String mlname, Model model) {
-			MenuList menuList = menuListService.info(mlresid, mlname);
+		public String modifyForm(String mlname, Model model, HttpSession session) {
+			String mid = (String) session.getAttribute("login");			
+			Member member = memberService.info(mid);
+			MenuList menuList = menuListService.info(member.getMresid(), mlname);
 			model.addAttribute("menuList",menuList);
 			return "menulist/modify";
 		}
 		
 		@RequestMapping(value="/modify", method=RequestMethod.POST)
 		public String modify(MenuList menuList,HttpSession session) throws IllegalStateException, IOException {
+			/*String mid = (String) session.getAttribute("login");			
+			Member member = memberService.info(mid);*/
 			
 			menuList.setMloriginfile(menuList.getMlphoto().getOriginalFilename());
 			String mlsavedfile = new Date().getTime() + menuList.getMlphoto().getOriginalFilename();
@@ -84,18 +90,25 @@ public class MenuListController {
 			
 			menuList.setMlmime(menuList.getMlphoto().getContentType());
 			menuListService.modify(menuList);
-			return "redirect:/menulist/list";
+			
+			return "redirect:/menulist/selectlist";
 		}
 		
 		@RequestMapping("/delete")
-		public String delete(int mlresid, String mlname){
-			menuListService.delete(mlresid, mlname);
-			return "redirect:/menulist/list";
+		public String delete(String mlname, HttpSession session){
+			String mid = (String) session.getAttribute("login");			
+			Member member = memberService.info(mid);
+			
+			menuListService.delete(member.getMresid(), mlname);
+			return "redirect:/menulist/selectlist";
 		}
 		
 		@RequestMapping("/info")	
-		public String info(int mlresid, String mlname, Model model) {
-			MenuList menuList = menuListService.info(mlresid, mlname);
+		public String info(String mlname, Model model, HttpSession session) {
+			String mid = (String) session.getAttribute("login");			
+			Member member = memberService.info(mid);
+			
+			MenuList menuList = menuListService.info(member.getMresid(), mlname);
 			model.addAttribute("menuList",menuList);
 			
 			return "menulist/info";
@@ -188,7 +201,7 @@ public class MenuListController {
 			
 			List<MenuList> list= menuListService.list(intPageNo, rowsPerPage, member.getMresid());
 			model.addAttribute("list", list);
-			model.addAttribute("pageNo", intPageNo);
+			/*model.addAttribute("pageNo", intPageNo);*/
 			model.addAttribute("rowsPerPage", rowsPerPage);
 			model.addAttribute("pagesPerGroup", pagesPerGroup);
 			model.addAttribute("totalMenuListNo", totalMenuListNo);

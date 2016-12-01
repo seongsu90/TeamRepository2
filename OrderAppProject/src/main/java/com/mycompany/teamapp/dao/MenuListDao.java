@@ -219,7 +219,7 @@ public class MenuListDao {
 		return list;
 	}
 	
-	public List<MenuList> selectList(int mlresid) {
+	/*public List<MenuList> selectList(int mlresid) {
 		String sql="select mlname, mlprice, mlinfo, mlsavedfile from menulist where mlresid=? ";
 		List<MenuList> list = jdbcTemplate.query(sql, new Object[]{mlresid}, new RowMapper<MenuList>() {
 			@Override
@@ -249,7 +249,7 @@ public class MenuListDao {
 			}
 		});
 		return list;
-	}
+	}*/
 	
 	public int hotMenuCount() {
 		String sql="select count(*) from menulist where mlishot=1";

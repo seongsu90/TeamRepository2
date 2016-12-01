@@ -80,7 +80,7 @@ public class MenuListService {
 		return menuListdao.hotMenuCount();
 	}
 	
-	public List<MenuList> selectList(int mlresid){
+	/*public List<MenuList> selectList(int mlresid){
 		List<MenuList> menuList = menuListdao.selectList(mlresid);
 		return menuList;
 	}
@@ -88,6 +88,6 @@ public class MenuListService {
 	public List<MenuList> selectHotList(int mlresid, boolean mlishot){
 		List<MenuList> menuHotList = menuListdao.selectHotList(mlresid,mlishot);
 		return menuHotList;
-	}
+	}*/
 
 }
