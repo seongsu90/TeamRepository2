@@ -110,6 +110,34 @@
 		</style>
 		
 		<script type="text/javascript">
+			
+			function onClickBtnAdd() {
+				$("#addCouponModal").modal("show");
+			}
+			
+			function onClickBtnCreate(){								
+				var cname = $("#addForm #cname").val();				
+				var cdday = $("#addForm #cdday").val();
+				var cinfo = $("#addForm #cinfo").val(); 
+				var cdiscount = $("#addForm #cdiscount").val();
+				
+				$.ajax({
+					url: "../coupon/add",
+					data: {"cname":cname, "cdday":cdday, "cinfo":cinfo, "cdiscount":cdiscount},
+					method:"post",
+					success: function(data) {
+						if(data.result == "success") {							
+							$("#addCouponModal").modal("hide"); 
+							location.reload();
+						}
+					}
+				});
+			}
+			
+			function onClickBtnCancel(){				
+				$("#addCouponModal").modal("hide");
+			}
+			
 			function sendInfo(coupon) {
 				$("#infoForm #cnumber").val(coupon.cnumber);
 				$("#infoForm #cname").val(coupon.cname);
@@ -153,6 +181,9 @@
 				});
 			}
 			
+			function onClickBtnClose() {
+				$("#sendInfoModal").modal("hide"); 
+			}
 		</script>
 	
 	</head>
@@ -160,8 +191,10 @@
 	<body>
 	
 		<div class="about-section"> 
-		   <div class="container" align="center"><h2>Coupon</h2> <br/>
-		   		
+		   <div class="container" align="center"><!-- <h2>Coupon</h2> <br/> -->
+		   		<div style="text-align: right;">
+					<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e">쿠폰 생성</button>
+				</div>
 				<table id="acrylic">
 					<thead>
 						<tr>
@@ -223,8 +256,64 @@
 			</div>
 		</div>
 		
-		<!-- ########################## 수정 Modal ########################## -->
 		
+		<!-- 쿠폰 추가 모달 -->		
+		<div id="addCouponModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
+			<div class="modal-dialog" role="document" style="width:450px;">
+		    	<div class="modal-content" style="width:450px; margin: 0">
+		    	
+		    		<!-- modal-header -->
+		     		<div class="modal-header" style="background-color: #34495e; color:white">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">쿠폰 생성</h4>
+		      		</div>
+		      		
+		      		<!-- modal-body -->
+		      		<div class="modal-body">
+						<form id="addForm">
+							
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>쿠폰이름</b></span>
+									<input type="text" class="form-control" id="cname" name="cname" />
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>유효 기간</b></span>
+									<input type="date" class="form-control" id="cdday" name="cdday" />
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>쿠폰 정보</b></span>
+									<input type="text" class="form-control" id="cinfo" name="cinfo" />
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>할인 금액</b></span>
+									<input type="text" class="form-control" id="cdiscount" name="cdiscount"/>
+								</div>
+							</div>							
+						</form>		
+		      		</div>
+		      	
+			      	<!-- modal-footer -->	
+					<div class="modal-footer" style="background-color: #34495e; color:white">
+				        <button id="btnCreate" type="button" class="btn btn-default" onclick="onClickBtnCreate()" style="color: #34495e"><b>추가</b></button>
+				        <button id="btnCancel" type="button" class="btn btn-default" onclick="onClickBtnCancel()" style="color: #34495e"><b>취소</b></button>
+				    </div>
+					
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		
+		
+		<!-- 쿠폰 상세보기 모달 -->		
 		<div id="sendInfoModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
 			<div class="modal-dialog" role="document" style="width:450px;">
 		    	<div class="modal-content" style="width:450px; margin: 0">
@@ -288,6 +377,7 @@
 					<div class="modal-footer" style="background-color: #34495e; color:white">
 				        <button id="btnSend" type="button" class="btn btn-default" onclick="onClickBtnSend()" style="color: #34495e"><b>전송</b></button>
 				        <button id="btnDelete" type="button" class="btn btn-default" onclick="onClickBtnDelete()" style="color: #34495e"><b>삭제</b></button>
+				        <button id="btnClose" type="button" class="btn btn-default" onclick="onClickBtnClose()" style="color: #34495e"><b>닫기</b></button>
 					</div>
 					
 				</div><!-- /.modal-content -->
