@@ -248,9 +248,11 @@
 	</head>
 	<body>
 		<div style="text-align: center;">
+		<c:if test="${mrank==2}">
 			<div style="text-align: right; width:1200px; display: inline-block; margin-top: 20px;">
 				<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e">레스토랑 등록</button>
 			</div>
+		</c:if>
 			<table id="acrylic" style="width:1200px;">
 				<thead>
 					<tr>
@@ -266,7 +268,9 @@
 						<th> 오픈 </th>
 						<th> 클로즈 </th>
 						<th> 휴일 </th>
+						<c:if test="${mrank==2}">
 						<th> 삭제 </th>
+						</c:if>
 					</tr>
 				</thead>
 				<tbody>
@@ -289,7 +293,9 @@
 							<td> ${restaurant.resopen} </td>
 							<td> ${restaurant.resclose} </td>
 							<td> ${restaurant.rescloseday} </td>
+							<c:if test="${mrank==2}">
 							<td> <a href="delete?resid=${restaurant.resid}" type="button" class="btn btn-info">삭제</a> </td>
+							</c:if>
 						</tr>
 					</c:forEach>
 				</tbody>

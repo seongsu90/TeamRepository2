@@ -147,12 +147,13 @@
 		<section class="content">
 			<nav>
 	          <ul class="nav nav-justified" style="width:1200px;">
-	            <li class="active" style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/add">생성</a></li>
+	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/restaurant/list">나의 Restaurant</a></li>
 	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/event/list?pageNo=1">이벤트</a></li>
 	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/selecthotlist?mlishot=1&pageNo=1">핫메뉴</a></li>
 	          </ul>
   			</nav>
-			<iframe name="iframe" style="width:1200px; height:840px; border-width:0;" src="/teamapp/event/list?pageNo=1"></iframe>
+			<iframe name="iframe" style="width:1200px; height:840px; border-width:0;" src="/teamapp/restaurant/list?pageNo=1"></iframe>
+			
 		</section>		
 
 

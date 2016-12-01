@@ -52,12 +52,7 @@ public class RestaurantController {
 		}
 		session.setAttribute("pageNo", String.valueOf(intPageNo));
 		
-		
-		//관심지역 주소 얻기
-	/*	String mid=(String)session.getAttribute("login");
-		model.addAttribute("mid", mid);
-		Member member=memberService.info(mid);
-		String loc=member.getMlocation();*/
+
 		
 		
 		
