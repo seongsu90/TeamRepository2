@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/resImage" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="4"
+            android:layout_margin="5dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textSize="18sp"
+                android:text="인테리어 조명1"
+                android:textStyle="bold"
+                android:id="@+id/resTitle" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="거실등으로 사용하면 좋습니다.검은색 테두리와 백열등의 조화가 이쁩니다."
+                android:id="@+id/resContent" />
+        </LinearLayout>
+
+    <Button
+        android:text="Button"
+        android:layout_width="0dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:id="@+id/button8"
+        android:layout_weight="1" />
+</LinearLayout>
