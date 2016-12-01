@@ -16,6 +16,7 @@
 	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 	
+	
 				<!--start-smoth-scrolling-->
 			<script type="text/javascript">
 				jQuery(document).ready(function($) {
@@ -47,8 +48,7 @@
 					
 					if(data.result=="success"){						
 						$("#login-modal").modal("hide");						
-					}else{
-						/* alert("아이디 혹은 비밀번호가 틀렸습니다."); */						
+					}else{										
 						$("#loginInCorrect-modal").modal("show");
 					}
 				}
@@ -102,6 +102,18 @@
 		    }
 		};
 	</script>
+	
+	<style type="text/css">
+		.page_t_txt p{
+		    font-weight: bold;
+		    margin-bottom: 5px;		     
+		    color: #1276ae;
+		}
+		 
+		.page_t_txt li { 
+			font-size: 14px;
+		}
+	</style>
 	
 </head>
 <body>
@@ -162,7 +174,44 @@
 			</div>
 		</div>
 		<iframe src="https://www.google.com/maps/embed/v1/place?q=%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%20%EC%86%A1%ED%8C%8C%EA%B5%AC%20%ED%95%9C%EA%B5%AD%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%EC%82%B0%EC%97%85%ED%98%91%ED%9A%8C&key=AIzaSyA-E4erY82nScLLGd9UVaHlvgX2goBhIMI" frameborder="0" style="border:0"></iframe>
-
+		
+		<br><br>
+		
+		<div class="contact-info">
+			<div class="container">
+				<div class="page_t_txt">
+					<p>도로명</p>
+					<ul type="disc">						
+						<li> (05717) 서울시 송파구 중대로 135, IT벤처타워 서관 12층 한국소프트웨어산업협회</li><br/>
+					</ul>
+				</div>
+				<div class="page_t_txt">
+					<p>대표전화</p>
+					<ul type="disc">
+						<li class="icon"> 010-9558-1893 </li><br/>
+					</ul>
+				</div>		
+				<div class="page_t_txt">
+					<p>대중교통안내</p>					
+					<div class="col-sm-6">                            
+                        <h5 style="margin: 19px 0;"><img src="http://saraminhr.co.kr/imgs/hr/loca_stlt01.gif" alt="지하철" /></h5>
+                        <ul type="disc">
+                            <li class="icon"> 3호선 경찰병원역 1번출구방향 50m</li>
+                            <li class="icon"> 8호선 가락시장역 4분출구 도보 5분(400m)</li>	                            
+                        </ul>
+                    </div>
+                	<div class="col-sm-6">
+                        <h5 style="margin: 19px 0;"><img src="http://saraminhr.co.kr/imgs/hr/loca_stlt02.gif" alt="버스" /></h5>
+                        <ul>
+                            <li class="icon"> 간선 302, 303, 320, 350, 352, 360 가락시장 앞 하차 후 도보 10분 </li>
+                            <li class="icon"> 지선 3217, 3317, 3413, 3422 가락시장 앞 하차 후 도보 10분 </li>
+							<li class="icon"> 간선 301, 401, 지선 3319, 3416 경찰병원앞 하차 </li>
+                        </ul>
+                    </div>					
+				</div>
+			</div>
+		</div>
+		
 		<div class="contact-inner">
 		  <div class="container">
 			<h4>FeedBack</h4>
