@@ -4,7 +4,6 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Food House a Hotels and Restaurants Category Flat Bootstarp responsive Website Template | Home :: w3layouts</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/style.css" />
@@ -86,9 +85,9 @@
 				<div class="clearfix"> </div>
 		</div>
 		<div class="head-bg">
-					<div class="logo three">
-							<a href="index.html"><h1>FOOD<span>House</span></h1></a>
-					</div>
+			<div class="logo three">
+					<a href="/teamapp/"><h1>FOOD<span>House</span></h1></a>
+			</div>
 		</div>
 		<!--/header-->
 	</div>

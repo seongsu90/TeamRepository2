@@ -33,6 +33,10 @@
 			$("#login-modal").on('hidden.bs.modal', function () {
 		    	parent.location.reload();
 		    });
+			
+			$("#login-modal").on('shown.bs.modal', function() {	            
+	            $("#login_userid").focus();
+	         }); 
 		}); 
 	
 		function onClickLogin()
@@ -181,31 +185,31 @@
 			<div class="container">
 				<div class="page_t_txt">
 					<p>도로명</p>
-					<ul type="disc">						
+					<ul>						
 						<li> (05717) 서울시 송파구 중대로 135, IT벤처타워 서관 12층 한국소프트웨어산업협회</li><br/>
 					</ul>
 				</div>
 				<div class="page_t_txt">
 					<p>대표전화</p>
-					<ul type="disc">
-						<li class="icon"> 010-9558-1893 </li><br/>
+					<ul>
+						<li> 010-9558-1893 </li><br/>
 					</ul>
 				</div>		
 				<div class="page_t_txt">
 					<p>대중교통안내</p>					
 					<div class="col-sm-6">                            
-                        <h5 style="margin: 19px 0;"><img src="http://saraminhr.co.kr/imgs/hr/loca_stlt01.gif" alt="지하철" /></h5>
-                        <ul type="disc">
-                            <li class="icon"> 3호선 경찰병원역 1번출구방향 50m</li>
-                            <li class="icon"> 8호선 가락시장역 4분출구 도보 5분(400m)</li>	                            
+                        <h5 style="margin: 19px 0;"><img src="http://saraminhr.co.kr/imgs/hr/loca_stlt01.gif" /></h5>
+                        <ul>
+                            <li> 3호선 경찰병원역 1번출구방향 50m</li>
+                            <li> 8호선 가락시장역 4분출구 도보 5분(400m)</li>	                            
                         </ul>
                     </div>
                 	<div class="col-sm-6">
                         <h5 style="margin: 19px 0;"><img src="http://saraminhr.co.kr/imgs/hr/loca_stlt02.gif" alt="버스" /></h5>
                         <ul>
-                            <li class="icon"> 간선 302, 303, 320, 350, 352, 360 가락시장 앞 하차 후 도보 10분 </li>
-                            <li class="icon"> 지선 3217, 3317, 3413, 3422 가락시장 앞 하차 후 도보 10분 </li>
-							<li class="icon"> 간선 301, 401, 지선 3319, 3416 경찰병원앞 하차 </li>
+                            <li> 간선 302, 303, 320, 350, 352, 360 가락시장 앞 하차 후 도보 10분 </li>
+                            <li> 지선 3217, 3317, 3413, 3422 가락시장 앞 하차 후 도보 10분 </li>
+							<li> 간선 301, 401, 지선 3319, 3416 경찰병원앞 하차 </li>
                         </ul>
                     </div>					
 				</div>

@@ -5,23 +5,19 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet"
-		href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css">
-	<link rel="stylesheet"
-		href="${pageContext.servletContext.contextPath}/resources/css/style.css" />
-	<link
-		href='http://fonts.googleapis.com/css?family=Niconne|Playball|Open+Sans:300italic,400italic,600italic,400,300,600,700'
-		rel='stylesheet' type='text/css'>
-	<link rel="stylesheet"
-		href="${pageContext.servletContext.contextPath}/resources/css/common.css" />	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/style.css" />
+	<%-- <link href="${pageContext.servletContext.contextPath}/resources/css/bootstrap.css" rel='stylesheet' type='text/css' /> --%> 
+	<link href='http://fonts.googleapis.com/css?family=Niconne|Playball|Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
 	
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-	<script type="text/javascript"
-		src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/bootstrap-3.3/js/bootstrap.min.js"></script>
+	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
+	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
+	
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#infoModal #ephoto").change(function(){
@@ -104,11 +100,11 @@
 						<li><a href="${pageContext.servletContext.contextPath}/">Home</a></li> 
 						<c:if test="${mrank==2}">
 						<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
-						<li><a class="active"  href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
+						<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
 						</c:if>
 						<c:if test="${mrank==1}">
 						<li><a href="${pageContext.servletContext.contextPath}/web/ordermanagement">주문관리</a></li> 
-						<li><a href="${pageContext.servletContext.contextPath}/web/restaurantmanege">매장관리</a></li>
+						<li><a class="active" href="${pageContext.servletContext.contextPath}/web/restaurantmanege">매장관리</a></li>
 						<li><a href="${pageContext.servletContext.contextPath}/web/menumanagement">메뉴관리</a></li> 
 						</c:if>
 						<li class="lost"><a href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
@@ -136,12 +132,38 @@
 		</div>
 		<div class="head-bg">
 			<div class="logo three">
-				<a href="/teamapp/home"><h1>
-						FOOD<span>House</span>
-					</h1></a>
+				<a href="/teamapp/"><h1>FOOD<span>House</span></h1></a>
+			</div>
+		</div>		
+	</div>
+	
+	<div class="gallery services">
+		<div class="container">		
+			<h3>Restaurant</h3>	
+			<div class="portfolio-bottom">
+				<div class="gallery-one two">
+					<div class="col-md-3 gallery-left two">
+						<a href="/teamapp/resources/img/g1.jpg" class=" mask b-link-stripe b-animate-go   swipebox"  title="Image Title"></a>
+						<div class="container">
+							<div class="row">
+							
+								<section class="content">
+									<nav>
+										<ul class="nav nav-justified" style="width:1200px;">
+											<li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/restaurant/list">나의 Restaurant</a></li>
+											<li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/event/list?pageNo=1">이벤트</a></li>
+											<li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/coupon/resCouponList">쿠폰</a></li>
+										</ul>
+									</nav>
+									<iframe name="iframe" style="width:1200px; height:840px; border-width:0;" src="/teamapp/restaurant/list"></iframe>			
+								</section>
+								
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<!--/header-->
 	</div>
 	
 	<!-- 내용 -->
@@ -163,42 +185,33 @@
 		</div>
 	</div>
 
-
-
-
-
-	<!-- <div class="menu-section">
-		<div class="container">
-			<h2>EVENT</h2>
-		
-			<iframe name="iframe" id="iframe"
-				style="width: 100%; height: 650px; border-width: 0px;"
-				src="/teamapp/event/list?pageNo=1"> </iframe>
-		</div>
-	</div> -->
-
 	<!--/start-footer-->
 	<div class="footer">
 		<div class="container">
 			<div class="col-md-3 footer-grid">
 				<div class="logo two">
-					<a href="/teamapp/home"><h3>
-							FOOD<span>House</span>
-						</h3></a>
+					<a href="${pageContext.servletContext.contextPath}/"><h3>주문<span>할게요!</span></h3></a>
 				</div>
 			</div>
 			<div class=" col-md-3 footer-grid footer-grid2">
 				<div class="bottom-nav">
 					<h4>LEARN</h4>
 					<ul>
-						<li><a href="${pageContext.servletContext.contextPath}">Home</a></li>
-						<li><a href="/teamapp/web/memberindex">회원관리</a></li>
-						<li><a href="/teamapp/web/resmanagement">가맹점관리</a></li>
-						<li><a href="/teamapp/web/ordermanagement">주문관리</a></li>
-						<li><a href="/teamapp/web/restaurantmanege">매장관리</a></li>
-						<li><a href="/teamapp/web/menumanagement">메뉴관리</a></li>
-						<li><a href="/teamapp/web/contact">오시는길</a></li>
-						<div class="clearfix"></div>
+						<li><a href="${pageContext.servletContext.contextPath}">Home</a></li> 
+						
+						<c:if test="${mrank==2}">
+							<li><a class="active"  href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
+							<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
+						</c:if>
+						
+						<c:if test="${mrank==1}">
+							<li><a href="${pageContext.servletContext.contextPath}/web/ordermanagement">주문관리</a></li> 
+							<li><a href="${pageContext.servletContext.contextPath}/web/restaurantmanege">매장관리</a></li>
+							<li><a href="${pageContext.servletContext.contextPath}/web/menumanagement">메뉴관리</a></li> 
+						</c:if>
+						
+						<li class="lost"><a href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
+						<div class="clearfix"> </div>
 					</ul>
 				</div>
 			</div>
@@ -206,54 +219,34 @@
 				<div class="Office Address">
 					<h4>ADDRESS</h4>
 					<ul class="bottom-icons">
-						<li><a class="home" href="#"><span> </span></a>Lorem ipsy
-							street,Newyork</li>
-						<li><a class="mail" href="mailto:info@example.com"><span>
-							</span>123 int@example.com</a></li>
-						<li><a class="mbl" href="#"><span> </span></a>+91 000 00 00
-							00 0</li>
-						<div class="clearfix"></div>
+						<li><a class="glyphicon glyphicon-home" href="#"></a>　서울시 송파구 중대로 135, <br/>　　IT벤처타워 서관 12층<br/>　　한국소프트웨어산업협회</li>
+						<li><a class="glyphicon glyphicon-envelope" href="#"></a>　gusqls0810@naver.com</li>
+						<li><a class="glyphicon glyphicon-phone" href="#"></a>　 010-9558-1893</li>	
+						<div class="clearfix"> </div>	
 					</ul>
 				</div>
 			</div>
+			
 			<div class="col-md-3 footer-grid">
 				<h4>SUPPORT WITH</h4>
-				<div class="support">
-					<input type="text" class="text" value="Enter email to reset it"
-						onfocus="this.value = '';"
-						onblur="if (this.value == 'Enter email to reset it') {this.value = 'Enter email to reset it';}">
-					<input type="submit" value="SUBMIT" class="botton">
-					<p>Lorem ipsum dolor sit amet conse aliqua. Ut enim ad minim
-						veniam Lorem ctetur adipisicing .</p>
+				<div class="Office Address">
+					<ul class="bottom-icons">
+						<li><a class="glyphicon glyphicon-envelope" href="#"></a>　gusqls0810@naver.com</li>
+						<li>고객지원 등 각종 문의사항은 해당 메일로 연락을 주시면 감사합니다.</li>
+					</ul>
 				</div>
 			</div>
 			<div class="clearfix"></div>
 		</div>
 	</div>
+	
+	<!-- last footer ( go to top ) -->
 	<div class="copy-right">
 		<div class="container">
-			<p>
-				Copyright &copy; 2015 All Rights Reserved Design by <a
-					href="http://w3layouts.com/">W3layouts</a>
-			</p>
+			<p>Copyright &copy; 2015 All Rights Reserved Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
 		</div>
-
-
 	</div>
-	<!--start-smoth-scrolling-->
-	<script type="text/javascript">
-		jQuery(document).ready(function($) {
-			$(".scroll").click(function(event){		
-				event.preventDefault();
-				$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-			});
-		});
-	</script>
-	
-
-	<a href="#home" id="toTop" class="scroll" style="display: block;">
-		<span id="toTopHover" style="opacity: 1;"> </span>
-	</a>
+	<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 	
  <%-- ## Info Modal ## --%>
 	 <div id="infoModal" class="modal fade" tabindex="-1" role="dialog" >
