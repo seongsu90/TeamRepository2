@@ -151,8 +151,9 @@
 		
 	<!-- ################################################################################################################## -->
 		
-		
+
 		<script type="text/javascript">
+
 			function showInfo(resid) {
 				$.ajax({
 
@@ -165,6 +166,10 @@
 					}
 				});
 			};
+		
+		
+			
+			
 
 				
 			function onClickBtnAdd() {
@@ -274,6 +279,8 @@
 					</tr>
 				</thead>
 				<tbody>
+				
+				
 					<c:forEach var="restaurant" items="${list}">
 						<tr>
 							<c:if test="${mrank==2}">
@@ -297,7 +304,10 @@
 							<td> <a href="delete?resid=${restaurant.resid}" type="button" class="btn btn-info">삭제</a> </td>
 							</c:if>
 						</tr>
+						
 					</c:forEach>
+					
+					
 				</tbody>
 			</table>
 			<div style="text-align:center;">
