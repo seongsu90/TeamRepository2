@@ -83,6 +83,8 @@ public class RestaurantController {
 		model.addAttribute("endPageNo", endPageNo);
 		model.addAttribute("find", find);
 		return "restaurant/list";
+		
+	
 	}
 	@RequestMapping(value="/list", method=RequestMethod.POST)
 	public String findList(String pageNo, String find, Model model) {
@@ -190,6 +192,8 @@ public class RestaurantController {
 		model.addAttribute("restaurant", restaurant);
 		return "restaurant/info";
 	}
+	
+	
 	
 	@RequestMapping(value="/modify", method=RequestMethod.GET)
 	public String modifyForm(int mresid, Model model){
