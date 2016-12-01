@@ -85,40 +85,32 @@
 			$("#infoModal #restotaltable").val(data.restotaltable);
 			$("#infoModal #resinfo").val(data.resinfo);
 			$("#infoModal #restel").val(data.restel);
+			
 			$("#infoModal #rescloseday").val(data.rescloseday);
-			
-			
-			
 			var closeday=[];
 			closeday=data.rescloseday.split("/");
-			
-		
-			
 		 	for(var i=0; i<closeday.length; i++) {
 				console.log(closeday[i]);
 		 	 	$("input[name=closeday][value="+closeday[i]+"]").attr("checked", true); 
-		 	 
 			} 
-			
 			
 			$("#infoModal #resopen").val(data.resopen);
 			$("#infoModal #resclose").val(data.resclose); 
 			$("#infoModal #photo").attr('src', "/teamapp/restaurant/showPhoto?ressavedfile=" + data.ressavedfile);
 	
 			
+			$('input').attr("readonly",true);//input 요소 설정 readonly 위한 것이다.
 			
-			
-			$('input').attr("readonly",true);//input 요소 설정 readonly 위한 것이다
-			
+			/* $(':checkbox[readonly="readonly"]').click(function() {
+				return false;
+				}); */
 
 			setCity(location[0]);
 			setProvince(location[0], location[1]);
-			
-			
 		 	$("#selCity").not(":selected").attr("disabled", "disabled");
 			$("#selProvince").not(":selected").attr("disabled", "disabled"); 
-			
-			
+			$("#resphoto").hide();
+			$("#closeday").hide();
 			$("#infoModal").modal("show");
 		};
 		
@@ -126,17 +118,25 @@
 		function onClickBtnModify(){
 		
 						
+	
+			
+			$(':checkbox[readonly="readonly"]').click(function() {
+				return true;
+				});
 			$('input').attr("readonly",false);
-		
+			
 			$("#selCity").removeAttr("disabled");
 			$("#selProvince").removeAttr("disabled");
 		
 			$("#btnModify").hide();
+			$("#isclose").hide();
+			$("#closeday").show();
 			$("#btnModifySuccess").show();
+			$("#resphoto").show();
 			setCity();		
 			
 		};
-		
+		 
 		
 		function resUpdate() {
 		
@@ -406,7 +406,18 @@
 						</div>
 						
 						
-						<div class="form-group">
+						
+						<div id="isclose" class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>레스토랑 휴일</b></span>
+								<b><input id="rescloseday" type='text' style="width:555px" class="form-control" /></b>
+							</div>
+						</div>
+						
+						
+						
+						
+						<div id="closeday" class="form-group">
 							<div class="input-group">
 								<span style="width: 130px; margin-right: 10px; border-right: 1px solid #ccc;" class="input-group-addon"><b>휴일</b></span>&nbsp;
 								<input type="checkbox"  name="closeday"  value="휴일없음" >휴일 X&nbsp;
@@ -426,7 +437,9 @@
 								<div id="photoTag">
 									<img id="photo" class="form-control" style="width: 225px; height:auto; padding: 10px"/>
 								</div>
-								<b><input id="resphoto" type='file' style="width:225px" class="form-control" multiple /></b>
+								
+								<b><input id="resphoto" type='file' style="width:225px" class="form-control" multiple/></b>
+						
 							</div>
 						</div>
 						
