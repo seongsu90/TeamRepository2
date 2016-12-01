@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.park.myapplication">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -19,7 +20,8 @@
         <activity android:name=".PwSearch" />
         <activity android:name=".PwModify" />
         <activity android:name=".Join" />
-        <activity android:name=".MainFunction"></activity>
+        <activity android:name=".MainFunction" />
+        <activity android:name=".ResInfo"></activity>
     </application>
 
 </manifest>

@@ -191,7 +191,7 @@
 	                 </tr>
 	            </thead>
 	            <tbody>
-	            <c:forEach var="event" items="${list}">
+	           	 <c:forEach var="event" items="${list}">
 	                <tr>
 	                    <td>
 	                  	  <a id="btnInfo" href="javascript:showInfo(${event.eresid}, '${event.emlname}')">	
@@ -208,7 +208,7 @@
 	                    <td>${event.eend}</td>
 	                    <td><a href="delete?eresid=${event.eresid}&emlname=${event.emlname}" class="btn btn-info">삭제</a></td>
 	                </tr>
-	               </c:forEach> 
+	              </c:forEach> 
 	            </tbody>
 	        </table>
 	        <form action="${pageContext.servletContext.contextPath}/event/list">
@@ -252,77 +252,68 @@
 	      			</div>
 
  
-	      	<%--	modal-modal-body           --%>
-	      		<div class="modal-body">
-					<form id="addForm">
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px; padding:0px;" class="input-group-addon"><b>이벤트 이름</b></span>
-								<b><input type="text" class="form-control" name="ename" id="ename"/></b>
+	      			<%--	modal-modal-body           --%>
+		      		<div class="modal-body">
+						<form id="addForm">
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px; padding:0px;" class="input-group-addon"><b>이벤트 이름</b></span>
+									<b><input type="text" class="form-control" name="ename" id="ename"/></b>
+								</div>
 							</div>
-						</div>
-
-
-						<!-- <div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>식당 아이디</b></span>
-								<input type="number" class="form-control" name="eresid" id="eresid"/>
+							
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>이벤트 사진</b></span>
+									<input type="file" class="form-control" name="ephoto" id="ephoto"/>
+								</div>
 							</div>
-						</div> -->
-
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>이벤트 사진</b></span>
-								<input type="file" class="form-control" name="ephoto" id="ephoto"/>
+	
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>이벤트 정보</b></span>
+									<input type="text" class="form-control" name="einfo" id="einfo"/>
+								</div>
 							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>이벤트 정보</b></span>
-								<input type="text" class="form-control" name="einfo" id="einfo"/>
+	
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>이벤트 메뉴</b></span>
+									<input type="text" class="form-control" name="emlname" id="emlname"/>
+								</div>
 							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>이벤트 메뉴</b></span>
-								<input type="text" class="form-control" name="emlname" id="emlname"/>
+	
+	
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>할인가격</b></span>
+									<input type="number" class="form-control" name="eprice" id="eprice"/>
+								</div>
 							</div>
-						</div>
-
-
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>할인가격</b></span>
-								<input type="number" class="form-control" name="eprice" id="eprice"/>
+	
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>시작일</b></span>
+									<input type="date" class="form-control" name="estart" id="estart"/>
+								</div>
 							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>시작일</b></span>
-								<input type="date" class="form-control" name="estart" id="estart"/>
+	
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>종료일</b></span>
+									<input type="date" class="form-control" name="eend" id="eend"/>
+								</div>
 							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>종료일</b></span>
-								<input type="date" class="form-control" name="eend" id="eend"/>
-							</div>
-						</div>
-					  </form>
-	      			</div>
-	      			
-	      			
-	      			    <!--      footer -->             
-	      			<div class="modal-footer" style="background-color: #34495e; color:white">
-	      				<button id="btnEventAdd" type="button" class="btn btn-default" onclick="onClickBtnEventAdd()" style="color:#34495e"><b>추가</b></button>
-	      				<button id="btnInit" type="button" class="btn btn-default" onclick="onClickBtnCancel()" style="color:#34495e"><b>취소</b></button>
-	      			</div>
+						 </form>
+		      		   </div>
+		      			      			
+		      			    <!--      footer -->             
+		      			<div class="modal-footer" style="background-color: #34495e; color:white">
+		      				<button id="btnEventAdd" type="button" class="btn btn-default" onclick="onClickBtnEventAdd()" style="color:#34495e"><b>추가</b></button>
+		      				<button id="btnInit" type="button" class="btn btn-default" onclick="onClickBtnCancel()" style="color:#34495e"><b>취소</b></button>
+		      			</div>
       			</div>
       		</div>
       	</div> 
   </body>
-   </html> 
+</html> 

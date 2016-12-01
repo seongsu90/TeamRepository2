@@ -68,8 +68,5 @@ public class MenuList {
 	public void setMlishot(boolean mlishot) {
 		this.mlishot = mlishot;
 	}
-	
-	
-	
-	
+		
 }

@@ -140,30 +140,27 @@ public class EventController {
 	@RequestMapping("/showPhoto")
 	public void showPhoto(String esavedfile, HttpServletRequest request, HttpServletResponse response){
 		try{
-		String fileName=esavedfile;
-		
-		
-		String emime=request.getServletContext().getMimeType(fileName);
-		response.setContentType(emime);
-		
-		OutputStream os=response.getOutputStream();
-		
-		String filePath=request.getServletContext().getRealPath("/WEB-INF/photo/"+fileName);
-		InputStream is=new FileInputStream(filePath);
-		
-		byte[] values=new byte[1024];
-		int byteNum=-1;
-		while((byteNum=is.read(values))!=-1){
-			os.write(values, 0, byteNum);
-		}
-		os.flush();
-		is.close();
-		os.close();
+			String fileName=esavedfile;
+			String emime=request.getServletContext().getMimeType(fileName);
+			response.setContentType(emime);
+			
+			OutputStream os=response.getOutputStream();
+			
+			String filePath=request.getServletContext().getRealPath("/WEB-INF/photo/"+fileName);
+			InputStream is=new FileInputStream(filePath);
+			
+			byte[] values=new byte[1024];
+			int byteNum=-1;
+			while((byteNum=is.read(values))!=-1){
+				os.write(values, 0, byteNum);
+			}
+			os.flush();
+			is.close();
+			os.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
-	
 	
 	@RequestMapping("/list")
 	public String list(String pageNo, Model model, HttpSession session){
@@ -210,5 +207,4 @@ public class EventController {
 		model.addAttribute("endPageNo", endPageNo);
 		return "event/list";
 	}
-	
 }

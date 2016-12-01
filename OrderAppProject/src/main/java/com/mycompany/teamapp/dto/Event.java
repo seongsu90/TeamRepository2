@@ -88,5 +88,4 @@ public class Event {
 		this.eend = eend;
 	}
 	
-	
 }

@@ -151,23 +151,22 @@
 	                </tr>
 	            </thead>
 	            <tbody>
-	            <c:forEach var="menuList" items="${list}">
-	                <tr>
-	                    <td data-label="Name">
-	                    	<a href="info?mlresid=${menuList.mlresid}&mlname=${menuList.mlname}">
-	                    		${menuList.mlname}
-	                    	</a>	
-	                    </td>
-	                    <td data-label="Age">${menuList.mlprice}</td>
-	                    <td data-label="Weight">${menuList.mlresid}</td>
-	                    <td data-label="Profession">${menuList.mlinfo}</td>
-	                    <td>
-	                    	<img src="showPhoto?mlsavedfile=${menuList.mlsavedfile}" style="width:50px;"/>
-	                    </td>
-	                    <td>${menuList.mlishot}</td>
-	                </tr>
-	                
-	               </c:forEach> 
+		            <c:forEach var="menuList" items="${list}">
+		                <tr>
+		                    <td data-label="Name">
+		                    	<a href="info?mlresid=${menuList.mlresid}&mlname=${menuList.mlname}">
+		                    		${menuList.mlname}
+		                    	</a>	
+		                    </td>
+		                    <td data-label="Age">${menuList.mlprice}</td>
+		                    <td data-label="Weight">${menuList.mlresid}</td>
+		                    <td data-label="Profession">${menuList.mlinfo}</td>
+		                    <td>
+		                    	<img src="showPhoto?mlsavedfile=${menuList.mlsavedfile}" style="width:50px;"/>
+		                    </td>
+		                    <td>${menuList.mlishot}</td>
+		                </tr>
+		              </c:forEach> 
 	            </tbody>
 	        </table>
 	        
