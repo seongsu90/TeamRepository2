@@ -82,6 +82,10 @@ public class CouponService {
 		return couponDao.count();
 	}
 	
+	public int getResCouponCount(int cresid) {
+		return couponDao.resCount(cresid);
+	}
+	
 	public int checkCoupon(String cbmid, int cbnumber) {		
 		Coupon coupon = couponDao.checkCoupon(cbmid, cbnumber);		
 		Date now = new Date();
@@ -93,7 +97,10 @@ public class CouponService {
 		} 	
 		return coupon.getCdiscount();
 	}
-	
-	
+
+	public List<Coupon> resCouponList(int cresid, int pageNo, int rowsPerPage) {
+		List<Coupon> resCouponList = couponDao.resCouponList(cresid, pageNo, rowsPerPage);
+		return resCouponList;
+	}
 
 }

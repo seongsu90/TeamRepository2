@@ -8,7 +8,7 @@
 	</head>
 	<body> <!-- 브라우저에 나오는 부분 -->
 		
-		&nbsp; <font size="6"><b>coupon 메인모습</b></font></p>
+		<p>&nbsp; <font size="6"><b>coupon 메인모습</b></font></p>
 		<hr/> <!-- 시작과 동시에 끝이다라는 의미<br/>// 태그의 의미는 수평선그리기 -->
 	
 			1. <a href="/teamapp/coupon/add">쿠폰 생성</a> <br/>

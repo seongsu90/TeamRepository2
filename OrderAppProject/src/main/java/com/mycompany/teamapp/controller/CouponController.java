@@ -27,8 +27,6 @@ import com.mycompany.teamapp.service.RestaurantService;
 public class CouponController {
 	private static final Logger logger = LoggerFactory.getLogger(CouponController.class);
 	
-	private String mid=null;
-	
 	@Autowired
 	private CouponService couponservice;
 	
@@ -40,14 +38,14 @@ public class CouponController {
 	
 	
 	@RequestMapping("/index")
-	public String index(String mid){
-		this.mid = mid;
-		logger.info("index 처리요청");
+	public String index(){
+		logger.info("index 처리요청");		
 		return "/coupon/index";
 	}
 	
 	@RequestMapping("/list")
-	public String list(String mid,String pageNo,Model model,HttpSession session){
+	public String list(String mid,String pageNo,Model model,HttpSession session) {
+		
 		int intPageNo =1;
 		if(pageNo==null)
 		{
@@ -105,9 +103,72 @@ public class CouponController {
 		return "coupon/list";
 	}
 	
+	@RequestMapping("/resCouponList")
+	public String resCouponList(String pageNo, Model model, HttpSession session) {
+		String mid = (String) session.getAttribute("login");
+		Member member = memberservice.info(mid);
+		int cresid = member.getMresid();
+		
+		int intPageNo =1;
+		if(pageNo==null)
+		{
+			pageNo = (String) session.getAttribute("pageNo");
+			if(pageNo != null) //넘어오지도 않고 세션에 존재하지도 않을 때는 1페이를 넘겨주게끔 셋팅
+				{
+					intPageNo =Integer.parseInt(pageNo)	;
+				}
+		}else
+		{
+			intPageNo = Integer.parseInt(pageNo);
+		}
+		session.setAttribute("pageNo", String.valueOf(intPageNo));
+		
+		int rowsPerPage = 8;
+		int pagesPerGroup =5;
+		
+		int totalBoardNo = couponservice.getResCouponCount(cresid);
+		
+		int totalPageNo = totalBoardNo/rowsPerPage + ((totalBoardNo%rowsPerPage!=0)?1:0); //나머지가 있다면 1을 더하고 없으면 0을 더한다.
+		int totalGroupNo = (totalPageNo/pagesPerGroup)+((totalPageNo%pagesPerGroup!=0)?1:0);
+		
+		int groupNo = (intPageNo-1)/ pagesPerGroup +1;
+		int startPageNo = (groupNo-1)*pagesPerGroup +1;
+		int endPageNo = startPageNo + pagesPerGroup -1;
+		
+		if(groupNo==totalGroupNo){endPageNo= totalPageNo;}
+		
+		List<Coupon> coupon = couponservice.resCouponList(cresid, intPageNo, rowsPerPage);
+		/*List<Coupon> coupon = new ArrayList<>();
+		int cn = 0;
+		for(int i=0; i<couponlist.size();i++)
+		{
+			CouponBox cb =couponlist.get(i);
+			cn=cb.getCbnumber();
+			coupon.add(couponservice.info(cn));
+		}
+		for(int i=0;i<coupon.size();i++)
+		{
+			coupon.get(i).setCresname(restaurantservice.info(coupon.get(i).getCresid()).getResname());
+		}*/
+		
+		
+		model.addAttribute("pageNo",intPageNo);
+		model.addAttribute("rowsPerPage",rowsPerPage);
+		model.addAttribute("pagesPerGroup",pagesPerGroup);
+		model.addAttribute("totalPageNo",totalPageNo);
+		model.addAttribute("totalBoardNo",totalBoardNo);
+		model.addAttribute("totalGroupNo",totalGroupNo);
+		model.addAttribute("groupNo",groupNo);
+		model.addAttribute("startPageNo",startPageNo);
+		model.addAttribute("endPageNo",endPageNo);		
+		model.addAttribute("coupon",coupon);
+		return "coupon/resCouponList";
+	}
+	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
-	public String addform(HttpSession session){
-		logger.info("addform 요청처리");
+	public String addform(HttpSession session){		
+		logger.info("addform 요청처리");		
+		String mid = (String) session.getAttribute("login");
 		int cnumber=0;
 		int ranNum =0;
 		boolean chkNum = false;
@@ -120,7 +181,7 @@ public class CouponController {
 			chkNum = couponservice.check(ranNum);
 			}
 			cnumber = ranNum;
-			Member member = memberservice.info(mid);
+			Member member = memberservice.info(mid);			
 			cresid = member.getMresid();
 			break;
 		}
@@ -148,11 +209,12 @@ public class CouponController {
 		int result = couponservice.delete(cnumber);
 		if(result == CouponService.DELETE_FAIL)
 		{
-			model.addAttribute("error", "DELETE_FAIL");
-			return "/coupon/deleteForm";
+			model.addAttribute("result", "DELETE_FAIL");
+			/*return "/coupon/deleteForm";*/			
 		}
-		model.addAttribute("success", "DELETE_SUCCESS");
-		return "redirect:/coupon/index";
+		model.addAttribute("result", "DELETE_SUCCESS");
+		/*return "redirect:/coupon/index";*/
+		return "coupon/delete";
 	}
 	
 	@RequestMapping("/info")
@@ -172,10 +234,17 @@ public class CouponController {
 	}
 	
 	@RequestMapping(value="/send",method=RequestMethod.POST)
-	public String send(CouponBox couponbox,HttpSession session){
+	public String send(CouponBox couponbox,HttpSession session, Model model){
 		logger.info("send 요청처리");
-
-		int result = couponservice.send(couponbox);
-		return "redirect:/coupon/index";
+		try {
+			couponservice.send(couponbox);
+			model.addAttribute("result", "success");
+		} catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("result", "fail");
+		}
+		return "coupon/send";	
+		/*int result = couponservice.send(couponbox);
+		return "redirect:/coupon/index";*/
 	}
 }

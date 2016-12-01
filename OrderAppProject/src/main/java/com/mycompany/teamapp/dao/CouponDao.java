@@ -135,6 +135,42 @@ public class CouponDao {
 		});
 		return (list.size() != 0) ? list.get(0) : null;
 	}
+
+	public List<Coupon> resCouponList(int cresid, int pageNo, int rowsPerPage) {
+		String sql = "";
+		sql += "select rn, cnumber, cname, cdday, cinfo, cresid, cdiscount ";
+		sql += "from ( ";
+		sql += "select rownum as rn, cnumber, cname, cdday, cinfo, cresid, cdiscount ";
+		sql += "from (select cnumber, cname, cdday, cinfo, cresid, cdiscount from coupon where cresid=?) ";
+		sql += "where rownum<=?";
+		sql += ") ";
+		sql += "where rn>=? ";
+		
+		List<Coupon> list = jdbcTemplate.query(
+			sql,
+			new Object[]{cresid, (pageNo*rowsPerPage), ((pageNo-1)*rowsPerPage + 1)},
+			new RowMapper<Coupon>() {
+				@Override
+				public Coupon mapRow(ResultSet rs, int row) throws SQLException {
+					Coupon coupon = new Coupon();
+					coupon.setCnumber(rs.getInt("cnumber"));
+					coupon.setCname(rs.getString("cname"));
+					coupon.setCdday(rs.getDate("cdday"));
+					coupon.setCinfo(rs.getString("cinfo"));
+					coupon.setCresid(rs.getInt("cresid"));
+					coupon.setCdiscount(rs.getInt("cdiscount"));
+
+					return coupon;
+				}					
+			}
+		);
+		return list;
+	}
 	
+	public int resCount(int cresid) {
+		String sql="select count(*) from coupon where cresid = ? ";
+		int count = jdbcTemplate.queryForObject(sql,  new Object[]{cresid}, Integer.class);
+		return count;
+	}
 
 }
