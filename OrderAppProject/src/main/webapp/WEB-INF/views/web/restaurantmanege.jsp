@@ -29,7 +29,7 @@
 			});
 		});
 		
-		 function showInfo(data) {
+		function showInfo(data) {
 			 
 			var hi = data.esavedfile;
 			console.log(data.esavedfile);
@@ -100,7 +100,7 @@
 				<!--top-nav-->
 				<div class="top-nav">
 					<span class="menu two"> </span>
-					<ul>					
+					<ul>
 						<li><a href="${pageContext.servletContext.contextPath}/">Home</a></li> 
 						<c:if test="${mrank==2}">
 						<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
@@ -143,18 +143,25 @@
 		</div>
 		<!--/header-->
 	</div>
-
+	
+	<!-- 내용 -->
+	<div class="about-section"> 
+	   <div class="container" align="center"><h2>Restaurant Management</h2> <br/>
+	
 		<section class="content">
-			<nav>
-	          <ul class="nav nav-justified" style="width:1200px;">
-	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/restaurant/list">나의 Restaurant</a></li>
+			<nav style="width:1000px">
+	          <ul class="nav nav-justified">
+	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/restaurant/myres">나의 Restaurant</a></li>
 	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/event/list?pageNo=1">이벤트</a></li>
 	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/coupon/resCouponList">쿠폰</a></li>
 	          </ul>
   			</nav>
-			<iframe name="iframe" style="width:1200px; height:840px; border-width:0;" src="/teamapp/restaurant/list"></iframe>
+			<iframe name="iframe" style="width:100%; height:840px; border-width:0;" src="/teamapp/restaurant/myres"></iframe>
 			
-		</section>		
+		</section>
+		
+		</div>
+	</div>
 
 
 

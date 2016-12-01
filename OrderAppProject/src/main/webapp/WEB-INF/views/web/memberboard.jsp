@@ -304,7 +304,7 @@
 			$("#memberDeleteModal").modal("hide");
 		}
 		
-		/* ################## Message Modal################## */
+		/* ################## Message(OK, Error) Modal################## */
 		/* Message OK Button */
 		function onClickBtnOK() {
 			$("#messageModal").modal("hide");
@@ -316,6 +316,7 @@
 	<div class="about-section"> 
 	   <div class="container" align="center"><h2>Member List</h2> <br/>
 	   		
+	   		<!-- 회원 정보 목록 -->
 			<table id="acrylic">
 				<thead>
 					<tr>
@@ -372,12 +373,15 @@
 			</table>
 			<br/>
 	 		
+	 		<!-- 아이디, 이름으로 검색 -->
 			<form action="${pageContext.servletContext.contextPath}/member/memberboard">
 				<input type="hidden" name="pageNo" value="1"/>
-				<i class="fa fa-search" aria-hidden="true" style="font-size: 20px"></i> &nbsp;<input type="text" name="find" value="${find}"/>			
+				<i class="fa fa-search" aria-hidden="true" style="font-size: 20px"></i> &nbsp;
+				<input type="text" placeholder="아이디 or 이름 입력" name="find" value="${find}"/>			
 				<input type="submit" value="검색"/>
 			</form><br/>
 			
+			<!-- 페이지 이동 -->
 			<div style="width: 600px">
 				<c:if test="${pageNo!=1}">
 					<a href="memberboard?pageNo=1&find=${find}">[처음]</a>

@@ -258,7 +258,7 @@
 				<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e">레스토랑 등록</button>
 			</div>
 		</c:if>
-			<table id="acrylic" style="width:1200px;">
+			<table id="acrylic" style="width:1000px;">
 				<thead>
 					<tr>
 						<c:if test="${mrank==2}">
@@ -450,7 +450,7 @@
 	        <button id="btnInit" type="button" class="btn btn-default" onclick="onClickBtnCancel()" style="color: #34495e"><b>취소</b></button>
 		</div>
 	</div><!-- /.modal-content -->
-</div><!-- /.modal-dialog --> --%>
+</div><!-- /.modal-dialog --> 
 </div><!-- /.modal -->
 
 	</body>

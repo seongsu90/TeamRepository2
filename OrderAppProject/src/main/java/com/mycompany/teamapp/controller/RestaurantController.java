@@ -225,54 +225,57 @@ public class RestaurantController {
 		
 		if(restaurant.getResphoto() != null && !restaurant.getResphoto().isEmpty()) {
 			
-				restaurant.setResid(restaurant.getResid());
-				
-				
-				restaurant.setResoriginfile(restaurant.getResphoto().getOriginalFilename());
-				String ressavedfile = new Date().getTime() + restaurant.getResphoto().getOriginalFilename(); // 저장하는 파일이 유일해야하기 때문에 날짜를 붙인다.
-				String realPath = session.getServletContext().getRealPath("/WEB-INF/photo/"+ressavedfile);
-				restaurant.getResphoto().transferTo(new File(realPath)); 
-				restaurant.setRessavedfile(ressavedfile);
-				
-				restaurant.setResmime(restaurant.getResphoto().getContentType());
-				
-				int i=1;
-				int size=restaurant.getCloseday().length;
-				String close="";
-			        for(String closeday : restaurant.getCloseday()){		        	
-			        	close+=closeday;
-			        	if(i<size){	
-			        		close+="/";
-			        		i++;
-			        	}
-			        	
-			        }      
-			    restaurant.setRescloseday(close);
-			}else{
-				restaurant.setRessavedfile(preRestaurant.getRessavedfile());
-				restaurant.setResoriginfile(preRestaurant.getResoriginfile());
-				restaurant.setResmime(preRestaurant.getResmime());
-				int i=1;
-				int size=restaurant.getCloseday().length;
-				String close="";
-			        for(String closeday : restaurant.getCloseday()){		        	
-			        	close+=closeday;
-			        	if(i<size){	
-			        		close+="/";
-			        		i++;
-			        	}
-			        	
-			        }      
-			    restaurant.setRescloseday(close);
-			}
-	
+			restaurant.setResid(restaurant.getResid());
+			
+			restaurant.setResoriginfile(restaurant.getResphoto().getOriginalFilename());
+			String ressavedfile = new Date().getTime() + restaurant.getResphoto().getOriginalFilename(); // 저장하는 파일이 유일해야하기 때문에 날짜를 붙인다.
+			String realPath = session.getServletContext().getRealPath("/WEB-INF/photo/"+ressavedfile);
+			restaurant.getResphoto().transferTo(new File(realPath)); 
+			restaurant.setRessavedfile(ressavedfile);
+			
+			restaurant.setResmime(restaurant.getResphoto().getContentType());
+			
+			int i=1;
+			int size=restaurant.getCloseday().length;
+			String close="";
+		        for(String closeday : restaurant.getCloseday()){		        	
+		        	close+=closeday;
+		        	if(i<size){	
+		        		close+="/";
+		        		i++;
+		        	}
+		        	
+		        }      
+		    restaurant.setRescloseday(close);
+		    
+		} else{
+			restaurant.setRessavedfile(preRestaurant.getRessavedfile());
+			restaurant.setResoriginfile(preRestaurant.getResoriginfile());
+			restaurant.setResmime(preRestaurant.getResmime());
+			int i=1;
+			int size=restaurant.getCloseday().length;
+			String close="";
+		        for(String closeday : restaurant.getCloseday()){		        	
+		        	close+=closeday;
+		        	if(i<size){	
+		        		close+="/";
+		        		i++;
+		        	}
+		        	
+		        }      
+		    restaurant.setRescloseday(close);
+		}
+
+		try {
 			int result = restaurantService.modify(restaurant);
 			if(result == RestaurantService.MODIFY_SUCCESS) {
 				model.addAttribute("result", "success");
 			} else {
 				model.addAttribute("result", "fail");
 			}
-		
+		} catch (Exception e) {
+			model.addAttribute("result", "fail");
+		}
 		return "restaurant/modify";
 	}
 	
@@ -289,8 +292,14 @@ public class RestaurantController {
 		return "restaurant/index";
 	}
 	
+	@RequestMapping("/myres")
+	public String myres(HttpSession session,  Model model) {
+		String mid = (String) session.getAttribute("login");
+		Member member = memberService.info(mid);
+		Restaurant restaurant=restaurantService.info(member.getMresid());
+		model.addAttribute("restaurant", restaurant);
+		return "restaurant/myres";
+	}
 
-	
-	
 
 }

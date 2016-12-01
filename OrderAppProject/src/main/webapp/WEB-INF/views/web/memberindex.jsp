@@ -180,7 +180,7 @@
 	</div>
 	 
 	<!-- start-body -->
-	<!-- memberboard.jsp -> Member List -->
+	<!-- memberboard.jsp > Member List -->
 	<iframe id="memberIframe" src="memberboard?pageNo=1" style="width:100%;" onload="autoResize(this)" scrolling="no" frameborder="0"></iframe>
 
 	<!-- start-footer -->

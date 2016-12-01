@@ -95,7 +95,7 @@
 <!--gallery-->
 	<div class="gallery services" style="height:10px;">
 		<div class="container">
-				<h3>MenuList</h3>
+				<h3 style="padding: 0;">MenuList</h3>
 			<div class="portfolio-bottom">
 				<div class="gallery-one two">
 					<div class="col-md-3 gallery-left two">
@@ -112,7 +112,7 @@
 							            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/selecthotlist?mlishot=1&pageNo=1">핫메뉴</a></li>
 							          </ul>
 						  			</nav>
-									<iframe name="iframe" style="width:1200px; height:840px; border-width:0;" src="/teamapp/menulist/selectlist?pageNo=1"></iframe>
+									<iframe name="iframe" style="width:100%; height:840px; border-width:0;" src="/teamapp/menulist/selectlist?pageNo=1"></iframe>
 								</section>					
 							</div>
 						</div>
