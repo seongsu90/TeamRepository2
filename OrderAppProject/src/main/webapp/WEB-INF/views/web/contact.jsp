@@ -167,7 +167,7 @@
 							<a href="/teamapp/"><h1>FOOD<span>House</span></h1></a>
 					</div>
 		</div>
-		<!--/header-->
+		<!--/header--> 
 	</div>	
 	<!--/contact-->
 	<div class="contact-section">
