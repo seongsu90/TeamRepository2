@@ -371,18 +371,9 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<br/>
-	 		
-	 		<!-- 아이디, 이름으로 검색 -->
-			<form action="${pageContext.servletContext.contextPath}/member/memberboard">
-				<input type="hidden" name="pageNo" value="1"/>
-				<i class="fa fa-search" aria-hidden="true" style="font-size: 20px"></i> &nbsp;
-				<input type="text" placeholder="아이디 or 이름 입력" name="find" value="${find}"/>			
-				<input type="submit" value="검색"/>
-			</form><br/>
 			
 			<!-- 페이지 이동 -->
-			<div style="width: 600px">
+			<div style="width: 600px; margin: 15px;">
 				<c:if test="${pageNo!=1}">
 					<a href="memberboard?pageNo=1&find=${find}">[처음]</a>
 				</c:if>
@@ -405,7 +396,16 @@
 					<a href="memberboard?pageNo=${totalPageNo}&find=${find}">[맨끝]</a>
 				</c:if>
 			</div>
-		</div>
+	 		
+	 		<!-- 아이디, 이름으로 검색 -->
+			<form action="${pageContext.servletContext.contextPath}/member/memberboard">
+				<input type="hidden" name="pageNo" value="1"/>
+				<i class="fa fa-search" aria-hidden="true" style="font-size: 20px"></i> &nbsp;
+				<input type="text" placeholder="아이디 or 이름 입력" name="find" value="${find}"/>			
+				<input type="submit" value="검색"/>
+			</form>
+			
+		</div> <!-- container-end -->
 	</div>
 	
 	<!-- ########################## 수정 Modal ########################## -->
