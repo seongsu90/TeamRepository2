@@ -12,12 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.mycompany.teamapp.dto.Event;
 import com.mycompany.teamapp.dto.Member;
 import com.mycompany.teamapp.dto.MenuList;
 import com.mycompany.teamapp.dto.Pos;
 import com.mycompany.teamapp.dto.Reservation;
 import com.mycompany.teamapp.dto.Restaurant;
 import com.mycompany.teamapp.service.CouponService;
+import com.mycompany.teamapp.service.EventService;
 import com.mycompany.teamapp.service.MemberService;
 import com.mycompany.teamapp.service.MenuListService;
 import com.mycompany.teamapp.service.PosService;
@@ -46,6 +48,9 @@ public class PosController {
 	
 	@Autowired
 	private ReservationService reservationService;
+	
+	@Autowired
+	private EventService eventService;
 		
 	@RequestMapping("/index")
 	public String index(String rvmid, HttpSession session, Model model) {
@@ -119,6 +124,7 @@ public class PosController {
 		List<Integer> price = posService.calcSum(presid, ptableno);	// 합계 계산
 		List<MenuList> menuList = menuListService.menuList(presid); // 매장별 메뉴 리스트
 		List<Integer> eventList = posService.checkEvent(presid, ptableno);	// 매장별 이벤트 메뉴 할인 합계
+		List<Event> eventMenu = eventService.eventMenu(presid);
 				
 		int totalPrice = 0;
 		for ( int i = 0; i < price.size(); i++ ) {
@@ -144,6 +150,7 @@ public class PosController {
 		model.addAttribute("eventPrice", eventPrice);
 		model.addAttribute("result", result);
 		model.addAttribute("point", point);
+		model.addAttribute("eventMenu", eventMenu);
 		return "pos/info";
 	}
 	

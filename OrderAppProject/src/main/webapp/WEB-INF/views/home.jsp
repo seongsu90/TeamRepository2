@@ -527,7 +527,7 @@
 						
 						<div>
 							<button id="login_findId_btn" type="button" class="btn btn-link"  onclick="onClickFindId()" ><u>아이디 찾기</u></button>
-							<button id="login_findPw_btn" type="button" class="btn btn-link"  onclick="onClickFind w()" ><u>비밀번호 찾기</u></button>
+							<button id="login_findPw_btn" type="button" class="btn btn-link"  onclick="onClickFindPw()" ><u>비밀번호 찾기</u></button>
 							<!--      <button id="login_register_btn" type="button" class="btn btn-link">Register</button> -->
 						</div>
 					</div>

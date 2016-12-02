@@ -16,16 +16,24 @@
 	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 	
+	<!-- script-for-menu -->
+	<script>
+		$(document).ready(function(){
+			$("span.menu").click(function(){
+				$(".top-nav ul").slideToggle(200);
+			});
+		});
+	</script>
 	
-				<!--start-smoth-scrolling-->
-			<script type="text/javascript">
-				jQuery(document).ready(function($) {
-					$(".scroll").click(function(event){		
-						event.preventDefault();
-						$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-					});
-				});
-			</script>
+	<!--start-smoth-scrolling-->
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){		
+				event.preventDefault();
+				$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			});
+		});
+	</script>
 	
 	<script type="text/javascript">
 
@@ -125,47 +133,43 @@
 	<div id="home" class="header">
 			<!--logo-->
 			<div class="header-top">
-			<div class="container">
-		<!--top-nav-->
-			<div class="top-nav">
+				<div class="container">
+			<!--top-nav-->
+				<div class="top-nav">
 					<span class="menu"> </span>
 					<ul>
 						<li><a href="${pageContext.servletContext.contextPath}/">Home</a></li> 
+						
 						<c:if test="${mrank==2}">
-						<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
-						<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
+							<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
+							<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
 						</c:if>
+						
 						<c:if test="${mrank==1}">
-						<li><a href="${pageContext.servletContext.contextPath}/web/ordermanagement">주문관리</a></li> 
-						<li><a href="${pageContext.servletContext.contextPath}/web/restaurantmanege">매장관리</a></li>
-						<li><a href="${pageContext.servletContext.contextPath}/web/menumanagement">메뉴관리</a></li> 
+							<li><a href="${pageContext.servletContext.contextPath}/web/ordermanagement">주문관리</a></li> 
+							<li><a href="${pageContext.servletContext.contextPath}/web/restaurantmanege">매장관리</a></li>
+							<li><a href="${pageContext.servletContext.contextPath}/web/menumanagement">메뉴관리</a></li> 
 						</c:if>
+						
 						<li><a class="active"  href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
+						
 						<c:if test="${login==null}">
 							<li ><p class="text-center"><a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a></p></li>
 						</c:if>
 						<c:if test="${login!=null}">
-						<li ><a href="${pageContext.servletContext.contextPath}/member/logout">로그아웃</a></li>
+							<li ><a href="${pageContext.servletContext.contextPath}/member/logout">로그아웃</a></li>
 						</c:if>
 					</ul>
 				</div>
-				<div class="clearfix"> </div>
-		<!-- script-for-menu -->
-				<script>
-					$(document).ready(function(){
-						$("span.menu").click(function(){
-							$(".top-nav ul").slideToggle(200);
-						});
-					});
-				</script>
-		</div>
+				<div class="clearfix"> </div>		
+			</div>
 	<!--End-top-nav-script-->
-				<div class="clearfix"> </div>
+			<div class="clearfix"> </div>
 		</div>
 		<div class="head-bg">
-					<div class="logo three">
-							<a href="/teamapp/"><h1>FOOD<span>House</span></h1></a>
-					</div>
+			<div class="logo three">
+					<a href="/teamapp/"><h1>FOOD<span>House</span></h1></a>
+			</div>
 		</div>
 		<!--/header-->  
 	</div>	
@@ -174,7 +178,10 @@
 		<div class="contact-head">
 			<div class="container">
 				<h3>Contact Info</h3>
-				<p>Donec vel ornare orci. Donec gravida, felis eu venenatis ultricies, neque libero auctor tortor, nec aliquet dolor massa quis est. Ut ut molestie turpis. Curabitur semper purus tortor, vel mollis nunc vestibulum gravida. Proin vehicula magna non dui aliquet rhoncus. In massa nisl; sollicitudin et nulla ac, feugiat auctor nisl. Nulla sed nisl nisi. Phasellus et arcu augue? Praesent sit amet vestibulum est. Maecenas ut ultrices, nunc sed auctor eleifend, tellus enim placerat velit, id porttitor ante est non nisl. Duis molestie lacus varius suscipit ullamcorper. Nullam at auctor ante. Praesent laoreet elit varius odio porta tincidunt. Morbi in nisl id eros volutpat ornare a et diam. Phasellus tempus non arcu at eleifend.</p>
+				<p>글로벌 주문앱으로 성장하는 [주문할게요!] <br/> 
+				34개국 음식 주문서비스에 투자하고 있는 스타트업 유니콘인 [주문할게요!] 는 글로벌 네트워크 사입니다. <br/>
+				전 세계 유일의 주문앱으로 전 세계를 매료시키고 한국의 우수사례를 전 세계에 알리고 있습니다.</p><br/>
+				<!-- <p>Donec vel ornare orci. Donec gravida, felis eu venenatis ultricies, neque libero auctor tortor, nec aliquet dolor massa quis est. Ut ut molestie turpis. Curabitur semper purus tortor, vel mollis nunc vestibulum gravida. Proin vehicula magna non dui aliquet rhoncus. In massa nisl; sollicitudin et nulla ac, feugiat auctor nisl. Nulla sed nisl nisi. Phasellus et arcu augue? Praesent sit amet vestibulum est. Maecenas ut ultrices, nunc sed auctor eleifend, tellus enim placerat velit, id porttitor ante est non nisl. Duis molestie lacus varius suscipit ullamcorper. Nullam at auctor ante. Praesent laoreet elit varius odio porta tincidunt. Morbi in nisl id eros volutpat ornare a et diam. Phasellus tempus non arcu at eleifend.</p> -->
 			</div>
 		</div>
 		<iframe src="https://www.google.com/maps/embed/v1/place?q=%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD%20%EC%86%A1%ED%8C%8C%EA%B5%AC%20%ED%95%9C%EA%B5%AD%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%EC%82%B0%EC%97%85%ED%98%91%ED%9A%8C&key=AIzaSyA-E4erY82nScLLGd9UVaHlvgX2goBhIMI" frameborder="0" style="border:0"></iframe>
@@ -335,7 +342,7 @@
 							
 							<div>
 								<button id="login_findId_btn" type="button" class="btn btn-link"  onclick="onClickFindId()" ><u>아이디 찾기</u></button>
-								<button id="login_findPw_btn" type="button" class="btn btn-link"  onclick="onClickFind w()" ><u>비밀번호 찾기</u></button>
+								<button id="login_findPw_btn" type="button" class="btn btn-link"  onclick="onClickFindPw()" ><u>비밀번호 찾기</u></button>
 								<!--      <button id="login_register_btn" type="button" class="btn btn-link">Register</button> -->
 							</div>
 						</div>

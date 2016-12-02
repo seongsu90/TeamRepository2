@@ -128,6 +128,24 @@ public class EventDao {
 	return list;
 	}
 	
+	public List<Event> eventMenu(int eresid) {
+		String sql = "select emlname, eprice "; 
+				sql += "from event "; 
+				sql += "where sysdate between estart and eend "; 
+				sql += "and eresid = ? ";								
+		
+		List<Event> list = jdbcTemplate.query(sql, new Object[]{eresid}, new RowMapper<Event>() {
+			@Override
+			public Event mapRow(ResultSet rs, int row) throws SQLException {				
+				Event event = new Event();
+				event.setEmlname(rs.getString("emlname"));
+				event.setEprice(rs.getInt("eprice"));
+				return event;
+			}
+		});
+		return list;		
+	}
+	
 	/*public List<Integer> checkEvent(int eresid, int ptableno) {
 		String sql = "";
 				sql += "select (e.eprice * p.pcount) eventprice "; 

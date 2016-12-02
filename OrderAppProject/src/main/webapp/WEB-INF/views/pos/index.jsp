@@ -161,18 +161,26 @@
 					}					
 				}); 
 				
+				
+				/* orderModal에서 수량 올리면 가격 올라가게 처리 */				
 				$("#orderModal").on('shown.bs.modal', function() {
 					$(".mcount").change(function () {
 						var arrTr = $(".menu");
-						var totalPrice = 0;						
+						var totalPrice = 0;			
+						var eventPrice = 0;
 						for(var i=0; i<arrTr.length; i++) {
 							var tr = arrTr[i];
 							if($(".mcount", tr).val() != 0) {								
-								totalPrice +=	$(".mprice", tr).val() * $(".mcount", tr).val();								
+								totalPrice +=	$(".mprice", tr).val() * $(".mcount", tr).val();
+								eventPrice += $(".eprice", tr).val() * $(".mcount", tr).val();
 							}
 						}
-						$("#totalPrice").html(totalPrice);						
-						$("#result").html(totalPrice);						
+						$("#totalPrice").html(totalPrice);	
+						$("#eventPrice").html(eventPrice);
+						
+						var result =  totalPrice - eventPrice;
+						$("#result").html(result);
+						$("#point").html(result * 0.01);
 				    });	
 				});
 			
@@ -261,6 +269,9 @@
 									'<td>' +
 										'<input class="mprice" type="text" style="border: 0;" name="mprice" value="' + menu.mprice + '" readonly/>' +							
 									'</td>' +			
+									'<td>' +
+										'<input class="eprice" type="hidden" style="border: 0;" name="eprice" value="' + menu.eprice + '" readonly/>' +							
+									'</td>' +
 								'</tr>'
 							);
 						}

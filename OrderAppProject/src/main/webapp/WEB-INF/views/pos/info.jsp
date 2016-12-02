@@ -19,9 +19,21 @@
 					</c:if>
 				</c:forEach>
 				"${mcount}",
-				"mprice":${menu.mlprice}
+				"mprice":${menu.mlprice},
+				
+				"eprice":
+				<c:set var="eprice" value="0"></c:set>
+				<c:forEach var="event" items="${eventMenu}">
+					<c:if test="${menu.mlname == event.emlname}">
+						<c:set var="eprice" value="${event.eprice}"></c:set>
+					</c:if>
+				</c:forEach>
+				"${eprice}"
 			}
 			<c:if test="${!status.last}">,</c:if>
 		</c:forEach>
-	]
+	]	
 }
+
+
+

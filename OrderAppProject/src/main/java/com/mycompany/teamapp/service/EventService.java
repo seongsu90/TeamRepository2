@@ -65,6 +65,11 @@ public class EventService {
 		return eventdao.count(eresid);
 	}
 	
+	public List<Event> eventMenu(int eresid) {
+		List<Event> list = eventdao.eventMenu(eresid);
+		return list;
+	}
+	
 	/*public List<Integer> checkEvent(int eresid, int ptableno) {
 		List<Integer> list = eventdao.checkEvent(eresid, ptableno);
 		return list;
