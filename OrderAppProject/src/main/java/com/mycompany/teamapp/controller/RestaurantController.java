@@ -154,9 +154,15 @@ public class RestaurantController {
 	}	
 	
 	@RequestMapping(value="/delete")
-	public String delete(int resid){
-		restaurantService.delete(resid);
-		return "redirect:/restaurant/list";
+	public String delete(int deleteresid, int inputresid, Model model){
+		logger.info("delete() POST 실행");
+		int result = restaurantService.REMOVE_FAIL;
+		if ( deleteresid==inputresid){
+			restaurantService.delete(deleteresid);
+			result=restaurantService.REMOVE_SUCCESS;
+		}
+		model.addAttribute("result", result);
+		return "restaurant/result";
 	}
 
 	@RequestMapping("/showPhoto")
@@ -201,17 +207,6 @@ public class RestaurantController {
 		Restaurant restaurant=restaurantService.info(mresid);
 		model.addAttribute("restaurant", restaurant);
 		model.addAttribute("resid", restaurant.getResid());
-		
-		//String selectedLocation[] = restaurant.getReslocation().split(" ");
-/*		if ( selectedLocation.length == 3 ) {
-			selectedLocation[1] += (" " + selectedLocation[2]);
-		}
-		model.addAttribute("slocation", selectedLocation);*/
-		
-	/*	String loc="";
-		for(int i=0; i<2; i++){
-			loc+=selectedLocation[i];
-		}*/
 		
 		
 		return "restaurant/modify";
