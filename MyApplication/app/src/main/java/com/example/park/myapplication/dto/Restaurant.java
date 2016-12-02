@@ -7,33 +7,31 @@ import android.graphics.Bitmap;
  */
 
 public class Restaurant {
-    private Bitmap image;
-    private String title;
-    private String content;
+    private Bitmap resImage;
+    private String resTitle;
+    private String resContent;
 
-
-    public Bitmap getImage() {
-        return image;
+    public Bitmap getResImage() {
+        return resImage;
     }
 
-    public void setImage(Bitmap image) {
-        this.image = image;
+    public void setResImage(Bitmap resImage) {
+        this.resImage = resImage;
     }
 
-    public String getTitle() {
-        return title;
+    public String getResTitle() {
+        return resTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setResTitle(String resTitle) {
+        this.resTitle = resTitle;
     }
 
-    public String getContent() {
-        return content;
+    public String getResContent() {
+        return resContent;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setResContent(String resContent) {
+        this.resContent = resContent;
     }
-
 }

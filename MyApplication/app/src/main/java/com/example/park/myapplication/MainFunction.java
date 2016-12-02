@@ -1,6 +1,7 @@
 package com.example.park.myapplication;
 
 import android.app.TabActivity;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -41,6 +42,12 @@ public class MainFunction extends TabActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        String id =  pref.getString("hi", "");
+
+        Log.i("mylog", id);
+
+
         TabHost mTab = getTabHost();
 
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -58,7 +65,7 @@ public class MainFunction extends TabActivity {
         resList = (ListView)findViewById(R.id.resList);
 
 
-       /* fillItems();*/
+        fillItems();
 
 
 
@@ -131,13 +138,13 @@ public class MainFunction extends TabActivity {
             for (int i=0; i<jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Restaurant res = new Restaurant();
-                res.setImage(getBitmap(jsonObject.getString("resImage")));
-                res.setTitle(jsonObject.getString("resTitle"));
-                res.setContent(jsonObject.getString("resContent"));
+                res.setResImage(getBitmap(jsonObject.getString("resImage")));
+                res.setResTitle(jsonObject.getString("resTitle"));
+                res.setResContent(jsonObject.getString("resContent"));
 
                 list.add(res);
 
-                Log.i("myLog",list.get(0).getTitle());
+                Log.i("myLog",list.get(0).getResTitle());
             }
         } catch (JSONException e) {
             Log.i("mylog", e.getMessage());

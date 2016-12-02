@@ -56,13 +56,13 @@ public class ResAdapter extends BaseAdapter {
         Restaurant restaurant = list.get(position);
 
         TextView resTitle = (TextView) convertView.findViewById(R.id.resTitle);
-        resTitle.setText(restaurant.getTitle());
+        resTitle.setText(restaurant.getResTitle());
 
         TextView resContent = (TextView) convertView.findViewById(R.id.resContent);
-        resContent.setText(restaurant.getContent());
+        resContent.setText(restaurant.getResContent());
 
         ImageView resImage = (ImageView) convertView.findViewById(R.id.resImage);
-        resImage.setImageBitmap(restaurant.getImage());
+        resImage.setImageBitmap(restaurant.getResImage());
 
         return convertView;
     }
