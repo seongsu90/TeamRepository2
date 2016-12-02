@@ -40,7 +40,7 @@
 	            font-weight: 400;
 	            color: #fff;
 	            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
-	            text-align: left;
+	            text-align: center;
 	            padding: 20px;
 	            background-size: 100%;
 	            background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #646f7f), color-stop(100%, #4a5564));
@@ -104,6 +104,7 @@
 	            opacity: 1;
 	            transition: 0.2s all;
 	        }
+	        
 		</style>
 		<script type="text/javascript">
 			function showInfo(eresid, emlname){
@@ -126,7 +127,6 @@
 				console.log("onClickBtnEventAdd() 실행");
 				
 				var ename = $("#ename").val();
-				/* var eresid = $("#eresid").val(); */
 				var ephoto = $("#ephoto")[0];
 				var einfo = $("#einfo").val();
 				var emlname = $("#emlname").val(); 
@@ -136,7 +136,6 @@
 				
 				var data = new FormData();
 				data.append("ename", ename);
-			/* 	data.append("eresid", eresid);	 */
 				if(ephoto.files.length != 0) {
 					data.append("ephoto", ephoto.files[0]);
 				}	
@@ -155,11 +154,11 @@
 					cache: false,
 					success: function(data){
 						if(data.result == "success"){
-							alert("추가 성공");
+							
 							$("#eventAddModal").modal("hide");
 							location.reload();
 						} else {
-							alert("제대로 입력하시오");	
+							
 						}
 					}
 					
@@ -170,14 +169,15 @@
 				console.log("onClickBtnCancel() 실행");
 				$("#eventAddModal").modal("hide");
 			}
+			
 		</script>
 	</head>
 	<body>
 		<div style="text-align: center;">
 			<div style="text-align: right;">
-				<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e">추가</button>
+				<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e; margin-right:100px; margin-top:10px">추가</button>
 			</div>
-	        <table id="acrylic" style="width:100%">
+	        <table id="acrylic" style="width:1000px;">
 	            <thead>
 	                <tr>
 		                <th> 이벤트 이름</th>
@@ -186,7 +186,7 @@
 						<th> 이벤트 메뉴  </th>
 						<th> 할인가격 </th>
 						<th> 시작일 </th>
-						<th> 종료일 </th>
+						<th> 종료일 </th>						
 						<th> 삭제 </th>
 	                 </tr>
 	            </thead>
@@ -199,7 +199,7 @@
 	                      </a>
 	                    </td>
 	                    <td>
-	                    	<img src="showPhoto?esavedfile=${event.esavedfile}" width="50px"/>
+	              		  <img src="showPhoto?esavedfile=${event.esavedfile}" width="50px"/>
 	                    </td>
 	                    <td>${event.einfo}</td>
 	                    <td>${event.emlname}</td>
