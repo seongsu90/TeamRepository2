@@ -43,7 +43,7 @@ public class MainFunction extends TabActivity {
         super.onCreate(savedInstanceState);
 
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        String id =  pref.getString("hi", "");
+        String id =  pref.getString("login", "");
 
         Log.i("mylog", id);
 

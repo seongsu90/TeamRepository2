@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.teamapp.dto.Restaurant;
+import com.mycompany.teamapp.service.MemberService;
 import com.mycompany.teamapp.service.RestaurantService;
 
 @Controller
@@ -18,6 +20,23 @@ public class AndroidController {
 	
 	@Autowired
 	private RestaurantService restaurantService;
+	
+	@Autowired
+	private MemberService memberService;
+	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String login(String mid, String mpassword, HttpSession session, Model model) {
+		System.out.println("Android Login 실행");
+		String result = MemberService.LOGIN_FAIL_MID;
+		result = memberService.login(mid, mpassword);
+		if(result.equals(MemberService.LOGIN_SUCCESS)) {
+			session.setAttribute("login", mid);
+			session.setAttribute("mrank", memberService.info(mid).getMrank());
+		}
+
+		model.addAttribute("result", result);
+		return "android/result";
+	}
 	
 	@RequestMapping("/reslist")
 	public String reslist(String pageNo, @RequestParam(required=false, defaultValue="") String find, Model model, HttpSession session)
