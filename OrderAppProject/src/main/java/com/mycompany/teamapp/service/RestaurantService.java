@@ -28,11 +28,14 @@ private RestaurantDao restaurantDao;
 
 @Autowired
 private MemberDao memberDao;
+ 
 
 		public List<Restaurant> list(int pageNo, int rowsPerPage, String find){
 			return restaurantDao.selectByPage(pageNo, rowsPerPage, find);
-			
-	
+		}
+		
+		public List<Restaurant> mlist(int pageNo, int rowsPerPage, String mreslocaion){
+			return restaurantDao.selectByPage(pageNo, rowsPerPage, mreslocaion);
 		}
 
 		public int add(Restaurant restaurant){
@@ -65,8 +68,9 @@ private MemberDao memberDao;
 			return restaurantDao.count(find);
 		}
 
-	
-		
+		public int getmCount(String mreslocaion){
+			return restaurantDao.mcount(mreslocaion);
+		}
 	
 		
 		
