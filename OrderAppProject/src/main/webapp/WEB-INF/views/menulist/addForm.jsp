@@ -86,22 +86,17 @@
 									<form method="post" enctype="multipart/form-data">
 										<table class="table table-striped table-bordered table-list">
 											<tbody>
-												<tr class="ok">
+												<tr class="ok" style="text-align:center;">
 													<td>메뉴이름</td>
 													<td>메뉴가격</td>
 													<td>메뉴정보</td>
 													<td>메뉴사진</td>
-													<td>핫메뉴 선택</td> 
 												</tr>
-												<tr class="ban">
+												<tr class="ban" style="text-align:center;">
 													<td><input type="text" name="mlname" value="${menuList.mlname}"/></td>
 													<td><input type="number" name="mlprice" value="${menuList.mlprice}"/></td>
 													<td><input type="text" name="mlinfo" value="${menuList.mlinfo}"/></td>
 													<td><input type="file" name="mlphoto" value="${menuList.mlsavedfile}"/></td>
-													<td>
-														<input type="radio" name="mlishot" value="true"/>핫메뉴
-														<input type="radio" name="mlishot" value="false"/>일반메뉴
-													</td>  
 												</tr>
 												<tr class="new" style="text-align:center;">
 													<td colspan="6"><input type="submit" value="추가"/></td>

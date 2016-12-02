@@ -183,7 +183,7 @@
 				contentType: false,
 				success: function(data) {
 					if(data.result == "success") {
-						$("#successMessage").html("삭제 성공");
+						$("#successMessage").html("수정 성공");
 						$("#messageIcon").attr('class', "fa fa-check-circle");
 						$("#messageModal").modal("show");
 						$("#messageModal").on('hidden.bs.modal', function() {

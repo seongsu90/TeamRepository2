@@ -79,7 +79,7 @@
                         android:inputType="textPersonName"
                         android:hint="ID"
                         android:ems="10"
-                        android:id="@+id/editText" />
+                        android:id="@+id/editMid" />
 
                     <TextView
                         android:text="비밀번호"

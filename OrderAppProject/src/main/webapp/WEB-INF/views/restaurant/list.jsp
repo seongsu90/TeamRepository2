@@ -35,20 +35,20 @@
 	        }
 
 	        #acrylic thead th {
-	            font-family: 'Roboto';
-	            font-size: 16px;
-	            font-weight: 400;
-	            color: #fff;
-	            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
-	            text-align: left;
-	            padding: 20px;
-	            background-size: 100%;
-	            background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #646f7f), color-stop(100%, #4a5564));
-	            background-image: -moz-linear-gradient(#646f7f, #4a5564);
-	            background-image: -webkit-linear-gradient(#646f7f, #4a5564);
-	            background-image: linear-gradient(#646f7f, #4a5564);
-	            border-top: 1px solid #858d99;
-	        }
+            font-family: 'Roboto';
+            font-size: 16px;
+            font-weight: 400;
+            color: white;
+            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+            text-align: left;
+            padding: 20px;
+            background-size: 100%;
+            background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3C5064), color-stop(100%, #34495e));
+            background-image: -moz-linear-gradient(#3C5064, #34495e);
+            background-image: -webkit-linear-gradient(#3C5064, #34495e);
+            background-image: linear-gradient(#3C5064, #34495e);
+            border-top: 1px solid #858d99;
+            }
 
 	        #acrylic thead th:first-child {
 	            -moz-border-top-right-radius: 10px;
@@ -240,7 +240,50 @@
 					}					
 				});	
 		 	}
-
+			
+			/* ################## Delete Modal################## */
+			/* Show Delete Modal */
+			function showDeleteModal(resid) {
+				$("#deleteForm #deleteresid").val(resid);
+				$("#restaurantDeleteModal").modal("show");
+			}
+			
+			/* Delete Button */
+			function onClickBtnDelete() {
+				var deleteresid = $("#deleteresid").val();
+				var inputresid = $("#inputresid").val();
+				
+				$.ajax({
+					url: "delete",
+					data: {"deleteresid":deleteresid, "inputresid":inputresid},
+					method: "post",
+					success: function(data) {
+						if ( data.result == 0 ) {
+							$("#successMessage").html("삭제 성공");
+							location.reload(true);
+							$("#messageIcon").attr('class', "fa fa-check-circle");
+							$("#messageModal").modal("show");
+							$("#restaurantDeleteModal").modal("hide");
+							location.reload(true);
+							
+						} else {
+							$("#failMessage").html("잘못된 입력입니다");
+							$("#messageModal").modal("show");
+						}
+					}
+				});
+			}
+			
+			/* Delete Cancel Button */
+			function onClickBtnDeleteCancel() {
+				$("#restaurantDeleteModal").modal("hide");
+			}
+			
+			/* ################## Message(OK, Error) Modal################## */
+			/* Message OK Button */
+			function onClickBtnOK() {
+				$("#messageModal").modal("hide");
+			}
 			
 			function onClickBtnCancel() {
 				console.log("onClickBtnCancel() 실행");
@@ -252,13 +295,18 @@
 		</script>
 	</head>
 	<body>
+	<div class="about-section"> 
+	   <div class="container" align="center"><h2>Restaurant List</h2> <br/>
+	
+	
 		<div style="text-align: center;">
 		<c:if test="${mrank==2}">
-			<div style="text-align: right; width:1200px; display: inline-block; margin-top: 20px;">
+			<div style="text-align: right; width:1100px; display: inline-block; margin-top: 0px;">
 				<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e">레스토랑 등록</button>
 			</div>
 		</c:if>
-			<table id="acrylic" style="width:1000px;">
+	
+			<table id="acrylic" style="width:1100px;">
 				<thead>
 					<tr>
 						<c:if test="${mrank==2}">
@@ -301,7 +349,7 @@
 							<td> ${restaurant.resclose} </td>
 							<td> ${restaurant.rescloseday} </td>
 							<c:if test="${mrank==2}">
-							<td> <a href="delete?resid=${restaurant.resid}" type="button" class="btn btn-info">삭제</a> </td>
+							<td> <button type="button" class="btn btn-warning" style="color: #34495e" onclick="showDeleteModal('${restaurant.resid}')">삭제</button> </td>
 							</c:if>
 						</tr>
 						
@@ -310,6 +358,7 @@
 					
 				</tbody>
 			</table>
+	
 			<div style="text-align:center;">
 				<c:if test="${pageNo!=1}">
 				<a href="list?pageNo=1&find=${find}">[처음]</a>
@@ -348,8 +397,9 @@
 			      </form>
 			    </div>
 			</div>
-						
-
+		</div>				
+</div>
+</div>
 		<%-- 	 #################################################################################### 
 
 		 <%-- ## Add Modal ## --%>
@@ -421,7 +471,7 @@
 				<div class="form-group">
 					<div class="input-group">
 						<span style="width: 130px; margin-right: 10px; border-right: 1px solid #ccc;" class="input-group-addon"><b>휴일</b></span>&nbsp;
-						<input type="checkbox" name="closeday"  value="휴일 없음">휴일 X&nbsp;
+						<input type="checkbox" name="closeday"  value="휴일없음">휴일 X&nbsp;
 	        			<input type="checkbox" name="closeday"  value="월요일" checked>월요일&nbsp;
 	        			<input type="checkbox" name="closeday"  value="화요일">화요일&nbsp;
 	        			<input type="checkbox" name="closeday"  value="수요일">수요일&nbsp;
@@ -452,6 +502,82 @@
 	</div><!-- /.modal-content -->
 </div><!-- /.modal-dialog --> 
 </div><!-- /.modal -->
+
+
+	<!-- ########################## 삭제 Modal ########################## -->
+	
+	<div id="restaurantDeleteModal" class="modal fade" tabindex="-1" role="dialog" style="position: fixed">
+		<div class="modal-dialog" role="document" style="width: 450px;">
+	    	<div class="modal-content" style="width:450px; margin: 0">
+	    	
+	    		<!-- modal-header -->
+	     		<div class="modal-header" style="background-color: #34495e; color:white">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Restaurant 삭제</h4>
+	      		</div>
+	      		
+	      		<!-- modal-body -->
+	      		<div class="modal-body">
+					<form id="deleteForm">
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px; padding:0px; background-color: #34495e; color:white" class="input-group-addon"><b>Restaurant</b></span>
+								<b><input type="text" class="form-control" name="deleteresid" id="deleteresid" readonly/></b>
+							</div>
+						</div>
+						
+						<b style="color: #34495e"> 삭제할 Restaurant아이디를 한 번 더 입력해 주세요</b><br/><br/>
+						
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>아이디 입력</b></span>
+								<input type="text" class="form-control" name="inputresid" id="inputresid" onkeydown="if(event.keyCode==13){javascript:onClickBtnDelete();}"/>
+							</div>
+						</div>
+						
+					</form>		
+	      		</div>
+	      	
+		      	<!-- modal-footer -->	
+				<div class="modal-footer" style="background-color: #34495e; color:white">
+			        <button id="btnDelete" type="button" class="btn btn-default" onclick="onClickBtnDelete()" style="color: #34495e"><b>삭제</b></button>
+			        <button id="btnDeleteCancel" type="button" class="btn btn-default" onclick="onClickBtnDeleteCancel()" style="color: #34495e"><b>취소</b></button>
+				</div>
+				
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<!-- ########################## Message Modal ########################## -->
+	
+	<div id="messageModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto" onkeydown="if(event.keyCode==13){javascript:onClickBtnOK();}">
+		<div class="modal-dialog" role="document" style="width:300px;">
+	    	<div class="modal-content" style="width:300px; margin: 0">
+	    	
+	    		<!-- modal-header -->
+	     		<div class="modal-header" style="background-color: #34495e; color:white; text-align: left">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<i id="headerIcon" class="fa fa-bell-o" style="font-size: 20px" aria-hidden="true"> 알림</i>
+	      		</div>
+	      		
+	      		<!-- modal-body -->
+	      		<div class="modal-body" align="center">
+	      			<i id="messageIcon" class="fa fa-exclamation-triangle" style="font-size: 100px; color: #34495e" aria-hidden="true"></i><br/>
+					<b style="font-size: 20px; color: #1bbc9b" id="successMessage"></b>
+					<b style="font-size: 20px; color: red" id="failMessage"></b>
+	      		</div>
+	      	
+		      	<!-- modal-footer -->	
+				<div class="modal-footer" style="background-color: #34495e; color:white">
+			        <button id="messageOk" type="button" class="btn btn-default" onclick="onClickBtnOK()" style="color: #34495e"><b>확인</b></button>
+				</div>
+				
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<!-- ########################## Message Modal ########################## -->
+
 
 	</body>
 </html>

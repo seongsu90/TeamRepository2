@@ -77,7 +77,7 @@
 			<section class="col-md-12">
 				<form class="form-horizontal" method="post" enctype="multipart/form-data">
 				  <div class="form-group barra">
-				    <label for="inputEmail3" class="col-sm-4 control-label">메뉴이름</label>
+				    <label for="inputEmail3" class="col-sm-4 control-label">메뉴 이름</label>
 				    <div class="col-sm-8"> 
 				      <input style="width:500px;" type="text" name="mlname" value="${menuList.mlname}" class="form-control" id="inputPassword3"/>
 				    </div>
@@ -108,7 +108,7 @@
 				  </div>
 				  <div class="form-group barra">
 				    <label for="inputPassword3" class="col-sm-4 control-label">선택</label>
-				    <div class="col-sm-8">
+				    <div class="col-sm-8" style="width:110px; margin-left:10px; margin-top:3px;">
 				    	<input type="radio" name="mlishot" value="true"/>핫
 						<input type="radio" name="mlishot" value="false"/>일반
 				    </div>
