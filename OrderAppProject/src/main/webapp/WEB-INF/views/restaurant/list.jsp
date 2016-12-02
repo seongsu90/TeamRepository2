@@ -35,20 +35,20 @@
 	        }
 
 	        #acrylic thead th {
-	            font-family: 'Roboto';
-	            font-size: 16px;
-	            font-weight: 400;
-	            color: #fff;
-	            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
-	            text-align: left;
-	            padding: 20px;
-	            background-size: 100%;
-	            background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #646f7f), color-stop(100%, #4a5564));
-	            background-image: -moz-linear-gradient(#646f7f, #4a5564);
-	            background-image: -webkit-linear-gradient(#646f7f, #4a5564);
-	            background-image: linear-gradient(#646f7f, #4a5564);
-	            border-top: 1px solid #858d99;
-	        }
+            font-family: 'Roboto';
+            font-size: 16px;
+            font-weight: 400;
+            color: white;
+            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+            text-align: left;
+            padding: 20px;
+            background-size: 100%;
+            background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3C5064), color-stop(100%, #34495e));
+            background-image: -moz-linear-gradient(#3C5064, #34495e);
+            background-image: -webkit-linear-gradient(#3C5064, #34495e);
+            background-image: linear-gradient(#3C5064, #34495e);
+            border-top: 1px solid #858d99;
+            }
 
 	        #acrylic thead th:first-child {
 	            -moz-border-top-right-radius: 10px;
@@ -252,13 +252,18 @@
 		</script>
 	</head>
 	<body>
+	<div class="about-section"> 
+	   <div class="container" align="center"><h2>Restaurant List</h2> <br/>
+	
+	
 		<div style="text-align: center;">
 		<c:if test="${mrank==2}">
-			<div style="text-align: right; width:1200px; display: inline-block; margin-top: 20px;">
+			<div style="text-align: right; width:1100px; display: inline-block; margin-top: 20px;">
 				<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e">레스토랑 등록</button>
 			</div>
 		</c:if>
-			<table id="acrylic" style="width:1000px;">
+	
+			<table id="acrylic" style="width:1100px;">
 				<thead>
 					<tr>
 						<c:if test="${mrank==2}">
@@ -310,6 +315,7 @@
 					
 				</tbody>
 			</table>
+	
 			<div style="text-align:center;">
 				<c:if test="${pageNo!=1}">
 				<a href="list?pageNo=1&find=${find}">[처음]</a>
@@ -348,8 +354,9 @@
 			      </form>
 			    </div>
 			</div>
-						
-
+		</div>				
+</div>
+</div>
 		<%-- 	 #################################################################################### 
 
 		 <%-- ## Add Modal ## --%>
