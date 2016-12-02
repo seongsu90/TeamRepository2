@@ -93,7 +93,7 @@ public class RestaurantDao {
 		sql += "from( " ;
 		sql += "select rownum as rn, resid, resname, reslocation, resinfo, restotaltable, restel, resopen, resclose, rescloseday ,ressavedfile ";
 		sql += "from (select resid, resname, reslocation, resinfo, restotaltable, restel, resopen, resclose, rescloseday ,ressavedfile from Restaurant order by resid desc) ";
-		sql += "where reslocaion like ? and rownum<=? ";
+		sql += "where reslocation like ? and rownum<=? ";
 		sql += ") ";
 		sql += "where rn>=? ";
 		

@@ -38,16 +38,6 @@ public class RestaurantController {
 	@Autowired
 	private MemberService memberService;
 	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String list(String pageNo, @RequestParam(required=false, defaultValue="") String find, Model model, HttpSession session){
