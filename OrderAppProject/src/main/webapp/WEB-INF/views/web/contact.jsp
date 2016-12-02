@@ -167,7 +167,7 @@
 							<a href="/teamapp/"><h1>FOOD<span>House</span></h1></a>
 					</div>
 		</div>
-		<!--/header-->
+		<!--/header-->  
 	</div>	
 	<!--/contact-->
 	<div class="contact-section">
@@ -192,7 +192,7 @@
 				<div class="page_t_txt">
 					<p>대표전화</p>
 					<ul>
-						<li> 010-9558-1893 </li><br/>
+						<li> 02-2188-6900 </li><br/>
 					</ul>
 				</div>		
 				<div class="page_t_txt">

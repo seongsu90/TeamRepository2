@@ -79,15 +79,19 @@ public class MenuListController {
 		@RequestMapping(value="/modify", method=RequestMethod.POST)
 		public String modify(MenuList menuList,HttpSession session) throws IllegalStateException, IOException {
 			
-			menuList.setMloriginfile(menuList.getMlphoto().getOriginalFilename());
-			String mlsavedfile = new Date().getTime() + menuList.getMlphoto().getOriginalFilename();
-			String realPath = session.getServletContext().getRealPath("/WEB-INF/photo/"+mlsavedfile);
-			menuList.getMlphoto().transferTo(new File(realPath)); 
-			menuList.setMlsavedfile(mlsavedfile);
+			if(menuList.getMlphoto() != null && !menuList.getMlphoto().isEmpty()){
+				try{
+					menuList.setMloriginfile(menuList.getMlphoto().getOriginalFilename());
+					String mlsavedfile = new Date().getTime() + menuList.getMlphoto().getOriginalFilename();
+					String realPath = session.getServletContext().getRealPath("/WEB-INF/photo/"+mlsavedfile);
+					menuList.getMlphoto().transferTo(new File(realPath)); 
+					menuList.setMlsavedfile(mlsavedfile);
+					
+					menuList.setMlmime(menuList.getMlphoto().getContentType());
+					menuListService.modify(menuList);
+				}catch(Exception e){}
 			
-			menuList.setMlmime(menuList.getMlphoto().getContentType());
-			menuListService.modify(menuList);
-			
+			}
 			return "redirect:/menulist/selectlist";
 		}
 		

@@ -38,6 +38,7 @@ public class RestaurantController {
 	@Autowired
 	private MemberService memberService;
 	
+	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String list(String pageNo, @RequestParam(required=false, defaultValue="") String find, Model model, HttpSession session){
 		
@@ -83,9 +84,9 @@ public class RestaurantController {
 		model.addAttribute("endPageNo", endPageNo);
 		model.addAttribute("find", find);
 		return "restaurant/list";
-		
-	
 	}
+	
+	
 	@RequestMapping(value="/list", method=RequestMethod.POST)
 	public String findList(String pageNo, String find, Model model) {
 		logger.info("findList() POST 실행");
@@ -94,6 +95,8 @@ public class RestaurantController {
 
 		return "redirect:/restaurant/list";		
 	}
+	
+	
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String add(Restaurant restaurant, HttpSession session, Model model){

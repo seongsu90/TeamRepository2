@@ -100,9 +100,9 @@
 					<section class="content">
 						<nav>
 				          <ul class="nav nav-justified" style="width:100%;">
-				            <li class="active" style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/add">추가</a></li>
-				            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/selectlist?pageNo=1">메뉴</a></li>
-				            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/selecthotlist?mlishot=1&pageNo=1">핫메뉴</a></li>
+				            <li class="active" style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/add"><b style="color:black;">추가</b></a></li>
+				            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/selectlist?pageNo=1"><b style="color:black;">메뉴</b></a></li>
+				            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/menulist/selecthotlist?mlishot=1&pageNo=1"><b style="color:black;">핫메뉴</b></a></li>
 				          </ul>
 			  			</nav>
 						<iframe name="iframe" style="width:1000px; height:840px; border-width:0; margin-left:95px;" src="/teamapp/menulist/selectlist?pageNo=1"></iframe>
@@ -112,64 +112,70 @@
 		</div>
 	</div>
 	
-	<!--/start-footer-->
+	<!-- start-footer -->
 	<div class= "footer">
-		 <div class="container">                                                   
+		<div class="container">                                                   
 			<div class="col-md-3 footer-grid">
-					<div class="logo two">
-						<a href="${pageContext.servletContext.contextPath}/"><h3>주문<span>할게요!</span></h3></a>
-					</div>
+				<div class="logo two">
+					<a href="${pageContext.servletContext.contextPath}"><h3>주문<span>할게요!</span></h3></a>
 				</div>
-				<div class=" col-md-3 footer-grid footer-grid2">
-					<div class="bottom-nav">
-						<h4>LEARN</h4>
-						<ul>
-							<li><a class="active" href="${pageContext.servletContext.contextPath}/">Home</a></li> 
-							<c:if test="${mrank==2}">
-							<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
+			</div>
+			
+			<div class=" col-md-3 footer-grid footer-grid2">
+				<div class="bottom-nav">
+			    	<h4>LEARN</h4>
+					<ul>
+						<li><a href="${pageContext.servletContext.contextPath}">Home</a></li> 
+						
+						<c:if test="${mrank==2}">
+							<li><a class="active"  href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
 							<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
-							</c:if>
-							<c:if test="${mrank==1}">
+						</c:if>
+						
+						<c:if test="${mrank==1}">
 							<li><a href="${pageContext.servletContext.contextPath}/web/ordermanagement">주문관리</a></li> 
 							<li><a href="${pageContext.servletContext.contextPath}/web/restaurantmanege">매장관리</a></li>
 							<li><a href="${pageContext.servletContext.contextPath}/web/menumanagement">메뉴관리</a></li> 
-							</c:if>
-							<li class="lost"><a href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
-							<div class="clearfix"> </div>
-						</ul>
-					</div>
+						</c:if>
+						
+						<li class="lost"><a href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
+						<div class="clearfix"> </div>
+					</ul>
 				</div>
-				<div class=" col-md-3 footer-grid">
-					<div class="Office Address">
-				    	<h4>ADDRESS</h4>
-				    	<ul class="bottom-icons">
-							<li><a class="glyphicon glyphicon-home" href="#"></a>　서울시 송파구 중대로 135, IT벤처타워 서관 12층 한국소프트웨어산업협회</li>
-							<li><a class="glyphicon glyphicon-envelope" href="#"></a>　gusqls0810@naver.com</li>
-							<li><a class="glyphicon glyphicon-phone" href="#"></a>　 010-9558-1893</li>	
-							<div class="clearfix"> </div>	
-						</ul>
-					 </div>
-				</div>
-				<div class="col-md-3 footer-grid">
-					<h4>SUPPORT WITH</h4>
-						<div class="Office Address">
-						<ul class="bottom-icons">
-							<li><a class="glyphicon glyphicon-envelope" href="#"></a>gusqls0810@naver.com</li>
-							<p>고객지원 등 각종 문의사항은 해당 메일로 연락을 주시면 감사합니다.</p>
-						</ul>
-						</div>
-				    </div>
-			    	<div class="clearfix"> </div>	
-				</div>
-			</div>
-			<div class="copy-right">
-				<div class="container">
-				 	 <p>Copyright &copy; 2015 All Rights Reserved Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
-				</div>		
-
 			</div>
 			
-			<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+			<div class=" col-md-3 footer-grid">
+				<div class="Office Address">
+			        <h4>ADDRESS</h4>
+					<ul class="bottom-icons">
+						<li><a class="glyphicon glyphicon-home" href="#"></a>　서울시 송파구 중대로 135, <br/>　　IT벤처타워 서관 12층<br/>　　한국소프트웨어산업협회</li>
+						<li><a class="glyphicon glyphicon-envelope" href="#"></a>　gusqls0810@naver.com</li>
+						<li><a class="glyphicon glyphicon-phone" href="#"></a>　 010-9558-1893</li>	
+						<div class="clearfix"> </div>	
+					</ul>
+				 </div>
+			</div>
+			
+			<div class="col-md-3 footer-grid">
+				<h4>SUPPORT WITH</h4>
+				<div class="Office Address">
+					<ul class="bottom-icons">
+						<li><a class="glyphicon glyphicon-envelope" href="#"></a>　gusqls0810@naver.com</li>
+						<li>고객지원 등 각종 문의사항은 해당 메일로 연락을 주시면 감사합니다.</li>
+					</ul>
+				</div>
+			</div>
+			<div class="clearfix"> </div>	
+		</div>
+	</div>
+	
+	<!-- last footer ( go to top ) -->	
+	<div class="copy-right">
+		<div class="container">
+			<p>Copyright &copy; 2015 All Rights Reserved Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+		</div>
+	</div>
+	<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 
  </body>
 </html>

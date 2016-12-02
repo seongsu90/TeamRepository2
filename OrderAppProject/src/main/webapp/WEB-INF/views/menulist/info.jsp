@@ -40,7 +40,7 @@
 			.project figure figcaption {
 			    position: relative;
 			    z-index: 10;
-			    padding: 8px 18px 11px;
+			    padding: 10px 18px 15px; 
 			    background: #fff;
 			    -ms-transition: all .2s ease-out;
 			    -webkit-transition: all .2s ease-out;
@@ -49,6 +49,7 @@
 			    transition: all .2s ease-out;
 			    text-align: left;
 			    color: #555;
+			    width: 290px;
 			}
 			
 			.project figure:hover .actions {
@@ -89,10 +90,10 @@
 			figcaption .project-price {
 			    position: absolute;
 			    right: 15px;
-			    top: 12px;
+			    top: 10px;
 			    font-size: 22px;
 			    text-align: right;
-			    margin-top: 8px;
+			    margin-top: 5px;
 			    letter-spacing: -1px;
 			    -webkit-font-smoothing: antialiased;
 			}
@@ -215,10 +216,10 @@
 		    <h1 class="text-center text-primary title" style="text-align:center;">정보</h1>
 		    <hr class="divider-title">
 		    
-		    <div class="col-ms-10 col-md-4" style="width:350px; margin:auto;">
+		    <div class="col-ms-10 col-md-4" style="width:400px; margin:auto;">
 		        <div class="project">
 		            <figure class="img-responsive">
-		               <img src="showPhoto?mlsavedfile=${menuList.mlsavedfile}" style="width:282px; height:300px;"/>
+		               <img src="showPhoto?mlsavedfile=${menuList.mlsavedfile}" style="width:326px; height:300px;"/>
 		                <figcaption>
 		                    <span class="project-details">${menuList.mlname}</span>
 		                    <span class="project-price"><strong>${menuList.mlprice}</strong></span>

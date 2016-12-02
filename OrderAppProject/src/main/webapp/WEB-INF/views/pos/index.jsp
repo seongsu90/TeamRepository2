@@ -149,6 +149,60 @@
 		
 		<script type="text/javascript">
 		
+			$(document).ready(function() {
+				$("#orderModal").on('hide.bs.modal', function() {					
+					var result = $("#result").html();
+					var tableNo = $("#ptableno").val();
+					
+					if(result != 0) {
+						$("#carousel-selector-"+ tableNo +" #tableImg").attr('src', "http://placehold.it/250/34495e/ffffff?text=" + tableNo);
+					} else {
+						$("#carousel-selector-"+ tableNo +" #tableImg").attr('src', "http://placehold.it/250/ffffff/34495e?text=" + tableNo);
+					}					
+				}); 
+				
+				$("#orderModal").on('shown.bs.modal', function() {
+					$(".mcount").change(function () {
+						var arrTr = $(".menu");
+						var totalPrice = 0;						
+						for(var i=0; i<arrTr.length; i++) {
+							var tr = arrTr[i];
+							if($(".mcount", tr).val() != 0) {								
+								totalPrice +=	$(".mprice", tr).val() * $(".mcount", tr).val();								
+							}
+						}
+						$("#totalPrice").html(totalPrice);						
+						$("#result").html(totalPrice);						
+				    });	
+				});
+			
+				init();				
+			});
+			
+			function init() {				
+				var presid = $("#orderModal #presid").val();
+				var totalTables = $("#totalTables").val(); 
+				
+				for ( var i=1; i<=totalTables; i++) {
+					var ptableno = $("#carousel-selector-"+ i + " #tbNo").val();
+					
+					$.ajax({
+						url: "../pos/info",
+						data: {"presid":presid, "ptableno":ptableno},
+						method: "post",
+						success: function(data) {
+							
+							if(data.result != 0) {								
+								$("#carousel-selector-"+ data.ptableno +" #tableImg").attr('src', "http://placehold.it/250/34495e/ffffff?text=" + data.ptableno);
+							} else {
+								$("#carousel-selector-"+ data.ptableno +" #tableImg").attr('src', "http://placehold.it/250/ffffff/34495e?text=" + data.ptableno);
+							}
+						}
+					}); 
+				} 
+			}
+		
+		
 			function onClickBtnConfirm(reservation) {		// 예약 확인 클릭
 				console.log("onClickBtnConfirm");			
 				var rvmid = reservation.rvmid;
@@ -180,10 +234,9 @@
 						/* } */						
 					}
 				}); 
-				
 			}
 		
-			function onClickBtnTable(tableNo) {		// 테이블 번호 클릭
+			function onClickBtnTable(tableNo) {		// 테이블 번호 클릭				
 				var presid = $("#orderModal #presid").val();
 
 				$.ajax({
@@ -212,7 +265,7 @@
 							);
 						}
 						$("#ptableno").val(tableNo);
-						/* $("#myModalLabel").html(tableNo); */
+						$("#myModalLabel").html(tableNo + " 번 테이블");
 						$("#totalPrice").html(data.totalPrice);
 						$("#coupon").html(data.coupon);
 						$("#eventPrice").html(data.eventPrice);
@@ -267,7 +320,7 @@
 				});
 			}
 		
-		
+/* 		
 			jQuery(document).ready(function($) {			
 		        $('#myCarousel').carousel({
 		                interval: 10000
@@ -278,7 +331,7 @@
 			        id_selector = $(this).attr("id");
 			        try {
 			            var id = /-(\d+)$/.exec(id_selector)[1];
-			            console.log(id_selector, id);
+			     
 			            jQuery('#myCarousel').carousel(parseInt(id)-1);
 			        } catch (e) {
 			            console.log('Regex failed!', e);
@@ -289,76 +342,31 @@
 					var id = $('.item.active').data('slide-number');					
 					$('#carousel-text').html($('#slide-content-'+id).html());
 		        });
-			});
+			}); */
+			
+			
 			
 		</script>
 	</head>
 	 
 	<body>
-	
-		<%--  <div class="container" align="center"><br/>
-			<div class="row">
-				<div class="col-md-8">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								<span class="glyphicon glyphicon-bookmark"></span> POS System 
-							</h3>
-						</div> 
-		                
-						<div class="panel-body">
-							<div class="row">							
-								<c:forEach var="i" begin="1" end="${totalTables}">
-									<div class="col-md-3">
-										<button onclick="onClickBtnTable(${i})" style="width:150px; height:150px;">${i} 번 테이블<br/>
-											<c:forEach  var="posList" items="${posList}">
-												<c:if test="${posList.ptableno == i}">${posList.pmlname}&nbsp;&nbsp;${posList.pcount}<br/></c:if>
-											</c:forEach>									
-										</button>
-									</div>
-								</c:forEach> 
-							</div>	               	
-						</div>
-		            <!-- panel body end -->
-					</div>
-				</div>
-				
-				<div class="col-md-4">					<!-- 예약자 확인 -->
-					<table id="acrylic" style="width:400px;">
-						<tr>
-							<th> 예약시간 </th>
-							<th> 인원수 </th>
-							<th> 예약자 </th>																
-						</tr>
-						<c:forEach  var="reservarion" items="${reservList}">														
-							<tr>
-								<td>${reservarion.rvtime}</td>
-								<td>${reservarion.rvperson}</td>
-								<td>${reservarion.rvmname}(${reservarion.rvmid})</td>
-								<td><input onclick="onClickBtnConfirm({rvmid:'${reservarion.rvmid}', rvresid:${reservarion.rvresid}})" type="button" value="확인"/>
-										<input onclick="onClickBtnPenalty({rvmid:'${reservarion.rvmid}',})" type="button" value="취소"/></td>
-							</tr>		
-						</c:forEach>						
-					</table>							
-				</div>
-			</div>
-		</div>
-		 --%>
 		 
-		 <div class="container">
+		 <div class="container" style="width: 75%;">
 		    <div id="main_area">
 		        <div class="row">
-		            <div class="col-sm-4" id="slider-thumbs">
+		            <div class="col-sm-5" id="slider-thumbs">
+		                	<input type="hidden" id="totalTables" value="${totalTables}"/>
 		                <ul class="hide-bullets">
-		                    <c:forEach var="i" begin="1" end="${totalTables}">
-			                    <li class="col-sm-3">
-			                        <a class="thumbnail" id="carousel-selector-${i}"><img src="http://placehold.it/150x150&text=${i}"></a>
+		                    <c:forEach var="i" begin="1" end="${totalTables}">		                    	
+			                    <li class="col-sm-3">		                     	   <a class="thumbnail" id="carousel-selector-${i}" data-toggle="modal" data-target="#orderModal" onclick="onClickBtnTable(${i})"><input type="hidden" id="tbNo" value="${i}"/>
+		                     	   
+		                     	   <img id="tableImg" src="http://placehold.it/250/ffffff/34495e?text=${i}"></a>			                        
 			                    </li>
 							</c:forEach>
 		                </ul>
 		            </div>
 		            
-		            <div class="col-sm-6">
+		           <%--  <div class="col-sm-6">
 		                <div class="col-xs-12" id="slider">		                    
 		                    <div class="row">
 		                        <div class="col-sm-12" id="carousel-bounding-box">
@@ -387,9 +395,9 @@
 		                        </div>
 		                    </div>
 		                </div>
-		            </div>
+		            </div> --%>
 		            
-		            <div class="col-md-2">					<!-- 예약자 확인 -->
+		           <div class="col-md-6">					<!-- 예약자 확인 -->
 						<table id="acrylic" style="width: 450px;">
 							<thead>
 								<tr>
@@ -411,7 +419,7 @@
 								</c:forEach>
 							</tbody>
 						</table>							
-					</div>         
+					</div>          
 		        </div>
 		    </div>
 		</div> 
@@ -424,7 +432,7 @@
 					<!-- modal-header-->	
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-						<h4 class="modal-title" id="myModalLabel">주문 입력</h4>
+						<h2 class="modal-title" id="myModalLabel"></h2>
 					</div>
 					<!-- modal-body-->
 					<div class="modal-body" >

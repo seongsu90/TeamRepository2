@@ -2,7 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 {
-	"totalPrice":${totalPrice},
+	"ptableno":${ptableno},
+	"totalPrice":${totalPrice}, 
 	"eventPrice":${eventPrice},
 	"point":${point},
 	"result":${result},

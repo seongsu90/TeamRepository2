@@ -84,6 +84,52 @@ public class RestaurantDao {
 		}
 	}
 	
+	
+	
+	
+	public List<Restaurant> selectBymPage(int pageNo, int rowsPerPage, String mreslocaion){
+		String sql = "";
+		sql += "select rn, resid, resname, reslocation, resinfo, restotaltable, restel, resopen, resclose, rescloseday ,ressavedfile ";
+		sql += "from( " ;
+		sql += "select rownum as rn, resid, resname, reslocation, resinfo, restotaltable, restel, resopen, resclose, rescloseday ,ressavedfile ";
+		sql += "from (select resid, resname, reslocation, resinfo, restotaltable, restel, resopen, resclose, rescloseday ,ressavedfile from Restaurant order by resid desc) ";
+		sql += "where reslocation like ? and rownum<=? ";
+		sql += ") ";
+		sql += "where rn>=? ";
+		
+		
+		List<Restaurant> list=jdbcTemplate.query(
+				sql, 
+				new Object[]{mreslocaion+"%", (pageNo*rowsPerPage), ((pageNo-1)*rowsPerPage+1)},
+				new RowMapper<Restaurant>(){
+					@Override
+					public Restaurant mapRow(ResultSet rs, int row)throws SQLException{
+						Restaurant restaurant=new Restaurant();
+						restaurant.setResid(rs.getInt("resid"));
+						restaurant.setResname(rs.getString("resname"));
+						restaurant.setReslocation(rs.getString("reslocation"));
+						restaurant.setResinfo(rs.getString("resinfo"));
+						restaurant.setRestotaltable(rs.getInt("restotaltable"));
+						restaurant.setRestel(rs.getString("restel"));
+						restaurant.setResopen(rs.getString("resopen"));
+						restaurant.setResclose(rs.getString("resclose"));
+						restaurant.setRescloseday(rs.getString("rescloseday"));
+						restaurant.setRessavedfile(rs.getString("ressavedfile"));
+						
+						return restaurant;
+					}
+				}
+		);
+	return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	public List<Restaurant> selectByPage(int pageNo, int rowsPerPage, String find){
 		String sql = "";
 		sql += "select rn, resid, resname, reslocation, resinfo, restotaltable, restel, resopen, resclose, rescloseday ,ressavedfile ";
@@ -152,13 +198,15 @@ public class RestaurantDao {
 		int count=jdbcTemplate.queryForObject(sql, new Object[]{"%"+find+"%"}, Integer.class);   
 		return count;
 	}
-
 	
-/*	public static int emptyTableNum(int resid) {
-		String sql="select count (distinct ptableno) from Pos where resid=? ";
-		jdbcTemplate.
-		return ;
-	}*/
+
+	public int mcount(String mreslocaion){
+		String sql="select count(*) from restaurant where reslocation like ? ";
+		int count=jdbcTemplate.queryForObject(sql, new Object[]{mreslocaion+"%"}, Integer.class);   
+		return count;
+	}
+	
+
 	
 	
 	

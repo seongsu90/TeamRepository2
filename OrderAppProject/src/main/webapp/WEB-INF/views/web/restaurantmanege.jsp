@@ -26,11 +26,6 @@
 		});
 		
 		function showInfo(data) {
-			 
-			var hi = data.esavedfile;
-			console.log(data.esavedfile);
-			console.log(data.ephoto);
-
 			$("#infoModal").modal("show");
 			$("#infoModal #ename").val(data.ename);
 			$("#infoModal #eresid").val(data.eresid);
@@ -41,7 +36,7 @@
 			$("#infoModal #eend").val(data.eend);
 			$("#infoModal #photoEx").attr('src', "/teamapp/event/showPhoto?esavedfile=" + data.esavedfile);
 		};
-	
+		
 		function eventUpdate() {
 	
 			var ename = $("#infoModal #ename").val();
@@ -74,10 +69,10 @@
 				contentType: false,
 				success: function(data) {
 					if(data.result == "success") {
-					    $("#infoModal").modal("hide");
-					    location.reload(true); 
+						$("#infoModal").modal("hide");
+						location.reload(true);
 					} else {
-						alert("수정 실패");
+						
 					  }
 				}
 			});
@@ -144,9 +139,9 @@
 		<section class="content">
 			<nav style="width:1000px">
 	          <ul class="nav nav-justified">
-	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/restaurant/myres"><b>나의 Restaurant</b></a></li>
-	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/event/list?pageNo=1"><b>이벤트</b></a></li>
-	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/coupon/resCouponList"><b>쿠폰</b></a></li>
+	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/restaurant/myres"><b style="color:black;">나의 Restaurant</b></a></li>
+	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/event/list?pageNo=1"><b style="color:black;">이벤트</b></a></li>
+	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/coupon/resCouponList"><b style="color:black;">쿠폰</b></a></li>
 	          </ul>
   			</nav>
 			<iframe name="iframe" style="width:100%; height:840px; border-width:0;" src="/teamapp/restaurant/myres"></iframe>
@@ -155,20 +150,6 @@
 		
 		</div>
 	</div>
-
-
-
-
-
-	<!-- <div class="menu-section">
-		<div class="container">
-			<h2>EVENT</h2>
-		
-			<iframe name="iframe" id="iframe"
-				style="width: 100%; height: 650px; border-width: 0px;"
-				src="/teamapp/event/list?pageNo=1"> </iframe>
-		</div>
-	</div> -->
 
 	<!--/start-footer-->
 	<div class="footer">
@@ -240,7 +221,7 @@
 			<!-- modal-header -->
 		     		<div class="modal-header" style="background-color: #34495e; color:white">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title">이벤트 정보</h4>
+						<h4 class="modal-title">이벤트 정보 및 수정</h4>
 		      		</div>
 		
 			<div class="modal-body">
@@ -253,14 +234,6 @@
 								<b><input id="ename" type="text" class="form-control" /></b>
 							</div>
 						</div>
-
-	
-						 <!--  <div class="form-group">
-							<div class="input-group">
-								<span style="width: 130px" class="input-group-addon"><b>식당 아이디</b></span>
-								<b><input id="eresid" type='number' class="form-control" /></b>
-							</div>
-						</div>  -->
 
 						 <div class="form-group">
 							<div class="input-group">
@@ -276,7 +249,7 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>이벤트 정보</b></span>
-								<b><input id="einfo" type="text" class="form-control" /></b>
+								<b><input id="einfo" type="text" class="form-control" style="width:280px;" /></b>
 							</div>
 						</div>
 
@@ -311,13 +284,11 @@
 						
 						</form>
 					</div>
-			<div class="modal-footer" style="background-color:#34495e; color:white">
-				
-						<a href="javascript:eventUpdate()" type="button"  class="btn btn-primary">수정</a>
-
-			</div>
+					<div class="modal-footer" style="background-color:#34495e; color:white">
+						 <a href="javascript:eventUpdate()" type="button"  class="btn btn-primary">수정</a>
+					</div>
 			</div>
 		</div>
-	</div> 	
+	</div> 		
 </body>
 </html>
