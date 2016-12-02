@@ -35,7 +35,7 @@ private MemberDao memberDao;
 		}
 		
 		public List<Restaurant> mlist(int pageNo, int rowsPerPage, String mreslocaion){
-			return restaurantDao.selectByPage(pageNo, rowsPerPage, mreslocaion);
+			return restaurantDao.selectBymPage(pageNo, rowsPerPage, mreslocaion);
 		}
 
 		public int add(Restaurant restaurant){
