@@ -3,7 +3,7 @@
 
 {
 	"ptableno":${ptableno},
-	"totalPrice":${totalPrice},
+	"totalPrice":${totalPrice}, 
 	"eventPrice":${eventPrice},
 	"point":${point},
 	"result":${result},
