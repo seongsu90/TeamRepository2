@@ -87,20 +87,20 @@ public class RestaurantDao {
 	
 	
 	
-	public List<Restaurant> selectBymPage(int pageNo, int rowsPerPage, String mreslocaion){
+	public List<Restaurant> selectBymPage(String mreslocaion){
 		String sql = "";
 		sql += "select rn, resid, resname, reslocation, resinfo, restotaltable, restel, resopen, resclose, rescloseday ,ressavedfile ";
 		sql += "from( " ;
 		sql += "select rownum as rn, resid, resname, reslocation, resinfo, restotaltable, restel, resopen, resclose, rescloseday ,ressavedfile ";
 		sql += "from (select resid, resname, reslocation, resinfo, restotaltable, restel, resopen, resclose, rescloseday ,ressavedfile from Restaurant order by resid desc) ";
-		sql += "where reslocation like ? and rownum<=? ";
+		sql += "where reslocation like ? ";
 		sql += ") ";
-		sql += "where rn>=? ";
+		
 		
 		
 		List<Restaurant> list=jdbcTemplate.query(
 				sql, 
-				new Object[]{mreslocaion+"%", (pageNo*rowsPerPage), ((pageNo-1)*rowsPerPage+1)},
+				new Object[]{mreslocaion+"%"},
 				new RowMapper<Restaurant>(){
 					@Override
 					public Restaurant mapRow(ResultSet rs, int row)throws SQLException{

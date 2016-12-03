@@ -76,7 +76,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:id="@+id/spinner3"
+                            android:id="@+id/spinnerLoc"
                             android:layout_weight="1.5" />
 
                         <Spinner
@@ -84,7 +84,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:id="@+id/spinner2"
+                            android:id="@+id/spinnerDetailLoc"
                             android:layout_weight="1.5" />
 
                     </LinearLayout>

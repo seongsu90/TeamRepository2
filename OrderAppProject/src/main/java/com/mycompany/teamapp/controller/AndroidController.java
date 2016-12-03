@@ -55,7 +55,7 @@ public class AndroidController {
 			endPageNo=totalPageNo;
 		}
 		
-		List<Restaurant> list=restaurantService.mlist(intPageNo, rowsPerPage, mreslocaion);
+		List<Restaurant> list=restaurantService.mlist(mreslocaion);
 		model.addAttribute("list", list);
 		model.addAttribute("pageNo", intPageNo);
 		model.addAttribute("rowsPerPage", rowsPerPage);

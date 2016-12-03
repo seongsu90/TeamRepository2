@@ -12,9 +12,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TabHost;
 
 import com.example.park.myapplication.adapter.ResAdapter;
@@ -30,6 +32,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,16 +40,16 @@ public class MainFunction extends TabActivity {
 
     private ResAdapter resAdapter;
     private ListView resList;
+    String location = "";
+    String detailLoc = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        String id =  pref.getString("hi", "");
 
-        Log.i("mylog", id);
-
+        /*탭호스트 설정*/
 
         TabHost mTab = getTabHost();
 
@@ -60,13 +63,76 @@ public class MainFunction extends TabActivity {
         mTab.addTab(mTab.newTabSpec("tag").setIndicator("이벤트").setContent(R.id.tab3));
         mTab.addTab(mTab.newTabSpec("tag").setIndicator("회원정보").setContent(R.id.tab4));
 
+        /*스피너 설정*/
+        final Spinner spinnerLoc = (Spinner) findViewById(R.id.spinnerLoc);
+        final Spinner spinnerDetailLoc = (Spinner) findViewById(R.id.spinnerDetailLoc);
+
+        ArrayAdapter extraAdapter = ArrayAdapter.createFromResource(this, R.array.location, android.R.layout.simple_spinner_dropdown_item);
+        extraAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinnerLoc.setAdapter(extraAdapter);
+        spinnerLoc.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+        spinnerLoc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                location = (String) spinnerLoc.getSelectedItem();
+                switch (location) {
+                    case "강원도":
+                        // city= Arrays.copyOf(kangwon, kangwon.length);
+                        ArrayAdapter extraAdapter2 = ArrayAdapter.createFromResource(MainFunction.this, R.array.kangwon, android.R.layout.simple_spinner_dropdown_item);
+                        extraAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinnerDetailLoc.setAdapter(extraAdapter2);
+                        spinnerDetailLoc.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        break;
+                    case "경기도":
+                        ArrayAdapter extraAdapter3 = ArrayAdapter.createFromResource(MainFunction.this, R.array.gyeonggi, android.R.layout.simple_spinner_dropdown_item);
+                        extraAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinnerDetailLoc.setAdapter(extraAdapter3);
+                        spinnerDetailLoc.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        break;
+                    case "서울특별시":
+                        ArrayAdapter extraAdapter4 = ArrayAdapter.createFromResource(MainFunction.this, R.array.seoul, android.R.layout.simple_spinner_dropdown_item);
+                        extraAdapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinnerDetailLoc.setAdapter(extraAdapter4);
+                        spinnerDetailLoc.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerDetailLoc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                detailLoc = (String) spinnerDetailLoc.getSelectedItem();
+                String resultLoc = location + " " + detailLoc;
+                resultLoc = resultLoc.trim();
+
+                fillItems(resultLoc);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
         /*식당 리스트 설정*/
         resList = (ListView)findViewById(R.id.resList);
+        /*
+        String resultLoc = location + " " + detailLoc;
+        resultLoc = resultLoc.trim();
 
 
-        fillItems();
-
+        fillItems(resultLoc);
+        */
 
 
         /*회원정보 리스트 설정*/
@@ -81,15 +147,16 @@ public class MainFunction extends TabActivity {
 
     }
 
-    public void fillItems()
+    public void fillItems(String resultLo)
     {
-        AsyncTask<Void,Void,List<Restaurant>> asyncTask = new AsyncTask<Void, Void, List<Restaurant>>() {
+        AsyncTask<String,Void,List<Restaurant>> asyncTask = new AsyncTask<String, Void, List<Restaurant>>() {
 
             @Override
-            protected List<Restaurant> doInBackground(Void... params) {
-                List<Restaurant> list = null;
+            protected List<Restaurant> doInBackground(String... params) {
+                //List<Restaurant> list = null;
+                List<Restaurant> list = new ArrayList<Restaurant>();
                 try {
-                    URL url= new URL("http://192.168.0.120:8080/teamapp/reslist");
+                    URL url= new URL("http://192.168.1.59:8080/teamapp/reslist?mreslocaion="+ URLEncoder.encode(params[0],"utf-8"));
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.connect();
 
@@ -127,7 +194,7 @@ public class MainFunction extends TabActivity {
                 resList.setAdapter(resAdapter);
             }
         };
-        asyncTask.execute();
+        asyncTask.execute(resultLo);
     }
 
     public List<Restaurant> parseJson(String strJson) {
@@ -155,7 +222,7 @@ public class MainFunction extends TabActivity {
     public Bitmap getBitmap(String fileName){
         Bitmap bitmap= null;
         try {
-            URL url = new URL("http://192.168.0.120:8080/teamapp/restaurant/showPhoto?ressavedfile="+fileName);
+            URL url = new URL("http://192.168.1.59:8080/teamapp/restaurant/showPhoto?ressavedfile="+fileName);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.connect();
 
