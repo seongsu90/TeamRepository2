@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,14 +20,15 @@ import com.mycompany.teamapp.service.RestaurantService;
 
 @Controller
 public class AndroidController {
+	private static final Logger logger = LoggerFactory.getLogger(AndroidController.class);
 	
 	@Autowired
 	private RestaurantService restaurantService;
-/*	@Autowired
+	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping(value="/mlist", method=RequestMethod.GET)
-	public String mlist(String pageNo, @RequestParam(required=false, defaultValue="") String mreslocaion, Model model, HttpSession session){
+	@RequestMapping(value="/reslist", method=RequestMethod.GET)
+	public String reslist(String pageNo, String mreslocaion, Model model, HttpSession session){
 		
 		int intPageNo = 1;
 		if ( pageNo == null ) {
@@ -38,13 +41,9 @@ public class AndroidController {
 		}
 		session.setAttribute("pageNo", String.valueOf(intPageNo));
 		
-
-		
-		
-		
 		int rowsPerPage=7;
 		int pagesPerGroup=5;
-		int totalRestaurantNo=restaurantService.getCount(mreslocaion);
+		int totalRestaurantNo=restaurantService.getmCount(mreslocaion);
 		
 		int totalPageNo=totalRestaurantNo/rowsPerPage+((totalRestaurantNo%rowsPerPage!=0)?1:0);
 		int totalGroupNo=totalPageNo/pagesPerGroup+((totalPageNo%pagesPerGroup!=0)?1:0);
@@ -68,8 +67,8 @@ public class AndroidController {
 		model.addAttribute("startPageNo", startPageNo);
 		model.addAttribute("endPageNo", endPageNo);
 		model.addAttribute("mreslocaion", mreslocaion);
-		return "restaurant/list";
+		return "android/reslist";
 	}
 	
-	*/
+	
 }
