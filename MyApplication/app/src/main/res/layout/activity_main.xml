@@ -97,7 +97,7 @@
                         android:inputType="textPassword"
                         android:layout_marginBottom="5dp"
                         android:ems="10"
-                        android:id="@+id/editText2" />
+                        android:id="@+id/editMpassword" />
                 </LinearLayout>
 
                 <FrameLayout
@@ -115,7 +115,7 @@
                         android:layout_marginLeft="3dp"
                         android:layout_marginBottom="12dp"
                         android:layout_gravity="center"
-                        android:id="@+id/button5" />
+                        android:id="@+id/btnLogin" />
                 </FrameLayout>
 
             </LinearLayout>

@@ -4,11 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.mycompany.teamapp.dao.PosDao;
+import com.mycompany.teamapp.dto.Event;
 import com.mycompany.teamapp.dto.Pos;
-import com.mycompany.teamapp.dto.Reservation;
 
 @Component
 public class PosService {
@@ -99,6 +98,11 @@ public class PosService {
 		} 	
 		return coupon.getCdiscount();
 	}*/
+
+	/*	public List<Event> eventMenu(int eresid) {
+	List<Event> list = posDao.eventMenu(eresid);
+	return list;
+}*/
 	
 	public List<Integer> checkEvent(int eresid, int ptableno) {
 		List<Integer> list = posDao.checkEvent(eresid, ptableno);

@@ -27,9 +27,23 @@ public class AndroidController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping(value="/reslist", method=RequestMethod.GET)
-	public String reslist(String pageNo, String mreslocaion, Model model, HttpSession session){
-		
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String login(String mid, String mpassword, HttpSession session, Model model) {
+		System.out.println("Android Login 실행");
+		String result = MemberService.LOGIN_FAIL_MID;
+		result = memberService.login(mid, mpassword);
+		if(result.equals(MemberService.LOGIN_SUCCESS)) {
+			session.setAttribute("login", mid);
+			session.setAttribute("mrank", memberService.info(mid).getMrank());
+		}
+
+		model.addAttribute("result", result);
+		return "android/result";
+	}
+	
+	@RequestMapping("/reslist")
+	public String reslist(String pageNo, @RequestParam(required=false, defaultValue="") String mreslocaion, Model model, HttpSession session)
+	{
 		int intPageNo = 1;
 		if ( pageNo == null ) {
 			pageNo = (String) session.getAttribute("pageNo");
