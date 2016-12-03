@@ -189,72 +189,71 @@
 	</head>
 	
 	<body>
-	
-		<div class="about-section"> 
-		   <div class="container" align="center"><!-- <h2>Coupon</h2> <br/> -->
-		   		<div style="text-align: right;">
-					<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e">쿠폰 생성</button>
-				</div>
-				<table id="acrylic">
-					<thead>
-						<tr>
-							<th> 쿠폰 번호 </th>
-							<th> 쿠폰 이름 </th>
-							<th> 유효 기간 </th>
-							<th> 쿠폰 정보 </th>
-							<th> 할인 금액 </th>
-							<th></th>							
-						</tr>
-					</thead>
-					
-					<tbody>
-						<c:forEach var="coupon" items="${coupon}">
-							<tr>
-								<td> ${coupon.cnumber} </td>
-								<td> ${coupon.cname} </td>
-								<td> ${coupon.cdday} </td>
-								<td> ${coupon.cinfo} </td>
-								<td> ${coupon.cdiscount} </td>								
-								<td>
-									<input onclick="sendInfo({
-														cnumber:${coupon.cnumber},
-														cname:'${coupon.cname}',
-														cdday:'${coupon.cdday}',
-														cinfo:'${coupon.cinfo}',
-														cdiscount:${coupon.cdiscount}									
-													})" type="button" value="상세보기"/>									
-								</td> 
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-				<br/>
+
+	   <div class="container" align="center"><!-- <h2>Coupon</h2> <br/> -->
+	   		<div style="text-align: right;">
+				<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e; margin-right:135px; margin-top:10px;">쿠폰 생성</button>
+			</div>
+			<table id="acrylic">
+				<thead>
+					<tr>
+						<th> 쿠폰번호 </th>
+						<th> 쿠폰이름 </th>
+						<th> 유효기간 </th>
+						<th> 쿠폰정보 </th>
+						<th> 할인금액 </th>
+						<th></th>							
+					</tr>
+				</thead>
 				
-				<div style="width: 600px">
-					<c:if test="${pageNo!=1}">
-						<a href="resCouponList?pageNo=1">[처음]</a>
-					</c:if>
-					
-					<c:if test="${groupNo>1}">
-						<a href="resCouponList?pageNo=${startPageNo-1}">[이전]</a>
-					</c:if>
-					
-					<c:forEach var="i" begin="${startPageNo}" end="${endPageNo}">
-						<a href="resCouponList?pageNo=${i}"
-							<c:if test="${pageNo==i}">style="color:red" </c:if>
-						>${i}</a>
+				<tbody>
+					<c:forEach var="coupon" items="${coupon}">
+						<tr>
+							<td> ${coupon.cnumber} </td>
+							<td> ${coupon.cname} </td>
+							<td> ${coupon.cdday} </td>
+							<td> ${coupon.cinfo} </td>
+							<td> ${coupon.cdiscount} </td>								
+							<td>
+								<input onclick="sendInfo({
+													cnumber:${coupon.cnumber},
+													cname:'${coupon.cname}',
+													cdday:'${coupon.cdday}',
+													cinfo:'${coupon.cinfo}',
+													cdiscount:${coupon.cdiscount}									
+												})" type="button" value="상세보기"/>									
+							</td> 
+						</tr>
 					</c:forEach>
-					
-					<c:if test="${groupNo<totalGroupNo}">
-						<a href="resCouponList?pageNo=${endPageNo+1}">[다음]</a>
-					</c:if>
-					
-					<c:if test="${pageNo!=totalPageNo}">
-						<a href="resCouponList?pageNo=${totalPageNo}">[맨끝]</a>
-					</c:if>
-				</div>
+				</tbody>
+			</table>
+			<br/>
+			
+			<div style="width: 600px">
+				<c:if test="${pageNo!=1}">
+					<a href="resCouponList?pageNo=1">[처음]</a>
+				</c:if>
+				
+				<c:if test="${groupNo>1}">
+					<a href="resCouponList?pageNo=${startPageNo-1}">[이전]</a>
+				</c:if>
+				
+				<c:forEach var="i" begin="${startPageNo}" end="${endPageNo}">
+					<a href="resCouponList?pageNo=${i}"
+						<c:if test="${pageNo==i}">style="color:red" </c:if>
+					>${i}</a>
+				</c:forEach>
+				
+				<c:if test="${groupNo<totalGroupNo}">
+					<a href="resCouponList?pageNo=${endPageNo+1}">[다음]</a>
+				</c:if>
+				
+				<c:if test="${pageNo!=totalPageNo}">
+					<a href="resCouponList?pageNo=${totalPageNo}">[맨끝]</a>
+				</c:if>
 			</div>
 		</div>
+
 		
 		
 		<!-- 쿠폰 추가 모달 -->		
@@ -281,21 +280,21 @@
 							
 							<div class="form-group">
 								<div class="input-group">
-									<span style="width: 130px" class="input-group-addon"><b>유효 기간</b></span>
+									<span style="width: 130px" class="input-group-addon"><b>유효기간</b></span>
 									<input type="date" class="form-control" id="cdday" name="cdday" />
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<div class="input-group">
-									<span style="width: 130px" class="input-group-addon"><b>쿠폰 정보</b></span>
+									<span style="width: 130px" class="input-group-addon"><b>쿠폰정보</b></span>
 									<input type="text" class="form-control" id="cinfo" name="cinfo" />
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<div class="input-group">
-									<span style="width: 130px" class="input-group-addon"><b>할인 금액</b></span>
+									<span style="width: 130px" class="input-group-addon"><b>할인금액</b></span>
 									<input type="text" class="form-control" id="cdiscount" name="cdiscount"/>
 								</div>
 							</div>							
@@ -344,28 +343,28 @@
 							
 							<div class="form-group">
 								<div class="input-group">
-									<span style="width: 130px" class="input-group-addon"><b>유효 기간</b></span>
+									<span style="width: 130px" class="input-group-addon"><b>유효기간</b></span>
 									<input type="text" class="form-control" name="cdday" id="cdday" readonly/>
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<div class="input-group">
-									<span style="width: 130px" class="input-group-addon"><b>쿠폰 정보</b></span>
+									<span style="width: 130px" class="input-group-addon"><b>쿠폰정보</b></span>
 									<input type="text" class="form-control" name="cinfo" id="cinfo" readonly/>
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<div class="input-group">
-									<span style="width: 130px" class="input-group-addon"><b>할인 금액</b></span>
+									<span style="width: 130px" class="input-group-addon"><b>할인금액</b></span>
 									<input type="text" class="form-control" name="cdiscount" id="cdiscount" readonly/>
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<div class="input-group">
-									<span style="width: 130px" class="input-group-addon"><b>받는 사람</b></span>
+									<span style="width: 130px" class="input-group-addon"><b>받는사람</b></span>
 									<input type="text" class="form-control" name="cbmid" id="cbmid" />
 								</div>
 							</div>

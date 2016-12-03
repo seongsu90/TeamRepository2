@@ -260,6 +260,7 @@
 							}
 							$("#menuTbody").append(
 								'<tr class="menu">' +
+									'<input class="eprice" type="hidden" style="border: 0;" name="eprice" value="' + menu.eprice + '" readonly/>' +
 									'<td>' +
 										'<input class="mname" type="text" style="border: 0;" name="menuName" value="' + menu.mname + '" readonly/>' +							
 									'</td>' +
@@ -268,10 +269,7 @@
 									'</td>' +
 									'<td>' +
 										'<input class="mprice" type="text" style="border: 0;" name="mprice" value="' + menu.mprice + '" readonly/>' +							
-									'</td>' +			
-									'<td>' +
-										'<input class="eprice" type="hidden" style="border: 0;" name="eprice" value="' + menu.eprice + '" readonly/>' +							
-									'</td>' +
+									'</td>' +		
 								'</tr>'
 							);
 						}
@@ -365,8 +363,8 @@
 		 <div class="container" style="width: 75%;">
 		    <div id="main_area">
 		        <div class="row">
-		            <div class="col-sm-5" id="slider-thumbs">
-		                	<input type="hidden" id="totalTables" value="${totalTables}"/>
+		            <div class="col-sm-6" id="slider-thumbs" >
+		                <input type="hidden" id="totalTables" value="${totalTables}"/>
 		                <ul class="hide-bullets">
 		                    <c:forEach var="i" begin="1" end="${totalTables}">		                    	
 			                    <li class="col-sm-3">		                     	   <a class="thumbnail" id="carousel-selector-${i}" data-toggle="modal" data-target="#orderModal" onclick="onClickBtnTable(${i})"><input type="hidden" id="tbNo" value="${i}"/>
@@ -450,7 +448,7 @@
 						<input id="presid" type="hidden" name="presid" value="${presid}"/> 							
 						<input id="ptableno" type="hidden" name="ptableno"/>
 						<div class="row" >
-							<div class="col-md-6">						
+							<div class="col-md-6" style="margin-left: 20px;">						
 								<table id="acrylic">
 									<thead>
 										<tr>
@@ -463,7 +461,7 @@
 									</tbody>
 								</table>	
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-5" style="margin-left: 40px;">
 								<table class="table table-striped custab" id="acrylic" style="width: 400px;">
 									<tr>
 										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 합계 </th>
