@@ -35,11 +35,4 @@
                 android:id="@+id/resContent" />
         </LinearLayout>
 
-    <Button
-        android:text="Button"
-        android:layout_width="0dp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:id="@+id/button8"
-        android:layout_weight="1" />
 </LinearLayout>

@@ -5,7 +5,8 @@
 	{
 		"resTitle" : "${restaurant.resname}",
 		"resContent" : "${restaurant.resinfo}",
-		"resImage" : "${restaurant.ressavedfile}"	
+		"resImage" : "${restaurant.ressavedfile}",
+		"resid" : "${restaurant.resid}"	
 	}
 	<c:if test="${!status.last}">,</c:if> <%--마지막줄이 아니면 ,를 붙여라 --%>
 </c:forEach>

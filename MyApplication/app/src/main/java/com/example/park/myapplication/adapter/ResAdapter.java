@@ -1,14 +1,18 @@
 package com.example.park.myapplication.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.park.myapplication.MainFunction;
 import com.example.park.myapplication.R;
+import com.example.park.myapplication.ResInfo;
 import com.example.park.myapplication.dto.Restaurant;
 
 import java.util.List;
@@ -17,10 +21,13 @@ import static com.example.park.myapplication.R.id.tab1;
 
 public class ResAdapter extends BaseAdapter {
     private List<Restaurant> list;
+    private Button btnresInfo;
 
     public void setList(List<Restaurant> list) {
         this.list = list;
     }
+
+
 
     private Context context; //범용적으로 생성자주입을 이용하기위해(원래는 mainactivity를 사용한다.) context 사용 // 쉽게 생각하면 Activity라고 보면 된다
     private LayoutInflater layoutInflater;
