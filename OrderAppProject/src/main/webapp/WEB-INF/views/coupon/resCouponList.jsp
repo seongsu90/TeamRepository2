@@ -110,6 +110,16 @@
 		</style>
 		
 		<script type="text/javascript">
+		
+			$(document).ready(function() {
+				$("#addCouponModal").on('shown.bs.modal', function() {
+					$("#cname").focus();
+				});
+				
+				$("#sendInfoModal").on('shown.bs.modal', function() {
+					$("#cbmid").focus();
+				});
+			});
 			
 			function onClickBtnAdd() {
 				$("#addCouponModal").modal("show");
@@ -138,14 +148,19 @@
 				$("#addCouponModal").modal("hide");
 			}
 			
-			function sendInfo(coupon) {
-				$("#infoForm #cnumber").val(coupon.cnumber);
-				$("#infoForm #cname").val(coupon.cname);
-				$("#infoForm #cdday").val(coupon.cdday);
-				$("#infoForm #cinfo").val(coupon.cinfo);
-				$("#infoForm #cdiscount").val(coupon.cdiscount);
-				
-				$("#sendInfoModal").modal("show");
+			function sendInfo(cnumber) {
+				$.ajax({
+					url:"../coupon/info",
+					data:{"cnumber":cnumber},
+					success: function(data) {
+						$("#sendInfoModal").modal("show");						
+						$("#infoForm #cnumber").val(data.cnumber);
+						$("#infoForm #cname").val(data.cname);
+						$("#infoForm #cdday").val(data.cdday);
+						$("#infoForm #cinfo").val(data.cinfo);
+						$("#infoForm #cdiscount").val(data.cdiscount);
+					}
+				})	
 			}
 			
 			function onClickBtnSend() {
@@ -192,7 +207,7 @@
 
 	   <div class="container" align="center"><!-- <h2>Coupon</h2> <br/> -->
 	   		<div style="text-align: right;">
-				<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e; margin-right:135px; margin-top:10px;">쿠폰 생성</button>
+				<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e; margin-right:190px; margin-top:10px;">쿠폰 생성</button>
 			</div>
 			<table id="acrylic">
 				<thead>
@@ -201,28 +216,18 @@
 						<th> 쿠폰이름 </th>
 						<th> 유효기간 </th>
 						<th> 쿠폰정보 </th>
-						<th> 할인금액 </th>
-						<th></th>							
+						<th> 할인금액 </th>						
 					</tr>
 				</thead>
 				
 				<tbody>
 					<c:forEach var="coupon" items="${coupon}">
 						<tr>
-							<td> ${coupon.cnumber} </td>
-							<td> ${coupon.cname} </td>
-							<td> ${coupon.cdday} </td>
-							<td> ${coupon.cinfo} </td>
-							<td> ${coupon.cdiscount} </td>								
-							<td>
-								<input onclick="sendInfo({
-													cnumber:${coupon.cnumber},
-													cname:'${coupon.cname}',
-													cdday:'${coupon.cdday}',
-													cinfo:'${coupon.cinfo}',
-													cdiscount:${coupon.cdiscount}									
-												})" type="button" value="상세보기"/>									
-							</td> 
+							<td><a href="javascript:sendInfo(${coupon.cnumber})">${coupon.cnumber}</a></td>								
+							<td>${coupon.cname}</td>
+							<td>${coupon.cdday}</td>
+							<td>${coupon.cinfo}</td>
+							<td>${coupon.cdiscount}</td>	
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -258,8 +263,8 @@
 		
 		<!-- 쿠폰 추가 모달 -->		
 		<div id="addCouponModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
-			<div class="modal-dialog" role="document" style="width:450px;">
-		    	<div class="modal-content" style="width:450px; margin: 0">
+			<div class="modal-dialog" role="document" style="width:350px;">
+		    	<div class="modal-content" style="width:350px; margin: 0">
 		    	
 		    		<!-- modal-header -->
 		     		<div class="modal-header" style="background-color: #34495e; color:white">
@@ -281,7 +286,7 @@
 							<div class="form-group">
 								<div class="input-group">
 									<span style="width: 130px" class="input-group-addon"><b>유효기간</b></span>
-									<input type="date" class="form-control" id="cdday" name="cdday" />
+									<input type="date" class="form-control" id="cdday" name="cdday" style="width: 183px" />
 								</div>
 							</div>
 							
@@ -314,8 +319,8 @@
 		
 		<!-- 쿠폰 상세보기 모달 -->		
 		<div id="sendInfoModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
-			<div class="modal-dialog" role="document" style="width:450px;">
-		    	<div class="modal-content" style="width:450px; margin: 0">
+			<div class="modal-dialog" role="document" style="width:350px;">
+		    	<div class="modal-content" style="width:350px; margin: 0">
 		    	
 		    		<!-- modal-header -->
 		     		<div class="modal-header" style="background-color: #34495e; color:white">
@@ -344,7 +349,7 @@
 							<div class="form-group">
 								<div class="input-group">
 									<span style="width: 130px" class="input-group-addon"><b>유효기간</b></span>
-									<input type="text" class="form-control" name="cdday" id="cdday" readonly/>
+									<input type="date" class="form-control" name="cdday" id="cdday" style="width: 183px;" readonly/>
 								</div>
 							</div>
 							
