@@ -40,7 +40,7 @@ public class AndroidController {
 		model.addAttribute("result", result);
 		return "android/result";
 	}
-	
+
 	@RequestMapping("/reslist")
 	public String reslist(String pageNo, @RequestParam(required=false, defaultValue="") String mreslocaion, Model model, HttpSession session)
 	{

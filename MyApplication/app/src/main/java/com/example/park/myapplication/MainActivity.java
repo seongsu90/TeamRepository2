@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -91,28 +92,23 @@ public class MainActivity extends AppCompatActivity {
                 String password = mpassword.getText().toString();
 
                 id_password_check(id, password);
-
-                SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("login", id);
-                editor.commit();
-
-                Intent intent = new Intent(MainActivity.this, MainFunction.class);
-                startActivity(intent);
             }
         });
 
     }
 
     public void id_password_check(String id, String password) {
+        //Log.i("mylog", "id_password_check : " + id + " " + password);
         AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground(String... params) {
+                //Log.i("mylog", "id_password_check & AsyncTask 실행");
                 String id = params[0];
                 String password = params[1];
+                String result = "";
 
                 try {
-                    URL url = new URL("http://192.168.0.29:8080/teamapp/login");
+                    URL url = new URL("http://192.168.1.4:8080/teamapp/login");
 
                     JSONObject body = new JSONObject();
                     body.put("mid", id);
@@ -129,15 +125,50 @@ public class MainActivity extends AppCompatActivity {
                     OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
                     BufferedWriter writer = new BufferedWriter(osw);
                     writer.write(getPostDataString(body));
-
                     writer.flush();
                     writer.close();
-                    conn.disconnect();
+
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+                        InputStreamReader isp = new InputStreamReader(conn.getInputStream());
+                        BufferedReader br = new BufferedReader(isp);
+                        String strJson = "";
+
+                        while (true) {
+                            String data = br.readLine();
+                            if (data == null) break;
+                            strJson  += data;
+                        }
+
+                        JSONObject jsonObject = new JSONObject(strJson);
+                        result = jsonObject.getString("result");
+
+                        br.close();
+                        isp.close();
+                    }
 
                 } catch (Exception e) {
                     Log.i("mylog", e.getMessage());
                 }
-                return "Hoo";
+
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                super.onPostExecute(result);
+
+                if (result.equals("success")){
+                    Toast.makeText(getApplicationContext(),"로그인 성공", Toast.LENGTH_SHORT).show();
+                    SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("login", mid.getText().toString());
+                    editor.commit();
+
+                    Intent intent = new Intent(MainActivity.this, MainFunction.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(),"로그인 실패",Toast.LENGTH_SHORT).show();
+                }
             }
 
         };
@@ -147,7 +178,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String getPostDataString(JSONObject params) throws Exception {
-
         StringBuilder result = new StringBuilder();
         boolean first = true;
 
@@ -168,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
             result.append(URLEncoder.encode(value.toString(), "UTF-8"));
 
         }
+
         return result.toString();
     }
 }
