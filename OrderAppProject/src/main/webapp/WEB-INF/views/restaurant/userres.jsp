@@ -126,7 +126,7 @@
 						$("#infoForm #rescloseday").val(data.rescloseday);
 						$("#mlname").html(data.mlname);
 						$("#mlprice").html(data.mlprice); 
-						
+						 
 						for(var i=0; i<data.menu.length; i++) {
 							var menu = data.menu[i];	
 							if(i==0) {
