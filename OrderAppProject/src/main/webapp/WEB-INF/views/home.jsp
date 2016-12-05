@@ -96,14 +96,14 @@
 		
 		function onClickFindId()
 		{
-			console.log("onClickFindId")
-			$(".modal-content").load("/teamapp/member/findMid")
+			console.log("onClickFindId");
+			$("#findMidModal").modal("show");
 		}
 		
 		function onClickFindPw()
 		{
-			console.log("onClickFindPw")
-			$(".modal-content").load("/teamapp/member/findMpassword")
+			console.log("onClickFindPw");
+			$(".modal-content").load("/teamapp/member/findMpassword");
 		}
 		
 	</script>
@@ -175,6 +175,10 @@
 						<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
 						<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
 						</c:if>
+						<c:if test="${mrank<=0}">
+							<li><a href="${pageContext.servletContext.contextPath}/web/userrestaurant">매장보기</a></li> 
+						</c:if>
+						
 						<c:if test="${mrank==1}">
 						<li><a href="${pageContext.servletContext.contextPath}/web/ordermanagement">주문관리</a></li> 
 						<li><a href="${pageContext.servletContext.contextPath}/web/restaurantmanege">매장관리</a></li>
@@ -556,6 +560,56 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- ########################## 아이디 찾기 Modal ########################## -->
+	
+	<div id="memberModifyModal" id="findMidModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
+		<div class="modal-dialog" role="document" style="width:450px;">
+	    	<div class="modal-content" style="width:450px; margin: 0">
+		    	<div class="login-form">
+			   		<!-- modal-header -->
+			   		<div class="modal-header" style="background-color: #34495e; color:white">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #FFFFFF;"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">아이디 찾기</h4>
+			    	</div>
+			    	
+			    	<div class="modal-bodyfooter">
+			    	
+			    		<!-- modal-modal-body -->
+				    	<div class="modal-body">
+							<form id="modifyForm">	
+							
+								<div class="form-group">
+									<div class="input-group">
+										<span style="width: 130px" class="input-group-addon"><b>이름</b></span>
+										<input type="text" class="form-control" name="mname" id="mname"/>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="input-group">
+										<span style="width: 130px" class="input-group-addon"><b>휴대폰번호</b></span>
+										<input type="text" class="form-control" name="mphone" id="mphone"/>
+									</div>
+								</div>
+								
+							</form>		
+				    	</div>
+			     	
+				      	<!-- modal-modal-modal-footer -->	
+						<div class="modal-footer" style="background-color: #34495e; color:white">
+					        <button id="btnModify" type="button" class="btn btn-default" onclick="onClickFindMid()" style="color: #34495e"><b>확인</b></button>
+					        <button id="btnInit" type="button" data-dismiss="modal" class="btn btn-default"  style="color: #34495e"><b>취소</b></button>
+					    </div>
+					    
+					</div>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<!-- ########################## 수정 Modal ########################## -->
+	
 	
 </body>
 </html>
