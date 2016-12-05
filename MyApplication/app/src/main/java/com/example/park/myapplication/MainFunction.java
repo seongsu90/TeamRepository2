@@ -132,15 +132,19 @@ public class MainFunction extends TabActivity {
         resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Restaurant restaurant = (Restaurant) resAdapter.getItem(position);
-                Log.i("mylog",""+restaurant.getResid());
-
-                Restaurant res =  startResinfo(restaurant.getResid());
+               final Restaurant restaurant = (Restaurant) resAdapter.getItem(position);
+                Restaurant res = null;
+                Log.i("mylog","리스트뷰클릭"+restaurant.getResid());
+                int resid = restaurant.getResid();
+                res = startResinfo(resid);
+                Log.i("mylog",res.getResopen());
                 Intent intent = new Intent(MainFunction.this,ResInfo.class);
                 intent.putExtra("resname",res.getResname());
+                Log.i("mylog",res.getReslocation());
                 intent.putExtra("reslocation",res.getReslocation());
                 intent.putExtra("resinfo",res.getResinfo());
                 intent.putExtra("restel",res.getRestel());
+                Log.i("mylog",res.getRestel());
                 intent.putExtra("rescloseday",res.getRescloseday());
                 intent.putExtra("resopen",res.getResopen());
                 intent.putExtra("resclose",res.getResclose());
@@ -162,38 +166,51 @@ public class MainFunction extends TabActivity {
 
     public Restaurant startResinfo(int resid)
     {
-        Restaurant restaurant = new Restaurant();
+        AsyncTask<Integer,Void,Restaurant> asyncTask = new AsyncTask<Integer, Void, Restaurant>() {
+            @Override
+            protected Restaurant doInBackground(Integer... params) {
+                Restaurant res = new Restaurant();
+                try {
+                    URL url= new URL("http://192.168.0.120:8080/teamapp/info?resid="+URLEncoder.encode(String.valueOf(params[0]),"utf-8"));
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.connect();
 
-        try {
-            URL url= new URL("http://192.168.0.120:8080/teamapp/restaurant/info?resid="+resid);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.connect();
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+                        InputStream is = conn.getInputStream();
+                        Reader reader = new InputStreamReader(is);
+                        BufferedReader br = new BufferedReader(reader);
+                        String strJson = "";
 
-            if (conn.getResponseCode() == HttpURLConnection.HTTP_OK){
-                InputStream is = conn.getInputStream();
-                Reader reader = new InputStreamReader(is);
-                BufferedReader br = new BufferedReader(reader);
-                String strJson = "";
+                        while (true) {
+                            String data = br.readLine();
+                            if (data == null) {//* 더 이상 데이터가 없을 때, 마지막 라인을 읽은 후 *//*
+                                break;
+                            }
+                            strJson += data;
+                        }
+                        Log.i("mylog",strJson);
+                        br.close();
+                        reader.close();
+                        is.close();
 
-                while (true) {
-                    String data = br.readLine();
-                    if (data == null) {//* 더 이상 데이터가 없을 때, 마지막 라인을 읽은 후 *//*
-                        break;
+                        res =parseJson2(strJson);
                     }
-                    strJson += data;
+                    conn.disconnect();
+                }catch (Exception e){
+                    Log.i("mylog",e.getMessage());
                 }
-                Log.i("mylog",strJson);
-                br.close();
-                reader.close();
-                is.close();
-
-                restaurant = parseJson2(strJson);
+                return res;
             }
-            conn.disconnect();
-        }catch (Exception e){
-            Log.i("mylog",e.getMessage());
-        }
-        return restaurant;
+
+            @Override
+            protected void onPostExecute(List<Restaurant> restaurants) {
+                resAdapter = new ResAdapter(MainFunction.this);
+                resAdapter.setList(restaurants);
+                resList.setAdapter(resAdapter);
+            }
+        };
+        asyncTask.execute(resid);
+
     }
 
     public void fillItems(String resultLo)
@@ -257,6 +274,7 @@ public class MainFunction extends TabActivity {
                 res.setResImage(getBitmap(jsonObject.getString("resImage")));
                 res.setResTitle(jsonObject.getString("resTitle"));
                 res.setResContent(jsonObject.getString("resContent"));
+                res.setResid(jsonObject.getInt("resid"));
 
                 list.add(res);
 

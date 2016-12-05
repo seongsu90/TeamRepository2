@@ -98,9 +98,18 @@
 			$("#infoModal #resclose").val(data.resclose); 
 			$("#infoModal #photo").attr('src', "/teamapp/restaurant/showPhoto?ressavedfile=" + data.ressavedfile);
 	
+
 			if(!"#ReserveModal"){
 				$('input').attr("readonly",true);//input 요소 설정 readonly 위한 것이다.
 			}
+
+
+			
+			$('input').attr("readonly",true);//input 요소 설정 readonly 위한 것이다.
+			
+			/* $(':checkbox[readonly="readonly"]').click(function() {
+				return false;
+				}); */
 
 			setCity(location[0]);
 			setProvince(location[0], location[1]);
@@ -111,6 +120,7 @@
 			$("#infoModal").modal("show");
 		};
 		
+
 /* ############################################################################	 */	
 		
 		function onClickBtnReserve(){
@@ -172,6 +182,25 @@
 		
 		
 		
+=======
+		 function check_only(chk){
+		     var obj = document.getElementsByName("closeday");
+		     if(chk.value=="휴일없음"){
+				for(var i=0; i<obj.length; i++){
+				   if(obj[i] != chk){
+				  		obj[i].checked = false;
+					}
+				}
+			}
+		     else{
+				for(var i=0; i<obj.length; i++){
+					   if(obj[i].value == "휴일없음"){
+					  		obj[i].checked = false;
+					  	}
+				}
+			}
+	     }
+>>>>>>> refs/remotes/origin/master
 		
 		 function check_only(chk){
 		     var obj = document.getElementsByName("closeday");
@@ -229,7 +258,6 @@
 			var resopen = $("#infoModal #resopen").val();
 			var resclose = $("#infoModal #resclose").val();
 			var resphoto = $("#infoModal #resphoto")[0];
-
 			
 			var data = new FormData();
 			data.append("resid", resid);

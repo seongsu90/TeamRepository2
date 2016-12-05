@@ -127,8 +127,10 @@
 		}
 	</style>
 	
+
+	
 </head>
-<body>
+<body style="background: #fefaf4">
 	<!--start-header-->
 	<div id="home" class="header">
 			<!--logo-->
@@ -151,7 +153,8 @@
 							<li><a href="${pageContext.servletContext.contextPath}/web/menumanagement">메뉴관리</a></li> 
 						</c:if>
 						
-						<li><a class="active"  href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
+						<li><a   href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
+						<li class="lost"><a class="active" href="${pageContext.servletContext.contextPath}/web/contact2">테스트페이지</a></li>
 						
 						<c:if test="${login==null}">
 							<li ><p class="text-center"><a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a></p></li>
@@ -164,19 +167,19 @@
 				<div class="clearfix"> </div>		
 			</div>
 	<!--End-top-nav-script-->
-		 	<!-- <div class="clearfix"> </div>
+			<div class="clearfix"> </div>
 		</div>
-		<div class="head-bg">
+		<!-- <div class="head-bg">
 			<div class="logo three">
 					<a href="/teamapp/"><h1>FOOD<span>House</span></h1></a>
 			</div>
-		</div>  -->
+		</div> -->
 		<!--/header-->  
 	</div>	
 	<!--/contact-->
-	<div class="contact-section">
+	<div class="contact-section" >
 		<div class="contact-head">
-			<div class="container">
+			<div class="container" >
 				<h3>Contact Info</h3>
 				<p>글로벌 주문앱으로 성장하는 [주문할게요!] <br/> 
 				34개국 음식 주문서비스에 투자하고 있는 스타트업 유니콘인 [주문할게요!] 는 글로벌 네트워크 사입니다. <br/>
@@ -239,7 +242,6 @@
 			</div>
 		</div>
 	</div>
-
 	
 <!-- start-footer -->
 	<div class= "footer">

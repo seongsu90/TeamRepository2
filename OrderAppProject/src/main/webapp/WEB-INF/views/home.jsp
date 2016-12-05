@@ -72,10 +72,46 @@
 			$("#login-modal").on('shown.bs.modal', function() {	            
 	            $("#login_userid").focus();
 	         }); 
+			
+			$("#findMidModal").on('shown.bs.modal', function() {
+				$("#mname").focus();
+			});
+			
+			$("#findMpasswordModal").on('shown.bs.modal', function() {
+				$("#fpmid").focus();
+			});
+			
+			$("#mpasswordResetModal").on('shown.bs.modal', function() {
+				$("#mpassword").focus();
+			});
+			
+			$("#joinModal").on('shown.bs.modal', function() {
+				$("#jmid").focus();
+			});
+			
+			$("#findMidModal").on('hidden.bs.modal', function() {
+				$("#mname").val("");
+				$("#mphone").val("");
+			});
+			
+			$("#messageModal").on('hidden.bs.modal', function() {
+				$("#mname").focus();
+				$("#successMessage").html("");
+				$("#failMessage").html("");
+			});
+			
+			$("#selCity").change(function () {
+				var selCity = $("#selCity").val();
+		        setProvince(selCity, null);
+		        $("#jmlocation").val(""); 
+		    });
+			
+			$("#selProvince").change(function () {
+				setMlocation();
+		    });
 		}); 
 		
-		function onClickLogin()
-		{
+		function onClickLogin() {
 			var mid =$("#login_userid").val();
 			var mpassword=$("#login_password").val();
 			
@@ -94,16 +130,221 @@
 			});
 		}
 		
-		function onClickFindId()
-		{
+		/* #################################### 아이디 찾기 Modal #################################### */
+		function onClickFindId() {
 			console.log("onClickFindId");
 			$("#findMidModal").modal("show");
 		}
 		
-		function onClickFindPw()
-		{
+		function onClickFindMid() {
+			var mname = $("#mname").val();
+			var mphone = $("#mphone").val();
+	
+			$.ajax({
+				url: "member/findMid",
+				data: {"mname":mname, "mphone":mphone},
+				method:"post",
+				success: function(data){
+					if(data.result=="success"){
+						$("#successMessage").html("아이디는 \"" + data.mid + "\" 입니다");
+						$("#messageIcon").attr('class', "fa fa-check-circle");
+						$("#messageModal").modal("show");
+						$("#messageModal").on('hidden.bs.modal', function() {
+							$("#findMidModal").modal("hide");
+							$("#login_userid").val(data.mid);
+						});
+					}else{
+						$("#failMessage").html("입력하신 정보와 일치하는 아이디가 없습니다.");
+						$("#messageModal").modal("show");
+					}
+				}
+			});
+			
+		}
+		/* #################################### 아이디 찾기 Modal #################################### */
+		
+		
+		/* #################################### 비밀번호 찾기 Modal #################################### */
+		function onClickFindPw() {
 			console.log("onClickFindPw");
-			$(".modal-content").load("/teamapp/member/findMpassword");
+			$("#findMpasswordModal").modal("show");
+		}
+		
+		function onClickChangepw()	{
+			var mid = $("#fpmid").val();
+			var mphone = $("#fpmphone").val();
+	
+			$.ajax({
+				url: "member/findMpassword",
+				data: {"mid":mid, "mphone":mphone},
+				method:"post",
+				success: function(data){
+					if(data.result=="success"){
+						$("#mpasswordResetModal").modal("show");
+					}else{
+						$("#failMessage").html("입력값이 올바르지 않습니다.");
+						$("#messageModal").modal("show");
+					}
+				}
+			});
+			
+		}
+		/* #################################### 비밀번호 찾기 Modal #################################### */
+		
+		/* #################################### 비밀번호 재설정 Modal #################################### */
+		function onClickModifyPw() {
+			var mid = $("#fpmid").val();
+			var mpassword = $("#mpassword").val();
+			var mpassword2 = $("#mpassword2").val();
+			
+			$.ajax({
+				url: "member/mpasswordReset",
+				data: {"mid":mid, "mpassword":mpassword, "mpassword2":mpassword2},
+				method:"post",
+				success: function(data) {
+					if(data.result=="success"){						
+						$("#successMessage").html("비밀번호 설정 완료");
+						$("#messageIcon").attr('class', "fa fa-check-circle");
+						$("#messageModal").modal("show");
+						$("#messageModal").on('hidden.bs.modal', function() {
+							$("#mpasswordResetModal").modal("hide");
+							$("#findMpasswordModal").modal("hide");
+						});
+					}else{
+						$("#failMessage").html("비밀번호가 일치하지 않습니다");
+						$("#messageModal").modal("show");
+					}
+				}
+			});
+		}
+		/* #################################### 비밀번호 재설정 Modal #################################### */
+		
+		/* #################################### 회원가입 Modal #################################### */
+		/* Show Join Modal */
+		function onClickJoin() {
+			setCity(null);
+			setProvince(null, null);
+			$("#joinModal").modal("show");
+		}
+		
+		/* Id Validation Check */
+		function onClickBtnValidationCheck() {
+			var mid = $("#jmid").val();
+			$.ajax({
+				url: "member/validationCheck",
+				data: {"mid":mid},
+				method:"post",
+				success: function(data) {
+					if(data.result == "possible") {
+						$("#successMessage").html("아이디 사용 가능");
+						$("#messageIcon").attr('class', "fa fa-check-circle");
+						$("#messageModal").modal("show");
+						$("#messageModal").on('hidden.bs.modal', function() {
+							$("#idCheck").val("success");
+							$("#jmname").focus();
+						});
+					} else if(data.result == "idOverflow") {
+						$("#failMessage").html("20자 이하의 아이디를 입력하세요");
+						$("#messageModal").modal("show");
+						$("#messageModal").on('hidden.bs.modal', function() {
+							$("#jmid").focus();
+						});
+					} else {
+						$("#failMessage").html("이미 사용중인 아이디 입니다");
+						$("#messageModal").modal("show");
+						$("#messageModal").on('hidden.bs.modal', function() {
+							$("#jmid").focus();
+						});
+					}
+				}
+			});
+		}
+		
+		/* Join Button */
+		function onClickBtnJoin() {
+			var mid = $("#jmid").val();
+			var mname = $("#jmname").val();
+			var mpassword = $("#jmpassword").val();
+			var mphone = $("#jmphone").val();
+			var mbirth = $("#jmbirth").val();
+			var mlocation = $("#jmlocation").val();
+			var mrank = 0;
+			var mpoint = 0;
+			var mresid = 0;
+			
+			if ( $("#idCheck").val() == "false" ) {
+				$("#failMessage").html("중복 체크를 해주세요");
+				$("#messageModal").modal("show");
+			} else {
+				$.ajax({
+					url: "member/join",
+					data: {"mid":mid, "mname":mname, "mpassword":mpassword, "mphone":mphone, "mbirth":mbirth, "mlocation":mlocation, "mrank":mrank, "mpoint":mpoint, "mresid":mresid},
+					method:"post",
+					success: function(data) {
+						if(data.result == "success") {
+							$("#successMessage").html("가입 완료");
+							$("#messageIcon").attr('class', "fa fa-check-circle");
+							$("#messageModal").modal("show");
+							$("#messageModal").on('hidden.bs.modal', function() {
+								$("#joinModal").modal("hide");
+								$("#login_userid").val(mid);
+								$("#login_userid").focus();
+							});
+						} else if(data.result == "idOverflow") {
+							$("#failMessage").html("20자 이하의 아이디를 입력하세요");
+							$("#messageModal").modal("show");
+						} else if (data.result == "morePassword") {
+							$("#failMessage").html("8글자 이상의 비밀번호를<br/>입력하세요");
+							$("#messageModal").modal("show");							
+						} else if(data.result == "idExist") {
+							$("#failMessage").html("아이디가 존재합니다");
+							$("#messageModal").modal("show");
+						} else {
+							$("#failMessage").html("모든 항목을 입력하세요");
+							$("#messageModal").modal("show");
+						}
+					}
+				});
+			}			
+		}
+		
+		/* Join Cancel Button */
+		function onClickBtnJoinCalcel() {
+			$("#joinModal").modal("hide");
+		}
+		
+		/* #################################### 회원가입 Modal #################################### */
+		
+		/* #################################### Location Setting #################################### */
+		function setCity(selCity) {
+			$.ajax({
+				url: "member/getCity",
+				data: {"selCity":selCity},
+				success: function (data) {
+					$("#selCity").html(data);
+				}
+			});
+		}
+		
+		function setProvince(selCity, selProvince) {
+			$.ajax({
+				url: "member/getProvince",
+				data: {"selCity":selCity, "selProvince":selProvince},
+				success: function (data) {
+					$("#selProvince").html(data);
+				}
+			});
+		}
+			
+		function setMlocation() {
+			$("#jmlocation").val($("#selCity").val() + " "+ $("#selProvince").val()); 				
+		}
+		/* #################################### Location Setting #################################### */
+		
+		/* ################## Message(OK, Error) Modal################## */
+		/* Message OK Button */
+		function onClickBtnOK() {
+			$("#messageModal").modal("hide");
 		}
 		
 	</script>
@@ -496,7 +737,7 @@
 
 <!-- BEGIN # MODAL LOGIN -->
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; padding-top: 150px" >
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width: 400px;">
 		<div class="modal-content">
 			<div class="modal-header" align="center">
 				<img class="img-angle" id="img_logo" src="${pageContext.servletContext.contextPath}/resources/img/logo_reform2.png">
@@ -530,8 +771,9 @@
 						</div>
 						
 						<div>
-							<button id="login_findId_btn" type="button" class="btn btn-link"  onclick="onClickFindId()" ><u>아이디 찾기</u></button>
-							<button id="login_findPw_btn" type="button" class="btn btn-link"  onclick="onClickFindPw()" ><u>비밀번호 찾기</u></button>
+							<button style="padding: 0px;" id="login_findId_btn" type="button" class="btn btn-link"  onclick="onClickFindId()"><u>아이디 찾기</u></button>
+							<button style="padding: 0px;" id="login_findPw_btn" type="button" class="btn btn-link"  onclick="onClickFindPw()"><u>비밀번호 찾기</u></button>
+							<button style="padding: 0px;" id="login_join_btn" type="button" class="btn btn-link"  onclick="onClickJoin()"><u>회원가입</u></button>
 							<!--      <button id="login_register_btn" type="button" class="btn btn-link">Register</button> -->
 						</div>
 					</div>
@@ -561,9 +803,10 @@
 		</div>
 	</div>
 	
-	<!-- ########################## 아이디 찾기 Modal ########################## -->
 	
-	<div id="memberModifyModal" id="findMidModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
+	
+	<!--  #################################### 아이디 찾기 Modal #################################### --> 
+	<div id="findMidModal" class="modal fade" tabindex="-1" role="dialog" style="margin: 155px auto">
 		<div class="modal-dialog" role="document" style="width:450px;">
 	    	<div class="modal-content" style="width:450px; margin: 0">
 		    	<div class="login-form">
@@ -582,14 +825,14 @@
 								<div class="form-group">
 									<div class="input-group">
 										<span style="width: 130px" class="input-group-addon"><b>이름</b></span>
-										<input type="text" class="form-control" name="mname" id="mname"/>
+										<input type="text" class="form-control" name="mname" id="mname" onkeydown="if(event.keyCode==13){javascript:onClickFindMid();}"/>
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<div class="input-group">
 										<span style="width: 130px" class="input-group-addon"><b>휴대폰번호</b></span>
-										<input type="text" class="form-control" name="mphone" id="mphone"/>
+										<input type="text" class="form-control" name="mphone" id="mphone" onkeydown="if(event.keyCode==13){javascript:onClickFindMid();}"/>
 									</div>
 								</div>
 								
@@ -598,7 +841,7 @@
 			     	
 				      	<!-- modal-modal-modal-footer -->	
 						<div class="modal-footer" style="background-color: #34495e; color:white">
-					        <button id="btnModify" type="button" class="btn btn-default" onclick="onClickFindMid()" style="color: #34495e"><b>확인</b></button>
+					        <button id="btnFindMid" type="button" class="btn btn-default" onclick="onClickFindMid()" style="color: #34495e"><b>확인</b></button>
 					        <button id="btnInit" type="button" data-dismiss="modal" class="btn btn-default"  style="color: #34495e"><b>취소</b></button>
 					    </div>
 					    
@@ -607,9 +850,199 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-
-	<!-- ########################## 수정 Modal ########################## -->
+	<!--  #################################### 아이디 찾기 Modal #################################### --> 
 	
+	<!--  #################################### 비밀번호 찾기 Modal #################################### --> 
+	<div id="findMpasswordModal" class="modal fade" tabindex="-1" role="dialog" style="margin: 155px auto">
+		<div class="modal-dialog" role="document" style="width:450px;">
+	    	<div class="modal-content" style="width:450px; margin: 0">
+		    	<div class="login-form">
+			   		<!-- modal-header -->
+			   		<div class="modal-header" style="background-color: #34495e; color:white">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #FFFFFF;"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">비밀번호 찾기</h4>
+			    	</div>
+
+		    		<!-- modal-modal-body -->
+			    	<div class="modal-body">
+						<form id="modifyForm">	
+						
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>아이디</b></span>
+									<input type="text" class="form-control" name="fpmid" id="fpmid" onkeydown="if(event.keyCode==13){javascript:onClickChangepw();}"/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>휴대폰번호</b></span>
+									<input type="text" class="form-control" name="fpmphone" id="fpmphone" onkeydown="if(event.keyCode==13){javascript:onClickChangepw();}"/>
+								</div>
+							</div>
+							
+						</form>		
+			    	</div>
+		     	
+			      	<!-- modal-modal-modal-footer -->	
+					<div class="modal-footer" style="background-color: #34495e; color:white">
+				        <button id="btnModify" type="button" class="btn btn-default" onclick="onClickChangepw()" style="color: #34495e"><b>확인</b></button>
+				        <button id="btnfpInit" type="button" data-dismiss="modal" class="btn btn-default"  style="color: #34495e"><b>취소</b></button>
+				    </div>
+
+				</div> <!-- /.login-form -->
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	<!--  #################################### 비밀번호 찾기 Modal #################################### --> 
+	
+	<!--  #################################### 비밀번호 재설정 Modal #################################### --> 
+	<div id="mpasswordResetModal" class="modal fade" tabindex="-1" role="dialog" style="margin: 155px auto">
+		<div class="modal-dialog" role="document" style="width:450px;">
+	    	<div class="modal-content" style="width:450px; margin: 0">
+		    	<div class="login-form">
+			   		<!-- modal-header -->
+			   		<div class="modal-header" style="background-color: #34495e; color:white">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #FFFFFF;"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">비밀번호 재설정</h4>
+			    	</div>
+			
+			    	<!-- modal-modal-body -->
+			    	<div class="modal-body">
+						<form id="modifyForm">
+						
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>새로운 비밀번호</b></span>
+									<input type="password" class="form-control" name="mpassword" id="mpassword" onkeydown="if(event.keyCode==13){javascript:onClickModifyPw();}"/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="input-group">
+									<span style="width: 130px" class="input-group-addon"><b>비밀번호 확인</b></span>
+									<input type="password" class="form-control" name="mpassword2" id="mpassword2" onkeydown="if(event.keyCode==13){javascript:onClickModifyPw();}"/>
+								</div>
+							</div>
+							
+						</form>		
+			    	</div>
+			     	
+			      	<!-- modal-modal-modal-footer -->	
+					<div class="modal-footer" style="background-color: #34495e; color:white">
+				        <button id="btnModifyPw" type="button" class="btn btn-default" onclick="onClickModifyPw()" style="color: #34495e"><b>확인</b></button>
+				        <button id="btnInitPw" type="button" data-dismiss="modal" class="btn btn-default"  style="color: #34495e"><b>취소</b></button>
+				    </div>
+				    
+				</div> <!-- /.login-form -->
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	<!--  #################################### 비밀번호 재설정 Modal #################################### --> 
+	
+	<!--  #################################### 회원가입 Modal #################################### --> 	
+	<div id="joinModal" class="modal fade" tabindex="-1" role="dialog" style="margin: 155px auto">
+		<div class="modal-dialog" role="document" style="width:450px;">
+	    	<div class="modal-content" style="width:450px; margin: 0">
+	    	
+	    		<!-- modal-header -->
+	     		<div class="modal-header" style="background-color: #34495e; color:white">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">회원 가입</h4>
+	      		</div>
+	      		
+	      		<!-- Validation Check Text -->
+	      		<input type="hidden" id="idCheck" value="false"/>
+	      		
+	      		<!-- modal-body -->
+	      		<div class="modal-body">
+					<form id="joinForm">
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px;" class="input-group-addon"><b>아이디</b></span>
+								<b><input type="text" style="width: 184px;" class="form-control" name="jmid" id="jmid"/></b>
+								&nbsp;<span><button id="btnValidationCheck" type="button" class="btn btn-default active" onclick="onClickBtnValidationCheck()" style="color: #34495e"><b>중복 체크</b></button></span>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>이름</b></span>
+								<input type="text" class="form-control" name="jmname" id="jmname" placeholder="홍길동"/>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>비밀번호</b></span>
+								<input type="password" class="form-control" name="jmpassword" id="jmpassword" placeholder="8~20글자 입력하세요"/>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>휴대전화</b></span>
+								<input type="text" class="form-control" name="jmphone" id="jmphone" placeholder="ex) 010-1234-1234 "/>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>생일</b></span>
+								<input type="date" class="form-control" name="jmbirth" id="jmbirth"/>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="input-group">
+								<span style="width: 130px" class="input-group-addon"><b>관심지역</b></span>
+								<select class="form-control" style="width: auto" id="selCity" name="selCity"></select>
+								<select class="form-control" style="width: auto" id="selProvince" name="selProvince"></select><br/>
+								<input type="hidden" class="form-control" name="mjlocation" id="jmlocation"/>		
+							</div>
+						</div>
+						
+					</form>		
+	      		</div>
+	      	
+		      	<!-- modal-footer -->	
+				<div class="modal-footer" style="background-color: #34495e; color:white">
+			        <button id="btnJoin" type="button" class="btn btn-default" onclick="onClickBtnJoin()" style="color: #34495e"><b>가입</b></button>
+			        <button id="btnJoinCancel" type="button" class="btn btn-default" onclick="onClickBtnJoinCancel()" style="color: #34495e"><b>취소</b></button>
+				</div>
+				
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	<!--  #################################### 회원가입 Modal #################################### -->
+	
+	<!--  #################################### Message Modal #################################### -->	
+	<div id="messageModal" class="modal fade" tabindex="-1" role="dialog" style="margin: 140px auto" onkeydown="if(event.keyCode==13){javascript:onClickBtnOK();}">
+		<div class="modal-dialog" role="document" style="width:300px;">
+	    	<div class="modal-content" style="width:300px; margin: 0">
+	    	
+	    		<!-- modal-header -->
+	     		<div class="modal-header" style="background-color: #34495e; color:white; text-align: left">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<i id="headerIcon" class="fa fa-bell-o" style="font-size: 20px" aria-hidden="true"> 알림</i>
+	      		</div>
+	      		
+	      		<!-- modal-body -->
+	      		<div class="modal-body" align="center">
+	      			<i id="messageIcon" class="fa fa-exclamation-triangle" style="font-size: 100px; color: #34495e" aria-hidden="true"></i><br/>
+					<b style="font-size: 20px; color: #1bbc9b" id="successMessage"></b>
+					<b style="font-size: 20px; color: red" id="failMessage"></b>
+	      		</div>
+	      	
+		      	<!-- modal-footer -->	
+				<div class="modal-footer" style="background-color: #34495e; color:white">
+			        <button id="messageOk" type="button" class="btn btn-default" onclick="onClickBtnOK()" style="color: #34495e"><b>확인</b></button>
+				</div>
+				
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	<!--  #################################### Message Modal #################################### -->
 	
 </body>
 </html>

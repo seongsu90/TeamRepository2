@@ -82,20 +82,20 @@
 				<div class="clearfix"> </div>
 		</div>
 	<!--End-top-nav-script-->
-				<div class="clearfix"> </div>
+			<!-- 	<div class="clearfix"> </div>
 		</div>
 		<div class="head-bg">
 			<div class="logo three">
 					<a href="/teamapp/"><h1>FOOD<span>House</span></h1></a>
 			</div>
-		</div>
+		</div> -->
 		<!--/header-->
 	</div>
 <!--gallery-->
 	<div class="gallery services" style="width:100%; height:1100px;">
 		<div class="container">
-			<h3 style="padding: 0;">MenuList</h3>
-			<div class="container" style="margin-top:30px;">
+			<h3 style="padding: 0; margin-top:0;">MenuList</h3>
+			<div class="container" style="margin-top:5px;">
 				<div class="row">						
 					<section class="content">
 						<nav>
