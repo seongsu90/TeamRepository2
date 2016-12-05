@@ -182,7 +182,7 @@
 		
 		
 		
-=======
+
 		 function check_only(chk){
 		     var obj = document.getElementsByName("closeday");
 		     if(chk.value=="휴일없음"){
@@ -200,7 +200,6 @@
 				}
 			}
 	     }
->>>>>>> refs/remotes/origin/master
 		
 		 function check_only(chk){
 		     var obj = document.getElementsByName("closeday");
