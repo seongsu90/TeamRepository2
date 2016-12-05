@@ -47,7 +47,7 @@
                 android:inputType="textPersonName"
                 android:hint="guest"
                 android:ems="10"
-                 />
+                android:id="@+id/editMid" />
 
             <Button
                 android:text="중복체크"
@@ -55,7 +55,7 @@
                 android:background="#FFFFFF"
                 android:textColor="#1bbc9b"
                 android:layout_height="wrap_content"
-                android:id="@+id/button3"
+                android:id="@+id/btnMidCheck"
                 android:layout_weight="1" />
 
         </LinearLayout>
@@ -77,7 +77,7 @@
             android:inputType="textPassword"
             android:hint="******"
             android:ems="10"
-             />
+            android:id="@+id/editMpassword" />
 
         <TextView
             android:text="이름"
@@ -96,7 +96,7 @@
             android:inputType="textPersonName"
             android:hint="홍길동"
             android:ems="10"
-            />
+            android:id="@+id/editMname" />
 
         <TextView
             android:text="휴대폰 번호"
@@ -121,8 +121,8 @@
                 android:gravity="center"
                 android:hint="010-1234-1234"
                 android:ems="10"
-                android:id="@+id/editText3"
-                android:layout_weight="2" />
+                android:layout_weight="2"
+                android:id="@+id/editMphone" />
 
             <Button
                 android:text="인증"
@@ -131,7 +131,7 @@
                 android:background="#FFFFFF"
                 android:textColor="#1bbc9b"
                 android:layout_height="wrap_content"
-                android:id="@+id/button2"
+                android:id="@+id/btnPIN"
                 android:layout_weight="0.6" />
 
             <EditText
@@ -142,7 +142,7 @@
                 android:gravity="center"
                 android:hint="123456"
                 android:ems="10"
-                android:id="@+id/editText4" />
+                android:id="@+id/editPINNum" />
 
         </LinearLayout>
 

@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mycompany.teamapp.dto.Member;
 import com.mycompany.teamapp.dto.MenuList;
+import com.mycompany.teamapp.service.EventService;
 import com.mycompany.teamapp.service.MemberService;
 import com.mycompany.teamapp.service.MenuListService;
+import com.mycompany.teamapp.service.RestaurantService;
 
 @Controller
 @RequestMapping("/menulist")
@@ -68,7 +70,7 @@ public class MenuListController {
 		}
 
 		@RequestMapping(value="/modify", method=RequestMethod.GET)
-		public String modifyForm(String mlname, Model model, HttpSession session) {
+		public String modifyForm(int mlresid, String mlname, Model model, HttpSession session) {
 			String mid = (String) session.getAttribute("login");			
 			Member member = memberService.info(mid);
 			MenuList menuList = menuListService.info(member.getMresid(), mlname);
@@ -77,8 +79,8 @@ public class MenuListController {
 		}
 		
 		@RequestMapping(value="/modify", method=RequestMethod.POST)
-		public String modify(MenuList menuList,HttpSession session) throws IllegalStateException, IOException {
-			
+		public String modify(MenuList menuList,HttpSession session, Model model){
+			MenuList oldmenuList = menuListService.info(menuList.getMlresid(), menuList.getMlname());
 			if(menuList.getMlphoto() != null && !menuList.getMlphoto().isEmpty()){
 				try{
 					menuList.setMloriginfile(menuList.getMlphoto().getOriginalFilename());
@@ -90,9 +92,20 @@ public class MenuListController {
 					menuList.setMlmime(menuList.getMlphoto().getContentType());
 					menuListService.modify(menuList);
 				}catch(Exception e){}
-			
+			}else {
+				menuList.setMlsavedfile(oldmenuList.getMlsavedfile());
+				menuList.setMloriginfile(oldmenuList.getMloriginfile());
+				menuList.setMlmime(oldmenuList.getMlmime());			
 			}
-			return "redirect:/menulist/selectlist";
+			
+			int result = menuListService.modify(menuList);
+			if(result == MenuListService.MODIFY_SUCCESS){
+				model.addAttribute("result", "success");
+			}else{
+				model.addAttribute("result", "fail");
+			}
+			
+			return "redirect:/menulist/selectlist";		
 		}
 		
 		@RequestMapping("/delete")
@@ -160,7 +173,7 @@ public class MenuListController {
 			
 			menuList.setMlmime(menuList.getMlphoto().getContentType());
 			menuListService.modifyHot(menuList);
-			return "redirect:/menulist/index";
+			return "redirect:/menulist/selectlist";
 		}
 		
 		@RequestMapping(value="/hotinfo")
