@@ -285,7 +285,6 @@
 			<form id="reserveForm">
 			
 				※ 당일 예약만 가능합니다. <br/>
-				
 			<div class="form-group">
 						<div class="input-group">
 							<span style="width: 130px; padding:0px;" class="input-group-addon"><b>예약자 ID</b></span>

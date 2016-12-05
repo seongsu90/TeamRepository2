@@ -45,6 +45,7 @@ public class ReservationService {
 		return DELETE_SUCCESS;
 	}
 	
+	
 	public List<Reservation> list(String mid, int pageNo, int rowsPerPage){
 		return reservationDao.selectByPage(mid,pageNo, rowsPerPage);
 	}
