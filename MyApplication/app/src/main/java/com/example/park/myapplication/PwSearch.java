@@ -18,9 +18,11 @@ public class PwSearch extends AppCompatActivity {
         btnpw1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PwSearch.this,PwModify.class);
+                Intent intent = new Intent(PwSearch.this, PwModify.class);
                 startActivity(intent);
             }
         });
+
+
     }
 }

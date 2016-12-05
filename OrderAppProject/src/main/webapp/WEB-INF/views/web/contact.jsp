@@ -164,13 +164,13 @@
 				<div class="clearfix"> </div>		
 			</div>
 	<!--End-top-nav-script-->
-			<div class="clearfix"> </div>
+		 	<!-- <div class="clearfix"> </div>
 		</div>
 		<div class="head-bg">
 			<div class="logo three">
 					<a href="/teamapp/"><h1>FOOD<span>House</span></h1></a>
 			</div>
-		</div>
+		</div>  -->
 		<!--/header-->  
 	</div>	
 	<!--/contact-->
@@ -239,6 +239,7 @@
 			</div>
 		</div>
 	</div>
+
 	
 <!-- start-footer -->
 	<div class= "footer">
