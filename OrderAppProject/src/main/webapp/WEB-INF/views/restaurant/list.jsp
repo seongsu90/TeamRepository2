@@ -522,6 +522,9 @@
 </div><!-- /.modal -->
 
 
+	
+
+
 	<!-- ########################## 삭제 Modal ########################## -->
 	
 	<div id="restaurantDeleteModal" class="modal fade" tabindex="-1" role="dialog" style="position: fixed">

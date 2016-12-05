@@ -290,5 +290,51 @@
 			</div>
 		</div>
 	</div> 		
+	
+	
+			<%-- 	 #################################################################################### 
+
+		 <%-- ## Reserve Modal ## --%>
+
+	<div id="ReserveModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
+		<div class="modal-dialog" role="document" style="width:750px">
+   			<div class="modal-content">
+   			<!-- modal-header -->
+     		<div class="modal-header" style="background-color: #34495e; color:white">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Restaurant 예약</h4>
+      		</div>
+
+     		<!-- modal-modal-body -->
+     		<div class="modal-body">
+     		
+			<form id="addForm">
+			
+				※ 당일 예약만 가능합니다. <br/>
+		- 예약 시간 <input type="time"  name="rvtime"  /> 
+		<c:if test="${error1 == 'TIME_OUT'}"> *올바른 시간이 아닙니다.</c:if>
+		<c:if test="${error1 == 'DAY_OUT'}"> *오늘은 쉬는날 입니다.</c:if><br/>
+		- 인원 수(테이블당 최대 4명) <input type="number" name="rvperson" min="1" max="8"><br/>
+		- 예약 아이디<input type="text" name="rvmid" value="${login}"readonly> <br/>
+		- 예약하는 식당 <input type="text"  name="rvresid" value="${rvresid}" readonly/><c:if test="${error1 == 'ALREADY'}"> *이미 예약한 식당입니다.</c:if><br/> <br/>
+		
+		<input type="submit" value="예약하기"/> <br/>
+			
+			
+			
+			
+
+			</form>
+     		</div>
+
+      	<!-- modal-modal-modal-footer -->
+		<div class="modal-footer" style="background-color: #34495e; color:white">
+	        <button id="btnResAdd" type="button" class="btn btn-default" onclick="onClickBtnResAdd()" style="color: #34495e"><b>등록</b></button>
+	        <button id="btnInit" type="button" class="btn btn-default" onclick="onClickBtnCancel()" style="color: #34495e"><b>취소</b></button>
+		</div>
+	</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog --> 
+</div><!-- /.modal -->
+	
 </body>
 </html>

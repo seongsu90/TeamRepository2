@@ -43,17 +43,14 @@ public class ReservationController {
 		return "/reservation/index";
 	}
 	
-	@RequestMapping(value="/add",method=RequestMethod.GET)
-	public String addForm(int rvresid,HttpSession httpsession){
-		httpsession.setAttribute("rvresid", rvresid);
-		logger.info("addform 처리");
-		return "/reservation/addform";
-	}
+	
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	public String add(Reservation reservation,HttpSession httpsession,Model model){
 		logger.info("add 처리");
-		int resid = (int) httpsession.getAttribute("rvresid");
+	
+		int resid = reservation.getRvresid();
+		
 		Restaurant rs = restaurantservice.info(resid);
 		String optime = rs.getResopen();
 		optime = optime.substring(0, 2);
@@ -66,7 +63,7 @@ public class ReservationController {
 		int rvt = Integer.parseInt(revtime);
 		
 		String[] cloday = rs.getRescloseday().split("/");
-		String[] sevenday = {"일요일","월요일","화요일","수요일","목요일","금요일","토요일","휴무 없음"};
+		String[] sevenday = {"일요일","월요일","화요일","수요일","목요일","금요일","토요일","휴일없음"};
 		Date date = new Date();
 		
 		for(int i=0; i<cloday.length;i++)
@@ -94,13 +91,17 @@ public class ReservationController {
 		}else{
 			int result = reservationservice.add(reservation);
 			if(result==0)
-			{
+			{	
+				model.addAttribute("result", "success");
 				httpsession.removeAttribute("rvresid");
-				return "redirect:/reservation/index";
+				return "/reservation/addform";
 			}
+			model.addAttribute("result", "fail");
 			model.addAttribute("error1", "ALREADY");
 			return "/reservation/addform";
 		}
+				
+		
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
