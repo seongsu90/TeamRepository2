@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.teamapp.dao.FavoriteDao;
 import com.mycompany.teamapp.dto.Member;
+import com.mycompany.teamapp.dto.MenuList;
 import com.mycompany.teamapp.dto.Restaurant;
 import com.mycompany.teamapp.service.MemberService;
+import com.mycompany.teamapp.service.MenuListService;
 import com.mycompany.teamapp.service.RestaurantService;
 
 @Controller
@@ -37,6 +39,9 @@ public class RestaurantController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private MenuListService menuListService;
 	
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
@@ -197,8 +202,11 @@ public class RestaurantController {
 
 	@RequestMapping("/info")
 	public String info(int resid, Model model){
-		Restaurant restaurant=restaurantService.info(resid);
+		Restaurant restaurant=restaurantService.info(resid);		
+		List<MenuList> menuList = menuListService.menuList(resid);
+		
 		model.addAttribute("restaurant", restaurant);
+		model.addAttribute("menuList", menuList);
 		return "restaurant/info";
 	}
 	

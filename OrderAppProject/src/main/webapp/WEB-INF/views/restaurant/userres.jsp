@@ -109,8 +109,44 @@
 	        }
 		</style>
 		
-		
-		
+		<script type="text/javascript">
+			function resinfo(resid) {
+				$.ajax({
+					url: "../restaurant/info",
+					data: {"resid":resid},
+					success: function(data) {
+						$("#resinfoModal").modal("show");						
+						$("#infoForm #resname").val(data.resname);
+						$("#infoForm #restotaltable").val(data.restotaltable);
+						$("#infoForm #restel").val(data.restel);
+						$("#infoForm #resopen").val(data.resopen);
+						$("#infoForm #resclose").val(data.resclose);							
+						$("#infoForm #resinfo").val(data.resinfo);
+						$("#infoForm #reslocation").val(data.reslocation);
+						$("#infoForm #rescloseday").val(data.rescloseday);
+						$("#mlname").html(data.mlname);
+						$("#mlprice").html(data.mlprice); 
+						
+						for(var i=0; i<data.menu.length; i++) {
+							var menu = data.menu[i];	
+							if(i==0) {
+								$("#menuTbody").empty();			// 메뉴리스트 중복 출력 제거
+							}
+							$("#menuTbody").append(
+								'<tr class="menu">' +									
+									'<td>' +
+										'<input class="mlname" type="text" style="border: 0;" name="mlname" value="' + menu.mlname + '" readonly/>' +							
+									'</td>' +									
+									'<td>' +
+										'<input class="mlprice" type="text" style="border: 0;" name="mlprice" value="' + menu.mlprice + '" readonly/>' +							
+									'</td>' +		
+								'</tr>'
+							);
+						}
+					}
+				});
+			};
+		</script>
 	
 	</head>
 	<body>
@@ -121,7 +157,6 @@
 				<table id="acrylic" style="width:1100px;">
 					<thead>
 						<tr> 
-							
 							<th> 사진 </th>
 							<th> 이름</th>
 							<%-- <th> 위치</th> --%>
@@ -137,21 +172,15 @@
 						<c:forEach var="restaurant" items="${list}">
 							<tr>
 								<td><img src="showPhoto?ressavedfile=${restaurant.ressavedfile}" width="50px"/></td>
-	
 								<td>									
-									<a id="btnInfo" href="javascript:showInfo(${restaurant.resid})">${restaurant.resname}</a>
-								</td>
-	
-								<%-- <td> ${restaurant.reslocation} </td> --%>
+									<a id="btnInfo" href="javascript:resinfo(${restaurant.resid})">${restaurant.resname}</a>
+								</td>							
 								<td> ${restaurant.resinfo} </td>
 								<td> ${restaurant.restotaltable} </td>
 								<td> ${restaurant.restel} </td>
 								<td> ${restaurant.resopen} </td>
 								<td> ${restaurant.resclose} </td>
-								<td> ${restaurant.rescloseday} </td>
-								<c:if test="${mrank==2}">
-	 							<td> <button type="button" class="btn btn-warning" style="color: #34495e" onclick="showDeleteModal('${restaurant.resid}')">삭제</button> </td>
-								</c:if>
+								<td> ${restaurant.rescloseday} </td>								
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -194,6 +223,98 @@
 			</div>				
 		</div>
 	</div>
-
+	
+	<!-- resinfoModal start -->	
+	<div id="resinfoModal" class="modal fade" tabindex="-1" role="dialog" >
+		<div class="modal-dialog" role="document" style="width:820px">
+			<div class="modal-content">
+			<!-- modal-header -->
+		     	<div class="modal-header" style="background-color: #34495e; color:white">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">레스토랑 정보</h4>
+		      	</div>
+		
+				<div class="modal-body">
+					<form id="infoForm">
+						<div class="row" >
+							<div class="col-md-6" style="margin-left: 20px;">
+								<input id="resid" type='hidden'/>						
+								<div class="form-group">
+									<div class="input-group">
+										<span style="width: 130px; padding:0px;" class="input-group-addon"><b>식당 이름</b></span>
+										<b><input id="resname" type='text' style="width:225px" class="form-control" /></b>
+									</div>
+								</div>
+		
+								<div class="form-group">
+									<div class="input-group">
+										<span style="width: 130px" class="input-group-addon"><b>전체 테이블 수</b></span>
+										<b><input id="restotaltable" type='number' style="width:225px" class="form-control" /></b>
+									</div>
+								</div>
+		
+								<div class="form-group">
+									<div class="input-group">
+										<span style="width: 130px" class="input-group-addon"><b>전화번호</b></span>
+										<b><input id="restel" type='text' style="width:225px" class="form-control" /></b>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="input-group">
+										<span style="width: 130px" class="input-group-addon"><b>오픈 타임</b></span>
+										<b><input id="resopen" type='time' style="width:225px" class="form-control" /></b>
+									</div>
+									<div class="input-group">
+										<span style="width: 130px" class="input-group-addon"><b>클로즈 타임</b></span>
+										<b><input id="resclose" type='time' style="width:225px" class="form-control"/></b>
+									</div>
+								</div>
+		
+								<div class="form-group">
+									<div class="input-group">
+										<span style="width: 130px" class="input-group-addon"><b>레스토랑 정보</b></span>
+										<b><input id="resinfo" type='text' style="width:225px" class="form-control" /></b>
+									</div>
+								</div>
+		
+								<div class="form-group">
+									<div class="input-group">
+										<span style="width: 130px" class="input-group-addon"><b>주소</b></span>
+										<b><input id="reslocation" type='text' style="width:225px" class="form-control" /></b>
+									</div>
+								</div>
+								
+								<div id="isclose" class="form-group">
+									<div class="input-group">
+										<span style="width: 130px" class="input-group-addon"><b>레스토랑 휴일</b></span>
+										<b><input id="rescloseday" type='text' style="width:225px" class="form-control" /></b>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-md-4">								
+								<table id="acrylic">
+									<thead>
+										<tr>
+											<th> 메뉴 </th>
+											<th> 가격 </th>																							
+										</tr>
+									</thead>									
+									<tbody id="menuTbody">							
+									</tbody>
+								</table>	
+							</div>
+						</div>
+					</form>
+				</div>
+				
+				<div class="modal-footer" style="background-color:#34495e; color:white">
+					<button id="btnReservation" type="button" class="btn btn-primary" onclick="onClickBtnReservation()" ><b>예약하기</b></button>					
+				</div>
+			</div>
+		</div>		
+		<!-- resinfoModal end -->
+	</div>
 	</body>
 </html>
