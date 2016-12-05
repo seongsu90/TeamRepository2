@@ -175,7 +175,7 @@
 						<li><a href="${pageContext.servletContext.contextPath}/web/memberindex">회원관리</a></li>
 						<li><a href="${pageContext.servletContext.contextPath}/web/resmanagement">가맹점관리</a></li> 
 						</c:if>
-						<c:if test="${mrank<=0}">
+						<c:if test="${mrank==0}">
 							<li><a href="${pageContext.servletContext.contextPath}/web/userrestaurant">매장보기</a></li> 
 						</c:if>
 						
