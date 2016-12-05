@@ -137,7 +137,7 @@ public class MemberController {
 	public String join(Member member, Model model) {
 		logger.info("join() POST 실행");
 		try {
-			int result = memberService.join(member);
+			String result = memberService.join(member);
 			return "redirect:/member/login";
 		} catch ( UncategorizedSQLException e ) {
 			model.addAttribute("error", " 20자 이하의 아이디를 입력하세요");

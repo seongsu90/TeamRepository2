@@ -1,5 +1,8 @@
 package com.example.park.myapplication;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,26 +13,39 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.StringTokenizer;
 
 public class Join extends AppCompatActivity {
-        private String location = null;
-        private String detailLoc = null;
-        private String inputYear = null;
-        private String inputMonth = null;
-        private String inputDay = null;
-        private Button btnMidCheck;
-        private Button btnPIN;
-        private Button btnNext;
-        private EditText mid;
-        private EditText mpassword;
-        private EditText mname;
-        private EditText mphone;
-        private String mbirth;
-        private String mlocation;
+    private String location = null;
+    private String detailLoc = null;
+    private String inputYear = null;
+    private String inputMonth = null;
+    private String inputDay = null;
+    private Button btnMidCheck;
+    private Button btnPIN;
+    private Button btnNext;
+    private EditText mid;
+    private EditText mpassword;
+    private EditText mname;
+    private EditText mphone;
+    private String mbirth;
+    private String mlocation;
+    private boolean validation_signal = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,6 +170,7 @@ public class Join extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 inputYear = (String) spinneryear.getSelectedItem();
+                mbirth = inputYear + "-" + inputMonth + "-" + inputDay;
             }
 
             @Override
@@ -166,6 +183,7 @@ public class Join extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 inputMonth = (String) spinnermonth.getSelectedItem();
+                mbirth = inputYear + "-" + inputMonth + "-" + inputDay;
             }
 
             @Override
@@ -179,7 +197,6 @@ public class Join extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 inputDay = (String) spinnerday.getSelectedItem();
                 mbirth = inputYear + "-" + inputMonth + "-" + inputDay;
-                Log.i("mylog", mbirth);
             }
 
             @Override
@@ -187,5 +204,223 @@ public class Join extends AppCompatActivity {
 
             }
         });
+
+        btnMidCheck =(Button)findViewById(R.id.btnMidCheck);
+        btnMidCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id = mid.getText().toString();
+                id_validation_check(id);
+            }
+        });
+
+        btnPIN = (Button) findViewById(R.id.btnPIN);
+        btnPIN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Join.this,MainFunction.class);
+                startActivity(intent);
+            }
+        });
+
+        btnNext = (Button) findViewById(R.id.btnNext);
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id = mid.getText().toString();
+                String password = mpassword.getText().toString();
+                String name = mname.getText().toString();
+                String phone = mphone.getText().toString();
+                String birth = mbirth;
+                String inputLocation = mlocation;
+                join(id, password, name, phone, birth, inputLocation);
+            }
+        });
+
     }
+
+    /* 아이디 중복 체크 */
+    public void id_validation_check(String id) {
+        AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+                String id = params[0];
+                String result = "";
+
+                try {
+                    URL url = new URL("http://192.168.0.29:8080/teamapp/validationCheck");
+
+                    JSONObject body = new JSONObject();
+                    body.put("mid", id);
+
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setReadTimeout(15000);
+                    conn.setConnectTimeout(15000);
+                    conn.setRequestMethod("POST");
+                    conn.setDoInput(true);
+                    conn.setDoOutput(true);
+
+                    OutputStream os = conn.getOutputStream();
+                    OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
+                    BufferedWriter writer = new BufferedWriter(osw);
+                    writer.write(getPostDataString(body));
+                    writer.flush();
+                    writer.close();
+
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+                        InputStreamReader isp = new InputStreamReader(conn.getInputStream());
+                        BufferedReader br = new BufferedReader(isp);
+                        String strJson = "";
+
+                        while (true) {
+                            String data = br.readLine();
+                            if (data == null) break;
+                            strJson  += data;
+                        }
+
+                        JSONObject jsonObject = new JSONObject(strJson);
+                        result = jsonObject.getString("result");
+
+                        br.close();
+                        isp.close();
+                    }
+
+                } catch (Exception e) {
+                    Log.i("mylog", e.getMessage());
+                }
+
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                super.onPostExecute(result);
+
+                if (result.equals("possible")){
+                    validation_signal = true;
+                    Toast.makeText(getApplicationContext(),"아이디 사용 가능", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(),"아이디가 존재합니다.\n다른 아이디를 입력해 주세요",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        };
+
+        asyncTask.execute(id);
+
+    }
+
+    /* Join 실행 */
+    public void join(String id, String password, String name, String phone, String birth, String inputLocation) {
+        AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+                String id = params[0];
+                String password = params[1];
+                String name = params[2];
+                String phone = params[3];
+                String birth = params[4];
+                String inputLocation = params[5];
+                String result = "";
+
+                try {
+                    URL url = new URL("http://192.168.0.29:8080/teamapp/join");
+
+                    JSONObject body = new JSONObject();
+                    body.put("mid", id);
+                    body.put("mpassword", password);
+                    body.put("mname", name);
+                    body.put("mphone", phone);
+                    body.put("mbirth", birth);
+                    body.put("mlocation", inputLocation);
+
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setReadTimeout(15000);
+                    conn.setConnectTimeout(15000);
+                    conn.setRequestMethod("POST");
+                    conn.setDoInput(true);
+                    conn.setDoOutput(true);
+
+                    OutputStream os = conn.getOutputStream();
+                    OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
+                    BufferedWriter writer = new BufferedWriter(osw);
+                    writer.write(getPostDataString(body));
+                    writer.flush();
+                    writer.close();
+
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+                        InputStreamReader isp = new InputStreamReader(conn.getInputStream());
+                        BufferedReader br = new BufferedReader(isp);
+                        String strJson = "";
+
+                        while (true) {
+                            String data = br.readLine();
+                            if (data == null) break;
+                            strJson  += data;
+                        }
+
+                        JSONObject jsonObject = new JSONObject(strJson);
+                        result = jsonObject.getString("result");
+
+                        br.close();
+                        isp.close();
+                    }
+
+                } catch (Exception e) {
+                    Log.i("mylog", e.getMessage());
+                }
+
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                super.onPostExecute(result);
+
+                if (result.equals("success")){
+                    Toast.makeText(getApplicationContext(),"가입 완료", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Join.this, MainActivity.class);
+                    startActivity(intent);
+                } else if ( validation_signal == false || result.equals("validation")){
+                    Toast.makeText(getApplicationContext(),"아이디 중복체크를 해주세요",Toast.LENGTH_SHORT).show();
+                } else if(result.equals("toomany")){
+                    Toast.makeText(getApplicationContext(),"20글자 이하의 id, password를 입력하세요",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(),"모든 항목을 입력해 주세요",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        };
+
+        asyncTask.execute(id, password, name, phone, birth, inputLocation);
+
+    }
+
+    public String getPostDataString(JSONObject params) throws Exception {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+
+        Iterator<String> itr = params.keys();
+
+        while(itr.hasNext()){
+
+            String key= itr.next();
+            Object value = params.get(key);
+
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            result.append(URLEncoder.encode(key, "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(value.toString(), "UTF-8"));
+
+        }
+
+        return result.toString();
+    }
+
+
+
 }

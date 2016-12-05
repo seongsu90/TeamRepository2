@@ -218,13 +218,13 @@
             android:layout_weight="1">
 
             <Button
-                android:text="확인"
+                android:text="가입"
                 android:background="#FFFFFF"
                 android:textColor="#1bbc9b"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnpw1" />
+                android:id="@+id/btnNext" />
         </FrameLayout>
 
         <Space

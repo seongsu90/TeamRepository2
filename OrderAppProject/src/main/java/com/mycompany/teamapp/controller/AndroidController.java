@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +31,7 @@ public class AndroidController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(String mid, String mpassword, HttpSession session, Model model) {
-		System.out.println("Android Login 실행");
+		logger.info("Android Login 실행");
 		String result = MemberService.LOGIN_FAIL_MID;
 		result = memberService.login(mid, mpassword);
 		if(result.equals(MemberService.LOGIN_SUCCESS)) {
@@ -37,6 +39,37 @@ public class AndroidController {
 			session.setAttribute("mrank", memberService.info(mid).getMrank());
 		}
 
+		model.addAttribute("result", result);
+		return "android/result";
+	}
+	
+	@RequestMapping(value="/validationCheck", method=RequestMethod.POST)
+	public String validationCheck(String mid, HttpSession session, Model model) {
+		logger.info("Android validationCheck 실행");
+		boolean validation = false;
+		String result = "impossible";
+		validation = memberService.isMid(mid);
+		if( !mid.equals("") && validation) {
+			result = "possible";
+		}
+
+		model.addAttribute("result", result);
+		return "android/result";
+	}
+	
+	@RequestMapping(value="/join", method=RequestMethod.POST)
+	public String join(Member member, Model model) {
+		logger.info("Android join 실행");
+		String result = "fail";		
+		
+		try {
+			result = memberService.join(member);
+		} catch ( UncategorizedSQLException e ) {
+			result = "toomany";
+		} catch (DuplicateKeyException e1) {
+			result = "validation";
+		} catch (Exception e2) {}
+		
 		model.addAttribute("result", result);
 		return "android/result";
 	}

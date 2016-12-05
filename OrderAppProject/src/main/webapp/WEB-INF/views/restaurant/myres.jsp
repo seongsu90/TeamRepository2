@@ -118,6 +118,25 @@
 			$("#closeday").hide();
 		};
 		
+		 function check_only(chk){
+		     var obj = document.getElementsByName("closeday");
+		     if(chk.value=="휴일없음"){
+				for(var i=0; i<obj.length; i++){
+				   if(obj[i] != chk){
+				  		obj[i].checked = false;
+					}
+				}
+			}
+		     else{
+				for(var i=0; i<obj.length; i++){
+					   if(obj[i].value == "휴일없음"){
+					  		obj[i].checked = false;
+					  	}
+				}
+			}
+	     }
+		
+		
 		function onClickBtnModify(){
 			$(':checkbox[readonly="readonly"]').click(function() {
 				return true;
@@ -291,14 +310,14 @@
 						<div id="closeday" class="form-group">
 							<div class="input-group">
 								<span style="width: 130px; margin-right: 10px; border-right: 1px solid #ccc;" class="input-group-addon"><b>휴일</b></span>&nbsp;
-								<input type="checkbox"  name="closeday"  value="휴일없음" >휴일 X&nbsp;
-			        			<input type="checkbox"  name="closeday"  value="월요일" >월요일&nbsp;
-			        			<input type="checkbox"  name="closeday"  value="화요일" >화요일&nbsp;
-			        			<input type="checkbox"  name="closeday"  value="수요일" >수요일&nbsp;
-			        			<input type="checkbox"  name="closeday"  value="목요일" >목요일&nbsp;
-			        			<input type="checkbox"  name="closeday"  value="금요일" >금요일&nbsp;
-			        			<input type="checkbox"  name="closeday"  value="토요일" >토요일&nbsp;
-			        			<input type="checkbox"  name="closeday"  value="일요일" >일요일
+								<input type="checkbox" name="closeday"  value="휴일없음" onclick="check_only(this)">휴일 X&nbsp;
+			        			<input type="checkbox" name="closeday"  value="월요일" onclick="check_only(this)">월요일&nbsp;
+			        			<input type="checkbox" name="closeday"  value="화요일" onclick="check_only(this)">화요일&nbsp;
+			        			<input type="checkbox" name="closeday"  value="수요일" onclick="check_only(this)">수요일&nbsp;
+			        			<input type="checkbox" name="closeday"  value="목요일" onclick="check_only(this)">목요일&nbsp;
+			        			<input type="checkbox" name="closeday"  value="금요일" onclick="check_only(this)">금요일&nbsp;
+			        			<input type="checkbox" name="closeday"  value="토요일" onclick="check_only(this)">토요일&nbsp;
+			        			<input type="checkbox" name="closeday"  value="일요일" onclick="check_only(this)">일요일
 							</div>
 						</div>
 	

@@ -10,8 +10,8 @@ import com.mycompany.teamapp.dto.Member;
 
 @Component
 public class MemberService {
-	public static final int JOIN_SUCCESS = 0;
-	public static final int JOIN_FAIL = 1;
+	public static final String JOIN_SUCCESS = "success";
+	public static final String JOIN_FAIL = "fail";
 	
 	public static final String LOGIN_SUCCESS = "success";
 	public static final String LOGIN_FAIL_MID = "fail_mid";
@@ -32,7 +32,7 @@ public class MemberService {
 	@Autowired
 	private MemberDao memberDao;
 	
-	public int join(Member member) {
+	public String join(Member member) {
 		memberDao.insert(member);
 		return JOIN_SUCCESS;
 	}
@@ -81,8 +81,8 @@ public class MemberService {
 	
 	public boolean isMid(String mid) {
 		Member member = memberDao.selectByMid(mid);
-		if ( member == null ) return false;
-		return true;
+		if ( member == null ) return true;
+		return false;
 	}
 	
 	public int addPenalty(String mid) {
