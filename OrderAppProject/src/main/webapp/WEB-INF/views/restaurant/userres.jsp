@@ -146,6 +146,49 @@
 					}
 				});
 			};
+			
+			
+			/* ############################################################################	 */	
+			
+			function onClickBtnReserve(){
+				console.log("onClickBtnReserve");
+				$("#").hide();
+				$("#ReserveModal").modal("show");
+			
+			}
+			
+			
+			
+			function onClickReserveAdd(){
+				var rvmid = $("#rvmid").val();
+				var rvresid = $("#rvresid").val();
+				var rvtime = $("#rvtime").val();
+				var rvperson = $("#rvperson").val();
+				
+				console.log(rvmid);
+				console.log(rvresid);
+				console.log(rvtime);
+				console.log(rvperson);
+				
+				
+				$.ajax({
+					url:"/teamapp/reservation/add",
+					data:{"rvmid":rvmid, "rvresid":rvresid, "rvtime":rvtime, "rvperson":rvperson},
+					method:"post",
+					success: function(data) {
+						if(data.result == "success") {
+							
+							$("#ReserveModal").hide();
+							$("#infoModal").show();
+							location.reload(true);
+						} else{
+							alert("추가 실패");
+						}
+					}					
+				});
+			
+			}
+			
 		</script>
 	
 	</head>
@@ -223,6 +266,82 @@
 			</div>				
 		</div>
 	</div>
+	
+	
+	 <%-- ## Reserve Modal ## --%>
+
+	<div id="ReserveModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
+		<div class="modal-dialog" role="document" style="width:750px">
+   			<div class="modal-content">
+   			<!-- modal-header -->
+     		<div class="modal-header" style="background-color: #34495e; color:white">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Restaurant 예약</h4>
+      		</div>
+
+     		<!-- modal-modal-body -->
+     		<div class="modal-body">
+     		
+			<form id="reserveForm">
+			
+				※ 당일 예약만 가능합니다. <br/>
+				
+			<div class="form-group">
+						<div class="input-group">
+							<span style="width: 130px; padding:0px;" class="input-group-addon"><b>예약자 ID</b></span>
+							<b><input type="text" style="width:225px" class="form-control" id="rvmid" name="rvmid" value="${login}" readonly/></b>
+						</div>
+			</div>
+			
+			<div class="form-group">
+						<div class="input-group">
+							<span style="width: 130px; padding:0px;" class="input-group-addon"><b>Restaurant ID</b></span>
+							<b><input type="text" style="width:225px" class="form-control" id="rvresid" name="rvresid" />
+								<c:if test="${error1 == 'ALREADY'}"> *이미 예약한 식당입니다.</c:if>
+							</b>
+						</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="input-group">
+					<span style="width: 130px" class="input-group-addon"><b>예약 시간</b></span>
+					<input type="time" style="width:225px" class="form-control" id="rvtime" name="rvtime"/>
+				</div>
+			</div>
+			<c:if test="${error1 == 'TIME_OUT'}"> *올바른 시간이 아닙니다.</c:if>
+			<c:if test="${error1 == 'DAY_OUT'}"> *오늘은 쉬는날 입니다.</c:if><br/>
+			
+			<div class="form-group">
+				<div class="input-group">
+					<span style="width: 130px" class="input-group-addon"><b>인원 수(테이블 당 최대 4명)</b></span>
+					<input type="number"  style="width:225px" class="form-control" id="rvperson" name="rvperson"/>
+				</div>
+			</div>	
+			
+			</form>
+     	</div>
+
+      	<!-- modal-modal-modal-footer -->
+		<div class="modal-footer" style="background-color: #34495e; color:white">
+	        <button id="btnResAdd" type="button" class="btn btn-default" onclick="onClickReserveAdd()" style="color: #34495e"><b>등록</b></button>
+	        <button id="btnInit" type="button" class="btn btn-default" onclick="onClickBtnCancel()" style="color: #34495e"><b>취소</b></button>
+		</div>
+	</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog --> 
+</div><!-- /.modal -->
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<!-- resinfoModal start -->	
 	<div id="resinfoModal" class="modal fade" tabindex="-1" role="dialog" >
@@ -310,7 +429,7 @@
 				</div>
 				
 				<div class="modal-footer" style="background-color:#34495e; color:white">
-					<button id="btnReservation" type="button" class="btn btn-primary" onclick="onClickBtnReservation()" ><b>예약하기</b></button>					
+					<button id="btnReserve" type="button" class="btn btn-primary" onclick="onClickBtnReserve()" ><b>예약하기</b></button>					
 				</div>
 			</div>
 		</div>		
