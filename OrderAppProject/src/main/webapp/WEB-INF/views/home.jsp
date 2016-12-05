@@ -185,6 +185,7 @@
 						<li><a href="${pageContext.servletContext.contextPath}/web/menumanagement">메뉴관리</a></li> 
 						</c:if>
 						<li class="lost"><a href="${pageContext.servletContext.contextPath}/web/contact">오시는길</a></li>
+						<li class="lost"><a href="${pageContext.servletContext.contextPath}/web/contact2">테스트페이지</a></li>
 						<c:if test="${login==null}">
 							<li ><p class="text-center"><a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a></p></li>
 						</c:if>
