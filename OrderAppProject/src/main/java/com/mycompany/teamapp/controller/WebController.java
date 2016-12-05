@@ -58,7 +58,7 @@ public class WebController {
 		return "/web/userrestaurant";
 	}
 	
-	@RequestMapping("/contact")
+	@RequestMapping("/contact2")
 	public String contact2()
 	{
 		return "/web/contact2";
