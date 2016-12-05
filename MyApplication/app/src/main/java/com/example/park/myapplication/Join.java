@@ -7,6 +7,8 @@ import android.view.View;
 import android.webkit.ConsoleMessage;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -14,19 +16,36 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Join extends AppCompatActivity {
-        String location = null;
-        String detailLoc = null;
+        private String location = null;
+        private String detailLoc = null;
+        private String inputYear = null;
+        private String inputMonth = null;
+        private String inputDay = null;
+        private Button btnMidCheck;
+        private Button btnPIN;
+        private Button btnNext;
+        private EditText mid;
+        private EditText mpassword;
+        private EditText mname;
+        private EditText mphone;
+        private String mbirth;
+        private String mlocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
-        int year=1920;
+        mid = (EditText)findViewById(R.id.editMid);
+        mpassword = (EditText)findViewById(R.id.editMpassword);
+        mname = (EditText)findViewById(R.id.editMname);
+        mphone = (EditText)findViewById(R.id.editMphone);
+
+        final int year=2016;
         ArrayList<String> years = new ArrayList<String>();
         for(int i=0;i<100;i++)
         {
-            years.add(String.valueOf(year+i));
+            years.add(String.valueOf(year-i));
         }
 
         int month = 1;
@@ -47,9 +66,9 @@ public class Join extends AppCompatActivity {
 
         final Spinner spinner = (Spinner) findViewById(R.id.btnspinner1);
         final Spinner spinnerLoc = (Spinner) findViewById(R.id.btnspinner2);
-        Spinner spinneryear = (Spinner) findViewById(R.id.spinneryear);
-        Spinner spinnermonth = (Spinner) findViewById(R.id.spinnermonth);
-        Spinner spinnerday = (Spinner) findViewById(R.id.spinnerday);
+        final Spinner spinneryear = (Spinner) findViewById(R.id.spinneryear);
+        final Spinner spinnermonth = (Spinner) findViewById(R.id.spinnermonth);
+        final Spinner spinnerday = (Spinner) findViewById(R.id.spinnerday);
 
         ArrayAdapter extraAdapter = ArrayAdapter.createFromResource(this, R.array.location, android.R.layout.simple_spinner_dropdown_item);
         extraAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -120,6 +139,7 @@ public class Join extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 detailLoc = (String) spinnerLoc.getSelectedItem();
+                mlocation = location + " " + detailLoc;
             }
 
             @Override
@@ -133,7 +153,7 @@ public class Join extends AppCompatActivity {
         spinneryear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                inputYear = (String) spinneryear.getSelectedItem();
             }
 
             @Override
@@ -145,7 +165,7 @@ public class Join extends AppCompatActivity {
         spinnermonth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                inputMonth = (String) spinnermonth.getSelectedItem();
             }
 
             @Override
@@ -157,7 +177,9 @@ public class Join extends AppCompatActivity {
         spinnerday.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                inputDay = (String) spinnerday.getSelectedItem();
+                mbirth = inputYear + "-" + inputMonth + "-" + inputDay;
+                Log.i("mylog", mbirth);
             }
 
             @Override
