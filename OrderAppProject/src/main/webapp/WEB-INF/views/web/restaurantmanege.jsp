@@ -18,6 +18,12 @@
 	<%-- <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/prefixfree.min.js"></script> --%>
 	<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery-ui.min.js"></script>
 	
+	<style type="text/css">
+		.about-section {
+			background-image: url("/teamapp/resources/img/bg5.png");
+		}
+	</style>
+	
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#infoModal #ephoto").change(function(){
