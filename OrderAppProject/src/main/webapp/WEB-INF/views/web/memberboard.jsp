@@ -147,6 +147,10 @@
 		.input-group-addon {
 			color: #34495e;
 		}
+		
+		.about-section {
+			background-image: url("/teamapp/resources/img/bg5.png");
+		}
         
 	</style>		
 	
