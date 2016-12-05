@@ -298,6 +298,50 @@ public class RestaurantController {
 		model.addAttribute("restaurant", restaurant);
 		return "restaurant/myres";
 	}
+	
+	@RequestMapping("/userres")
+	public String userres(String pageNo, @RequestParam(required=false, defaultValue="") String find, Model model, HttpSession session){		
+		
+		int intPageNo = 1;
+		if ( pageNo == null ) {
+			pageNo = (String) session.getAttribute("pageNo");
+			if ( pageNo != null ) {
+				intPageNo = Integer.parseInt(pageNo);
+			}
+		} else {
+			intPageNo = Integer.parseInt(pageNo);
+		}
+		session.setAttribute("pageNo", String.valueOf(intPageNo));
+		
+		int rowsPerPage=7;
+		int pagesPerGroup=5;
+		int totalRestaurantNo=restaurantService.getCount(find);
+		
+		int totalPageNo=totalRestaurantNo/rowsPerPage+((totalRestaurantNo%rowsPerPage!=0)?1:0);
+		int totalGroupNo=totalPageNo/pagesPerGroup+((totalPageNo%pagesPerGroup!=0)?1:0);
+		
+		int groupNo=(intPageNo-1)/pagesPerGroup+1;
+		int startPageNo=(groupNo-1)*pagesPerGroup+1;
+		int endPageNo=startPageNo+pagesPerGroup-1;
+		if(groupNo==totalGroupNo){
+			endPageNo=totalPageNo;
+		}
+		
+		List<Restaurant> list=restaurantService.list(intPageNo, rowsPerPage, find);
+		model.addAttribute("list", list);
+		model.addAttribute("pageNo", intPageNo);
+		model.addAttribute("rowsPerPage", rowsPerPage);
+		model.addAttribute("pagesPerGroup", pagesPerGroup);
+		model.addAttribute("totalRestaurantNo", totalRestaurantNo);
+		model.addAttribute("totalPageNo", totalPageNo);
+		model.addAttribute("totalGroupNo", totalGroupNo);
+		model.addAttribute("groupNo", groupNo);
+		model.addAttribute("startPageNo", startPageNo);
+		model.addAttribute("endPageNo", endPageNo);
+		model.addAttribute("find", find);
+		
+		return "restaurant/userres";
+	}
 
 
 }
