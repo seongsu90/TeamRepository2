@@ -90,8 +90,10 @@ public class ReservationController {
 			return "/reservation/addform";
 		}else{
 			int result = reservationservice.add(reservation);
+			
 			if(result==0)
 			{	
+				model.addAttribute("rvresid", reservation.getRvresid());
 				model.addAttribute("result", "success");
 				httpsession.removeAttribute("rvresid");
 				return "/reservation/addform";

@@ -152,7 +152,7 @@
 			
 			function onClickBtnReserve(){
 				console.log("onClickBtnReserve");
-				$("#").hide();
+				$("#resinfoModal").hide();
 				$("#ReserveModal").modal("show");
 			
 			}
@@ -177,9 +177,8 @@
 					method:"post",
 					success: function(data) {
 						if(data.result == "success") {
-							
 							$("#ReserveModal").hide();
-							$("#infoModal").show();
+							$("#resinfoModal").show();
 							location.reload(true);
 						} else{
 							alert("추가 실패");
@@ -280,6 +279,7 @@
       		</div>
 
      		<!-- modal-modal-body -->
+     	
      		<div class="modal-body">
      		
 			<form id="reserveForm">
@@ -296,7 +296,7 @@
 			<div class="form-group">
 						<div class="input-group">
 							<span style="width: 130px; padding:0px;" class="input-group-addon"><b>Restaurant ID</b></span>
-							<b><input type="text" style="width:225px" class="form-control" id="rvresid" name="rvresid" />
+							<b><input type="text" style="width:225px" class="form-control" id="rvresid" name="rvresid" value="${rvresid}" readonly/>
 								<c:if test="${error1 == 'ALREADY'}"> *이미 예약한 식당입니다.</c:if>
 							</b>
 						</div>
