@@ -307,6 +307,7 @@ public class RestaurantController {
 		return "restaurant/myres";
 	}
 	
+	
 	@RequestMapping("/userres")
 	public String userres(String pageNo, @RequestParam(required=false, defaultValue="") String find, Model model, HttpSession session){		
 		
