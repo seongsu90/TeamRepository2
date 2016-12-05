@@ -36,6 +36,13 @@
 	</head>
 	
 	<body>
+	
+		<!-- modal-header -->
+   		<div class="modal-header" style="background-color: #34495e; color:white">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #FFFFFF;"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title">비밀번호 찾기</h4>
+    	</div>
+    	
     	<!-- modal-modal-body -->
     	<div class="modal-body">
 			<form id="modifyForm">	
