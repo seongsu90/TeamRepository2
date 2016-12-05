@@ -120,7 +120,7 @@
 			<div style="text-align: center;">
 				<table id="acrylic" style="width:1100px;">
 					<thead>
-						<tr>
+						<tr> 
 							
 							<th> 사진 </th>
 							<th> 이름</th>
