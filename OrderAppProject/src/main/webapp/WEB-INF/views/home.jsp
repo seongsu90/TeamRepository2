@@ -968,28 +968,28 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>이름</b></span>
-								<input type="text" class="form-control" name="jmname" id="jmname" placeholder="홍길동"/>
+								<input type="text" style="width: 184px;" class="form-control" name="jmname" id="jmname" placeholder="홍길동"/>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>비밀번호</b></span>
-								<input type="password" class="form-control" name="jmpassword" id="jmpassword" placeholder="8~20글자 입력하세요"/>
+								<input type="password" style="width: 184px;" class="form-control" name="jmpassword" id="jmpassword" placeholder="8~20글자 입력하세요"/>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>휴대전화</b></span>
-								<input type="text" class="form-control" name="jmphone" id="jmphone" placeholder="ex) 010-1234-1234 "/>
+								<input type="text" style="width: 184px;" class="form-control" name="jmphone" id="jmphone" placeholder="ex) 010-1234-1234 "/>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>생일</b></span>
-								<input type="date" class="form-control" name="jmbirth" id="jmbirth"/>
+								<input type="date" style="width: 184px;" class="form-control" name="jmbirth" id="jmbirth"/>
 							</div>
 						</div>
 						

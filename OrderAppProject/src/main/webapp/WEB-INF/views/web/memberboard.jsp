@@ -433,35 +433,35 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px; padding:0px; background-color: #34495e; color:white" class="input-group-addon"><b>아이디</b></span>
-								<b><input type="text" class="form-control" name="mid" id="mid" readonly/></b>
+								<b><input style="width: 200px" type="text" class="form-control" name="mid" id="mid" readonly/></b>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>이름</b></span>
-								<input type="text" class="form-control" name="mname" id="mname"/>
+								<input style="width: 200px" type="text" class="form-control" name="mname" id="mname"/>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>비밀번호</b></span>
-								<input type="password" class="form-control" name="mpassword" id="mpassword" placeholder="8~20글자 입력하세요"/>
+								<input style="width: 200px" type="password" class="form-control" name="mpassword" id="mpassword" placeholder="8~20글자 입력하세요"/>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>휴대전화</b></span>
-								<input type="text" class="form-control" name="mphone" id="mphone"/>
+								<input style="width: 200px" type="text" class="form-control" name="mphone" id="mphone"/>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>생일</b></span>
-								<input type="date" class="form-control" name="mbirth" id="mbirth"/>
+								<input style="width: 200px" type="date" class="form-control" name="mbirth" id="mbirth"/>
 							</div>
 						</div>
 						
@@ -477,21 +477,21 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>회원 등급</b></span>
-								<input type="number" class="form-control" name="mrank" id="mrank"/>
+								<input style="width: 200px" type="number" class="form-control" name="mrank" id="mrank"/>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>적립 포인트</b></span>
-								<input type="number" class="form-control" name="mpoint" id="mpoint"/>
+								<input style="width: 200px" type="number" class="form-control" name="mpoint" id="mpoint"/>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>보유 레스토랑id</b></span>
-								<input type="number" class="form-control" name="mresid" id="mresid"/>
+								<input style="width: 200px" type="number" class="form-control" name="mresid" id="mresid"/>
 							</div>
 						</div>
 						
