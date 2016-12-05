@@ -84,5 +84,7 @@ public class AndroidController {
 		return "android/reslist";
 	}
 	
+
+	
 	
 }

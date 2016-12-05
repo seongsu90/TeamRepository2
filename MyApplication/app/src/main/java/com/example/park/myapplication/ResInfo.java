@@ -8,14 +8,11 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 
 public class ResInfo extends TabActivity {
-    private ImageView resInfoImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        resInfoImage = (ImageView) findViewById(R.id.resInfoImage);
-
 
         TabHost mTab = getTabHost();
 
@@ -28,6 +25,6 @@ public class ResInfo extends TabActivity {
         mTab.addTab(mTab.newTabSpec("tag").setIndicator("이벤트").setContent(R.id.tab3));
         mTab.addTab(mTab.newTabSpec("tag").setIndicator("리뷰").setContent(R.id.tab4));
 
-        setContentView(R.layout.activity_res_info);
+
     }
 }
