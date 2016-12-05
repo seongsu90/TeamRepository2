@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 html, body{
   	font-family: 'Open Sans', sans-serif;
     font-size: 100%;
-  	background: #FFf;
+  	background-image: url("/teamapp/resources/img/bg5.png");
 }
 body a,.grid_1,plan_1,plan_1.one,plan_1.two{
 	transition:0.5s all;
