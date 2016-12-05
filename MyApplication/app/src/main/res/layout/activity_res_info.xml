@@ -18,10 +18,9 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/resize_yw"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:id="@+id/imageView2"
+            android:id="@+id/resInfoImage"
             android:layout_weight="1" />
 
         <LinearLayout

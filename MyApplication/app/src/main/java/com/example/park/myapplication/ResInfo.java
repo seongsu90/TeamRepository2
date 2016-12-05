@@ -4,13 +4,18 @@ import android.app.TabActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.widget.TabHost;
 
 public class ResInfo extends TabActivity {
+    private ImageView resInfoImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        resInfoImage = (ImageView) findViewById(R.id.resInfoImage);
+
 
         TabHost mTab = getTabHost();
 

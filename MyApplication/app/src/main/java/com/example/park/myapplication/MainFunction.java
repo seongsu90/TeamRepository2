@@ -129,12 +129,13 @@ public class MainFunction extends TabActivity {
         resList = (ListView)findViewById(R.id.resList);
 
         /*리스트뷰 아이템 클릭*/
-        resList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        resList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Restaurant restaurant = (Restaurant) resAdapter.getItem(position);
+                Log.i("mylog",""+restaurant.getResid());
 
-              Restaurant res =  startResinfo(restaurant.getResid());
+                Restaurant res =  startResinfo(restaurant.getResid());
                 Intent intent = new Intent(MainFunction.this,ResInfo.class);
                 intent.putExtra("resname",res.getResname());
                 intent.putExtra("reslocation",res.getReslocation());
@@ -144,11 +145,6 @@ public class MainFunction extends TabActivity {
                 intent.putExtra("resopen",res.getResopen());
                 intent.putExtra("resclose",res.getResclose());
                 startActivity(intent);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -169,7 +165,7 @@ public class MainFunction extends TabActivity {
         Restaurant restaurant = new Restaurant();
 
         try {
-            URL url= new URL("http://192.168.1.59:8080/teamapp/restaurant/info?resid="+resid);
+            URL url= new URL("http://192.168.0.120:8080/teamapp/restaurant/info?resid="+resid);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.connect();
 
@@ -209,7 +205,7 @@ public class MainFunction extends TabActivity {
                 //List<Restaurant> list = null;
                 List<Restaurant> list = new ArrayList<Restaurant>();
                 try {
-                    URL url= new URL("http://192.168.1.59:8080/teamapp/reslist?mreslocaion="+ URLEncoder.encode(params[0],"utf-8"));
+                    URL url= new URL("http://192.168.0.120:8080/teamapp/reslist?mreslocaion="+ URLEncoder.encode(params[0],"utf-8"));
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.connect();
 
@@ -299,7 +295,7 @@ public class MainFunction extends TabActivity {
     public Bitmap getBitmap(String fileName){
         Bitmap bitmap= null;
         try {
-            URL url = new URL("http://192.168.1.59:8080/teamapp/restaurant/showPhoto?ressavedfile="+fileName);
+            URL url = new URL("http://192.168.0.120:8080/teamapp/restaurant/showPhoto?ressavedfile="+fileName);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.connect();
 
