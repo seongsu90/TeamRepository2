@@ -806,7 +806,7 @@
 	
 	
 	<!--  #################################### 아이디 찾기 Modal #################################### --> 
-	<div id="findMidModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
+	<div id="findMidModal" class="modal fade" tabindex="-1" role="dialog" style="margin: 155px auto">
 		<div class="modal-dialog" role="document" style="width:450px;">
 	    	<div class="modal-content" style="width:450px; margin: 0">
 		    	<div class="login-form">
@@ -853,7 +853,7 @@
 	<!--  #################################### 아이디 찾기 Modal #################################### --> 
 	
 	<!--  #################################### 비밀번호 찾기 Modal #################################### --> 
-	<div id="findMpasswordModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
+	<div id="findMpasswordModal" class="modal fade" tabindex="-1" role="dialog" style="margin: 155px auto">
 		<div class="modal-dialog" role="document" style="width:450px;">
 	    	<div class="modal-content" style="width:450px; margin: 0">
 		    	<div class="login-form">
@@ -897,7 +897,7 @@
 	<!--  #################################### 비밀번호 찾기 Modal #################################### --> 
 	
 	<!--  #################################### 비밀번호 재설정 Modal #################################### --> 
-	<div id="mpasswordResetModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto">
+	<div id="mpasswordResetModal" class="modal fade" tabindex="-1" role="dialog" style="margin: 155px auto">
 		<div class="modal-dialog" role="document" style="width:450px;">
 	    	<div class="modal-content" style="width:450px; margin: 0">
 		    	<div class="login-form">
@@ -1017,7 +1017,7 @@
 	<!--  #################################### 회원가입 Modal #################################### -->
 	
 	<!--  #################################### Message Modal #################################### -->	
-	<div id="messageModal" class="modal fade" tabindex="-1" role="dialog" style="margin: auto" onkeydown="if(event.keyCode==13){javascript:onClickBtnOK();}">
+	<div id="messageModal" class="modal fade" tabindex="-1" role="dialog" style="margin: 140px auto" onkeydown="if(event.keyCode==13){javascript:onClickBtnOK();}">
 		<div class="modal-dialog" role="document" style="width:300px;">
 	    	<div class="modal-content" style="width:300px; margin: 0">
 	    	
