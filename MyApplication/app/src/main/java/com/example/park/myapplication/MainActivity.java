@@ -16,17 +16,13 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Iterator;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -90,25 +86,24 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String id = mid.getText().toString();
                 String password = mpassword.getText().toString();
-
-                id_password_check(id, password);
+                Login(id, password);
             }
         });
 
     }
 
-    public void id_password_check(String id, String password) {
-        //Log.i("mylog", "id_password_check : " + id + " " + password);
+    public void Login(String id, String password) {
+        //Log.i("mylog", "Login : " + id + " " + password);
         AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground(String... params) {
-                //Log.i("mylog", "id_password_check & AsyncTask 실행");
+                //Log.i("mylog", "Login & AsyncTask 실행");
                 String id = params[0];
                 String password = params[1];
                 String result = "";
 
                 try {
-                    URL url = new URL("http://192.168.1.4:8080/teamapp/login");
+                    URL url = new URL("http://192.168.0.29:8080/teamapp/login");
 
                     JSONObject body = new JSONObject();
                     body.put("mid", id);

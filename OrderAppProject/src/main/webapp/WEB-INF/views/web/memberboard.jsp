@@ -147,6 +147,10 @@
 		.input-group-addon {
 			color: #34495e;
 		}
+		
+		.about-section {
+			background-image: url("/teamapp/resources/img/bg5.png");
+		}
         
 	</style>		
 	
@@ -443,7 +447,7 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>비밀번호</b></span>
-								<input type="text" class="form-control" name="mpassword" id="mpassword" placeholder="8~20글자 입력하세요"/>
+								<input type="password" class="form-control" name="mpassword" id="mpassword" placeholder="8~20글자 입력하세요"/>
 							</div>
 						</div>
 						
@@ -457,7 +461,7 @@
 						<div class="form-group">
 							<div class="input-group">
 								<span style="width: 130px" class="input-group-addon"><b>생일</b></span>
-								<input type="text" class="form-control" name="mbirth" id="mbirth"/>
+								<input type="date" class="form-control" name="mbirth" id="mbirth"/>
 							</div>
 						</div>
 						

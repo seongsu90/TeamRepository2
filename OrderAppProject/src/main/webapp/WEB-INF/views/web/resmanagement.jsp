@@ -131,6 +131,24 @@
 			}
 	     }
 		
+		 function check_only(chk){
+		     var obj = document.getElementsByName("closeday");
+		     if(chk.value=="휴일없음"){
+				for(var i=0; i<obj.length; i++){
+				   if(obj[i] != chk){
+				  		obj[i].checked = false;
+					}
+				}
+			}
+		     else{
+				for(var i=0; i<obj.length; i++){
+					   if(obj[i].value == "휴일없음"){
+					  		obj[i].checked = false;
+					  	}
+				}
+			}
+	     }
+		
 		
 		function onClickBtnModify(){
 		

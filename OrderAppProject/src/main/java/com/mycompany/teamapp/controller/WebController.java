@@ -51,4 +51,16 @@ public class WebController {
 	{
 		return "/web/contact";
 	}
+	
+	@RequestMapping("/userrestaurant")
+	public String userrestaurant()
+	{
+		return "/web/userrestaurant";
+	}
+	
+	@RequestMapping("/contact2")
+	public String contact2()
+	{
+		return "/web/contact2";
+	}
 }

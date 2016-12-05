@@ -167,18 +167,6 @@
 					}
 				});
 			};
-		
-		
-/* 
-		    function oneCheckbox(a){
-		        var obj = document.getElementsByName("closeday");
-		        for(var i=0; i<obj.length; i++){
-		            if(obj[i] != a){
-		                obj[i].checked = false;
-		            }
-		        }
-		    }
- */
 			
 
 				
@@ -188,7 +176,25 @@
 				setCity();		
 			}
 		
-			
+			 function check_only(chk){
+			     var obj = document.getElementsByName("closeday");
+			     if(chk.value=="휴일없음"){
+					for(var i=0; i<obj.length; i++){
+					   if(obj[i] != chk){
+					  		obj[i].checked = false;
+						}
+					}
+				}
+			     else{
+					for(var i=0; i<obj.length; i++){
+						   if(obj[i].value == "휴일없음"){
+						  		obj[i].checked = false;
+						  	}
+					}
+				}
+		     }
+			 
+			 
 		 	function onClickBtnResAdd() {
 				var resname = $("#resname").val();
 				var restotaltable = $("#restotaltable").val();
@@ -212,8 +218,7 @@
 					closeday.push($(this).val());
 				});				
 				
-				
-				
+
 				var resphoto = $("#resphoto")[0];
 				
 				var data=new FormData();
@@ -245,7 +250,6 @@
 					contentType: false,
 					success: function(data) {
 						if(data.result == "success") {
-							alert("추가 성공");
 							$("#restaurantAddModal").modal("hide");
 							//$("#iframe")[0].contentDocument.location.reload(true);
 							location.reload(true);
@@ -485,14 +489,14 @@
 				<div class="form-group">
 					<div class="input-group">
 						<span style="width: 130px; margin-right: 10px; border-right: 1px solid #ccc;" class="input-group-addon"><b>휴일</b></span>&nbsp;
-						<input type="checkbox" id="not" name="closeday"  value="휴일없음">휴일 X&nbsp;
-	        			<input type="checkbox" id="mon" name="closeday"  value="월요일">월요일&nbsp;
-	        			<input type="checkbox" id="tue" name="closeday"  value="화요일">화요일&nbsp;
-	        			<input type="checkbox" id="wen" name="closeday"  value="수요일">수요일&nbsp;
-	        			<input type="checkbox" id="thu" name="closeday"  value="목요일">목요일&nbsp;
-	        			<input type="checkbox" id="fri" name="closeday"  value="금요일">금요일&nbsp;
-	        			<input type="checkbox" id="sat" name="closeday"  value="토요일">토요일&nbsp;
-	        			<input type="checkbox" id="sun" name="closeday"  value="일요일">일요일
+						<input type="checkbox" id="not" name="closeday"  value="휴일없음" onclick="check_only(this)">휴일 X&nbsp;
+	        			<input type="checkbox" id="mon" name="closeday"  value="월요일" onclick="check_only(this)">월요일&nbsp;
+	        			<input type="checkbox" id="tue" name="closeday"  value="화요일" onclick="check_only(this)">화요일&nbsp;
+	        			<input type="checkbox" id="wen" name="closeday"  value="수요일" onclick="check_only(this)">수요일&nbsp;
+	        			<input type="checkbox" id="thu" name="closeday"  value="목요일" onclick="check_only(this)">목요일&nbsp;
+	        			<input type="checkbox" id="fri" name="closeday"  value="금요일" onclick="check_only(this)">금요일&nbsp;
+	        			<input type="checkbox" id="sat" name="closeday"  value="토요일" onclick="check_only(this)">토요일&nbsp;
+	        			<input type="checkbox" id="sun" name="closeday"  value="일요일" onclick="check_only(this)">일요일
 					</div>
 				</div>
 

@@ -276,7 +276,6 @@
 						$("#ptableno").val(tableNo);
 						$("#myModalLabel").html(tableNo + " 번 테이블");
 						$("#totalPrice").html(data.totalPrice);
-						$("#coupon").html(data.coupon);
 						$("#eventPrice").html(data.eventPrice);
 						$("#point").html(data.point);
 						$("#result").html(data.result);
@@ -466,10 +465,6 @@
 									<tr>
 										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 합계 </th>
 										<th id="totalPrice"></th>		
-									</tr>
-									<tr>
-										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 쿠폰 </th>
-										<th id="coupon"></th>			
 									</tr>
 									<tr>
 										<th style="width:100px; background-image: linear-gradient(#3C5064, #34495e); color:white;"> 이벤트 </th>			

@@ -132,24 +132,44 @@ public class MemberController {
 		return "member/joinForm";
 	}
 	
+	// 아이디 유효성 검사
+	@RequestMapping(value="/validationCheck", method=RequestMethod.POST)
+	public String validationCheck(String mid, HttpSession session, Model model) {
+		logger.info("validationCheck 실행");
+		boolean validation = false;
+		String result = "impossible";
+		validation = memberService.isMid(mid);
+		if( mid.length() > 20 ) {
+			result = "idOverflow";
+		} else if ( !mid.equals("") && validation ) {
+			result = "possible";
+		}
+
+		model.addAttribute("result", result);
+		return "member/result";
+	}
+	
 	// 회원가입
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(Member member, Model model) {
 		logger.info("join() POST 실행");
+		String result = "fail";
 		try {
-			int result = memberService.join(member);
-			return "redirect:/member/login";
+			if ( member.getMpassword().length() < 8 ) {
+				result = "morePassword";
+			} else {
+				result = memberService.join(member);				
+			}
 		} catch ( UncategorizedSQLException e ) {
-			model.addAttribute("error", " 20자 이하의 아이디를 입력하세요");
-			return "member/joinForm";
+			result = "idOverflow";
 		} catch (DuplicateKeyException e1) {
-			model.addAttribute("error", " 아이디가 존재합니다. 다른 아이디를 입력해 주세요.");
-			return "member/joinForm";
+			result = "idExist";
 		} catch (Exception e2) {
-			e2.printStackTrace();
-			model.addAttribute("error2", " 모든 항목을 입력해 주세요");
-			return "member/joinForm";
+			result = "fail";
 		}
+
+		model.addAttribute("result", result);
+		return "member/result";
 	}
 	
 	// 회원 정보보기 ( 사용자 기준 )
@@ -260,46 +280,6 @@ public class MemberController {
 	public String getProvince() {
 		return "backup/member/getProvince";	
 	}
-	
-	// 회원 수정
-	/*@RequestMapping(value="/modifyInfo", method=RequestMethod.POST)
-	public String modifyInfo(Member member, String newmpassword, Model model, HttpSession session) {
-		String mid = (String) session.getAttribute("login");
-		Member dbmember = memberService.info(mid);
-		if (dbmember.getMrank() == 2) {
-			try {
-				memberService.modify(member);
-				return "redirect:/member/list";
-			} catch (DataIntegrityViolationException e) {
-				model.addAttribute("member", member);
-				model.addAttribute("error", " 입력하신 id의 레스토랑이 없습니다.");
-				return "member/modifyInfoForManagerForm";
-			} catch (Exception e1) {
-				model.addAttribute("member", member);
-				model.addAttribute("error", " 모든 항목을 입력해 주세요");
-				return "member/modifyInfoForManagerForm";
-			}
-		} else {
-			if ( dbmember.getMpassword().equals(member.getMpassword()) ) {
-				dbmember.setMphone(member.getMphone());
-				dbmember.setMlocation(member.getMlocation());
-				dbmember.setMpassword(newmpassword);
-				try {
-					memberService.modify(dbmember);
-					return "redirect:/member/info?mid=" + mid;
-				} catch (Exception e) {
-					model.addAttribute("member", dbmember);
-					model.addAttribute("error", " 모든 항목을 입력해 주세요");
-					return "member/modifyInfoForm";
-				}
-			} else {
-				model.addAttribute("member", member);
-				model.addAttribute("error", " 비밀번호가 틀렸습니다");
-				return "member/modifyInfoForm";
-			}
-		}
-	}*/
-	
 	
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
 	public String modify(Member member, String newmpassword, Model model, HttpSession session) {
