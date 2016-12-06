@@ -107,6 +107,10 @@
 	            opacity: 1;
 	            transition: 0.2s all;
 	        }
+	        		
+			.about-section {
+				background-image: url("/teamapp/resources/img/bg5.png");
+			}
 		</style>
 		
 		<script type="text/javascript">
