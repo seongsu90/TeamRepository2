@@ -147,7 +147,6 @@
 	          <ul class="nav nav-justified">
 	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/restaurant/myres"><b style="color:black;">나의 Restaurant</b></a></li>
 	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/event/list?pageNo=1"><b style="color:black;">이벤트</b></a></li>
-	            <li style="background:#1bbc9b;"><a target="iframe" href="/teamapp/coupon/resCouponList"><b style="color:black;">쿠폰</b></a></li>
 	          </ul>
   			</nav>
 			<iframe name="iframe" style="width:100%; height:840px; border-width:0;" src="/teamapp/restaurant/myres"></iframe>

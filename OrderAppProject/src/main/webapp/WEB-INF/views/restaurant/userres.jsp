@@ -201,6 +201,11 @@
 			location.reload(true);
         }
 		
+		function onClickBtnImpossible(){
+			$("#failMessage").html("죄송하지만<br/>예약하실 수 없습니다");
+			$("#messageModal").modal("show");
+		}
+		
 		/* ################## Message(OK, Error) Modal################## */
 		/* Message OK Button */
 		function onClickBtnOK() {
@@ -372,7 +377,12 @@
 				</div>
 				
 				<div class="modal-footer" style="background-color:#34495e; color:white">
+				<c:if test="${mrank == -3}">
+					<button id="btnImpossible" type="button" class="btn btn-primary" onclick="onClickBtnImpossible()" ><b>예약불가</b></button>	
+				</c:if>
+				<c:if test="${mrank != -3}">
 					<button id="btnReserve" type="button" class="btn btn-primary" onclick="onClickBtnReserve()" ><b>예약하기</b></button>					
+				</c:if>
 				</div>
 			</div>
 		</div>		
