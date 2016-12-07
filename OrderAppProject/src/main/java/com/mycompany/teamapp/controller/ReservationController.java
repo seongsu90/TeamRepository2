@@ -50,6 +50,7 @@ public class ReservationController {
 		logger.info("add 처리");
 	
 		int resid = reservation.getRvresid();
+		String result = "success";
 		
 		Restaurant rs = restaurantservice.info(resid);
 		String optime = rs.getResopen();
@@ -75,7 +76,7 @@ public class ReservationController {
 					if(j==date.getDay())
 					{
 						model.addAttribute("error1", "DAY_OUT");
-						return "/reservation/addform";
+						result = "fail";
 					}
 					if(j==7){
 						break;
@@ -87,22 +88,22 @@ public class ReservationController {
 		if(op>rvt || cl<rvt)
 		{
 			model.addAttribute("error1", "TIME_OUT");
-			return "/reservation/addform";
+			result = "fail";
 		}else{
-			int result = reservationservice.add(reservation);
+			int returnValue = reservationservice.add(reservation);
 			
-			if(result==0)
+			if(returnValue==0)
 			{	
 				model.addAttribute("rvresid", reservation.getRvresid());
-				model.addAttribute("result", "success");
 				httpsession.removeAttribute("rvresid");
-				return "/reservation/addform";
 			}
-			model.addAttribute("result", "fail");
+
 			model.addAttribute("error1", "ALREADY");
-			return "/reservation/addform";
 		}
-				
+		
+		logger.info("result : " + result);
+		model.addAttribute("result", result);
+		return "reservation/addform";
 		
 	}
 	

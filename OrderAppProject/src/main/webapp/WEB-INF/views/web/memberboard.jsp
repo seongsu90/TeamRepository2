@@ -156,7 +156,6 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
-				
 				$("#selCity").change(function () {
 					var selCity = $("#selCity").val();
 			        setProvince(selCity, null);
