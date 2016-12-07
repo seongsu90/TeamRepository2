@@ -72,20 +72,15 @@
 	
 	<script type="text/javascript">
 		function showInfo(data) {	
-	
-			
 			$("#btnModifySuccess").hide();
  			$("#infoModal #resid").val(data.resid);
 			$("#infoModal #resname").val(data.resname);
-		
 			$("#infoModal #reslocation").val(data.reslocation);
 			var location =[];
 			location=data.reslocation.split(" ");
-			
 			$("#infoModal #restotaltable").val(data.restotaltable);
 			$("#infoModal #resinfo").val(data.resinfo);
 			$("#infoModal #restel").val(data.restel);
-			
 			$("#infoModal #rescloseday").val(data.rescloseday);
 			var closeday=[];
 			closeday=data.rescloseday.split("/");
@@ -93,24 +88,13 @@
 				console.log(closeday[i]);
 		 	 	$("input[name=closeday][value="+closeday[i]+"]").attr("checked", true); 
 			} 
-			
 			$("#infoModal #resopen").val(data.resopen);
 			$("#infoModal #resclose").val(data.resclose); 
 			$("#infoModal #photo").attr('src', "/teamapp/restaurant/showPhoto?ressavedfile=" + data.ressavedfile);
-	
-
 			if(!"#ReserveModal"){
 				$('input').attr("readonly",true);//input 요소 설정 readonly 위한 것이다.
 			}
-
-
-			
 			$('input').attr("readonly",true);//input 요소 설정 readonly 위한 것이다.
-			
-			/* $(':checkbox[readonly="readonly"]').click(function() {
-				return false;
-				}); */
-
 			setCity(location[0]);
 			setProvince(location[0], location[1]);
 		 	$("#selCity").not(":selected").attr("disabled", "disabled");
@@ -122,7 +106,6 @@
 		
 
 
-		
 		
 		function onClickBtnCancel() {
 			console.log("onClickBtnCancel() 실행");
@@ -180,43 +163,34 @@
 		
 		
 		function onClickBtnModify(){
-			
 			$(':checkbox[readonly="readonly"]').click(function() {
 				return true;
 				});
 			$('input').attr("readonly",false);
-			
 			$("#selCity").removeAttr("disabled");
 			$("#selProvince").removeAttr("disabled");
-		
 			$("#btnModify").hide();
 			$("#isclose").hide();
 			$("#closeday").show();
 			$("#btnModifySuccess").show();
 			$("#resphoto").show();
 			setCity();		
-			
 		};
 		 
-		
 		function resUpdate() {
-		
 			var resid = $("#infoModal #resid").val();
 			var resname = $("#infoModal #resname").val();
 			var reslocation = $("#infoModal #reslocation").val();
 			var restotaltable = $("#infoModal #restotaltable").val();
 			var resinfo = $("#infoModal #resinfo").val();
 			var restel = $("#infoModal #restel").val();
-			
 			var closeday =[];
 			$("input[name='closeday']:checked").each(function(i) {
 				closeday.push($(this).val());
 			});
-			
 			var resopen = $("#infoModal #resopen").val();
 			var resclose = $("#infoModal #resclose").val();
 			var resphoto = $("#infoModal #resphoto")[0];
-			
 			var data = new FormData();
 			data.append("resid", resid);
 			data.append("resname", resname);
@@ -224,19 +198,14 @@
 			data.append("restotaltable", restotaltable);
 			data.append("resinfo", resinfo);
 			data.append("restel", restel);
-			
 			for(var i=0; i<closeday.length; i++) {
 				data.append("closeday", closeday[i]);
 			}
-			
 			data.append("resopen", resopen);
 			data.append("resclose", resclose);
-			
-			
-			
 			if(resphoto.files.length != 0) {
 				data.append("resphoto", resphoto.files[0]);
-			}			
+			}	
 			
 			$.ajax({
 				url:"../restaurant/modify",

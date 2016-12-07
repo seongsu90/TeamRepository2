@@ -161,10 +161,8 @@
 
 			function showInfo(resid) {
 				$.ajax({
-
 					url: "../restaurant/info",
 					data: {"resid":resid},
-
 					success: function(data) {
 						location.reload(true);
 						parent.showInfo(data);
@@ -207,41 +205,25 @@
 				var reslocation = $("#reslocation").val();			
 				var resopen = $("#resopen").val();
 				var resclose = $("#resclose").val();
-				
-				console.log(resname);
-				console.log(restotaltable);
-				console.log(resinfo);
-				console.log(restel);
-				console.log(reslocation);
-				console.log(resopen);
-				console.log(resclose);
-				
-				 
 				var closeday =[];
 				$("input[name='closeday']:checked").each(function(i) {
 					closeday.push($(this).val());
 				});				
-				
-
 				var resphoto = $("#resphoto")[0];
-				
 				var data=new FormData();
 				data.append("resname", resname);
 				data.append("reslocation", reslocation);
 				data.append("restotaltable", restotaltable);
 				data.append("resinfo", resinfo);
 				data.append("restel", restel);
-				
 				for(var i=0; i<closeday.length; i++) {
 					data.append("closeday", closeday[i]);
 				}
-				
 				data.append("resopen", resopen);
 				data.append("resclose", resclose);
 				if(resphoto.files.length != 0) {
 					data.append("resphoto", resphoto.files[0]);
 				}			
-				
 				
 		
 				
@@ -255,7 +237,6 @@
 					success: function(data) {
 						if(data.result == "success") {
 							$("#restaurantAddModal").modal("hide");
-							//$("#iframe")[0].contentDocument.location.reload(true);
 							location.reload(true);
 						} else{
 							alert("추가 실패");
@@ -319,67 +300,58 @@
 	</head>
 	<body>
 	<div class="about-section"> 
-	   <div class="container" align="center"><h2>Restaurant List</h2> 
-	
-		<div style="text-align: center;">
+	   <div class="container" align="center"><h2>Restaurant List</h2>
+	   <div style="text-align: center;">
 		<c:if test="${mrank==2}">
 			<div style="text-align: right; width:1100px; display: inline-block; margin-top: 0px;">
 				<button id="btnAdd" type="button" class="btn btn-warning" onclick="onClickBtnAdd()" style="color: #34495e">레스토랑 등록</button>
 			</div>
 		</c:if>
-	
-			<table id="acrylic" style="width:1100px;">
-				<thead>
+		
+		<table id="acrylic" style="width:1100px;">
+			<thead>
+				<tr>
+					<c:if test="${mrank==2}">
+						<th> 아이디</th>
+					</c:if>
+					<th> 사진 </th>
+					<th> 이름</th>
+					<%-- <th> 위치</th> --%>
+					<th> 정보 </th>
+					<th> 테이블 </th>
+					<th> 전화번호 </th>
+					<th> 오픈 </th>
+					<th> 클로즈 </th>
+					<th> 휴일 </th>
+					<c:if test="${mrank==2}">
+					<th> 삭제 </th>
+					</c:if>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<c:forEach var="restaurant" items="${list}">
 					<tr>
 						<c:if test="${mrank==2}">
-							<th> 아이디</th>
+							<td> ${restaurant.resid}</td>
 						</c:if>
-						<th> 사진 </th>
-						<th> 이름</th>
-						<%-- <th> 위치</th> --%>
-						<th> 정보 </th>
-						<th> 테이블 </th>
-						<th> 전화번호 </th>
-						<th> 오픈 </th>
-						<th> 클로즈 </th>
-						<th> 휴일 </th>
+						<td><img src="showPhoto?ressavedfile=${restaurant.ressavedfile}" width="50px"/></td>
+						<td>
+							<a id="btnInfo" href="javascript:showInfo(${restaurant.resid})">${restaurant.resname}</a>
+						</td>
+						<td> ${restaurant.resinfo} </td>
+						<td> ${restaurant.restotaltable} </td>
+						<td> ${restaurant.restel} </td>
+						<td> ${restaurant.resopen} </td>
+						<td> ${restaurant.resclose} </td>
+						<td> ${restaurant.rescloseday} </td>
 						<c:if test="${mrank==2}">
-						<th> 삭제 </th>
+							<td> <button type="button" class="btn btn-warning" style="color: #34495e" onclick="showDeleteModal('${restaurant.resid}')">삭제</button> </td>
 						</c:if>
 					</tr>
-				</thead>
-				<tbody>
-				
-				
-					<c:forEach var="restaurant" items="${list}">
-						<tr>
-							<c:if test="${mrank==2}">
-								<td> ${restaurant.resid}</td>
-							</c:if>
-							<td><img src="showPhoto?ressavedfile=${restaurant.ressavedfile}" width="50px"/></td>
-
-							<td>
-								<%-- <a href="info?resid=${restaurant.resid}">${restaurant.resname}</a> --%>
-								<a id="btnInfo" href="javascript:showInfo(${restaurant.resid})">${restaurant.resname}</a>
-							</td>
-
-							<%-- <td> ${restaurant.reslocation} </td> --%>
-							<td> ${restaurant.resinfo} </td>
-							<td> ${restaurant.restotaltable} </td>
-							<td> ${restaurant.restel} </td>
-							<td> ${restaurant.resopen} </td>
-							<td> ${restaurant.resclose} </td>
-							<td> ${restaurant.rescloseday} </td>
-							<c:if test="${mrank==2}">
- 							<td> <button type="button" class="btn btn-warning" style="color: #34495e" onclick="showDeleteModal('${restaurant.resid}')">삭제</button> </td>
-							</c:if>
-						</tr>
-						
-					</c:forEach>
-					
-					
-				</tbody>
-			</table>
+				</c:forEach>
+			</tbody>
+		</table>
 	
 			<div style="text-align:center;">
 				<c:if test="${pageNo!=1}">

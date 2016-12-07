@@ -97,7 +97,6 @@ public class RestaurantController {
 		logger.info("findList() POST 실행");
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("find", find);
-
 		return "redirect:/restaurant/list";		
 	}
 	
@@ -204,7 +203,6 @@ public class RestaurantController {
 	public String info(int resid, Model model){
 		Restaurant restaurant=restaurantService.info(resid);		
 		List<MenuList> menuList = menuListService.menuList(resid);
-		
 		model.addAttribute("restaurant", restaurant);
 		model.addAttribute("menuList", menuList);
 		return "restaurant/info";
