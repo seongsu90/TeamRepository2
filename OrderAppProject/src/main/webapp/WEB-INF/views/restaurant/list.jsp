@@ -414,21 +414,21 @@
 				<div class="form-group">
 					<div class="input-group">
 						<span style="width: 130px; padding:0px;" class="input-group-addon"><b>식당 이름</b></span>
-						<b><input type="text" style="width:225px" class="form-control" name="resname" id="resname" value="은지네식당"/></b>
+						<b><input type="text" style="width:225px" class="form-control" name="resname" id="resname"/></b>
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<div class="input-group">
 						<span style="width: 130px" class="input-group-addon"><b>전체 테이블 수</b></span>
-						<input type="number"  style="width:225px" class="form-control" name="restotaltable" id="restotaltable" value="10"/>
+						<input type="number"  style="width:225px" class="form-control" name="restotaltable" id="restotaltable"/>
 					</div>
 				</div>				
 				
 				<div class="form-group">
 					<div class="input-group">
 						<span style="width: 130px" class="input-group-addon"><b>전화번호</b></span>
-						<input type="tel"  style="width:225px" class="form-control" name="restel" id="restel" value="010-4711-1129"/>
+						<input type="tel"  style="width:225px" class="form-control" name="restel" id="restel"/>
 					</div>
 				</div>	
 
@@ -436,18 +436,18 @@
 				<div class="form-group">
 					<div class="input-group">
 						<span style="width: 130px" class="input-group-addon"><b>오픈 타임</b></span>
-						<input type="time" style="width:225px" class="form-control" name="resopen" id="resopen" value="13:00"/>
+						<input type="time" style="width:225px" class="form-control" name="resopen" id="resopen"/>
 					</div>
 					<div class="input-group">
 						<span style="width: 130px" class="input-group-addon"><b>클로즈 타임</b></span>
-						<input type="time" style="width:225px" class="form-control" name="resclose" id="resclose" value="23:00"/>
+						<input type="time" style="width:225px" class="form-control" name="resclose" id="resclose"/>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<div class="input-group">
 						<span style="width: 130px" class="input-group-addon"><b>레스토랑 정보</b></span>
-						<input type="text"  style="width:555px" class="form-control" name="resinfo" id="resinfo" value="맛있어요"/>
+						<input type="text"  style="width:555px" class="form-control" name="resinfo" id="resinfo" />
 					</div>
 				</div>				
 
@@ -458,7 +458,7 @@
 						<select class="form-control" style="width: 105px" id="selProvince" name="selProvince">
 							<option value="선택">선택</option>
 						</select>	
-						<input type="text" class="form-control" style="width: 330px" id="reslocation" name="reslocation" value="가락동"/><br/>
+						<input type="text" class="form-control" style="width: 330px" id="reslocation" name="reslocation"/><br/>
 					</div>
 				</div>
 
